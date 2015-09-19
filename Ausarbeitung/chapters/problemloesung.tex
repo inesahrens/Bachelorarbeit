@@ -3,7 +3,10 @@
 % ==============
 
 \chapter{Anwendung auf das Phasenfeldmodell für Rissentstehung }
-%todo neuer Titel
+
+Nachdem wir die Mathematischen Grundlagen für die Betrachtung eines Optimierungsproblems kennengelernt haben, wollen wir diese anwenden. 
+Zunächst teilen wir das Minimierungsproblem in zwei voneinander unabhängige Optimierungen auf: Die Optimierung nach $u$ und die Optimierung nach $v$. Im Anschluss betrachten wir beide Optimierungen genauer, indem wir sie umschreiben und numerische Verfahren zur Lösung entwickeln. Zum Schluss fusionieren wir beide Verfahren.
+
 
 \section{erste Betrachtung der Rissentstehung}
 \label{sec:allgemeines_kkt}
@@ -16,47 +19,52 @@ Erinnern wir uns an die vorangegangene Problemstellung:
 	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2  
 \end{align*}
 
-Beim genaueren Betrachten bemerkt man, dass die zwei Nebenbedingungen entweder nur von $u$ oder nur von $v$ abhängen. Dies bietet die Möglichkeit das Optimierungsproblem in zwei Teilprobleme aufzuteilen. Zum einen die Optimierung nach $u$ und zum anderen die Optimierung nach $v$. 
+Beim genaueren Betrachten bemerkt man, dass die Ungleichungsnebenbedingung nur von $v$ und die Randbedingung nur von $u$ abhängt. Dies bietet die Möglichkeit das Optimierungsproblem in zwei Teilprobleme aufzuteilen.
 \begin{align*}
 \label{eq:problem_von_v}
 	& \min\limits_{u \in\h^2} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\
 	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2 
 	\vspace{1ex} \\
 	& \min\limits_{v \in\h} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\
-	& \text{s.t.} \hspace{1ex} 0 \le v \le v_0 
+	& \text{s.d.} \hspace{1ex} 0 \le v \le v_0 
 \end{align*}
 
-%todo nein, so geht das nur theoretisch... theorie nochmal neu überarbeiten!
-%todo struktur überarbeiten: erst alle Theorie, dann alle Numerik
-Wenn man beide Probleme implementiert, löst man zunächst ein Problem und setzt die Lösung dann in das andere Problem ein. Dieses Vorgehen wiederholt man. Betrachten wir zuerst die Optimierung nach u. 
+Wenn man beide Probleme implementiert, löst man zunächst die Optimierung nach u und setzt die Lösung dann in die Optimierung nach $v$ ein. Dieses Vorgehen wird mit der semidifferenzierbaren Newtonmethode wiederholt. Betrachten wir zuerst die Optimierung nach u. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Optimierung nach u          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 \section{Optimierung nach u}
+
+Das Kapitel ist in zwei Unterkapitel aufgeteilt: Die analytische und numerische Betrachtung. 
+
+Im analytischen Teil formulieren wir das Problem zu einem Problem ohne Nebenbedingung und. Dieses lässt sich dann als partielle Differentialgleichung schreiben. Die Existenz und Eindeutigkeit der schwachen Lösung sichern wir uns am Schluss des ersten Teils. 
+
+Für die numerische Betrachtung schreiben wir das Problem nochmal um und wenden dann Finite Elemente und den Galerkin Ansatz an. Das Resultat ist ein Gleichungsssytem, das sich einfach lösen lässt. 
+
 \subsection{Analytische Betrachtung}
 
-Die Optimierung nach $u$ sieht wie folgt aus: 
+Erinnern wir uns an das Optimierungsproblem, das die Verschiebung des Körpers bei der Entstehung von einem Riss beschreibt.
 \begin{align*}
 	& \min\limits_{u \in\h^2} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\
 	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2
 \end{align*}
 
-Das Problem lässt sich vereinfachen, indem man 
+Es ist leichter ein Problem ohne Nebenbedingung zu betrachten, also nehmen wir die Nebenbedingung mit in dem Raum auf, über dem wir optimieren. Also suchen wir statt $u \in \h^2$ 
 \begin{align*}
 	u \in u_0 + \ho^2:=u_0+\{u \in\h^2| u=0 \text{ auf } \Gamma_1 \cup \Gamma_2\} 
 \end{align*}
-sucht, statt $u \in \h^2$. Daraus ergibt sich ein Problem ohne Nebenbedingung.
+Das Problem hat dann folgende Form
 \begin{align}
 	\label{eq:optimierung_u_ohne_nb}
 	& \min\limits_{u \in u_0 +\ho^2} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x 
 \end{align}
 
-Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren. Dieses werden wir nicht gleichzeitig tun, sondern zunächst die Optimierung nach $u_1$ und dann die Optimierung nach $u_2$ betrachten. Die Optimierungen kann man trennen, da keine Mischung aus den Termen $u_1$ und $u_2$ auftauchen. Beide Optimierungen sind identisch, es müssen später nur unterschiedliche Werte eingesetzt werden.Betrachten wir also nur die Optimierung nach $u_1$. 
+Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren. Es tauchen keine Mischung aus den Termen $u_1$ und $u_2$ auf, das heißt, dass wir die Optimierungen trennen können. Beide sind identisch, es müssen später nur unterschiedliche Werte eingesetzt werden.Betrachten wir oBdA die Optimierung nach $u_1$. 
 
-\begin{thm}{Bedingung für Minimum}
-	Sei das Minimierungsproblem \eqref{eq:optimierung_u_ohne_nb} gegeben. Sei $\tilde{u_1}$ das Minimum. Dann gilt 
+\begin{thm}[Bedingung für ein Minimum]
+	Sei das Minimierungsproblem \eqref{eq:optimierung_u_ohne_nb} gegeben und $\tilde{u_1}$  nimmt das Minimum an. Dann gilt 
 	\begin{align}
 		\label{eq:u_gleich_null}
 		\int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla \tilde{u_1} \nabla \varphi \diff x = 0 \forall \varphi \in u_0 + \ho 
@@ -131,6 +139,7 @@ Mit den Bezeichnungen aus \ref{sec:grundlagen_pdgl} ist $g = u_0$, $f,b,c=0$ und
 	0 & v^2(x) + \epsilon_1 
 	\end{pmatrix}		
 \end{align*}
+%todo falls zeit matrix anders
 Aus \ref{ann:ex_und_eind} sind 3 und 4 bereits erfüllt, da $b,c=0$ gilt. Beweisen wir 1. 
 
 Sei $\xi \in \R^n$. Dann gilt:
@@ -152,46 +161,30 @@ mit $\Lambda = \sup (v_0)^2 + \epsilon   $
 %todo nummerierungen anders? 
 \end{proof}
 
-Jetzt könnte man noch untersuchen, ob auch mit weniger Voraussetzungen an $u_0 $ und $v_0$ das Problem eine eindeutige Lösung hat. Dieses werde ich jedoch im Rahmen der Bachelorarbeit nicht untersuchen können.  
-%todo vll untersuchen
-
-%Für die Beschränktheit muss gezeigt werden, dass $B(u_1,s) \le c \|u_1\|_{u_0 +\h0^2} \|\varphi \|_{u_0 + H_0^1(\Omega)}$ mit $c>0$ konstant. 
-%\begin{align*}
-%	B(u_1,\varphi )	& = \int\limits_{\Omega}  \left( v^2 + \epsilon \right) 2  \nabla u_1 \nabla \varphi   \diff x  \\
-%				& \le 2 \| \left( v^2 + \epsilon \right) \nabla u_1 \|_{L^2(\Omega)}  \| \nabla \varphi  \|_{L^2(\Omega)} \\
-%				& \le 2 \|  \sup_{x \in \Omega} \left\{ v^2 + \epsilon \right\}   \nabla u_1 \|_{L^2(\Omega)}  \| \nabla s \|_{L^2(\Omega)} \\ 
-%				& = 2 |\sup_{x \in \Omega} \left\{ v^2 + \epsilon \right\} | \|  \nabla u_1 \|_{L^2(\Omega)}  \| \nabla s \|_{L^2(\Omega)} \\
-%				& \le c \|  \nabla u_1 \|_{u_0 + H_0^1(\Omega)}  \| \nabla \varphi  \|_{u_0 + H_0^1(\Omega)} 
-%\end{align*}
-%
-
-%\end{proof}
-
 \subsection{Numerische Betrachtung}
 
-Zur Erinnerung: Folgendes Problem soll numerisch gelöst werden. 
+Wir haben grade bewiesen, dass wir folgendes Problem lösen müssen:
 
-Finde $u_1 \in u_0+ H_0^1(\Omega)$, sodass  $\forall \varphi \in u_0 + H_0^1(\Omega)$  
+Finde $u_1 \in u_0+ H_0^1(\Omega)$, sodass
 \begin{align*}
-	0 = \int\limits_{\Omega}  2 \left( v^2 + \epsilon_1 \right) \nabla u_1 \nabla \varphi \diff x 
+	0 = \int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_1 \nabla \varphi \diff x \hspace{2ex} \forall \varphi \in u_0 + H_0^1(\Omega)
 \end{align*}
 
-Die $2$ kann gekürzt werden, da wir die Nullstelle dieser Funktion suchen. Da die Nullstelle im Raum $H_0^1(\Omega)$ einfacher zu finden ist, als im Raum $u_0 + H_0^1(\Omega)$ stellen wir das Problem um. 
-Dazu definieren wir $\uotild \in u_0 + \ho$, sodass $\uotild$ $u_{0_1}$ auf dem Rand $\Gamma_1 \cup \Gamma_2$ entspricht, sonst $0$ ist. Der Übergang soll stetig sein. Desweiteren definieren wir $\utild \in \ho$, sodass $u_1=\utild + \uotild$. 
+Da die Nullstelle im Raum $H_0^1(\Omega)$ einfacher zu finden ist, als im Raum $u_0 + H_0^1(\Omega)$, stellen wir das Problem um. 
+Dazu definieren wir $\uotild \in u_0 + \ho$, sodass $\uotild$ $u_{0_1}$ auf dem Rand $\Gamma_1 \cup \Gamma_2$ entspricht und sonst $0$ ist. Dafiniere zusätzlich $\utild \in \ho$, sodass $u_1=\utild + \uotild$. 
 Damit lässt sich das Problem umschreiben zu 
 
 Finde $\utild \in \ho$, sodass  $\forall \varphi \in \ho$  
 \begin{align*}
 	- \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla \uotild \nabla \varphi \diff x  = \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \utild \nabla \varphi \diff x 
 \end{align*}
-gilt
 
-Zur numerischen Betrachtung bieten sich Finite Elemente, insbesondere die dreieckig-linearen Lagrange Elemente an. Die Theorie  wird als bekannt vorausgesetzt und hier nicht weiter besprochen. Zuerst triangulieren wir das Gebiet, wie in \ref{sec:finite_elemente} dargestellt.  Dann nutzen wir den Galerkin Ansatz. Dafür gilt ab jetzt $k:=(m+1)(n+1)$
+Zur numerischen Betrachtung bieten sich Finite Elemente, insbesondere die dreieckig-linearen Lagrange Elemente an. Dafür triangulieren wir das Gebiet, wie in \ref{sec:finite_elemente} dargestellt. Nun nutzen wir den Galerkin Ansatz. Dafür gilt ab jetzt $k:=(m+1)(n+1)$
 \begin{align*}
 	\utild(x,y):= \sum\limits_{i=1}^{k} u^h_i T_i(x,y) 
 \end{align*}
 
-mit den globalen Formfunktionen $T_i(x,y)$ und gesuchten Konstanten $u^h_i$. Setzt man die Definition von $\utild$ ein und ersetzt $\varphi \in \ho$ durch die Basis von $P^*$, also den globalen Formfunktionen $T_i$, so gilt $\forall i \in \{1, \cdots , k\}$  
+Dabei sind  $T_i(x,y)$ die globalen Formfunktionen und $u^h_i$ die gesuchten Konstanten. Setzt man die Definition von $\utild$ ein und ersetzt $\varphi \in \ho$ durch die Basis von $P^*$, also den globalen Formfunktionen $T_i$, so gilt $\forall i \in \{1, \cdots , k\}$  
 \begin{align*}
 	& - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \uotild \nabla \varphi \diff x  = \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla \utild \nabla \varphi \diff x \\
 	\Leftrightarrow 
@@ -208,20 +201,20 @@ Also müssen wir $A$ berechnen und dann das Gleichungssystem $ A*u_0^h =  A * u^h
 
 \subsubsection{Berechnung des $u$ Integrals} 
   
-Als erste Vereinfacherung betrachten wir nicht mehr das Integral über $\Omega$, sondern über die einzelnen Dreiecke der Triangulierung. Desweiteren ist $T_i$ linear, also $\nabla T_i$ Konstant. Es gilt:  
+Als erste Vereinfacherung betrachten wir nicht mehr das Integral über $\Omega$, sondern über die einzelnen Dreiecke der Triangulierung. Desweiteren ist $T_i$ linear, also $\nabla T_i$ konstant. Es gilt:  
 \begin{align*}
   \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla T_i \nabla T_j  \diff x  
  & = \sum\limits_{\tilde{E} \in E_k} \int\limits_{\tilde{E}}  \left( v^2 + \epsilon_1 \right) \nabla T_i \nabla T_j  \diff x \\
- & =  \sum\limits_{\tilde{E} \in E_k} 2 \nabla T_i \nabla T_j \int\limits_{\tilde{E}}  \left( v^2 + \epsilon_1 \right)   \diff x 
+ & =  \sum\limits_{\tilde{E} \in E_k} \nabla T_i \nabla T_j \int\limits_{\tilde{E}}  \left( v^2 + \epsilon_1 \right)   \diff x 
 \end{align*}
 
 Wir kennen $\nabla T_i \nabla T_j$ auf jedem Dreieck. Also muss nur noch $\int_E v^2+ \epsilon \diff x$ berechnet werden. Es darf über das Referenzdreieck integriert werden, da durch den Transformationssatz das Integral über das transformierte Element gewonnen werden kann. Es gilt:
 \begin{align*}
 	\int\limits_E v^2 + \epsilon_1 \diff x &  = \int\limits_E v^2  \diff x + \frac{1}{2}\epsilon_1  \\
 \end{align*}
-Da $v$ bereits numerisch berechnet wurde, haben wir nur Funktionsauswertungen von $v$ an den Ecken des Dreieckes gegeben und wir wissen, dass $v \in \mathcal{P}_1$. Also ist v eindeutig bestimmt und kann berechnet werden. Die Berechnung ist in \ref{subsec:darstellung_linear} mit $v=a$ zu finden. 
+Da $v$ bereits numerisch berechnet wurde, haben wir nur Funktionsauswertungen von $v$ an den Ecken des Dreieckes gegeben und wir wissen, dass $v \in \mathcal{P}_1$. Also ist v eindeutig bestimmt und kann berechnet werden. Die Berechnung ist in \ref{eq:gerades_dreieck_lineare_fkt} und \ref{eq:ungerades_dreieck_lineare_fkt} zu finden. 
 
-Nun können wir das Integral berechnen. Dies ist einfach und wird hier nicht weiter ausgeführt. 
+Die Berechnung von $\int_E v^2 \diff x$ sieht wie folgt aus
 \begin{align*}
 	\int\limits_E v(x,y)^2 \diff x \diff y 
 	& = \int\limits_0^1 \int\limits_0^{1-y}
@@ -239,8 +232,7 @@ Berechnen wir nun
 B(T_i,T_j) = \sum\limits_{\tilde{E} \in E_k} \nabla T_i \nabla T_j \int\limits_{\tilde{E}}  \left( v^2 + \epsilon \right)   \diff x 
 \end{align*}
 
-$T_i$ ist nur auf einem Gitterpunkt $1$ und sonst $0$. Das heißt genauer, dass $T_i$ nur auf sechs Dreiecken ungleich 0 ist. Um das Integral zu bestimmen braucht man also maximal sechs Dreiecke. Falls der Gitterpunkt am Rand liegen sollte, betrachtet man einfach nur drei Dreiecke, an den Ecken entweder ein oder zwei Dreiecke. Für den Rand setzt man einfach die Dreiecke, die nicht existieren gleich 0. 
-$B(T_i,T_j)$ nimmt für unterschiedliche $i$ und $j$ unterschiedliche Werte an. 
+$T_i$ ist nur auf dem Gitterpunkt $i$ $1$ und sonst $0$. Das heißt genauer, dass $T_i$ nur auf sechs Dreiecken ungleich 0 ist. Um das Integral zu bestimmen braucht man also maximal sechs Dreiecke. Falls der Gitterpunkt am Rand liegen sollte, betrachtet man nur drei Dreiecke, an den Ecken entweder ein oder zwei Dreiecke. 
 
 \begin{figure}[ht]
 	\centering
@@ -249,56 +241,58 @@ $B(T_i,T_j)$ nimmt für unterschiedliche $i$ und $j$ unterschiedliche Werte an.
 	\label{fig:triang_inner}
 \end{figure}
 
-Jetzt können wir $B(T_i,T_j)$ berechnen. Für unterschiedliche $i$ und $j$ kommen natürlich unterschiedliche Werte heraus. Betrachten wir zunächst die Situation, dass $i$ und $j$ nicht benachbart sind. Dann ist $B(T_i,T_j)=0$, da $\nabla T_i \nabla T_j$ nur auf benachbarten Dreiecken ungleich $0$ ist. Daraus ergeben sich vier Fälle: $i$ und $j$ sind dasselbe, also $j=i$. $j$ liegt rechts neben $i$ also $j=i+1$, $j$ liegt direkt unter $i$, $j=i+n+1$ und $j$ liegt schräg unter $i$, also $j=i+n+2$.  Betrachten wir für die einzelnen Berechnungen \ref{fig:triang_inner}. $T_i$ ist immer der Mittelpunkt dieser Zeichnung, $T_j$ ist entsprechend des jeweiligen $j$ positioniert. In den Berechnungen stimmen die Nummerierungen der Dreiecke mit den Nummerierungen in der Abbildung \ref{fig:triang_inner} überein und $T^k, k \in \{1,2,3\}$ ist das Gleiche $T^k$ wie in \eqref{eq:ti_bezeichnung_ableitung}. 
+Jetzt können wir $B(T_i,T_j)$ für festes $i,j$ berechnen. Falls $i$ und $j$ nicht adjazent sind, ist $B(T_i,T_j)=0$, da $T_i T_j=0$ gilt. Seien nun $T_I$ und $T_j$ adjazent. Hier haben wir vier Fälle: $i$ liegt auf $j$, also $j=i$, $j$ liegt rechts neben $i$ also $j=i+1$, $j$ liegt direkt unter $i$, $j=i+n+1$ und $j$ liegt schräg unter $i$, also $j=i+n+2$.  Betrachten wir für die einzelnen Berechnungen \ref{fig:triang_inner}. $T_i$ ist immer der Mittelpunkt dieser Zeichnung, $T_j$ ist entsprechend des jeweiligen $j$ positioniert. In den Berechnungen stimmen die Nummerierungen der Dreiecke mit den Nummerierungen in der Abbildung \ref{fig:triang_inner} überein und $\varphi_k, k \in \{0,1,2\}$ entspricht den $\varphi_k$ in \eqref{eq:varphi}. 
+
+Betrachten wir nun die vier Fälle. 
 
 \paragraph*{$i$ und $j$ sind gleich}
 \begin{align*}
 	B(T_i,T_i)	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_i   \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x\\
- 				& =  \nabla T^0 \nabla T^0 \int\limits_{E_3}  \left( v^2 + \epsilon \right)   \diff x 
- 				+ \nabla T^0 \nabla T^0 \int\limits_{E_4} \left( v^2 + \epsilon \right) \diff x \\ 
- 				& +  \nabla T^1 \nabla T^1 \int\limits_{E_1}  \left( v^2 + \epsilon \right)   \diff x
- 				+ \nabla T^1 \nabla T^1 \int\limits_{E_6} \left( v^2 + \epsilon \right) \diff x \\			
- 				& +  \nabla T^2 \nabla T^2  \int\limits_{E_2}  \left( v^2 + \epsilon \right)  \diff x
- 				+  \nabla T^2  \nabla T^2  \int\limits_{E_5}  \left( v^2 + \epsilon \right) \diff x		
+ 				& =  \nabla \varphi_0 \nabla \varphi_0 \int\limits_{E_3}  \left( v^2 + \epsilon \right)   \diff x 
+ 				+ \nabla \varphi_0 \nabla \varphi_0 \int\limits_{E_4} \left( v^2 + \epsilon \right) \diff x \\ 
+ 				& +  \nabla \varphi_1 \nabla \varphi_1 \int\limits_{E_1}  \left( v^2 + \epsilon \right)   \diff x
+ 				+ \nabla \varphi_1 \nabla \varphi_1 \int\limits_{E_6} \left( v^2 + \epsilon \right) \diff x \\			
+ 				& +  \nabla \varphi_2 \nabla \varphi_2  \int\limits_{E_2}  \left( v^2 + \epsilon \right)  \diff x
+ 				+  \nabla \varphi_2  \nabla \varphi_2  \int\limits_{E_5}  \left( v^2 + \epsilon \right) \diff x		
 \end{align*}
-
+%todo falls zeit reihenfolge anders
 \paragraph*{$j$ liegt rechts neben $i$}
 \begin{align*}
 	B(T_i,T_{i+1})	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+1}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
- 				& =  \nabla T^0 \nabla T^1  \int\limits_{E_3}  \left( v^2 + \epsilon \right)   \diff x + \nabla T^0 \nabla T^1  \int\limits_{E_6}  \left( v^2 + \epsilon \right)   \diff x 
+ 				& =  \nabla \varphi_0 \nabla \varphi_1  \int\limits_{E_3}  \left( v^2 + \epsilon \right)   \diff x + \nabla \varphi_0 \nabla \varphi_1  \int\limits_{E_6}  \left( v^2 + \epsilon \right)   \diff x 
 \end{align*}
 
 \paragraph*{$j$ liegt unter $i$}
 \begin{align*}
 %korrekte varphi?
 	B(T_i,T_{i+1+n})	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+1+n}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
- 				& =  \nabla T^0 \nabla T^1 \int\limits_{E_4}  \left( v^2 + \epsilon \right)   \diff x + \nabla T^0 \nabla T^1  \int\limits_{E_5}  \left( v^2 + \epsilon \right)   \diff x 
+ 				& =  \nabla \varphi_0 \nabla \varphi_1 \int\limits_{E_4}  \left( v^2 + \epsilon \right)   \diff x + \nabla \varphi_0 \nabla \varphi_1  \int\limits_{E_5}  \left( v^2 + \epsilon \right)   \diff x 
 \end{align*}
 
 \paragraph*{$j$ liegt schräg unter $i$}
 \begin{align*}
 %korrekte varphi?
 	B(T_i,T_{i+2+n})	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+2+n}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
- 				& =  \nabla T^1 \nabla T^2 \int\limits_{E_5}  \left( v^2 + \epsilon \right)   \diff x + \nabla T^1\nabla T^2  \int\limits_{E_6}  \left( v^2 + \epsilon \right)   \diff x \\
+ 				& =  \nabla \varphi_1 \nabla \varphi_2 \int\limits_{E_5}  \left( v^2 + \epsilon \right)   \diff x + \nabla \varphi_1\nabla \varphi_2  \int\limits_{E_6}  \left( v^2 + \epsilon \right)   \diff x \\
  				& = 0
 \end{align*}
 
 \paragraph*{Zusammenfassung}
-Mit diesen Werten können wir nun die Matrix $\int_{\Omega} (v^2+ \epsilon) \nabla u \nabla \varphi$ aufstellen:
+Mit diesen Werten können wir nun die Matrix $ \left( \int_{\Omega} (v^2+ \epsilon) \nabla T_i \nabla T_j \right)_{ij}$ aufstellen:
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=0.25]{images/matrix.png}
-	\caption{Triangulierung im Inneren}
-	\label{fig:triang_inner}
+	\caption{Darstellung der Matrix $ \left( \int_{\Omega} (v^2+ \epsilon) \nabla T_i \nabla T_j \right)_{ij}$ }
+	\label{fig:int_u}
 \end{figure}
 Dabei sind auf der Diagonalen die Einträge $B(T_i,T_i)$, auf der Nebendiagonalen die Einträge $B(T_i,T_{i+1})$ und auf der anderen Diagonale die Einträge $B(T_i,T_{i+n+1})$. Wir haben bis jetzt immer nur über das Referenzdreieck integriert. Da wir aber eigentlich über die transformierten Dreiecke integrieren, müssen wir zu der Matrix $1/(h_1 h_2)$ multiplizieren. 
 
-Wir wissen noch, dass auf $\Gamma_1 \cup \Gamma_2$ $u=0$ gilt. Deshalb ist auf den Rändern $B(T_i,T_j)=0$. Also muss in der Implementierung für $i=1$ und $i=m$ oder $j=1$ und $j=m$ der entsprechende Eintrag $0$ gesetzt werden. Damit entsteht eine singuläre Matrix. Da wir das nicht wollen, setzten wir die Einträge auf der Diagonalen die durch $0$ ersetzt worden sind, auf $1$. Wenn wir nachher bei der linken Seite die entsprechenden Einträge auch 0 setzen, erhalten wir die gewünschten Randterme.  
+Wir wissen noch, dass auf $\Gamma_1 \cup \Gamma_2$ $u=0$ gilt. Dies ist bis jetzt noch nicht in die Matrix mit eingeflossen. Deshalb ist auf den Rändern $B(T_i,T_j)=0$. Also muss in der Implementierung für $i=1$ und $i=m$ oder $j=1$ und $j=m$ der entsprechende Eintrag $0$ gesetzt werden. Damit entsteht eine singuläre Matrix. Da wir das nicht wollen, setzten wir die Einträge auf der Diagonalen die durch $0$ ersetzt worden sind, auf $1$. Wenn wir nachher bei der linken Seite die entsprechenden Einträge auch 0 setzen, erhalten wir die gewünschten Randterme.  
 %todo andere Begründung vll mit Beweis. 
 
 
-\subsection{Zusammenfassung}
+\subsection{Agregation}
 
 Damit haben wir beide Seiten diskretisiert und können nun die Matrizen implementieren.  
 Wir wollen
@@ -503,7 +497,10 @@ Da sowohl $A$ als auch $b$ aus fast nur Nullen besteht, verwende ich in Matlab S
 
 \section{Optimierung nach v}
 %todo evtl mit u zusammenfassen
+Bei optimierung nach v zunächst existenz und eind. anhand des optimierungsproblems mit nb. dann optimalitätsbedingungen mit kkt system aufstellen. Aus KKT semidiffbare newtonmethode machen aufstellen. 
+Zum schluss beide optimierungen ineinander überführen
 
+\subsection{Analytische Betrachtung}
 Die Optimierung nach $v$ ist ein Optimierungsproblem mit einfacher Nebenbedingung und lässt sich in folgender Form schreiben:
 \begin{align*}
  \min\limits_{w \in W} J(w) \quad s.t. \quad w \in C 
@@ -1119,8 +1116,6 @@ Bei $B$ steht  auf der Hauptdiagonalen $4 $, auf der Nebendiagonalen und der zwe
 Der Vektor c hat bei allen Einträgen, die nicht zu einem Randpunkt gehören eine $1$, bei Einträgen am Rand und nicht in einer Ecke, eine $\frac{1}{2}$, an der linken oberen und der rechten unteren Ecke eine $\frac{1}{3}$ und der Eintrag auf den anderen beiden Ecken ist $\frac{1}{6}$.   
 
 Bei $D$ steht  auf der Hauptdiagonalen $\frac{1}{2} $, auf der ersten, zweiten und dritten Nebendiagonalen $\frac{1}{12} $. 
-
-Der Vektor $e$ hat überall Eintäge. Da diese von $\eta$ abhängen, haben sie keine erkennbare Form. 
 
 Durch die noch ausstehende Transformation der Dreiecke, muss der gesamte Term mit $1/ h_1 h_2$ multipliziert werden.  
 

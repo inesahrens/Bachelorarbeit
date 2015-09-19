@@ -15,23 +15,24 @@
 \contentsline {section}{\numberline {3.1}erste Betrachtung der Rissentstehung}{17}{section.3.1}
 \contentsline {section}{\numberline {3.2}Optimierung nach u}{18}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Analytische Betrachtung}{18}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Numerische Betrachtung}{20}{subsection.3.2.2}
-\contentsline {subsubsection}{\nonumberline Berechnung des $u$ Integrals}{21}{section*.5}
+\contentsline {subsection}{\numberline {3.2.2}Numerische Betrachtung}{21}{subsection.3.2.2}
+\contentsline {subsubsection}{\nonumberline Berechnung des $u$ Integrals}{22}{section*.5}
 \contentsline {subsection}{\numberline {3.2.3}Zusammenfassung}{25}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Optimierung nach v}{25}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Newtonmethode}{29}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}numerische Betrachtung}{32}{subsection.3.3.2}
+\contentsline {section}{\numberline {3.3}Optimierung nach v}{26}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Analytische Betrachtung}{26}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Newtonmethode}{30}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}numerische Betrachtung}{33}{subsection.3.3.3}
 \contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1}$}{33}{section*.13}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix $A_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } u^{dis} T_i T_j$}{34}{section*.14}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix $B_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } \nabla T_i \nabla T_j$}{35}{section*.15}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix $A_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } u^{dis} T_i T_j$}{35}{section*.14}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix $B_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } \nabla T_i \nabla T_j$}{36}{section*.15}
 \contentsline {paragraph}{\nonumberline Berechnung des Vektors c}{36}{section*.16}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix $D_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } T_i T_j$}{36}{section*.17}
-\contentsline {paragraph}{\nonumberline Berechnung des Vektors e}{37}{section*.18}
-\contentsline {paragraph}{\nonumberline Zusammenfassung}{38}{section*.19}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2}$}{39}{section*.21}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 v}$}{41}{section*.22}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 \eta }$}{41}{section*.23}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 v}$}{42}{section*.24}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 \eta }$}{43}{section*.25}
-\contentsline {subsubsection}{\nonumberline Zusammenfassung}{44}{section*.26}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{45}{chapter*.27}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix $D_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } T_i T_j$}{37}{section*.17}
+\contentsline {paragraph}{\nonumberline Zusammenfassung}{38}{section*.18}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2}$}{38}{section*.20}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 v}$}{40}{section*.21}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 \eta }$}{40}{section*.22}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 v}$}{41}{section*.23}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 \eta }$}{43}{section*.24}
+\contentsline {subsubsection}{\nonumberline Zusammenfassung}{43}{section*.25}
+\contentsline {chapter}{\numberline {4}Fazit und Ausblick}{44}{chapter.4}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{45}{chapter*.26}
