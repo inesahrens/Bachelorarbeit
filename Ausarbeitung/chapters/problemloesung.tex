@@ -186,111 +186,7 @@ Finde $\utild \in \ho$, sodass  $\forall \varphi \in \ho$
 \end{align*}
 gilt
 
-Zur numerischen Betrachtung bieten sich Finite Elemente, insbesondere die dreieckig-linearen Lagrange Elemente an. Die Theorie  wird als bekannt vorausgesetzt und hier nicht weiter besprochen. Zuerst triangulieren wir das Gebiet. 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%		Newtonmethode 					%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Zur Nullstellensuche werden wir die Newtonmethode benutzen. Diese lautet: 
-%
-%\begin{algorithm}[H]
-%\caption{einfache Newton Methode}
-%\KwData{$u^0$ (möglichst nah an der Lösung $\overline{u}$)}
-%\For{$k=0,1,\cdots$} {
-%	\emph{Löse $G'(u^k) s^k=-G(u^k)$}\;
-%	$u^{k+1}=u^k+s^k $\;
-%}
-%\end{algorithm}
-%Die Herleitung dieser Methode findet man in 
-%%todo: Referenz Buch
-%
-%\begin{quest}
-%Ist hier überhaupt ein Newtonverfahren erforderlich? 
-%\end{quest}
-%
-%Hier gilt: $G(u_1)= \int\limits_{\Omega}  \left( v^2 + \epsilon \right) 2  \nabla u_1 \nabla \varphi   \diff x $
-%
-%Um die G\^ateaux-Ableitung zu erhalten, bestimmen wir zunächst die Richtungsableitung in Richtung $\psi$.
-%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-%    G\^ateaux-Ableitung   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%$
-%\begin{array}{lcrl}
-%	\partial G(u_1,\psi ) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big( & G(u_1+t \psi)-G(u_1) \Big) \\
-%	& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big(	& 
-%		\int\limits_{\Omega}  \left( v^2 + \epsilon \right)  \nabla (u_1+t \psi ) \nabla \varphi \diff x - \int\limits_{\Omega}  \left( v^2 + \epsilon \right)  \nabla u_1 \nabla \varphi \diff x \Big) \\
-%	& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big(	& 
-%		\int\limits_{\Omega}  \left( v^2 + \epsilon \right)  \nabla (u_1+t \psi - u_1) \nabla \varphi \diff x \Big)\\
-%	& = & &\int\limits_{\Omega} 2 \left( v^2 + \epsilon \right) \nabla \psi \nabla \varphi \diff x  
-%\end{array}
-%$
-%
-%Damit  erhalten wir $\int_{\Omega} (v^2+ \epsilon) \nabla \psi \nabla \varphi$.  
-
-
-% Beide Funktionen $G$ und $G'$ sind nun analytisch gegeben. Damit ich sie numerisch berechnen kann, muss das Gebiet zunächst triangulisiert werden.
- 
-Hier ist ein rechteckiges Gebiet in 2D gegeben. ObdA $\Omega = [0,a] \times [0,b]$. Auf diesem Gebiet legen wir ein äquidistantes Gitter $G_h$. 
-\begin{align*}
-	G_h:= \left\{ (ih_1,jh_2)| i=0, \cdots , \frac{a}{h_1}, j=0, \cdots , \frac{b}{h_2}  \right\}
-\end{align*}
- $h=(h_1,h_2)$ ist die Schrittweite mit $a=(n+1) h_1$ und $b=(m+1) h_2$, $n+1$ die Anzahl der Stützpunkte in x-Richtung und $m+1$ die Anzahl der Stützpunkte in y-Richtung.
- %todo will ich mir die arbeit machen und alles im code umbenennen?  
-Um ein sinnvolles Gitter zu erhalten, sollten m und n recht nahe beieinander gewählt werden. Die genaue Wahl wird nachher in der Implementierung vorgenommen.
-Nun wird durch die Gitterpunkte die Triangulierung gelegt. Diese nennen wir $E_k$ und ist in \ref{fig:triangulierung} dargestellt. 
- %todo m+1 -> m überall? einfachere notation!
- 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[scale=0.1]{images/triang.png}
-	\caption{Triangulierung eines rechteckigen Gebietes}
-	\label{fig:triangulierung}
-\end{figure}
-%todo falls Zeit achsenbeschriftung einfügen. 
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[scale=0.25]{images/referenzdreieck.png}
-	\caption{Referenzdreieck}
-	\label{fig:referenzdreieck}
-\end{figure}
-
-Stellen wir das Referenzelement unserer Finiten Elemente auf. Es ist gegeben durch $(E,P, \Psi)$, wobei $E$ das Referenzdreieck \ref{fig:referenzdreieck} ist. $P= \mathcal{P}_1$ sind Polynome auf $\R^2$ vom Grad 1 mit Basis $ \{p_0, p_1, p_2 \}$ 
-\begin{align*}
-	p_0(x,y):=1 \hspace{5ex} p_1(x,y):=x \hspace{5ex} p_2(x,y):=y 
-\end{align*}
-
-$\Psi:=\{\varphi_0, \varphi_1, \varphi_2\}$ sind Funktionale auf $P$ und damit eine Basis von $P^*$. $\varphi_i$ sind lokale Formfunktionen d.h. $\varphi_i(p_j)= \delta_{ij}$, $i,j \in \{ 0,1,2 \}$. Dabei ist $\delta_{ij}$ das Kronecker-Delta. Außerdem soll gelten $\varphi_i(p_j)=p_j(a_i)$, wobei $a_i$ eine Auswertung in einer Ecke des Dreiecks ist. Daraus ergibt sich, dass 
-\begin{align*}
-	\varphi_0=1-x-y, \hspace{1ex} \varphi_1=x, \hspace{1ex} \varphi_2=y
-\end{align*} 
-Nun ist das Referenzelement gegeben. Jedes Element $(E_k, P_k, \Psi_k)$ lässt sich nun mit der affin linearen Transformation \\
-$
-\begin{array}{lrcl}
-	T: 	& \R^2 									& \rightarrow 	& \R^2 \\
-		& \begin{pmatrix} x \\ y \end{pmatrix}	& \mapsto		& \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} \pm \begin{pmatrix} h_1 x \\ h_2 y \end{pmatrix}
-\end{array}	
-$
-
-durch das Referenzelement darstellen. Dabei entspricht $(a_1,a_2)^t$ dem Eckpunkt mit dem $90^{\circ}$ Winkel des Rechteckes und $(h_1,h_2)^t$ ist die Höhe des Dreiecks. Mit dem Transformationssatz können wir alle Berechnungen auf dem Referenzelement ausführen und dann auf das transformierte Element übertragen.  
-
-Die Familie $\{(E_k,P_k, \Psi_k)\}$ von Finiten Elementen, die durch unsere Triangulierung hervorgegangen ist, ist verträglich. Also können wir die globalen Formfunktionen aufstellen, die auf dem gesamten Gebiet $\Omega$ definiert sind. Die globale Formfunktion $T_j$ ist $1$ auf dem dem Gitterpunkt $j$ und 0 sonst. 
-%todo verbessern
-
-Kommen wir wieder zu unserem eigentlichen Zielfunktional zurück. Wir wollten  $\utild \in \ho$ finden, sodass  $\forall \varphi \in \ho$  
-\begin{align*}
-	- \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \uotild \nabla \varphi \diff x  = \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla \utild \nabla \varphi \diff x 
-\end{align*}
-gilt. 
-
-Wir benutzen den Galerkin Ansatz. Dafür gilt ab jetzt $k:=(m+1)(n+1)$
+Zur numerischen Betrachtung bieten sich Finite Elemente, insbesondere die dreieckig-linearen Lagrange Elemente an. Die Theorie  wird als bekannt vorausgesetzt und hier nicht weiter besprochen. Zuerst triangulieren wir das Gebiet, wie in \ref{sec:finite_elemente} dargestellt.  Dann nutzen wir den Galerkin Ansatz. Dafür gilt ab jetzt $k:=(m+1)(n+1)$
 \begin{align*}
 	\utild(x,y):= \sum\limits_{i=1}^{k} u^h_i T_i(x,y) 
 \end{align*}
@@ -299,17 +195,16 @@ mit den globalen Formfunktionen $T_i(x,y)$ und gesuchten Konstanten $u^h_i$. Set
 \begin{align*}
 	& - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \uotild \nabla \varphi \diff x  = \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla \utild \nabla \varphi \diff x \\
 	\Leftrightarrow 
-	& - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \uotild \nabla T_i \diff x  =\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \sum\limits_{i=1}^{k} u^h_i \nabla T_i  \nabla T_j  \diff x \\
+	& - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \sum\limits_{i=1}^{k} {u^h_0}_i \nabla T_i \nabla T_i \diff x  =\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \sum\limits_{i=1}^{k} u^h_i \nabla T_i  \nabla T_j  \diff x \\
 	\Leftrightarrow
-	& - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \uotild \nabla T_i \diff x
+	& - \sum\limits_{i=1}^{k} {u^h_0}_i \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla T_j \nabla T_i \diff x
 	= \sum\limits_{i=1}^{k} u^h_i \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)   \nabla T_i \nabla T_j  \diff x \\
 	\Leftrightarrow
-	& b =  A * u^h
+	& A*u_0^h =  A * u^h
 \end{align*}
-wobei $u^h:= (u^h_1, \cdots u^h_{k})^T $, $A:= \left( \int_{\Omega}  \left( v^2 + \epsilon \right)   \nabla T_i \nabla T_j  \diff x \right)_{ij} $ und \\
- $b:=\left( \int_{\Omega}  \left( v^2 + \epsilon \right)  \nabla \uotild \nabla T_i \diff x\right)_i$
+wobei $u^h:= (u^h_1, \cdots u^h_{k})^T $, $u_0^h:= ({u^h_0}_1, \cdots {u^h_0}_k)^T $ und $A:= \left( \int_{\Omega}  \left( v^2 + \epsilon \right)   \nabla T_i \nabla T_j  \diff x \right)_{ij} $
 
-Also gilt $u^h = b \backslash A$. Daraus folgt, dass wir $A$ und $b$ berechnen müssen. Betrachten wir zunächst die Matrix $A$
+Also müssen wir $A$ berechnen und dann das Gleichungssystem $ A*u_0^h =  A * u^h$ lösen. 
 
 \subsubsection{Berechnung des $u$ Integrals} 
   
@@ -402,155 +297,6 @@ Dabei sind auf der Diagonalen die Einträge $B(T_i,T_i)$, auf der Nebendiagonalen
 Wir wissen noch, dass auf $\Gamma_1 \cup \Gamma_2$ $u=0$ gilt. Deshalb ist auf den Rändern $B(T_i,T_j)=0$. Also muss in der Implementierung für $i=1$ und $i=m$ oder $j=1$ und $j=m$ der entsprechende Eintrag $0$ gesetzt werden. Damit entsteht eine singuläre Matrix. Da wir das nicht wollen, setzten wir die Einträge auf der Diagonalen die durch $0$ ersetzt worden sind, auf $1$. Wenn wir nachher bei der linken Seite die entsprechenden Einträge auch 0 setzen, erhalten wir die gewünschten Randterme.  
 %todo andere Begründung vll mit Beweis. 
 
-\subsubsection{Betrachtung des $u_0$ Integrals}
-Berechnen wir nun numerisch 
-\begin{align*}
-	\int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x  \forall i \in \{1, \cdots , k \}
-\end{align*}
-Es gilt mit den gleichen Begründungen wie bei der rechten Seite: 
-\begin{align*}
-	\int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x &= \sum\limits_{E \in E_k} \int\limits_{E} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
-	& =   \sum\limits_{\substack{E \in E_k \text{ und } \\ E \text{ liegt am Rand }}} \int\limits_{E} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x 
-\end{align*}
-da $u_0$ überall, außer auf den äußeren Dreiecken $0$ ist. Damit müssen nur die $T_i$ betrachtet werden, die am oder neben dem Rand liegen. Alle anderen Einträge sind 0, wie in Grafik \ref{fig:u0_matrix} dargestellt. 
-Damit haben wir 4 Fälle für die Berechnung von dem Integral.  $T_i$ kann auf dem linken oder rechten Rand 1 sein, oder auf einem Dreieck neben dem linken oder rechten Rand 1 sein.  
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[scale=0.25]{images/u0_matrix.png}	
-	\caption{Veranschaulichung des Vektors $\int_{\Omega} (v^2+ \epsilon) \nabla u_0 \nabla T_i$ }
-	\label{fig:u0_matrix}
-\end{figure}
-
-\paragraph{$T_i$ ist auf dem Rand 1}
-
-Bis jetzt haben wir uns immer die sechs Dreiecke um $T_i$ angeschaut. Nun reicht es, die drei Dreiecke am Rand zu betrachten, da $T_i$ am Rand ist, wie in Zeichnung \ref{fig:triang_outer_middle} dargestellt. 
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[scale=0.25]{images/triang_outer_middle.png}	
-	\caption{umliegende Dreiecke von $T_i$ mit rechten bzw. linken Rand}
-	\label{fig:triang_outer_middle}
-\end{figure}
-
-\subparagraph{linker Rand}
- Wir erhalten hier
-\begin{align*}
-	\begin{array}{l||l|l|l|l}
-		& T_i	& \nabla T_i							& \nabla u_0						& \nabla T_i \nabla u_0 \\[.2ex]
-		\hline
-		E_3 &-x-y-1	& \begin{pmatrix} -1 \\ -1\end{pmatrix} & \begin{pmatrix} -u_0^2 \\ u_0^1-u_0^2  \end{pmatrix}	& 2u_0^2-u_0^1 \\[3ex]
-		E_5 & y		& \begin{pmatrix} 0 \\ 1\end{pmatrix}	& \begin{pmatrix} -u_0^2 \\ u_0^1-u_0^2 \end{pmatrix}	& u_0^1-u_0^2 \\[3ex]
-		E_6 & x		& \begin{pmatrix} 1 \\ 0\end{pmatrix}	& \begin{pmatrix} u_0^1 \\ 0 \end{pmatrix}	& u_0^1 
-	\end{array}
-\end{align*}
-
-Daraus ergibt sich: 
-\begin{align*}
-	& \int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
-	& = 
-	\int\limits_{E_3} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x 
-	+ \int\limits_{E_5} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x
-	+ \int\limits_{E_6} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
-	& =  \int\limits_{E_3} \left( v^2 + \epsilon_1 \right) (2 u_0^2 - u_0^1) \diff x 
-	+ \int\limits_{E_5} \left( v^2 + \epsilon_1 \right) (u_0^1 - u_0^2) \diff x
-	+ \int\limits_{E_6} \left( v^2 + \epsilon_1 \right) u_0^1 \diff x 
-\end{align*}
-
-\subparagraph{rechter Rand}
-Es ergibt sich folgende Tabelle
-\begin{align*}
-	\begin{array}{l||l|l|l|l}
-		& T_i	& \nabla T_i							& \nabla u_0						& \nabla T_i \nabla u_0 \\[.2ex]
-		\hline
-		E_1 & x		& \begin{pmatrix} 1 \\ 0\end{pmatrix}	& \begin{pmatrix} u_0^3 \\ 0 \end{pmatrix}	& u_0^3 \\[3ex]
-		E_2 & y		& \begin{pmatrix} 0 \\ 1\end{pmatrix}	& \begin{pmatrix} -u_0^2 \\ u_0^3-u_0^2 \end{pmatrix}	& u_0^3-u_0^2 \\[3ex]
-		E_4 &-x-y-1 & \begin{pmatrix} -1 \\ -1\end{pmatrix}	& \begin{pmatrix} -u_0^2 \\ u_0^3-u_0^2 \end{pmatrix}	& 2u_0^2-u_0^3		
-	\end{array}
-\end{align*}
-
-Es folgt:
-\begin{align*}
-	& \int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
-	& = 
-	\int\limits_{E_1} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x 
-	+ \int\limits_{E_2} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x
-	+ \int\limits_{E_4} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
-	& = \int\limits_{E_1} \left( v^2 + \epsilon_1 \right) u_0^3 \diff x 
-	+ \int\limits_{E_2} \left( v^2 + \epsilon_1 \right) (u_0^3 - u_0^2) \diff x
-	+ \int\limits_{E_4} \left( v^2 + \epsilon_1 \right) (2 u_0^2 - u_0^3) \diff x 
-\end{align*} 
-
-\paragraph{$T_i$ ist neben dem Rand 1}
-
-Bei den $T_i$ neben dem linken bzw. rechten Rand gehen wir analog vor. Wir betrachten jetzt \ref{fig:triang_outer_side}.
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[scale=0.25]{images/triang_outer_side.png}	
-	\caption{umliegende Dreiecke von $T_i$ neben dem rechten bzw. linken Rand}
-	\label{fig:triang_outer_side}
-\end{figure}
-%todo zeichnung verbessern: Dreiecke in der Mitte weg
-
-\subparagraph{linker Rand}
-\begin{align*}
-	\begin{array}{l||l|l|l|l}
-		& T_i	& \nabla T_i							& \nabla u_0						& \nabla T_i \nabla u_0 \\[.2ex]
-		\hline 
-		E_1 & x		& \begin{pmatrix} 1 \\ 0\end{pmatrix}	& \begin{pmatrix} - u_0^2 \\ u_0^1 - u_0^2 \end{pmatrix}	& - u_0^2 \\ [3ex]
-		E_2 & y		& \begin{pmatrix} 0 \\ 1\end{pmatrix}	& \begin{pmatrix} u_0^1 \\ 0 \end{pmatrix}	& 0 \\[3ex]
-		E_4 &-x-y-1 & \begin{pmatrix} -1 \\ -1\end{pmatrix}	& \begin{pmatrix} -u_0^1 \\ 0 \end{pmatrix}	& - u_0^1 
-	\end{array}
-\end{align*}
-
-Es folgt:
-\begin{align*}
-	& \int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
-	& = 
-	\int\limits_{E_1} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x 
-	+ \int\limits_{E_2} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x
-	+ \int\limits_{E_4} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
-	& = -\int\limits_{E_1} \left( v^2 + \epsilon_1 \right) u_0^2 \diff x 
-	+ 0 
-	- \int\limits_{E_4} \left( v^2 + \epsilon_1 \right) u_0^1 \diff x 
-\end{align*}
-
-\subparagraph{rechter Rand}
-\begin{align*}
-	\begin{array}{l||l|l|l|l}
-		& T_i	& \nabla T_i							& \nabla u_0						& \nabla T_i \nabla u_0 \\[.2ex]
-		\hline 
-		E_3 &-x-y-1	& \begin{pmatrix} -1 \\ -1\end{pmatrix}	& \begin{pmatrix} u_0^3 \\ 0 \end{pmatrix}	& - u_0^3\\[3ex]
-		E_5 & y		& \begin{pmatrix} 0 \\ 1\end{pmatrix}	& \begin{pmatrix} -u_0^3 \\ 0 \end{pmatrix}	& 0 \\[3ex]
-		E_6 & x		& \begin{pmatrix} 1 \\ 0\end{pmatrix}	& \begin{pmatrix} - u_0^2 \\ u_0^3-u_0^2  \end{pmatrix}	& -u_0^2 \\	[3ex]	
-	\end{array}
-\end{align*}
-
-Es ergibt sich
-\begin{align*}
-	& \int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
-	& = 
-	\int\limits_{E_3} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x 
-	+ \int\limits_{E_5} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x
-	+ \int\limits_{E_6} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
-	& = -\int\limits_{E_3} \left( v^2 + \epsilon_1 \right) u_0^3 \diff x 
-	+ 0 
-	- \int\limits_{E_6} \left( v^2 + \epsilon_1 \right) u_0^2 \diff x 
-\end{align*}
-
-\paragraph*{Zusammenfassung}
-
-Durch die vorherigen Berechnungen kommen wir auf den Vektor \ref{fig:u0_vektor}, der fast nur aus Nullen besteht. Nur die Einträge, die zu dem Rand des Gitters oder direkt neben dem Rand des Gitters liegen, sind ungleich 0.Dieses zeigt \ref{fig:u0_matrix}
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[scale=0.25]{images/u0_vektor.png}	
-	\caption{Vektor $\int_{\Omega} (v^2+ \epsilon_1) \nabla u_0 \nabla T_i$ }
-	\label{fig:u0_vektor}
-\end{figure}
-
-Es fehlt noch die Transformation der Dreiecke, über die wir integriert haben. Also multiplizieren wir hier auch wieder den Vektor mit $1/ h_1h_2$. 
 
 \subsection{Zusammenfassung}
 
@@ -1220,14 +966,14 @@ G_1(v,\eta) =  \int\limits_{\Omega} 2 \varphi v | \nabla u|^2 + \epsilon_2 2 \na
 wird nun diskretisiert:
 \begin{align*}
 	& \hspace{2ex} \int\limits_{\Omega} 2\varphi v | \nabla u|^2 + 2 \epsilon_2  \nabla v \nabla \varphi - \frac{2}{\epsilon_3} (1-v)\varphi  +  \eta \varphi \diff x \\
-	& = \int\limits_{\Omega} 2 T_j  \sum\limits_{i=1}^{k} v_i^h T_i u^{dis} + \epsilon_2 2 \nabla (\sum\limits_{i=1}^{k} v_i^h T_i) \nabla  T_j - \frac{2}{\epsilon_3} (1-\sum\limits_{i=1}^{k} v_i^h T_i) T_j + \eta T_j  \diff x \\
+	& = \int\limits_{\Omega} 2 T_j  \sum\limits_{i=1}^{k} v_i^h T_i u^{dis} + \epsilon_2 2 \nabla (\sum\limits_{i=1}^{k} v_i^h T_i) \nabla  T_j - \frac{2}{\epsilon_3} (1-\sum\limits_{i=1}^{k} v_i^h T_i) T_j + \sum\limits_{i=1}^{k} \eta_i^h T_i T_j  \diff x \\
 	& = 2 \sum\limits_{i=1}^{k} v_i^h \int\limits_{\Omega} u^{dis} T_i T_j \diff x 
 	+ 2 \epsilon_2 \sum\limits_{i=1}^{k} v_i^h  \int\limits_{\Omega} \nabla T_i \nabla T_j \diff x
 	- \frac{2}{\epsilon_3} \sum\limits_{i=1}^{k} \int\limits_{\Omega} T_j \diff x \\
 & \hspace{2ex}	+  \frac{2}{\epsilon_3} \sum\limits_{i=1}^{k} \alpha_i  \int\limits_{\Omega} T_i T_j \diff x 
-	+ \int\limits_{\Omega} \eta T_j \diff x \\
-	& = 2 A v^h + 2 \epsilon_2 v^h  B - \frac{2}{\epsilon_3} c + \frac{2}{\epsilon_3}  D v^h \\
-	& = (2 A + 2 \epsilon_2 B + \frac{2}{\epsilon_3} D) v^h - \frac{2}{\epsilon_3} c + e
+	+  \sum\limits_{i=1}^{k} \eta_i^h \int\limits_{\Omega} T_i T_j \diff x \\
+	& = 2 A v^h + 2 \epsilon_2 v^h  B - \frac{2}{\epsilon_3} c + \frac{2}{\epsilon_3}  D v^h + D \eta^h \\
+	& = (2 A + 2 \epsilon_2 B + \frac{2}{\epsilon_3} D) v^h - \frac{2}{\epsilon_3} c + D\eta^h
 \end{align*}
 
 mit $v^h:=(v_1^h, \cdots v_k^h)^T$, $A_{ij}=  \int_{\Omega} u^{dis} T_i T_j \diff x $, $B_{ij}:= \int_{\Omega} \nabla T_i \nabla T_j \diff x$, $c_j:= \int_{\Omega} T_j \diff x$, $D_{ij}:= \int_{\Omega} T_i T_j \diff x $ und $e_j:=\int_{\Omega} \eta T_j \diff x  $. 
@@ -1351,38 +1097,6 @@ Falls $i$ an einem Rand liegen sollte, werden die Dreiecke, die nicht vorhanden 
 					 + \int\limits_{E_6}   \varphi_1 \varphi_2 \diff x \\
 					 & = \frac{1}{24} + \frac{1}{24}  = \frac{1}{12}
 	\end{align*}
-
-\paragraph{Berechnung des Vektors e}
-\begin{align*}
-	\begin{array}{ll}
-		B(T_i)= \int\limits_{\Omega} \eta T_i 
-	\end{array}
-\end{align*}
-$\eta$ ist auf dem ungeraden Dreieck gegeben durch 
-\begin{align*}
-	\eta(x,y) = (\eta_3 - \eta_2)x + (\eta_1 - \eta_2)y + \eta_2
-\end{align*}
-und auf dem geraden gegeben durch
-\begin{align*}
-	\eta(x,y) = (\eta_1 - \eta_2)x + (\eta_3 - \eta_2)y + \eta_2
-\end{align*}
-Dadurch ergibt sich 
-\begin{align*}
-	\begin{array}{l|l|l}
-		& T_i	& \int_{E_i} \eta T_i \\
-		\hline
-		E_1 & x		& \eta_1 + \eta_2 + 2 \eta_3 \\  
-		E_2 & y		& \eta_1 + \eta_2 + 2 \eta_3 \\  
-		E_3 & 1-x-y	& \eta_1 + 2 \eta_2 + \eta_3 \\  
-		E_4 & 1-x-y & \eta_1 + 2 \eta_2 + \eta_3 \\  
-		E_5 & y 	& 2 \eta_1 + \eta_2 + \eta_3 \\  
-		E_6 & x		& 2 \eta_1 + \eta_2 + \eta_3 
-	\end{array}
-\end{align*}
-In der Tabelle entspricht $\eta_1$ in der Spalte für $E_i$ nicht $\eta_1$ in der Spalte für $E_j$, da die $1$ für das jeweilige Dreieck angibt, dass der Wert oben rechts in der Ecke steht. Das selbe gilt auch für $\eta_2$ und $\eta_3$.
-
-Den Vektor $e$ kann man berechnen, indem man die Werte addiert. Dabei gilt wieder, dass, falls $i$ am Rand liegt, die nicht existenten Dreiecke ausgelassen werden.  
-
 
 \paragraph{Zusammenfassung}
 Also ergibt sich 
