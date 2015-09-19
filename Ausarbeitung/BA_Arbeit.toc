@@ -33,6 +33,7 @@
 \contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 \eta }$}{41}{section*.22}
 \contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 v}$}{42}{section*.23}
 \contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 \eta }$}{43}{section*.24}
-\contentsline {subsubsection}{\nonumberline Zusammenfassung}{44}{section*.25}
+\contentsline {subsection}{\numberline {3.3.4}Agregation}{44}{subsection.3.3.4}
 \contentsline {chapter}{\numberline {4}Fazit und Ausblick}{45}{chapter.4}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{46}{chapter*.26}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{46}{chapter*.25}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{47}{chapter*.26}

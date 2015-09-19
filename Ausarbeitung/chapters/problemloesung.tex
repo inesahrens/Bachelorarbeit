@@ -11,7 +11,6 @@ Zunächst teilen wir das Minimierungsproblem in zwei voneinander unabhängige Opti
 \section{erste Betrachtung der Rissentstehung}
 \label{sec:allgemeines_kkt}
 
-%todo einleitung
 Erinnern wir uns an die vorangegangene Problemstellung: 
 \begin{align*}
 	& \min\limits_{u \in  \h^2 , v \in \h } \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 dx \\
@@ -69,7 +68,6 @@ Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren
 		\label{eq:u_gleich_null}
 		\int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla \tilde{u_1} \nabla \varphi \diff x = 0 \forall \varphi \in u_0 + \ho 
 	\end{align}
-	%todo wirklich u_0 + ho? oder nur ho?
 \end{thm}
 \begin{proof}
 	Nach \ref{thm:ableitung_gleich_null} muss nur überprüft werden, ob die Gâteaux-Ableitung von 
@@ -82,7 +80,7 @@ Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren
 	\eqref{eq:u_gleich_null} ist. Leiten wir $J$ ab: 
 	\begin{align*}
 		\begin{array}{lcrl}
-			\partial J(u,\varphi ) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\partial J(u)(\varphi ) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big( & J(u_1+t \varphi,u_2)-J(u_1,u_2) \Big) \\
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
@@ -108,8 +106,6 @@ Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren
 		\end{array}	
 	\end{align*}
 	Damit dies eine G\^ateaux Ableitung ist, muss die Abbildung $J'(u_1): \varphi  \mapsto \partial J(u_1,\varphi ) \in \R $ linear und beschränkt sein. Linearität ist einfach nachzurechnen. Beschränktheit lässt sich durch Cauchy-Schwarz zeigen.   
-	%todo muss ich das ausführen?
-	%todo brauche ich F-diffbar für konvergenz der Methode? 
 \end{proof}
 
 Also lautet unser analytisches Problem:
@@ -139,7 +135,6 @@ Mit den Bezeichnungen aus \ref{sec:grundlagen_pdgl} ist $g = u_0$, $f,b,c=0$ und
 	0 & v^2(x) + \epsilon_1 
 	\end{pmatrix}		
 \end{align*}
-%todo falls zeit matrix anders
 Aus \ref{ann:ex_und_eind} sind 3 und 4 bereits erfüllt, da $b,c=0$ gilt. Beweisen wir 1. 
 
 Sei $\xi \in \R^n$. Dann gilt:
@@ -158,7 +153,6 @@ Zu Annahme 2:
      \le (\sup (v_0)^2 + \epsilon_3)  |\xi| |\zeta| 
 \end{align*}
 mit $\Lambda = \sup (v_0)^2 + \epsilon   $
-%todo nummerierungen anders? 
 \end{proof}
 
 \subsection{Numerische Betrachtung}
@@ -193,14 +187,13 @@ Dabei sind  $T_i(x,y)$ die globalen Formfunktionen und $u^h_i$ die gesuchten Kon
 	& - \sum\limits_{i=1}^{k} {u^h_0}_i \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla T_j \nabla T_i \diff x
 	= \sum\limits_{i=1}^{k} u^h_i \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)   \nabla T_i \nabla T_j  \diff x \\
 	\Leftrightarrow
-	& A*u_0^h =  A * u^h
+	& L*u_0^h =  L * u^h
 \end{align*}
-wobei $u^h:= (u^h_1, \cdots u^h_{k})^T $, $u_0^h:= ({u^h_0}_1, \cdots {u^h_0}_k)^T $ und $A:= \left( \int_{\Omega}  \left( v^2 + \epsilon \right)   \nabla T_i \nabla T_j  \diff x \right)_{ij} $
+wobei $u^h:= (u^h_1, \cdots u^h_{k})^T $, $u_0^h:= ({u^h_0}_1, \cdots {u^h_0}_k)^T $ und $L:= \left( \int_{\Omega}  \left( v^2 + \epsilon \right)   \nabla T_i \nabla T_j  \diff x \right)_{ij} $
 
-Also müssen wir $A$ berechnen und dann das Gleichungssystem $ A*u_0^h =  A * u^h$ lösen. 
+Also müssen wir $L$ berechnen und dann das Gleichungssystem $ L*u_0^h =  L * u^h$ lösen. 
 
 \subsubsection{Berechnung des $u$ Integrals} 
-  %todo nicht B nennen!
 Als erste Vereinfacherung betrachten wir nicht mehr das Integral über $\Omega$, sondern über die einzelnen Dreiecke der Triangulierung. Desweiteren ist $T_i$ linear, also $\nabla T_i$ konstant. Es gilt:  
 \begin{align*}
   \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla T_i \nabla T_j  \diff x  
@@ -225,11 +218,10 @@ Die Berechnung von $\int_E v^2 \diff x$ sieht wie folgt aus
 	 & = \frac{1}{12} (v_1^2+v_2^2+v_3^2 + v_1v_2 + v_1 v_3 + v_2 v_3)
 \end{align*}
 Da die Berechnung über das transformierte Element durchgeführt wurde, muss noch der Multiplikator $\frac{1}{h_1 h_2}$ eingefügt werden. 
-%todo: genauer erklären?
 
 Berechnen wir nun 
 \begin{align*}
-B(T_i,T_j) = \sum\limits_{\tilde{E} \in E_k} \nabla T_i \nabla T_j \int\limits_{\tilde{E}}  \left( v^2 + \epsilon \right)   \diff x 
+L_{i,j} = \sum\limits_{\tilde{E} \in E_k} \nabla T_i \nabla T_j \int\limits_{\tilde{E}}  \left( v^2 + \epsilon \right)   \diff x 
 \end{align*}
 
 $T_i$ ist nur auf dem Gitterpunkt $i$ $1$ und sonst $0$. Das heißt genauer, dass $T_i$ nur auf sechs Dreiecken ungleich 0 ist. Um das Integral zu bestimmen braucht man also maximal sechs Dreiecke. Falls der Gitterpunkt am Rand liegen sollte, betrachtet man nur drei Dreiecke, an den Ecken entweder ein oder zwei Dreiecke. 
@@ -247,7 +239,7 @@ Betrachten wir nun die vier Fälle.
 
 \paragraph*{$i$ und $j$ sind gleich}
 \begin{align*}
-	B(T_i,T_i)	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_i   \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x\\
+	L_{i,i}	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_i   \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x\\
  				& =  \nabla \varphi_0 \nabla \varphi_0 \int\limits_{E_3}  \left( v^2 + \epsilon \right)   \diff x 
  				+ \nabla \varphi_0 \nabla \varphi_0 \int\limits_{E_4} \left( v^2 + \epsilon \right) \diff x \\ 
  				& +  \nabla \varphi_1 \nabla \varphi_1 \int\limits_{E_1}  \left( v^2 + \epsilon \right)   \diff x
@@ -258,21 +250,21 @@ Betrachten wir nun die vier Fälle.
 %todo falls zeit reihenfolge anders
 \paragraph*{$j$ liegt rechts neben $i$}
 \begin{align*}
-	B(T_i,T_{i+1})	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+1}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
+	L_{i,i+1}	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+1}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
  				& =  \nabla \varphi_0 \nabla \varphi_1  \int\limits_{E_3}  \left( v^2 + \epsilon \right)   \diff x + \nabla \varphi_0 \nabla \varphi_1  \int\limits_{E_6}  \left( v^2 + \epsilon \right)   \diff x 
 \end{align*}
 
 \paragraph*{$j$ liegt unter $i$}
 \begin{align*}
 %korrekte varphi?
-	B(T_i,T_{i+1+n})	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+1+n}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
+	L_{i,i+1+n}	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+1+n}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
  				& =  \nabla \varphi_0 \nabla \varphi_1 \int\limits_{E_4}  \left( v^2 + \epsilon \right)   \diff x + \nabla \varphi_0 \nabla \varphi_1  \int\limits_{E_5}  \left( v^2 + \epsilon \right)   \diff x 
 \end{align*}
 
 \paragraph*{$j$ liegt schräg unter $i$}
 \begin{align*}
 %korrekte varphi?
-	B(T_i,T_{i+2+n})	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+2+n}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
+	L_{i,i+2+n}	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+2+n}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
  				& =  \nabla \varphi_1 \nabla \varphi_2 \int\limits_{E_5}  \left( v^2 + \epsilon \right)   \diff x + \nabla \varphi_1\nabla \varphi_2  \int\limits_{E_6}  \left( v^2 + \epsilon \right)   \diff x \\
  				& = 0
 \end{align*}
@@ -286,27 +278,27 @@ Mit diesen Werten können wir nun die Matrix $ \left( \int_{\Omega} (v^2+ \epsilo
 	\caption{Darstellung der Matrix $ \left( \int_{\Omega} (v^2+ \epsilon) \nabla T_i \nabla T_j \right)_{ij}$ }
 	\label{fig:int_u}
 \end{figure}
-Dabei sind auf der Diagonalen die Einträge $B(T_i,T_i)$, auf der Nebendiagonalen die Einträge $B(T_i,T_{i+1})$ und auf der anderen Diagonale die Einträge $B(T_i,T_{i+n+1})$. Wir haben bis jetzt immer nur über das Referenzdreieck integriert. Da wir aber eigentlich über die transformierten Dreiecke integrieren, müssen wir zu der Matrix $1/(h_1 h_2)$ multiplizieren. 
+Dabei sind auf der Diagonalen die Einträge $L_{i,i}$, auf der Nebendiagonalen die Einträge $BL_{i,i+1}$ und auf der anderen Diagonale die Einträge $BL_{i,i+n+1}$. Wir haben bis jetzt immer nur über das Referenzdreieck integriert. Da wir aber eigentlich über die transformierten Dreiecke integrieren, müssen wir zu der Matrix $1/(h_1 h_2)$ multiplizieren. 
 
 \subsection{Agregation}
 
-Nun haben wir die Matrix $A$ und den Vektor $u_0^h$ gegeben, um das Gleichungssystem $A u^h = A u_0^h$ zu berechnen. Allerdings haben wir noch nicht eingebracht, dass auf $\Gamma_1 \cup \Gamma_2$ $u=0$ gilt. Eigentlich würden wir das im Vektor $u$ mit aufnehmen, also die Zeilen 0 setzten, die den Rand repräsentieren und dann das Gleichungssystem lösen. Dies geht numerisch jedoch nicht so einfach. Die Information muss in $A$ und in $A u_0^h$ codiert sein. Dazu setzt man die Zeilen in $A$ 0, die zum Rand gehören. Die zugehörigen Diagonaleinträge werden 1 gesetzt. Diese Matrix nennen wir $\tilde{A}$. Die zugehörige Zeile in $A u_0^h$ setzt man 0. Den neuen Vektor nennen wir $\tilde{A u_0^h}$ Dadurch erhält man, dass $u^h$ an dieser Stelle 0 wird. 
+Nun haben wir die Matrix $L$ und den Vektor $u_0^h$ gegeben, um das Gleichungssystem $L u^h = L u_0^h$ zu berechnen. Allerdings haben wir noch nicht eingebracht, dass auf $\Gamma_1 \cup \Gamma_2$ $u=0$ gilt. Eigentlich würden wir das im Vektor $u$ mit aufnehmen, also die Zeilen 0 setzten, die den Rand repräsentieren und dann das Gleichungssystem lösen. Dies geht numerisch jedoch nicht so einfach. Die Information muss in $L$ und in $L u_0^h$ codiert sein. Dazu setzt man die Zeilen in $L$ 0, die zum Rand gehören. Die zugehörigen Diagonaleinträge werden 1 gesetzt. Diese Matrix nennen wir $\tilde{L}$. Die zugehörige Zeile in $L u_0^h$ setzt man 0. Den neuen Vektor nennen wir $\tilde{L u_0^h}$ Dadurch erhält man, dass $u^h$ an dieser Stelle 0 wird. 
 
 
 Damit haben wir beide Seiten diskretisiert und können das Gleichungssystem implementieren.  
 Wir wollen
 \begin{align*}
-	\frac{1}{h_1 h_2}\tilde{A} u=\frac{1}{h_1 h_2} \tilde{A u_0^h} \Leftrightarrow \tilde{A}u = \tilde{A u_0^h}
+	\frac{1}{h_1 h_2}\tilde{L} u=\frac{1}{h_1 h_2} \tilde{L u_0^h} \Leftrightarrow \tilde{L}u = \tilde{L u_0^h}
 \end{align*}
 berechnen. Der Code dazu hat folgende Form: 
 
 \begin{algorithm}[H]
 	\caption{Berechnung von u}
-	1. Berechne Matrix $\tilde{A}$ \\
-	2. Berechne Vektor $\tilde{A u_0^h}$ \\
-	3. $u = \tilde{A u_0^h}\backslash \tilde{A}$ 
+	1. Berechne Matrix $\tilde{L}$ \\
+	2. Berechne Vektor $\tilde{L u_0^h}$ \\
+	3. $u = \tilde{L u_0^h}\backslash \tilde{L}$ 
 \end{algorithm}
-Da sowohl $\tilde{A}$ als auch $\tilde{A u_0^h}$ aus fast nur Nullen besteht, verwende ich in Matlab Sparse Matrizen. Dies führt zu einer wesentlich kürzeren Laufzeit. 
+Da sowohl $\tilde{L}$ als auch $\tilde{L u_0^h}$ aus fast nur Nullen besteht, verwende ich in Matlab Sparse Matrizen. Dies führt zu einer wesentlich kürzeren Laufzeit. 
 
 \section{Optimierung nach v}
 
@@ -352,7 +344,7 @@ Zunächst wollen wir die Existenz und Eindeutigkeit der Lösung zeigen. Dafür brau
 	Zunächst kommt die Richtungsableitung:  
 	\begin{align*}
 		\begin{array}{lcrl}
-			\partial J(v,s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\partial J(v)(s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big( & J(v+ts)-J(v) \Big) \\
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
@@ -438,7 +430,6 @@ Nachdem wir nun wissen, dass die Lösung existiert und eindeutig ist, wollen wir 
 	G ist linear, also konvex. 
 	
 	Das Bild von $J$ enthält ein $\hat{v}$, sodass $G(\hat{v})<_P 0 $ gilt, da es ein $v \in H^1(\Omega)$ geben muss, das echt zwischen $0$ und $v_0$ liegt. 
-	%todo genauer
 	
 	Außerdem ist $a:=\inf \{J(w)|G(w) \le_P 0\}< \infty$, da J stetig und beschränkt ist. 
 	
@@ -487,7 +478,6 @@ Die schwache Formulierung ist dann
 mit $\eta = \mu - \lambda$
 
 \subsection{semidifferenzierbare Newtonmethode}
-%todo erklärung, warum ich semidiffbare nm nehme
 
 Unser Ziel ist es, eine Methode zu finden, wie wir das KKT System lösen können. Betrachten wir also 
 \begin{align*}
@@ -508,7 +498,7 @@ Sehen wir uns zunächst die $\partial G_1(v,\eta)(h)$ an. Es gilt:
 	$G_1(v,\eta)$ ist semidifferenzierbar mit 
 	\begin{align*}
 		& \partial G_{1 v} (v, \eta)(\phi) = \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x \\
-		& G_{1 \eta} (v, \eta) (\phi) = \int\limits_{\Omega}  \phi \varphi  \diff x
+		& \partial G_{1 \eta} (v, \eta) (\phi) = \int\limits_{\Omega}  \phi \varphi  \diff x
 	\end{align*}	
 \end{thm}
 \begin{proof}
@@ -520,7 +510,7 @@ Sehen wir uns zunächst die $\partial G_1(v,\eta)(h)$ an. Es gilt:
 	Die Berechnung wird hier nicht weiter ausgeführt. Die Richtungsableitung muss linear und beschränkt in $\phi$ sein. Linearität ist einfach zu sehen.
 	Für Fréchet Differenzierbarkeit muss eine Abschätzung überprüft werden:
 	\begin{align*}
-		& \|G_1(v + h,\eta) - G_1(v,\eta) - \partial G_{1v}(v,\eta)\| \\
+		& \|G_1(v + h,\eta) - G_1(v,\eta) - \partial G_{1v}(v,\eta)(h)\| \\
 		& =  \| 	\int\limits_{\Omega} 2 \varphi  (v+h)  | \nabla u|^2 + \epsilon_2 2 \nabla (v+h) \nabla \varphi  - \frac{2}{\epsilon_3} (1-(v+h))\varphi + \eta \varphi  \diff x \\
 		& \hspace{5ex} - 	\int\limits_{\Omega} 2 \varphi  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi  - \frac{2}{\epsilon_3} (1-v)\varphi + \eta \varphi  \diff x \\
 		&  \hspace{5ex} - \int\limits_{\Omega} 2 \varphi  h | \nabla u|^2 + \epsilon_2 2 \nabla h \nabla \varphi  + \frac{2}{\epsilon_3} h \varphi \diff x \| \\
@@ -650,114 +640,6 @@ Also lautet das Gleichungssystem, das für das Newtonverfahren nach $s$ gelöst we
 	s^2
 	\end{pmatrix}
 \end{align*}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%			old				% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%Mit der Theorie zu Optimalitätsbedingungen können wir unser Problem zu einer Nullstellensuche umschreiben. 
-%
-%\begin{thm}
-%Sei das Problem \eqref{eq:problem_von_v} gegeben. Folgende Aussagen sind äquivalent:
-%\begin{itemize}
-%	\item $\overline{v}$ löst \eqref{eq:problem_von_v}
-%	\item $\overline{v}$ löst $\overline{v}=P(\overline{v}- \gamma \nabla J(\overline{v}))$
-%\end{itemize}
-%Desweiteren existiert genau eine Lösung des Optimierungsproblems. 
-%\end{thm}  
-%\begin{proof}
-%Wir wollen \ref{thm:aus_optimal_folgt_projektion} anwenden. Sei dazu $W=H^1(\Omega)$. W ist ein Hilbertraum. Nun muss gezeigt werden, dass $C$ nichtleer, abgeschlossen und konvex ist. 
-%
-%$C$ ist nichtleer, da $0 \in C$. 
-%
-%Sei $v_n$ eine konvergente Folge in C. Dann gilt $0 \le v_n \le v_0 \hspace{1ex} \forall n \in \N$. Es gilt auch $0 \le \lim_{n \rightarrow \infty} u_n \le v_0$. Also ist $C$ abgeschlossen. 
-%
-%Für Konvexität sei $0<\lambda<1 $ und $v, w \in C$. Dann gilt $0 \le \lambda v + (1- \lambda) w$, da $\lambda>0$ außerdem gilt $\lambda v + (1- \lambda) w \le \lambda v_0 + (1- \lambda) v_0 = v_0$. Also ist jede Konvexkombination in $C$ enthalten, also ist $C$ konvex. 
-%
-%Nun muss $J$ Gâteaux-differenzierbar bei $\overline{v}$ sein. Dazu berechne zunächst die Richtungsableitung: 
-%
-%$
-%\begin{array}{lcrl}
-%	\partial J(v,s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big( & J(v+ts)-J(v) \Big) \\
-%	
-%	& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big(	& 
-%		\int\limits_{\Omega}  \left( (v+ts)^2 + \epsilon \right) | \nabla (u)|^2 + \epsilon |\nabla (v+ts)|^2 + \frac{1}{\epsilon} \left( 1- (v+ts) \right)^2 \\ 
-%		& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon \right) | \nabla u|^2 \hspace{8ex} + \epsilon |\nabla v|^2 \hspace{6.5ex}+ \frac{1}{\epsilon} \left( 1- v \right)^2 \Big) \\
-%		
-%	& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big(	& 
-%		\int\limits_{\Omega}  \left( \left( (v+ts)^2 + \epsilon \right) - \left( v^2 + \epsilon \right) \right) | \nabla (u)|^2 \\
-%		& & & \hspace{2ex} + \epsilon \left( |\nabla (v+ts)|^2 - |\nabla v|^2 \right) \\
-%		& & & \hspace{2ex} + \frac{1}{\epsilon} \left( (1- v- ts)^2 -  (1- v)^2 \right)
-%	\Big) \\	
-%	
-%	& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big(	& 
-%		\int\limits_{\Omega}  \left( v^2 + 2vts + t^2s^2 - v^2  \right) | \nabla u|^2 \\
-%		& & & \hspace{2ex} + \epsilon \left( |\nabla v|^2 + 2 t \nabla v \nabla s + t^2 |\nabla s|^2 - |\nabla v|^2 \right) \\
-%		& & & \hspace{2ex} + \frac{1}{\epsilon} \left( (1- v)^2 - 2(1-v)ts + t^2s^2 -  (1- v)^2 \right)
-%	\Big) \\		
-%	
-%	& = &\lim\limits_{t \rightarrow 0} 
-%	\Big(	& 
-%		\int\limits_{\Omega}  \left( 2vs + ts^2  \right) | \nabla u|^2 + \epsilon \left( 2 \nabla v \nabla s + t |\nabla s|^2 \right) \\
-%		& & & \hspace{2ex} - \frac{1}{\epsilon} \left(2(1-v)s + ts^2 \right) + \lambda_1 s  - \lambda_2 s  \diff x
-%	\Big) \\	
-%	& = &\hspace{6.5ex} & 
-%		\int\limits_{\Omega} 2s v | \nabla u|^2 + \epsilon 2 \nabla v \nabla s - \frac{2}{\epsilon} (1-v)s  \diff x\\	
-%								& = &\hspace{6.5ex} & 
-%		\int\limits_{\Omega} 2  v | \nabla u|^2 s - \epsilon 2 \Delta v  s - \frac{2}{\epsilon} (1-v)s \diff x + \int\limits_{\partial \Omega} 2 \epsilon \nabla v \nu s \diff x  							 
-%\end{array}
-%$
-%\\
-%Daraus ergibt sich die Ableitung
-%
-%$
-%\begin{array}{lrcl}
-%	J'(v): 	& \overline{H^1}(\Omega) 	& \rightarrow 	& \R \\
-%						& s							& \mapsto		&  \left( 2  v | \nabla (u)|^2  - \epsilon 2 \Delta v - \frac{2}{\epsilon} (1-v), s \right)_{L^2(\Omega)} + \left( 2 \epsilon \nabla v \nu , s \right)_{L^2(\partial \Omega)}  \\
-%\end{array}	
-%$
-%
-%Diese muss noch beschränkt und linear sein. Linearität in s ist einfach zu sehen und Beschränktheit ebenfalls
-%\begin{quest}
-%genauer? 
-%\end{quest}
-%
-%Nun können wir \ref{thm:aus_optimal_folgt_projektion} anwenden und deswegen auch \ref{VI}. Falls jetzt noch $J$ konvex auf C ist, sind die Aussagen im Theorem oben äquivalent.
-%Dieses ist auch so und J ist sogar strikt konvex. Der Beweis dazu kann durch einfaches Nachrechnen geführt werden. 
-%%todo Nachrechen einfügen evtl 
-%Falls zusätzlich $W$ reflexiv, J strikt konvex und stetig  mit
-%\begin{align*}
-%\lim\limits_{v \in C, \|v\|_{H^1(\Omega)} \rightarrow \infty} J(v)=\infty
-%\end{align*} 
-%ist, dann existiert genau eine Lösung von \eqref{eq:problem_von_v}.
-%Da $W=H^1(\Omega)$ ist W reflexiv. Strikte Konvenxheit von J wurde schon gezeigt. Die Stetigkeit von J ist offensichtlich. Sei nun $w \in C$ mit $\|v\|_{H^1(\Omega)} \rightarrow \infty$. Dann gilt
-%
-%$
-%\begin{array}{ll}
-%	J(v) 	& = \int_{\Omega} \left( v^2 + \epsilon \right) | \nabla u|^2 + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- v \right)^2 \diff x \\
-%			& = \int_{\Omega} v^2  | \nabla u|^2 + \epsilon  | \nabla u|^2  + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- 2v + v^2 \right) \diff x \\
-%			& = \int_{\Omega} v^2  | \nabla u|^2 - \frac{2}{\epsilon} v + \frac{1}{\epsilon}v^2  \diff x + \int_{\Omega} \epsilon  | \nabla u|^2  + \frac{1}{\epsilon}\diff x  +  \int_{\Omega} \epsilon |\nabla v|^2 \diff x \\
-%			& \le \int_{\Omega} v^2  \left(| \nabla u|^2 + \frac{1}{\epsilon} \right)   \diff x + c  +  \epsilon \| \nabla v\|_{L^2(\Omega)}^2 \\
-%			& \le c' \|v\|_{L^2(\Omega)}^2 + c + \epsilon \| \nabla v\|_{L^2(\Omega)}^2 \\
-%			& \le c'' \left( \|v\|_{L^2(\Omega)}^2 + \| \nabla v\|_{L^2(\Omega)}^2 \right) + c \\
-%			& \le c'' \|v\|_{H^1(\Omega)}^2   + c \\
-%			& \rightarrow \infty
-%\end{array}
-%$
-%
-%mit $c,c',c''>0$ passende Konstanten. 
-%Daraus folgt, dass genau eine Lösung des Optimierungsproblems exisitiert. 
-% 
-%\end{proof}
-  
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%		Numerische Betrachtung			%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{numerische Betrachtung}
 
@@ -937,33 +819,6 @@ Bei $D$ steht  auf der Hauptdiagonalen $\frac{1}{2} $, auf der ersten, zweiten u
 
 Durch die noch ausstehende Transformation der Dreiecke, muss der gesamte Term mit $1/ h_1 h_2$ multipliziert werden.  
 
-%\begin{equation*}
-%(2 A + 2 \epsilon B + \frac{2}{\epsilon} D) \alpha  - \frac{2}{\epsilon} c = \\
-%\left( 
-%	2
-%	\begin{pmatrix}
-%		4	& -1 		&     	& 		& -1	\\
-%		-1	& \ddots	& \ddots& 		& 			& \ddots	\\
-%			& \ddots	&		&		&			& 			& -1 \\
-%		-1	& 			&		&		&			& \ddots	&	\\
-%			&\ddots		&	  	&		& \ddots	& \ddots 	& -1 \\
-%			&			&	-1	&		&			& -1		& 4 	
-%	\end{pmatrix}
-%	+ 2 \epsilon
-%	\begin{pmatrix}
-%		B
-%	\end{pmatrix}
-%	+ \frac{2}{\epsilon} 
-%	\begin{pmatrix}
-%		D
-%	\end{pmatrix}
-%\right) 
-%\alpha - \frac{2}{\epsilon} 
-%\begin{pmatrix}
-%	c
-%\end{pmatrix}
-%\end{equation*}
-
 \subsubsection{numerische Darstellung von $G_{2}$}
 \begin{align*}
 	\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \varphi \diff x
@@ -1111,5 +966,40 @@ Die numerische Darstellung ist genau die gleiche, wie bei $G_{2 v}$, nur dass di
 	
 %todo transformation
 
-\subsubsection{Zusammenfassung}
-Nun sind alle Funktionen disktretisiert und das Problem kann implementiert werden. 
+\subsection{Agregation}
+Nun sind alle Funktionen disktretisiert und das Problem kann implementiert werden. Stellen wir die genaue Newtonmethode auf: 
+
+\begin{algorithm}[H]
+	\caption{semidiffbare Newton Methode}
+	\label{algo:semidiffbare_nm_anw}
+	\KwData{$v^0, \eta^h $ (möglichst Nah an der Lösung $(\overline{v},\overline{\eta})$)}
+	\For{$k=0,1,\cdots$} {
+		\emph{Löse das Gleichungssytem $L u^k = L u_0^k$ nach $u^k$ }\;
+		\emph{Erhalte $s_k$ beim lösen von $ -\begin{pmatrix}
+			G_1(v^k,\eta^k) \\ G_2(v^k,\eta^k)
+			\end{pmatrix} = \begin{pmatrix}
+				\partial G_{1v}(v^k, \eta^k)(T_i) & \partial G_{1\eta}(v^k, \eta^k)(T_i) \\
+				\partial G_{2v}(v^k, \eta^k)(T_i) & \partial G_{2 \eta}(v^k, \eta^k)(T_i) \\  
+			\end{pmatrix} 
+			\begin{pmatrix}
+			s^k_1 \\ s^k_
+			\end{pmatrix}$}\;
+		$v^{k+1}=v^k+s_1^k \hspace{2ex} \eta^{k+1}= \eta^k + s_2^k$\;
+	}
+\end{algorithm}
+
+mit
+\begin{align*}
+	\begin{array}{rcl}
+		L 					& = & \int\limits_{\Omega} (v^2 + \epsilon_1) \nabla T_i \nabla T_j \diff x \\
+		G_1 				& = &  \left(2 (\int\limits_{\Omega} u^{dis} T_i T_j \diff x)_{ij} + 2 \epsilon_2 (\int\limits_{\Omega} \nabla T_i \nabla T_j \diff x)_{ij} +  \frac{2}{\epsilon_3}  (\int\limits_{\Omega} T_i T_j \diff x)_{ij}  \right) v^k \\
+		& & - \frac{2}{\epsilon_3} (\int\limits_{\Omega} T_j \diff x)_j +  ( \int\limits_{\Omega} T_i T_j \diff x )_{ij} \eta^k \\
+		G_2 				& = &   ( \int\limits_{\Omega} T_i T_j \diff x)_{ij}     (\eta_i^h- \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h ) \right\} -  \min \left\{0,  \eta_i^h + c v_i^h    \right\}  )_i\\
+		\partial G_{1v} 	& = & 2 (\int\limits_{\Omega} u^{dis} T_i T_j \diff x)_{ij} + 2 \epsilon_2 (\int\limits_{\Omega} \nabla T_i \nabla T_j \diff x)_{ij} +  \frac{2}{\epsilon_3}  (\int\limits_{\Omega} T_i T_j \diff x)_{ij}\\
+		\partial G_{1\eta}	& = & (\int\limits_{\Omega} T_i T_j \diff x)_{ij}\\
+		\partial G_{2v} 	& = & (\int\limits_{\Omega} \frac{\partial f}{\partial v} T_i T_j)_{ij} \\
+		\partial G_{2 \eta} & = & (\int\limits_{\Omega} \frac{\partial f}{\partial \eta} T_i T_j)_{ij} \\
+		f					& = &  \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\}				
+	\end{array}
+\end{align*}
+

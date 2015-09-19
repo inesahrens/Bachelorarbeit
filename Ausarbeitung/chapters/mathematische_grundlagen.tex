@@ -19,7 +19,7 @@ Sei $F: U \subset X \rightarrow Y$ ein Operator zwischen Banachräumen und $U \ne
 \begin{defi}[Richtungsableitung]
 	F heißt Richtungsableitbar in $x \in U$, falls 
 	\begin{align*}
-		\delta F(x,h)= \lim\limits_{t \rightarrow 0^+} \frac{F(x+th)-F(x)}{t} \in Y
+		\partial F(x)(h)= \lim\limits_{t \rightarrow 0^+} \frac{F(x+th)-F(x)}{t} \in Y
 	\end{align*}
 	für alle $h \in X$ existiert. Dann heißt $\delta F(x,h) $ Richtungsableitung von F in Richtung h. 
 \end{defi}
@@ -28,7 +28,7 @@ Sei $F: U \subset X \rightarrow Y$ ein Operator zwischen Banachräumen und $U \ne
 	F heißt Gâteaux differenzierbar in $x \in U$, falls F Richtungsableitbar ist und die Richtungsableitung 
 	\begin{align*}
 		&  F'(x):X \rightarrow Y \\
-		& h \mapsto \delta F(x,h)
+		& h \mapsto \partial F(x)(h)
 	\end{align*}
 	beschränkt und linear ist d.h. $F'(x) \in L(X,Y)$
 \end{defi}
@@ -47,7 +47,7 @@ Nun können wir die Ableitung von $J$ bestimmen und daraus resultierend das Optim
 	Sei das Optimierungsproblem \eqref{eq:op_ohne_nb} gegeben. 
 	Sei $J:W \rightarrow \R$ Gâteaux differenzierbar in $\tilde{w} \in W$. Wenn $\tilde{w}$ das Optimierungsproblem löst, gilt:  
 	\begin{align*}
-		\partial J(\tilde{w},h)=0 \hspace{2ex} \forall h \in W
+		\partial J(\tilde{w})(h)=0 \hspace{2ex} \forall h \in W
 	\end{align*}
 	Dabei ist $h$ die Richtung der Ableitung.  
 \end{thm}
@@ -71,10 +71,10 @@ Oftmals tauchen als Nebenbedingungen Ungleichungsbedingungen wie $a \le u \le b$
 \end{defi}
 
 Wir werden Probleme der Form
-\begin{align}
+\begin{align*}
 	\min\limits_{w \in W} J(w) \quad s.d. \quad G(w) \le_p 0 
-	\label{eq:optimierungsproblem_funktionbedingung}
-\end{align}
+	%\label{eq:optimierungsproblem_funktionbedingung}
+\end{align*}
 
 bearbeiten, wobei $W,Z$  Banachräume sind, $J: W \rightarrow \R $ Gâteaux differenzierbar und  $G: W \rightarrow Z$ die Nebenbedingung des Optimierungsproblems ist. $P \subset Z$ ist ein positiver Kegel. Die Nebenbedingung lässt sich in eine Raumnebenbedingung umschreiben, $C:=\{w \in W| G(w) \le_P 0 \}$. Dabei ist $C$ nichtleer, abgeschlossen und konvex. Das Problem lautet: 
 \begin{align}
@@ -203,7 +203,6 @@ Nun wird durch die Gitterpunkte die Triangulierung gelegt. Diese nennen wir $E_k
 	\caption{Triangulierung eines rechteckigen Gebietes}
 	\label{fig:triangulierung}
 \end{figure}
-%todo falls Zeit achsenbeschriftung einfügen. 
 
 \begin{figure}[ht]
 	\centering
@@ -339,7 +338,7 @@ Nun untersuchen wir die durch diesen Algorithmus gewonnene Folge $x^k$ in einer 
 \end{align*}
 Wir erhalten: 
 
-\begin{thm}
+\begin{thm}[Konvrgenz der generalisierten Newton Methode]
 	\label{thm:konvergenz_generalisierte_NM}
 	Betrachte \eqref{eq:g=0} mit der Lösung $\overline{x}$. Sei $x^k$ die Folge, die durch den Generalisierten Newton Algorithmus \ref{algo:generalisierte_newton_methode} erzeugt wurde. Sei $x^0$ nah genug an $\overline{x}$ gewählt
 	\begin{enumerate}
@@ -414,7 +413,7 @@ Nun können wir, um unser Newtonverfahren umzugestalten $M_k \in \partial G(x^k)$
 
 Dieses nennt sich semidiffbar. 
 
-\begin{defi}[semidiffbar]
+\begin{defi}[semidifferenzierbar]
 	Sei $G: X \rightarrow Y$ ein stetiger Operator zwischen Banachräumen. Sei $\partial G: X \rightrightarrows L(X,Y) $ mit nicht leeren Bildern gegeben wie oben.
 	\begin{enumerate}
 		\item G heißt $\partial G $ semidiffbar in $x \in X$, falls
