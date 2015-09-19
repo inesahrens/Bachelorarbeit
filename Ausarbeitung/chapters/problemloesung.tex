@@ -200,7 +200,7 @@ wobei $u^h:= (u^h_1, \cdots u^h_{k})^T $, $u_0^h:= ({u^h_0}_1, \cdots {u^h_0}_k)
 Also müssen wir $A$ berechnen und dann das Gleichungssystem $ A*u_0^h =  A * u^h$ lösen. 
 
 \subsubsection{Berechnung des $u$ Integrals} 
-  
+  %todo nicht B nennen!
 Als erste Vereinfacherung betrachten wir nicht mehr das Integral über $\Omega$, sondern über die einzelnen Dreiecke der Triangulierung. Desweiteren ist $T_i$ linear, also $\nabla T_i$ konstant. Es gilt:  
 \begin{align*}
   \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla T_i \nabla T_j  \diff x  
@@ -310,18 +310,24 @@ Da sowohl $\tilde{A}$ als auch $\tilde{A u_0^h}$ aus fast nur Nullen besteht, ve
 
 \section{Optimierung nach v}
 
-Bei optimierung nach v zunächst existenz und eind. anhand des optimierungsproblems mit nb. dann optimalitätsbedingungen mit kkt system aufstellen. Aus KKT semidiffbare newtonmethode machen aufstellen. 
-Zum schluss beide optimierungen ineinander überführen
+Bei der Optimierung nach $v$ geht es um die Fortsetzung des Risses. Für dieses Optimierungsproblem mit Ungleichungsnebenbedingung sicheren wir zunächst die Existenz und Eindeutigkeit der Lösung. Danach stellen wir die Optimalitätsbedingungen auf. Das resultiert in ein Karush Kuhn Tucker System. Dieses wollen wir mittels semidifferenzierbarer Newtonmethode lösen. Dazu müssen zunächst alle Funktionen der KKT Systems differenziert und danach diskretisiert werden.Dies geschieht wieder mit Finiten Elementen. Am Schluss führe beide Optimierungsprobleme zu einem Verfahren zusammen.    
+
 
 \subsection{Analytische Betrachtung}
-Die Optimierung nach $v$ ist ein Optimierungsproblem mit einfacher Nebenbedingung und lässt sich in folgender Form schreiben:
+Die Optimierung nach $v$ hat folgende Form:
+
+\begin{align}
+	\label{eq:problem_von_v}
+	& \min\limits_{v \in\h} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\
+	& \text{s.d.} \hspace{1ex} 0 \le v \le v_0 \notag
+\end{align}
+Das lässt sich allgemein als Optimierungsproblem mit Ungleichungsnebenbedingungen darstellen:  
 \begin{align*}
- \min\limits_{w \in W} J(w) \quad s.t. \quad w \in C 
+ \min\limits_{w \in W} J(w) \quad \text{s.d.} \quad w \in C 
 \end{align*}
 wobei W ein Banachraum, $J: W \rightarrow \R $ G-diffbar und $C \subset W$. 
 
 In diesem Fall bedeutet das also, dass 
-
 \begin{align*}
 	\begin{array}{lrcl}
 		J: 	& H^1(\Omega)	& \rightarrow 	& \R \\
@@ -330,12 +336,60 @@ In diesem Fall bedeutet das also, dass
 	\end{array}
 \end{align*}
 
+Zunächst wollen wir die Existenz und Eindeutigkeit der Lösung zeigen. Dafür brauchen wir, dass $J$ Gâteaux differenzierbar ist. 
+
+\begin{lem}
+	\label{lem:J_g_diffbar}
+	$J$ ist Gâteaux-Differenzierbar mit 
+	\begin{align*}
+		\begin{array}{lrcl}
+			J'(v): 	& \overline{H^1}(\Omega) 	& \rightarrow 	& \R \\
+			& s							& \mapsto		&  \left( 2  v | \nabla (u)|^2  - \epsilon_2 2 \Delta v - \frac{2}{\epsilon_3} (1-v), s \right)_{L^2(\Omega)} + \left( 2 \epsilon_2 \nabla v \nu , s \right)_{L^2(\partial \Omega)}  \\
+		\end{array}	
+	\end{align*}
+\end{lem}
+\begin{proof}
+	Zunächst kommt die Richtungsableitung:  
+	\begin{align*}
+		\begin{array}{lcrl}
+			\partial J(v,s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\Big( & J(v+ts)-J(v) \Big) \\
+			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\Big(	& 
+			\int\limits_{\Omega}  \left( (v+ts)^2 + \epsilon_1 \right) | \nabla (u)|^2 + \epsilon_2 |\nabla (v+ts)|^2 + \frac{1}{\epsilon_3} \left( 1- (v+ts) \right)^2 \\ 
+			& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla u|^2 \hspace{8ex} + \epsilon_2 |\nabla v|^2 \hspace{6.5ex}+ \frac{1}{\epsilon_3} \left( 1- v \right)^2 \Big) \\
+			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\Big(	& 
+			\int\limits_{\Omega}  \left( \left( (v+ts)^2 + \epsilon_1 \right) - \left( v^2 + \epsilon_1 \right) \right) | \nabla (u)|^2 \\
+			& & & \hspace{2ex} + \epsilon_2 \left( |\nabla (v+ts)|^2 - |\nabla v|^2 \right) \\
+			& & & \hspace{2ex} + \frac{1}{\epsilon_3} \left( (1- v- ts)^2 -  (1- v)^2 \right)
+			\Big) \\	
+			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\Big(	& 
+			\int\limits_{\Omega}  \left( v^2 + 2vts + t^2s^2 - v^2  \right) | \nabla u|^2 \\
+			& & & \hspace{2ex} + \epsilon_2 \left( |\nabla v|^2 + 2 t \nabla v \nabla s + t^2 |\nabla s|^2 - |\nabla v|^2 \right) \\
+			& & & \hspace{2ex} + \frac{1}{\epsilon_3} \left( (1- v)^2 - 2(1-v)ts + t^2s^2 -  (1- v)^2 \right)
+			\Big) \\		
+			& = &\lim\limits_{t \rightarrow 0} 
+			\Big(	& 
+			\int\limits_{\Omega}  \left( 2vs + ts^2  \right) | \nabla u|^2 + \epsilon_2 \left( 2 \nabla v \nabla s + t |\nabla s|^2 \right) \\
+			& & & \hspace{2ex} - \frac{1}{\epsilon_3} \left(2(1-v)s + ts^2 \right)  \diff x
+			\Big) \\	
+			& = &\hspace{6.5ex} & 
+			\int\limits_{\Omega} 2s v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla s - \frac{2}{\epsilon_3} (1-v)s  \diff x\\	
+			& = &\hspace{6.5ex} & 
+			\int\limits_{\Omega} 2  v | \nabla u|^2 s - \epsilon_2 2 \Delta v  s - \frac{2}{\epsilon_3} (1-v)s \diff x + \int\limits_{\partial \Omega} 2 \epsilon_2 \nabla v \nu s \diff x  							 
+		\end{array}
+	\end{align*}
+	Damit es auch eine G\^ateaux Ableitung ist, muss sie beschränkt und linear sein. Dies ist einfach zu sehen. 
+\end{proof}
+
 \begin{thm}
 Das Problem  \eqref{eq:problem_von_v} besitzt genau eine Lösung, falls $v_0$ stetig ist. 
 \end{thm}
 \begin{proof}
 Wir wollen \ref{thm:existenz_eindeutigkeit_loesung} anwenden. Zunächst müssen wir alle Voraussetzungen prüfen. 
-\begin{itemize}
+\begin{enumerate}
 	\item  $W=H^1(\Omega)$ ist ein Hilbertraum, also ist er ein reflexiver Banachraum. 
 	\item Nun muss gezeigt werden, dass $C$ nichtleer, abgeschlossen und konvex ist. 
 $C$ ist nichtleer, da $0 \in C$. 
@@ -343,7 +397,8 @@ $C$ ist nichtleer, da $0 \in C$.
 Sei $v_n$ eine konvergente Folge in C. Dann gilt $0 \le v_n \le v_0 \hspace{1ex} \forall n \in \N$. Es gilt auch $0 \le \lim_{n \rightarrow \infty} u_n \le v_0$. Also ist $C$ abgeschlossen. 
 
 Für Konvexität sei $0<\lambda<1 $ und $v, w \in C$. Dann gilt $0 \le \lambda v + (1- \lambda) w$, da $\lambda>0$. Außerdem gilt $\lambda v + (1- \lambda) w \le \lambda v_0 + (1- \lambda) v_0 = v_0$. Also ist jede Konvexkombination in $C$ enthalten, $C$ ist konvex. 
-	\item J ist strikt konvex. Der Beweis dazu kann durch einfaches nachrechnen geführt werden. Für Stetigkeit gilt dasselbe. 
+	\item $J$ ist strikt konvex. Der Beweis dazu kann durch einfaches nachrechnen geführt werden. Für Stetigkeit gilt dasselbe. 
+	\item $J$ ist Gâteaux differenzierbar nach \eqref{lem:J_g_diffbar}
 	\item Sei $w \in C$ mit $\|v\|_{H^1(\Omega)} \rightarrow \infty$. Dann gilt
 \begin{align*}
 	\begin{array}{ll}
@@ -359,13 +414,13 @@ Für Konvexität sei $0<\lambda<1 $ und $v, w \in C$. Dann gilt $0 \le \lambda v +
 \end{align*}
 
 mit $c,c',c''>0$ passende Konstanten. 
-\end{itemize}
+\end{enumerate}
 Alle Vorraussetzungen aus \ref{thm:existenz_eindeutigkeit_loesung} sind erfüllt, alse existiert genau eine Lösung des Optimierungsproblems. 
 \end{proof}
   
-Nun stellen wir das KKT-System auf. . 
+Nachdem wir nun wissen, dass die Lösung existiert und eindeutig ist, wollen wir das Minimum finden. Dazu brauchen wir Optimalitätsbedingungen. Diese stellt das folgende Theorem auf: 
 
-\begin{thm}
+\begin{thm}[Optimalitätsbedingungen]
 	Sei $a:=\inf \{J(w)|G(w) \le_P 0\}$. Dann gilt:
 	\begin{align*}
 		a= \inf\limits_{v \in H^1(\Omega)} J(v)+ \langle G(v), \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega), H^{-1}(\Omega)}
@@ -393,74 +448,13 @@ Nun stellen wir das KKT-System auf. .
 	\end{align*}
 \end{proof}
 
-Um das KKT System konkret angeben brauchen wir die G\^ateaux Ableitung von $J$.
-\begin{thm}
-	$J$ ist Gâteaux-Differenzierbar mit 
-	\begin{align*}
-		\begin{array}{lrcl}
-			J'(v): 	& \overline{H^1}(\Omega) 	& \rightarrow 	& \R \\
-			& s							& \mapsto		&  \left( 2  v | \nabla (u)|^2  - \epsilon_2 2 \Delta v - \frac{2}{\epsilon_3} (1-v), s \right)_{L^2(\Omega)} + \left( 2 \epsilon_2 \nabla v \nu , s \right)_{L^2(\partial \Omega)}  \\
-		\end{array}	
-	\end{align*}
-\end{thm}
-\begin{proof}
-	 Zunächst kommt die Richtungsableitung:  
-	 \begin{align*}
-	 	\begin{array}{lcrl}
-	 		\partial J(v,s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-	 		\Big( & J(v+ts)-J(v) \Big) \\
-	 		& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-	 		\Big(	& 
-	 		\int\limits_{\Omega}  \left( (v+ts)^2 + \epsilon_1 \right) | \nabla (u)|^2 + \epsilon_2 |\nabla (v+ts)|^2 + \frac{1}{\epsilon_3} \left( 1- (v+ts) \right)^2 \\ 
-	 		& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla u|^2 \hspace{8ex} + \epsilon_2 |\nabla v|^2 \hspace{6.5ex}+ \frac{1}{\epsilon_3} \left( 1- v \right)^2 \Big) \\
-	 		& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-	 		\Big(	& 
-	 		\int\limits_{\Omega}  \left( \left( (v+ts)^2 + \epsilon_1 \right) - \left( v^2 + \epsilon_1 \right) \right) | \nabla (u)|^2 \\
-	 		& & & \hspace{2ex} + \epsilon_2 \left( |\nabla (v+ts)|^2 - |\nabla v|^2 \right) \\
-	 		& & & \hspace{2ex} + \frac{1}{\epsilon_3} \left( (1- v- ts)^2 -  (1- v)^2 \right)
-	 		\Big) \\	
-	 		& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-	 		\Big(	& 
-	 		\int\limits_{\Omega}  \left( v^2 + 2vts + t^2s^2 - v^2  \right) | \nabla u|^2 \\
-	 		& & & \hspace{2ex} + \epsilon_2 \left( |\nabla v|^2 + 2 t \nabla v \nabla s + t^2 |\nabla s|^2 - |\nabla v|^2 \right) \\
-	 		& & & \hspace{2ex} + \frac{1}{\epsilon_3} \left( (1- v)^2 - 2(1-v)ts + t^2s^2 -  (1- v)^2 \right)
-	 		\Big) \\		
-	 		& = &\lim\limits_{t \rightarrow 0} 
-	 		\Big(	& 
-	 		\int\limits_{\Omega}  \left( 2vs + ts^2  \right) | \nabla u|^2 + \epsilon_2 \left( 2 \nabla v \nabla s + t |\nabla s|^2 \right) \\
-	 		& & & \hspace{2ex} - \frac{1}{\epsilon_3} \left(2(1-v)s + ts^2 \right)  \diff x
-	 		\Big) \\	
-	 		& = &\hspace{6.5ex} & 
-	 		\int\limits_{\Omega} 2s v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla s - \frac{2}{\epsilon_3} (1-v)s  \diff x\\	
-	 		& = &\hspace{6.5ex} & 
-	 		\int\limits_{\Omega} 2  v | \nabla u|^2 s - \epsilon_2 2 \Delta v  s - \frac{2}{\epsilon_3} (1-v)s \diff x + \int\limits_{\partial \Omega} 2 \epsilon_2 \nabla v \nu s \diff x  							 
-	 	\end{array}
-	 \end{align*}
-	 Damit es auch eine G\^ateaux Ableitung ist, muss sie beschränkt und linear sein. Dies ist einfach zu sehen. 
-\end{proof}
-
-
-%
-%Auch die Ableitung von $\langle G(v), \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega)^2, H^{-1}(\Omega )^2}$ nach v wird benötigt. Also \\
-%
-%$
-%\begin{array}{rl}
-%	\frac{\partial}{\partial v} \langle G(v), \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega)^2, H^{-1}(\Omega )^2} & = \frac{\partial}{\partial v} \langle \begin{pmatrix} -v \\ v-v_0 \end{pmatrix}, \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega)^2, H^{-1}(\Omega )^2 }\\
-%	& = \frac{\partial}{\partial v}  \int\limits_{\Omega} -v \lambda + \mu (v-v_0) \diff x\\
-%	& = \int\limits_{\Omega} -\lambda + \mu \diff x
-%\end{array}
-%$
-%\begin{quest}
-%ist das Skalarprodukt richtig interpretiert? Weil $H^1$ skalarprodukt. Ableitung sieht komisch aus...
-%\end{quest}
-
- Aus $\nabla J(v)+ \lambda - \mu=0$ folgt , dass 
+Damit müssen wir nur noch das Minimum der Lagrangefunktion suchen. Dies funktioniert, indem wir die Ableitung bestimmen und 0 setzen. Wir leiten die Lagragefunktion ab und erhalten  $\nabla J(v)+ \lambda - \mu=0$. Ausformuliert sieht das so aus:  
 \begin{align*}
 	& 2  v | \nabla u|^2  - \epsilon_2 2 \Delta v   - \frac{2}{\epsilon_3} (1-v) + \lambda - \mu = 0 & \text{ auf } \Omega \\
 	& 2 \epsilon_2 \nabla v \nu  =0 & \text{ auf } \partial \Omega
 \end{align*} 
 
-Damit lautet das KKT System: 
+Nun ist alles gegeben, damit das KKT System aufgestellt werden kann. 
 \begin{align*}
 	\begin{array}{lll}
 	 	\multicolumn{3}{l}{  2  \overline{v} | \nabla u|^2  - \epsilon_2 2 \Delta \overline{v}   - \frac{2}{\epsilon_3} (1-\overline{v}) + \lambda - \mu = 0 \text{ auf } \Omega } \\
@@ -470,7 +464,7 @@ Damit lautet das KKT System:
 	\end{array}
 \end{align*}
 
-Die Projektion für die Nebenbedingung lautet nach \eqref{min_max_theorie}:
+Die Projektion für die Nebenbedingung lautet nach \eqref{eq:min_max_theorie}:
 \begin{align*}
 \mu - \lambda = \max\{0, \mu- \lambda + c(\overline{v}-v_0)\}+ \min\{0, \mu- \lambda + c\overline{v}\} \vspace{2ex} \forall c>0
 \end{align*}
@@ -484,7 +478,7 @@ Daraus ergibt sich eine starke und schwache Formulierung. Die Starke lautet:
 		\eta = \max\{0, \eta + c(\overline{v}-v_0)\}+ \min\{0, \eta + c\overline{v}\} \hspace{1ex} \forall c>0
 	\end{array}
 \end{align*}
-gilt. Die schwache Formulierung ist dann
+Die schwache Formulierung ist dann
 
 \begin{align*}
  	& \int\limits_{\Omega} 2 \varphi  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi  - \frac{2}{\epsilon_3} (1-v)\varphi + \eta \varphi \diff x = 0 & \forall \varphi \in \h \\
@@ -492,8 +486,25 @@ gilt. Die schwache Formulierung ist dann
 \end{align*}
 mit $\eta = \mu - \lambda$
 
-\subsection{Newtonmethode}
-%todo in Theorie, umändern!
+\subsection{semidifferenzierbare Newtonmethode}
+%todo erklärung, warum ich semidiffbare nm nehme
+
+Unser Ziel ist es, eine Methode zu finden, wie wir das KKT System lösen können. Betrachten wir also 
+\begin{align*}
+	\begin{array}{rcl}
+		G: H^1(\Omega) \times H^1(\Omega)	& \rightarrow 	& H^{-1}(\Omega)^2 \\
+		(v, \eta)								& \mapsto  	& 
+		\begin{pmatrix}
+			\int\limits_{\Omega} 2 \varphi  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi  - \frac{2}{\epsilon_3} (1-v)\varphi + \eta \varphi  \diff x  \\
+			\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \varphi \diff x
+		\end{pmatrix}
+	\end{array}
+\end{align*}
+Wir wollen $(v, \eta)$ finden, sodass $G=0$. Direkt kann diese Formel nicht gelöst werden, da $$
+
+ 
+direkt implementieren geht nicht, da beide formeln von v und eta abhängen d.h. ich kann keine berechnen, ohne nicht eta oder v zu kennen. 
+
 Wir wollen das Problem implementieren, indem wir die Newton Methode anwenden. Diese sieht wie folgt aus: 
 
 \begin{algorithm}[H]

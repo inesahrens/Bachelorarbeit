@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.7)  19 SEP 2015 18:23
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.7)  19 SEP 2015 19:37
 entering extended mode
 **BA_Arbeit.tex
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\BA_Arbeit.tex
@@ -947,69 +947,57 @@ Package pdftex.def Info: images/matrix.png used on input line 285.
 (pdftex.def)             Requested size: 98.9946pt x 98.9946pt.
 
 [24] [25 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/mat
-rix.png>]
-
-LaTeX Warning: Reference `eq:problem_von_v' on page 26 undefined on input line 
-334.
-
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 339.
-[26] [27]
-Overfull \hbox (9.55705pt too wide) in paragraph at lines 404--404
+rix.png>] [26]
+Overfull \hbox (9.55705pt too wide) in paragraph at lines 349--349
 [] 
  []
 
 
-Overfull \hbox (22.02663pt too wide) in paragraph at lines 438--438
+Overfull \hbox (22.02663pt too wide) in paragraph at lines 383--383
 [] 
  []
 
-[28]
-
-LaTeX Warning: Reference `min_max_theorie' on page 29 undefined on input line 4
-73.
-
-[29]
-Underfull \hbox (badness 10000) in paragraph at lines 509--510
+[27] [28] [29]
+Underfull \hbox (badness 10000) in paragraph at lines 504--505
 
  []
 
 
-Overfull \hbox (16.59837pt too wide) in paragraph at lines 519--519
+Overfull \hbox (16.59837pt too wide) in paragraph at lines 514--514
 [] 
  []
 
 [30]
-Overfull \hbox (21.80229pt too wide) in paragraph at lines 574--575
+Overfull \hbox (21.80229pt too wide) in paragraph at lines 569--570
 []\OT1/cmr/m/n/12 Sei nun $\OMS/cmsy/m/n/12  \OML/cmm/m/it/12 cv <  < \OMS/cms
 y/m/n/12  \OML/cmm/m/it/12 c\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 v \OMS/cmsy/m/n/1
 2   \OML/cmm/m/it/12 v[]\OT1/cmr/m/n/12 )$. Durch [][]2.4.8[][] m[]ussen wir wi
 e-der die Frechet-Differenzierbarkeit
  []
 
-
-Overfull \hbox (15.18996pt too wide) in paragraph at lines 585--585
+[31]
+Overfull \hbox (15.18996pt too wide) in paragraph at lines 580--580
 [] 
  []
 
-[31] [32]
+[32]
 
 LaTeX Warning: Reference `subsec:darstellung_linear' on page 33 undefined on in
-put line 765.
+put line 760.
 
 [33]
-Underfull \hbox (badness 10000) in paragraph at lines 791--792
+Underfull \hbox (badness 10000) in paragraph at lines 786--787
 
  []
 
-[34] [35] [36] [37] <images/formel.png, id=453, 1882.03125pt x 447.17062pt>
+[34] [35] [36] [37] <images/formel.png, id=462, 1882.03125pt x 447.17062pt>
 File: images/formel.png Graphic file (type png)
 
 <use images/formel.png>
-Package pdftex.def Info: images/formel.png used on input line 920.
+Package pdftex.def Info: images/formel.png used on input line 915.
 (pdftex.def)             Requested size: 282.29251pt x 67.0727pt.
 
-Overfull \hbox (17.47768pt too wide) in paragraph at lines 925--926
+Overfull \hbox (17.47768pt too wide) in paragraph at lines 920--921
 []\OT1/cmr/m/n/12 wobei bei $\OML/cmm/m/it/12 A$ \OT1/cmr/m/n/12 auf der Haupt-
 dia-go-na-len $[] []$, auf der Ne-ben-dia-go-na-len $[] []$
  []
@@ -1019,7 +1007,7 @@ ng>]
 ! Missing delimiter (. inserted).
 <to be read again> 
                    -
-l.985 \end{align*}
+l.980 \end{align*}
                   
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1031,7 +1019,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    -
-l.985 \end{align*}
+l.980 \end{align*}
                   
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1043,7 +1031,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    -
-l.985 \end{align*}
+l.980 \end{align*}
                   
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1055,7 +1043,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    -
-l.985 \end{align*}
+l.980 \end{align*}
                   
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1067,7 +1055,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    -
-l.985 \end{align*}
+l.980 \end{align*}
                   
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1079,7 +1067,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    -
-l.985 \end{align*}
+l.980 \end{align*}
                   
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1091,7 +1079,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    -
-l.985 \end{align*}
+l.980 \end{align*}
                   
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1103,7 +1091,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    -
-l.985 \end{align*}
+l.980 \end{align*}
                   
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1115,7 +1103,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    -
-l.985 \end{align*}
+l.980 \end{align*}
                   
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1127,7 +1115,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    -
-l.985 \end{align*}
+l.980 \end{align*}
                   
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1139,7 +1127,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    -
-l.985 \end{align*}
+l.980 \end{align*}
                   
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1151,7 +1139,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    -
-l.985 \end{align*}
+l.980 \end{align*}
                   
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1160,16 +1148,15 @@ braces don't get unbalanced. Otherwise just proceed.
 Acceptable delimiters are characters whose \delcode is
 nonnegative, or you can use `\delimiter <delimiter code>'.
 
-[39] [40]
+[39] [40] [41]
 
-LaTeX Warning: Reference `eq:explizite_lineare_fkt_dreieck' on page 41 undefine
-d on input line 1048.
+LaTeX Warning: Reference `eq:explizite_lineare_fkt_dreieck' on page 42 undefine
+d on input line 1043.
 
-[41]
 ! Missing delimiter (. inserted).
 <to be read again> 
                    \let 
-l.1084 	\end{align*}
+l.1079 	\end{align*}
                     
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1181,7 +1168,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    +
-l.1084 	\end{align*}
+l.1079 	\end{align*}
                     
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1193,7 +1180,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    \let 
-l.1084 	\end{align*}
+l.1079 	\end{align*}
                     
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1205,7 +1192,7 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 ! Missing delimiter (. inserted).
 <to be read again> 
                    +
-l.1084 	\end{align*}
+l.1079 	\end{align*}
                     
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1216,14 +1203,16 @@ nonnegative, or you can use `\delimiter <delimiter code>'.
 
 [42]
 ! Extra \right.
-l.1103 ...^h +  f_2^h + f_3^h\right)_{E_j} \right)
+l.1098 ...^h +  f_2^h + f_3^h\right)_{E_j} \right)
                                                   $, dass $f_i^h$ $f$ auf de...
 I'm ignoring a \right that had no matching \left.
 
-) [43]
+) [43] [44]
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\chapters/fazit.tex
 Kapitel 4.
-) [44
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 13.
+) [45
 
 
 
@@ -1236,7 +1225,7 @@ No file BA_Arbeit.bbl.
 Package natbib Warning: There were undefined citations.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 106.
-[45
+[46
 
 
 ]
@@ -1262,11 +1251,14 @@ Package rerunfilecheck Info: File `BA_Arbeit.brf' has not changed.
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 15390 strings out of 493921
- 233406 string characters out of 3144880
- 427933 words of memory out of 3000000
+ 15397 strings out of 493921
+ 233462 string characters out of 3144880
+ 427015 words of memory out of 3000000
  18236 multiletter control sequences out of 15000+200000
  14899 words of font info for 54 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -1288,9 +1280,9 @@ X 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.9
 /fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files (x86)/MiKTeX 
 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on BA_Arbeit.pdf (47 pages, 815379 bytes).
+Output written on BA_Arbeit.pdf (48 pages, 817976 bytes).
 PDF statistics:
- 590 PDF objects out of 1000 (max. 8388607)
- 175 named destinations out of 1000 (max. 500000)
+ 605 PDF objects out of 1000 (max. 8388607)
+ 182 named destinations out of 1000 (max. 500000)
  228 words of extra memory for PDF output out of 10000 (max. 10000000)
 
