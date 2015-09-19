@@ -1,0 +1,52 @@
+% ====================================
+% Einleitung
+% ====================================
+
+\chapter{Einleitung}
+\label{chap:einleitung}
+
+%todo einleitung besser schreiben.
+% dazu gehört:
+% - Anwendung/ Erklärungen
+%   - Entstehung von Rissen und ihre Fortsetzung in einem Phasenfeld
+%   - einzelne Terme erklären
+%   -  
+% - Organisation der Arbeit am ende der Einleitung
+
+Ich befasse mich mit Rissen und der Darstellung des Problems als Newtonmethode. Dabei sind meine Aufgaben:
+
+\begin{enumerate}
+	\item Optimalitätsbedingungen aufstellen (KKT)
+	\item Das Problem auf Semidifferenzierbarkeit untersuchen 
+	\item Newtonmethode für das Problem aufstellen
+	\item Problem implementieren mithilfe von Finite Elemente
+	\item Konvergenz des Problems anhand der Implementation untersuchen: Hängt die Konvergenz vom Gitter ab?
+\end{enumerate} 
+
+Das Problem lautet:
+\begin{align*}
+	& \min\limits_{u \in  \h^2 , v \in \h } \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 dx \\
+	& \text{s.d.} \hspace{1ex} 0 \le v \le v_0 \\\
+	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2  
+\end{align*}
+
+\begin{nota}
+ $| \nabla u|^2:=\frac{\partial u_1}{\partial x_1 }^2 
+ 				+ \frac{\partial u_1}{\partial x_2 }^2 
+ 				+ \frac{\partial u_2}{\partial x_1 }^2 
+ 				+ \frac{\partial u_2}{\partial x_2 }^2  
+ 				= u_{1 x_1}^2+ u_{1 x_2}^2 + u_{2 x_1}^2 + u_{2 x_2}^2  $ 
+\end{nota} 
+
+dabei ist $\epsilon_i>0 \hspace{1ex}\forall i \in \{1,2,3\}$ ein kleiner Parameter und $\Gamma_1, \Gamma_2 \subset \Omega$  ein der rechte bzw. linke Rand eines rechteckigen Gebietes $\Omega \subset \R^2$, das heißt, $\Omega=[0,a] \times [0,b] \hspace{1ex} \Gamma_1=\{0\} \times [0,b] \hspace{1ex} \Gamma_2=\{a\} \times [0,b] $
+
+$u:\Omega \rightarrow \R^2 $ beschreibt die Verschiebung eines Körpers auf dem Gebiet $\Omega$, wenn ein Riss entsteht. Der Körper ist an $\Gamma_1$ und $\Gamma_2$ befestigt, was die Randbedingung $u_0$ angibt.  
+ $v: \Omega \rightarrow \R$ gibt an, wo und wie stark der Körper gerissen ist. 1 bedeutet, dass der Körper vollständig gerissen ist und 0, das kein Riss vorhanden ist.  
+ 
+ Analytische und numerische Grundlagen werden gebraucht, um die Verschiebung des Gebietes und den Riss zu finden. Für die analytische Betrachtung nutze ich partielle Differentialgleichungen und Grundlagen der Optimierung. Da die Lösung des Problems analytisch nicht zu finden ist, diskretisiere ich das Problem mit dreieckig lineare Lagrange Elemente und implementiere es mittels semiglatter Newtonmethoden. Die Grundlagen dazu sind im zweiten Kapitel zu finden. Alle Themen sind sehr umfangreich und ich werde nur die wichtigsten Begriffe einführen können. Der Leser sollte schon Wissen über Finite Elemente, insbesondere die dreieckig linearen Lagrange Elemente mitbringen.
+ %todo brauche ich die noch nach meiner Einführung?
+ 
+ Die Untersuchung des Problems folgt in Kapitel drei. Beim ersten Betrachten fällt auf, dass man die Optimierung nach $u$ und $v$ trennen kann. Dieses wird im ersten Teil des dritten Kapitels erläutert. Im zweiten Teil wird die Optimierung nach $u$ betrachtet. Zuerst wird die Existenz und Eindeutigkeit gesichert, um dann numerisch die Lösung mit dreieckig linearen Lagrange Elementen zu suchen. Die Optimierung nach $v$ im dritten Teil hat den selben Aufbau. Nur ist hier das Problem komplizierter und die numerische Lösung erfolgt mit der semiglatten Newton Methoden. 
+ Im letzten Kapitel werte ich die numerischen Resultate aus und ziehe Rückschlüsse für die Konvergenz der Methode aufgrund der Gitterweite.  
+%todo später überprüfen, ob ich das wirklich tue, wenns geschribene ist
+

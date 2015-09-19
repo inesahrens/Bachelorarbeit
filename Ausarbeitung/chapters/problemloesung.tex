@@ -1,0 +1,1589 @@
+% ==============
+% Anwendung auf das Phasenfeldmodell für Rissentstehung 
+% ==============
+
+\chapter{Anwendung auf das Phasenfeldmodell für Rissentstehung }
+%todo neuer Titel
+
+\section{erste Betrachtung der Rissentstehung}
+\label{sec:allgemeines_kkt}
+
+%todo einleitung
+Erinnern wir uns an die vorangegangene Problemstellung: 
+\begin{align*}
+	& \min\limits_{u \in  \h^2 , v \in \h } \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 dx \\
+	& \text{s.d.} \hspace{1ex} 0 \le v \le v_0 \\\
+	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2  
+\end{align*}
+
+Beim genaueren Betrachten bemerkt man, dass die zwei Nebenbedingungen entweder nur von $u$ oder nur von $v$ abhängen. Dies bietet die Möglichkeit das Optimierungsproblem in zwei Teilprobleme aufzuteilen. Zum einen die Optimierung nach $u$ und zum anderen die Optimierung nach $v$. 
+\begin{align*}
+\label{eq:problem_von_v}
+	& \min\limits_{u \in\h^2} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\
+	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2 
+	\vspace{1ex} \\
+	& \min\limits_{v \in\h} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\
+	& \text{s.t.} \hspace{1ex} 0 \le v \le v_0 
+\end{align*}
+
+%todo nein, so geht das nur theoretisch... theorie nochmal neu überarbeiten!
+%todo struktur überarbeiten: erst alle Theorie, dann alle Numerik
+Wenn man beide Probleme implementiert, löst man zunächst ein Problem und setzt die Lösung dann in das andere Problem ein. Dieses Vorgehen wiederholt man. Betrachten wir zuerst die Optimierung nach u. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Optimierung nach u          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\section{Optimierung nach u}
+\subsection{Analytische Betrachtung}
+
+Die Optimierung nach $u$ sieht wie folgt aus: 
+\begin{align*}
+	& \min\limits_{u \in\h^2} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\
+	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2
+\end{align*}
+
+Das Problem lässt sich vereinfachen, indem man 
+\begin{align*}
+	u \in u_0 + \ho^2:=u_0+\{u \in\h^2| u=0 \text{ auf } \Gamma_1 \cup \Gamma_2\} 
+\end{align*}
+sucht, statt $u \in \h^2$. Daraus ergibt sich ein Problem ohne Nebenbedingung.
+\begin{align}
+	\label{eq:optimierung_u_ohne_nb}
+	& \min\limits_{u \in u_0 +\ho^2} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x 
+\end{align}
+
+Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren. Dieses werden wir nicht gleichzeitig tun, sondern zunächst die Optimierung nach $u_1$ und dann die Optimierung nach $u_2$ betrachten. Die Optimierungen kann man trennen, da keine Mischung aus den Termen $u_1$ und $u_2$ auftauchen. Beide Optimierungen sind identisch, es müssen später nur unterschiedliche Werte eingesetzt werden.Betrachten wir also nur die Optimierung nach $u_1$. 
+
+\begin{thm}{Bedingung für Minimum}
+	Sei das Minimierungsproblem \eqref{eq:optimierung_u_ohne_nb} gegeben. Sei $\tilde{u_1}$ das Minimum. Dann gilt 
+	\begin{align}
+		\label{eq:u_gleich_null}
+		\int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla \tilde{u_1} \nabla \varphi \diff x = 0 \forall \varphi \in u_0 + \ho 
+	\end{align}
+	%todo wirklich u_0 + ho? oder nur ho?
+\end{thm}
+\begin{proof}
+	Nach \ref{thm:ableitung_gleich_null} muss nur überprüft werden, ob die Gâteaux-Ableitung von 
+	\begin{align*}
+		\begin{array}{rrcl}
+			J: 	& u_0+ \ho^2& \rightarrow	& \R \\
+			& u 											& \mapsto		& \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x 
+		\end{array}
+	\end{align*}
+	\eqref{eq:u_gleich_null} ist. Leiten wir $J$ ab: 
+	\begin{align*}
+		\begin{array}{lcrl}
+			\partial J(u,\varphi ) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\Big( & J(u_1+t \varphi,u_2)-J(u_1,u_2) \Big) \\
+			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\Big(	& 
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla (u_1+t \varphi )|^2 + |\nabla u_2|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\ 
+			& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla u_1|^2 \hspace{6ex} + |\nabla u_2|^2  + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \Big) \\
+			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\Big(	& 
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \left( | \nabla (u_1+t \varphi )|^2 - | \nabla u_1|^2 \right) \diff x  
+			\Big) \\	
+			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\Big(	& 
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( | \nabla u_1+t \nabla \varphi |^2 - | \nabla u_1|^2 ) \diff x  
+			\Big) \\	
+			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\Big(	& 
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( | \nabla u_1|^2 + 2 t  \nabla u_1 \nabla \varphi  + t^2 |\nabla \varphi |^2 - | \nabla u_1|^2 ) \diff x  
+			\Big) \\					
+			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\Big(	& 
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( 2 t  \nabla u_1 \nabla \varphi  + t^2 |\nabla \varphi |^2 ) \diff x  
+			\Big) \\	
+			& = & &\int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right) \nabla u_1 \nabla \varphi \diff x  
+		\end{array}	
+	\end{align*}
+	Damit dies eine G\^ateaux Ableitung ist, muss die Abbildung $J'(u_1): \varphi  \mapsto \partial J(u_1,\varphi ) \in \R $ linear und beschränkt sein. Linearität ist einfach nachzurechnen. Beschränktheit lässt sich durch Cauchy-Schwarz zeigen.   
+	%todo muss ich das ausführen?
+	%todo brauche ich F-diffbar für konvergenz der Methode? 
+\end{proof}
+
+Also lautet unser analytisches Problem:
+Finde $u_1 \in u_0+\ho$, sodass  $\forall \varphi  \in u_0 +\ho$ gilt: 
+\begin{align}
+\label{eq:problem_u}
+	0 = \int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla u_1 \nabla \varphi   \diff x 
+\end{align}
+Nun ist noch interessant, ob eine Lösung existiert und ob sie eindeutig ist. Dieses hängt von $u_0$ und $v_0$ ab. 
+
+\begin{thm}[Existenz und Eindeutigkeit]
+	Sei $u_0 \in \h^2, ,v_0 \in \h$. Die schwache Lösung $u \in u_0+\ho$ von \eqref{eq:problem_u} existiert und ist eindeutig. 
+\end{thm}
+\begin{proof}
+Wir wenden \ref{thm:existenz_schwache_loesung} an. Dazu müssen wir die Bilinearform aufstellen und dann \ref{ann:ex_und_eind} zeigen. 
+Die Bilinearform lautet: 
+\begin{align*}
+	\begin{array}{rrcl}
+		B(u_1,\varphi ): 	& \left( u_0 +\h0^2 \right)^2  & \rightarrow 	& \R \\
+		& (u_1,\varphi )											& \mapsto		& \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) 2  \nabla u_1 \nabla \varphi   \diff x 
+	\end{array}
+\end{align*}
+Mit den Bezeichnungen aus \ref{sec:grundlagen_pdgl} ist $g = u_0$, $f,b,c=0$ und  
+\begin{align*}
+	A(x):= \begin{pmatrix}
+	v^2(x) + \epsilon_^1 & 0 \\
+	0 & v^2(x) + \epsilon_1 
+	\end{pmatrix}		
+\end{align*}
+Aus \ref{ann:ex_und_eind} sind 3 und 4 bereits erfüllt, da $b,c=0$ gilt. Beweisen wir 1. 
+
+Sei $\xi \in \R^n$. Dann gilt:
+\begin{align*}
+	\xi^T A(x) \xi  & = \xi^T  \begin{pmatrix}
+	v^2(x) + \epsilon_1 & 0 \\
+	0 & v^2(x) + \epsilon_1 
+	\end{pmatrix}		 \\
+	& = (v^2+ \epsilon_1) \xi \cdot \xi \\
+	& \ge \epsilon_1 |\xi|^2
+\end{align*}
+Damit ist Annahme 1 erfüllt mit $\lambda = \epsilon_1$. 
+Zu Annahme 2:
+\begin{align*}
+	|\xi^T A(x) \zeta| =  (v^2 + \epsilon_1) \xi \cdot \zeta   \le (v_0^2 + \epsilon_2) \xi \cdot \zeta 
+     \le (\sup (v_0)^2 + \epsilon_3)  |\xi| |\zeta| 
+\end{align*}
+mit $\Lambda = \sup (v_0)^2 + \epsilon   $
+%todo nummerierungen anders? 
+\end{proof}
+
+Jetzt könnte man noch untersuchen, ob auch mit weniger Voraussetzungen an $u_0 $ und $v_0$ das Problem eine eindeutige Lösung hat. Dieses werde ich jedoch im Rahmen der Bachelorarbeit nicht untersuchen können.  
+%todo vll untersuchen
+
+%Für die Beschränktheit muss gezeigt werden, dass $B(u_1,s) \le c \|u_1\|_{u_0 +\h0^2} \|\varphi \|_{u_0 + H_0^1(\Omega)}$ mit $c>0$ konstant. 
+%\begin{align*}
+%	B(u_1,\varphi )	& = \int\limits_{\Omega}  \left( v^2 + \epsilon \right) 2  \nabla u_1 \nabla \varphi   \diff x  \\
+%				& \le 2 \| \left( v^2 + \epsilon \right) \nabla u_1 \|_{L^2(\Omega)}  \| \nabla \varphi  \|_{L^2(\Omega)} \\
+%				& \le 2 \|  \sup_{x \in \Omega} \left\{ v^2 + \epsilon \right\}   \nabla u_1 \|_{L^2(\Omega)}  \| \nabla s \|_{L^2(\Omega)} \\ 
+%				& = 2 |\sup_{x \in \Omega} \left\{ v^2 + \epsilon \right\} | \|  \nabla u_1 \|_{L^2(\Omega)}  \| \nabla s \|_{L^2(\Omega)} \\
+%				& \le c \|  \nabla u_1 \|_{u_0 + H_0^1(\Omega)}  \| \nabla \varphi  \|_{u_0 + H_0^1(\Omega)} 
+%\end{align*}
+%
+
+%\end{proof}
+
+\subsection{Numerische Betrachtung}
+
+Zur Erinnerung: Folgendes Problem soll numerisch gelöst werden. 
+
+Finde $u_1 \in u_0+ H_0^1(\Omega)$, sodass  $\forall \varphi \in u_0 + H_0^1(\Omega)$  
+\begin{align*}
+	0 = \int\limits_{\Omega}  2 \left( v^2 + \epsilon_1 \right) \nabla u_1 \nabla \varphi \diff x 
+\end{align*}
+
+Die $2$ kann gekürzt werden, da wir die Nullstelle dieser Funktion suchen. Da die Nullstelle im Raum $H_0^1(\Omega)$ einfacher zu finden ist, als im Raum $u_0 + H_0^1(\Omega)$ stellen wir das Problem um. 
+Dazu definieren wir $\uotild \in u_0 + \ho$, sodass $\uotild$ $u_{0_1}$ auf dem Rand $\Gamma_1 \cup \Gamma_2$ entspricht, sonst $0$ ist. Der Übergang soll stetig sein. Desweiteren definieren wir $\utild \in \ho$, sodass $u_1=\utild + \uotild$. 
+Damit lässt sich das Problem umschreiben zu 
+
+Finde $\utild \in \ho$, sodass  $\forall \varphi \in \ho$  
+\begin{align*}
+	- \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla \uotild \nabla \varphi \diff x  = \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \utild \nabla \varphi \diff x 
+\end{align*}
+gilt
+
+Zur numerischen Betrachtung bieten sich Finite Elemente, insbesondere die dreieckig-linearen Lagrange Elemente an. Die Theorie  wird als bekannt vorausgesetzt und hier nicht weiter besprochen. Zuerst triangulieren wir das Gebiet. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		Newtonmethode 					%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Zur Nullstellensuche werden wir die Newtonmethode benutzen. Diese lautet: 
+%
+%\begin{algorithm}[H]
+%\caption{einfache Newton Methode}
+%\KwData{$u^0$ (möglichst nah an der Lösung $\overline{u}$)}
+%\For{$k=0,1,\cdots$} {
+%	\emph{Löse $G'(u^k) s^k=-G(u^k)$}\;
+%	$u^{k+1}=u^k+s^k $\;
+%}
+%\end{algorithm}
+%Die Herleitung dieser Methode findet man in 
+%%todo: Referenz Buch
+%
+%\begin{quest}
+%Ist hier überhaupt ein Newtonverfahren erforderlich? 
+%\end{quest}
+%
+%Hier gilt: $G(u_1)= \int\limits_{\Omega}  \left( v^2 + \epsilon \right) 2  \nabla u_1 \nabla \varphi   \diff x $
+%
+%Um die G\^ateaux-Ableitung zu erhalten, bestimmen wir zunächst die Richtungsableitung in Richtung $\psi$.
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    G\^ateaux-Ableitung   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%$
+%\begin{array}{lcrl}
+%	\partial G(u_1,\psi ) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big( & G(u_1+t \psi)-G(u_1) \Big) \\
+%	& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big(	& 
+%		\int\limits_{\Omega}  \left( v^2 + \epsilon \right)  \nabla (u_1+t \psi ) \nabla \varphi \diff x - \int\limits_{\Omega}  \left( v^2 + \epsilon \right)  \nabla u_1 \nabla \varphi \diff x \Big) \\
+%	& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big(	& 
+%		\int\limits_{\Omega}  \left( v^2 + \epsilon \right)  \nabla (u_1+t \psi - u_1) \nabla \varphi \diff x \Big)\\
+%	& = & &\int\limits_{\Omega} 2 \left( v^2 + \epsilon \right) \nabla \psi \nabla \varphi \diff x  
+%\end{array}
+%$
+%
+%Damit  erhalten wir $\int_{\Omega} (v^2+ \epsilon) \nabla \psi \nabla \varphi$.  
+
+
+% Beide Funktionen $G$ und $G'$ sind nun analytisch gegeben. Damit ich sie numerisch berechnen kann, muss das Gebiet zunächst triangulisiert werden.
+ 
+Hier ist ein rechteckiges Gebiet in 2D gegeben. ObdA $\Omega = [0,a] \times [0,b]$. Auf diesem Gebiet legen wir ein äquidistantes Gitter $G_h$. 
+\begin{align*}
+	G_h:= \left\{ (ih_1,jh_2)| i=0, \cdots , \frac{a}{h_1}, j=0, \cdots , \frac{b}{h_2}  \right\}
+\end{align*}
+ $h=(h_1,h_2)$ ist die Schrittweite mit $a=(n+1) h_1$ und $b=(m+1) h_2$, $n+1$ die Anzahl der Stützpunkte in x-Richtung und $m+1$ die Anzahl der Stützpunkte in y-Richtung.
+ %todo will ich mir die arbeit machen und alles im code umbenennen?  
+Um ein sinnvolles Gitter zu erhalten, sollten m und n recht nahe beieinander gewählt werden. Die genaue Wahl wird nachher in der Implementierung vorgenommen.
+Nun wird durch die Gitterpunkte die Triangulierung gelegt. Diese nennen wir $E_k$ und ist in \ref{fig:triangulierung} dargestellt. 
+ %todo m+1 -> m überall? einfachere notation!
+ 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.1]{images/triang.png}
+	\caption{Triangulierung eines rechteckigen Gebietes}
+	\label{fig:triangulierung}
+\end{figure}
+%todo falls Zeit achsenbeschriftung einfügen. 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.25]{images/referenzdreieck.png}
+	\caption{Referenzdreieck}
+	\label{fig:referenzdreieck}
+\end{figure}
+
+Stellen wir das Referenzelement unserer Finiten Elemente auf. Es ist gegeben durch $(E,P, \Psi)$, wobei $E$ das Referenzdreieck \ref{fig:referenzdreieck} ist. $P= \mathcal{P}_1$ sind Polynome auf $\R^2$ vom Grad 1 mit Basis $ \{p_0, p_1, p_2 \}$ 
+\begin{align*}
+	p_0(x,y):=1 \hspace{5ex} p_1(x,y):=x \hspace{5ex} p_2(x,y):=y 
+\end{align*}
+
+$\Psi:=\{\varphi_0, \varphi_1, \varphi_2\}$ sind Funktionale auf $P$ und damit eine Basis von $P^*$. $\varphi_i$ sind lokale Formfunktionen d.h. $\varphi_i(p_j)= \delta_{ij}$, $i,j \in \{ 0,1,2 \}$. Dabei ist $\delta_{ij}$ das Kronecker-Delta. Außerdem soll gelten $\varphi_i(p_j)=p_j(a_i)$, wobei $a_i$ eine Auswertung in einer Ecke des Dreiecks ist. Daraus ergibt sich, dass 
+\begin{align*}
+	\varphi_0=1-x-y, \hspace{1ex} \varphi_1=x, \hspace{1ex} \varphi_2=y
+\end{align*} 
+Nun ist das Referenzelement gegeben. Jedes Element $(E_k, P_k, \Psi_k)$ lässt sich nun mit der affin linearen Transformation \\
+$
+\begin{array}{lrcl}
+	T: 	& \R^2 									& \rightarrow 	& \R^2 \\
+		& \begin{pmatrix} x \\ y \end{pmatrix}	& \mapsto		& \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} \pm \begin{pmatrix} h_1 x \\ h_2 y \end{pmatrix}
+\end{array}	
+$
+
+durch das Referenzelement darstellen. Dabei entspricht $(a_1,a_2)^t$ dem Eckpunkt mit dem $90^{\circ}$ Winkel des Rechteckes und $(h_1,h_2)^t$ ist die Höhe des Dreiecks. Mit dem Transformationssatz können wir alle Berechnungen auf dem Referenzelement ausführen und dann auf das transformierte Element übertragen.  
+
+Die Familie $\{(E_k,P_k, \Psi_k)\}$ von Finiten Elementen, die durch unsere Triangulierung hervorgegangen ist, ist verträglich. Also können wir die globalen Formfunktionen aufstellen, die auf dem gesamten Gebiet $\Omega$ definiert sind. Die globale Formfunktion $T_j$ ist $1$ auf dem dem Gitterpunkt $j$ und 0 sonst. 
+%todo verbessern
+
+Kommen wir wieder zu unserem eigentlichen Zielfunktional zurück. Wir wollten  $\utild \in \ho$ finden, sodass  $\forall \varphi \in \ho$  
+\begin{align*}
+	- \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \uotild \nabla \varphi \diff x  = \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla \utild \nabla \varphi \diff x 
+\end{align*}
+gilt. 
+
+Wir benutzen den Galerkin Ansatz. Dafür gilt ab jetzt $k:=(m+1)(n+1)$
+\begin{align*}
+	\utild(x,y):= \sum\limits_{i=1}^{k} u^h_i T_i(x,y) 
+\end{align*}
+
+mit den globalen Formfunktionen $T_i(x,y)$ und gesuchten Konstanten $u^h_i$. Setzt man die Definition von $\utild$ ein und ersetzt $\varphi \in \ho$ durch die Basis von $P^*$, also den globalen Formfunktionen $T_i$, so gilt $\forall i \in \{1, \cdots , k\}$  
+\begin{align*}
+	& - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \uotild \nabla \varphi \diff x  = \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla \utild \nabla \varphi \diff x \\
+	\Leftrightarrow 
+	& - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \uotild \nabla T_i \diff x  =\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \sum\limits_{i=1}^{k} u^h_i \nabla T_i  \nabla T_j  \diff x \\
+	\Leftrightarrow
+	& - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \uotild \nabla T_i \diff x
+	= \sum\limits_{i=1}^{k} u^h_i \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)   \nabla T_i \nabla T_j  \diff x \\
+	\Leftrightarrow
+	& b =  A * u^h
+\end{align*}
+wobei $u^h:= (u^h_1, \cdots u^h_{k})^T $, $A:= \left( \int_{\Omega}  \left( v^2 + \epsilon \right)   \nabla T_i \nabla T_j  \diff x \right)_{ij} $ und \\
+ $b:=\left( \int_{\Omega}  \left( v^2 + \epsilon \right)  \nabla \uotild \nabla T_i \diff x\right)_i$
+
+Also gilt $u^h = b \backslash A$. Daraus folgt, dass wir $A$ und $b$ berechnen müssen. Betrachten wir zunächst die Matrix $A$
+
+\subsubsection{Berechnung des $u$ Integrals} 
+  
+Als erste Vereinfacherung betrachten wir nicht mehr das Integral über $\Omega$, sondern über die einzelnen Dreiecke der Triangulierung. Desweiteren ist $T_i$ linear, also $\nabla T_i$ Konstant. Es gilt:  
+\begin{align*}
+  \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla T_i \nabla T_j  \diff x  
+ & = \sum\limits_{\tilde{E} \in E_k} \int\limits_{\tilde{E}}  \left( v^2 + \epsilon_1 \right) \nabla T_i \nabla T_j  \diff x \\
+ & =  \sum\limits_{\tilde{E} \in E_k} 2 \nabla T_i \nabla T_j \int\limits_{\tilde{E}}  \left( v^2 + \epsilon_1 \right)   \diff x 
+\end{align*}
+
+Wir kennen $\nabla T_i \nabla T_j$ auf jedem Dreieck. Also muss nur noch $\int_E v^2+ \epsilon \diff x$ berechnet werden. Es darf über das Referenzdreieck integriert werden, da durch den Transformationssatz das Integral über das transformierte Element gewonnen werden kann. Es gilt:
+\begin{align*}
+	\int\limits_E v^2 + \epsilon_1 \diff x &  = \int\limits_E v^2  \diff x + \frac{1}{2}\epsilon_1  \\
+\end{align*}
+Da $v$ bereits numerisch berechnet wurde, haben wir nur Funktionsauswertungen von $v$ an den Ecken des Dreieckes gegeben und wir wissen, dass $v \in \mathcal{P}_1$. Also ist v eindeutig bestimmt und kann berechnet werden. Die Berechnung ist in \ref{subsec:darstellung_linear} mit $v=a$ zu finden. 
+
+Nun können wir das Integral berechnen. Dies ist einfach und wird hier nicht weiter ausgeführt. 
+\begin{align*}
+	\int\limits_E v(x,y)^2 \diff x \diff y 
+	& = \int\limits_0^1 \int\limits_0^{1-y}
+	 \left( 
+	 	(v_3-v_1)x+(v_2-v_1)y+v_1
+	 \right)^2
+	 \diff x \diff y \\ 
+	 & = \frac{1}{12} (v_1^2+v_2^2+v_3^2 + v_1v_2 + v_1 v_3 + v_2 v_3)
+\end{align*}
+Da die Berechnung über das transformierte Element durchgeführt wurde, muss noch der Multiplikator $\frac{1}{h_1 h_2}$ eingefügt werden. 
+%todo: genauer erklären?
+
+Berechnen wir nun 
+\begin{align*}
+B(T_i,T_j) = \sum\limits_{\tilde{E} \in E_k} \nabla T_i \nabla T_j \int\limits_{\tilde{E}}  \left( v^2 + \epsilon \right)   \diff x 
+\end{align*}
+
+$T_i$ ist nur auf einem Gitterpunkt $1$ und sonst $0$. Das heißt genauer, dass $T_i$ nur auf sechs Dreiecken ungleich 0 ist. Um das Integral zu bestimmen braucht man also maximal sechs Dreiecke. Falls der Gitterpunkt am Rand liegen sollte, betrachtet man einfach nur drei Dreiecke, an den Ecken entweder ein oder zwei Dreiecke. Für den Rand setzt man einfach die Dreiecke, die nicht existieren gleich 0. 
+$B(T_i,T_j)$ nimmt für unterschiedliche $i$ und $j$ unterschiedliche Werte an. 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.25]{images/triang_inner.png}
+	\caption{Triangulierung im Inneren}
+	\label{fig:triang_inner}
+\end{figure}
+
+Jetzt können wir $B(T_i,T_j)$ berechnen. Für unterschiedliche $i$ und $j$ kommen natürlich unterschiedliche Werte heraus. Betrachten wir zunächst die Situation, dass $i$ und $j$ nicht benachbart sind. Dann ist $B(T_i,T_j)=0$, da $\nabla T_i \nabla T_j$ nur auf benachbarten Dreiecken ungleich $0$ ist. Daraus ergeben sich vier Fälle: $i$ und $j$ sind dasselbe, also $j=i$. $j$ liegt rechts neben $i$ also $j=i+1$, $j$ liegt direkt unter $i$, $j=i+n+1$ und $j$ liegt schräg unter $i$, also $j=i+n+2$.  Betrachten wir für die einzelnen Berechnungen \ref{fig:triang_inner}. $T_i$ ist immer der Mittelpunkt dieser Zeichnung, $T_j$ ist entsprechend des jeweiligen $j$ positioniert. In den Berechnungen stimmen die Nummerierungen der Dreiecke mit den Nummerierungen in der Abbildung \ref{fig:triang_inner} überein und $T^k, k \in \{1,2,3\}$ ist das Gleiche $T^k$ wie in \eqref{eq:ti_bezeichnung_ableitung}. 
+
+\paragraph*{$i$ und $j$ sind gleich}
+\begin{align*}
+	B(T_i,T_i)	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_i   \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x\\
+ 				& =  \nabla T^0 \nabla T^0 \int\limits_{E_3}  \left( v^2 + \epsilon \right)   \diff x 
+ 				+ \nabla T^0 \nabla T^0 \int\limits_{E_4} \left( v^2 + \epsilon \right) \diff x \\ 
+ 				& +  \nabla T^1 \nabla T^1 \int\limits_{E_1}  \left( v^2 + \epsilon \right)   \diff x
+ 				+ \nabla T^1 \nabla T^1 \int\limits_{E_6} \left( v^2 + \epsilon \right) \diff x \\			
+ 				& +  \nabla T^2 \nabla T^2  \int\limits_{E_2}  \left( v^2 + \epsilon \right)  \diff x
+ 				+  \nabla T^2  \nabla T^2  \int\limits_{E_5}  \left( v^2 + \epsilon \right) \diff x		
+\end{align*}
+
+\paragraph*{$j$ liegt rechts neben $i$}
+\begin{align*}
+	B(T_i,T_{i+1})	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+1}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
+ 				& =  \nabla T^0 \nabla T^1  \int\limits_{E_3}  \left( v^2 + \epsilon \right)   \diff x + \nabla T^0 \nabla T^1  \int\limits_{E_6}  \left( v^2 + \epsilon \right)   \diff x 
+\end{align*}
+
+\paragraph*{$j$ liegt unter $i$}
+\begin{align*}
+%korrekte varphi?
+	B(T_i,T_{i+1+n})	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+1+n}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
+ 				& =  \nabla T^0 \nabla T^1 \int\limits_{E_4}  \left( v^2 + \epsilon \right)   \diff x + \nabla T^0 \nabla T^1  \int\limits_{E_5}  \left( v^2 + \epsilon \right)   \diff x 
+\end{align*}
+
+\paragraph*{$j$ liegt schräg unter $i$}
+\begin{align*}
+%korrekte varphi?
+	B(T_i,T_{i+2+n})	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+2+n}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
+ 				& =  \nabla T^1 \nabla T^2 \int\limits_{E_5}  \left( v^2 + \epsilon \right)   \diff x + \nabla T^1\nabla T^2  \int\limits_{E_6}  \left( v^2 + \epsilon \right)   \diff x \\
+ 				& = 0
+\end{align*}
+
+\paragraph*{Zusammenfassung}
+Mit diesen Werten können wir nun die Matrix $\int_{\Omega} (v^2+ \epsilon) \nabla u \nabla \varphi$ aufstellen:
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.25]{images/matrix.png}
+	\caption{Triangulierung im Inneren}
+	\label{fig:triang_inner}
+\end{figure}
+Dabei sind auf der Diagonalen die Einträge $B(T_i,T_i)$, auf der Nebendiagonalen die Einträge $B(T_i,T_{i+1})$ und auf der anderen Diagonale die Einträge $B(T_i,T_{i+n+1})$. Wir haben bis jetzt immer nur über das Referenzdreieck integriert. Da wir aber eigentlich über die transformierten Dreiecke integrieren, müssen wir zu der Matrix $1/(h_1 h_2)$ multiplizieren. 
+
+Wir wissen noch, dass auf $\Gamma_1 \cup \Gamma_2$ $u=0$ gilt. Deshalb ist auf den Rändern $B(T_i,T_j)=0$. Also muss in der Implementierung für $i=1$ und $i=m$ oder $j=1$ und $j=m$ der entsprechende Eintrag $0$ gesetzt werden. Damit entsteht eine singuläre Matrix. Da wir das nicht wollen, setzten wir die Einträge auf der Diagonalen die durch $0$ ersetzt worden sind, auf $1$. Wenn wir nachher bei der linken Seite die entsprechenden Einträge auch 0 setzen, erhalten wir die gewünschten Randterme.  
+%todo andere Begründung vll mit Beweis. 
+
+\subsubsection{Betrachtung des $u_0$ Integrals}
+Berechnen wir nun numerisch 
+\begin{align*}
+	\int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x  \forall i \in \{1, \cdots , k \}
+\end{align*}
+Es gilt mit den gleichen Begründungen wie bei der rechten Seite: 
+\begin{align*}
+	\int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x &= \sum\limits_{E \in E_k} \int\limits_{E} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
+	& =   \sum\limits_{\substack{E \in E_k \text{ und } \\ E \text{ liegt am Rand }}} \int\limits_{E} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x 
+\end{align*}
+da $u_0$ überall, außer auf den äußeren Dreiecken $0$ ist. Damit müssen nur die $T_i$ betrachtet werden, die am oder neben dem Rand liegen. Alle anderen Einträge sind 0, wie in Grafik \ref{fig:u0_matrix} dargestellt. 
+Damit haben wir 4 Fälle für die Berechnung von dem Integral.  $T_i$ kann auf dem linken oder rechten Rand 1 sein, oder auf einem Dreieck neben dem linken oder rechten Rand 1 sein.  
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.25]{images/u0_matrix.png}	
+	\caption{Veranschaulichung des Vektors $\int_{\Omega} (v^2+ \epsilon) \nabla u_0 \nabla T_i$ }
+	\label{fig:u0_matrix}
+\end{figure}
+
+\paragraph{$T_i$ ist auf dem Rand 1}
+
+Bis jetzt haben wir uns immer die sechs Dreiecke um $T_i$ angeschaut. Nun reicht es, die drei Dreiecke am Rand zu betrachten, da $T_i$ am Rand ist, wie in Zeichnung \ref{fig:triang_outer_middle} dargestellt. 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.25]{images/triang_outer_middle.png}	
+	\caption{umliegende Dreiecke von $T_i$ mit rechten bzw. linken Rand}
+	\label{fig:triang_outer_middle}
+\end{figure}
+
+\subparagraph{linker Rand}
+ Wir erhalten hier
+\begin{align*}
+	\begin{array}{l||l|l|l|l}
+		& T_i	& \nabla T_i							& \nabla u_0						& \nabla T_i \nabla u_0 \\[.2ex]
+		\hline
+		E_3 &-x-y-1	& \begin{pmatrix} -1 \\ -1\end{pmatrix} & \begin{pmatrix} -u_0^2 \\ u_0^1-u_0^2  \end{pmatrix}	& 2u_0^2-u_0^1 \\[3ex]
+		E_5 & y		& \begin{pmatrix} 0 \\ 1\end{pmatrix}	& \begin{pmatrix} -u_0^2 \\ u_0^1-u_0^2 \end{pmatrix}	& u_0^1-u_0^2 \\[3ex]
+		E_6 & x		& \begin{pmatrix} 1 \\ 0\end{pmatrix}	& \begin{pmatrix} u_0^1 \\ 0 \end{pmatrix}	& u_0^1 
+	\end{array}
+\end{align*}
+
+Daraus ergibt sich: 
+\begin{align*}
+	& \int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
+	& = 
+	\int\limits_{E_3} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x 
+	+ \int\limits_{E_5} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x
+	+ \int\limits_{E_6} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
+	& =  \int\limits_{E_3} \left( v^2 + \epsilon_1 \right) (2 u_0^2 - u_0^1) \diff x 
+	+ \int\limits_{E_5} \left( v^2 + \epsilon_1 \right) (u_0^1 - u_0^2) \diff x
+	+ \int\limits_{E_6} \left( v^2 + \epsilon_1 \right) u_0^1 \diff x 
+\end{align*}
+
+\subparagraph{rechter Rand}
+Es ergibt sich folgende Tabelle
+\begin{align*}
+	\begin{array}{l||l|l|l|l}
+		& T_i	& \nabla T_i							& \nabla u_0						& \nabla T_i \nabla u_0 \\[.2ex]
+		\hline
+		E_1 & x		& \begin{pmatrix} 1 \\ 0\end{pmatrix}	& \begin{pmatrix} u_0^3 \\ 0 \end{pmatrix}	& u_0^3 \\[3ex]
+		E_2 & y		& \begin{pmatrix} 0 \\ 1\end{pmatrix}	& \begin{pmatrix} -u_0^2 \\ u_0^3-u_0^2 \end{pmatrix}	& u_0^3-u_0^2 \\[3ex]
+		E_4 &-x-y-1 & \begin{pmatrix} -1 \\ -1\end{pmatrix}	& \begin{pmatrix} -u_0^2 \\ u_0^3-u_0^2 \end{pmatrix}	& 2u_0^2-u_0^3		
+	\end{array}
+\end{align*}
+
+Es folgt:
+\begin{align*}
+	& \int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
+	& = 
+	\int\limits_{E_1} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x 
+	+ \int\limits_{E_2} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x
+	+ \int\limits_{E_4} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
+	& = \int\limits_{E_1} \left( v^2 + \epsilon_1 \right) u_0^3 \diff x 
+	+ \int\limits_{E_2} \left( v^2 + \epsilon_1 \right) (u_0^3 - u_0^2) \diff x
+	+ \int\limits_{E_4} \left( v^2 + \epsilon_1 \right) (2 u_0^2 - u_0^3) \diff x 
+\end{align*} 
+
+\paragraph{$T_i$ ist neben dem Rand 1}
+
+Bei den $T_i$ neben dem linken bzw. rechten Rand gehen wir analog vor. Wir betrachten jetzt \ref{fig:triang_outer_side}.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.25]{images/triang_outer_side.png}	
+	\caption{umliegende Dreiecke von $T_i$ neben dem rechten bzw. linken Rand}
+	\label{fig:triang_outer_side}
+\end{figure}
+%todo zeichnung verbessern: Dreiecke in der Mitte weg
+
+\subparagraph{linker Rand}
+\begin{align*}
+	\begin{array}{l||l|l|l|l}
+		& T_i	& \nabla T_i							& \nabla u_0						& \nabla T_i \nabla u_0 \\[.2ex]
+		\hline 
+		E_1 & x		& \begin{pmatrix} 1 \\ 0\end{pmatrix}	& \begin{pmatrix} - u_0^2 \\ u_0^1 - u_0^2 \end{pmatrix}	& - u_0^2 \\ [3ex]
+		E_2 & y		& \begin{pmatrix} 0 \\ 1\end{pmatrix}	& \begin{pmatrix} u_0^1 \\ 0 \end{pmatrix}	& 0 \\[3ex]
+		E_4 &-x-y-1 & \begin{pmatrix} -1 \\ -1\end{pmatrix}	& \begin{pmatrix} -u_0^1 \\ 0 \end{pmatrix}	& - u_0^1 
+	\end{array}
+\end{align*}
+
+Es folgt:
+\begin{align*}
+	& \int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
+	& = 
+	\int\limits_{E_1} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x 
+	+ \int\limits_{E_2} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x
+	+ \int\limits_{E_4} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
+	& = -\int\limits_{E_1} \left( v^2 + \epsilon_1 \right) u_0^2 \diff x 
+	+ 0 
+	- \int\limits_{E_4} \left( v^2 + \epsilon_1 \right) u_0^1 \diff x 
+\end{align*}
+
+\subparagraph{rechter Rand}
+\begin{align*}
+	\begin{array}{l||l|l|l|l}
+		& T_i	& \nabla T_i							& \nabla u_0						& \nabla T_i \nabla u_0 \\[.2ex]
+		\hline 
+		E_3 &-x-y-1	& \begin{pmatrix} -1 \\ -1\end{pmatrix}	& \begin{pmatrix} u_0^3 \\ 0 \end{pmatrix}	& - u_0^3\\[3ex]
+		E_5 & y		& \begin{pmatrix} 0 \\ 1\end{pmatrix}	& \begin{pmatrix} -u_0^3 \\ 0 \end{pmatrix}	& 0 \\[3ex]
+		E_6 & x		& \begin{pmatrix} 1 \\ 0\end{pmatrix}	& \begin{pmatrix} - u_0^2 \\ u_0^3-u_0^2  \end{pmatrix}	& -u_0^2 \\	[3ex]	
+	\end{array}
+\end{align*}
+
+Es ergibt sich
+\begin{align*}
+	& \int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
+	& = 
+	\int\limits_{E_3} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x 
+	+ \int\limits_{E_5} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x
+	+ \int\limits_{E_6} \left( v^2 + \epsilon_1 \right) \nabla u_0 \nabla T_i \diff x \\
+	& = -\int\limits_{E_3} \left( v^2 + \epsilon_1 \right) u_0^3 \diff x 
+	+ 0 
+	- \int\limits_{E_6} \left( v^2 + \epsilon_1 \right) u_0^2 \diff x 
+\end{align*}
+
+\paragraph*{Zusammenfassung}
+
+Durch die vorherigen Berechnungen kommen wir auf den Vektor \ref{fig:u0_vektor}, der fast nur aus Nullen besteht. Nur die Einträge, die zu dem Rand des Gitters oder direkt neben dem Rand des Gitters liegen, sind ungleich 0.Dieses zeigt \ref{fig:u0_matrix}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.25]{images/u0_vektor.png}	
+	\caption{Vektor $\int_{\Omega} (v^2+ \epsilon_1) \nabla u_0 \nabla T_i$ }
+	\label{fig:u0_vektor}
+\end{figure}
+
+Es fehlt noch die Transformation der Dreiecke, über die wir integriert haben. Also multiplizieren wir hier auch wieder den Vektor mit $1/ h_1h_2$. 
+
+\subsection{Zusammenfassung}
+
+Damit haben wir beide Seiten diskretisiert und können nun die Matrizen implementieren.  
+Wir wollen
+\begin{align*}
+	\frac{1}{h_1 h_2}Au=\frac{1}{h_1 h_2}b \Leftrightarrow Au = b
+\end{align*}
+berechnen. Der Code dazu hat folgende Form: 
+
+\begin{algorithm}[H]
+	\caption{Berechnung von u}
+	1. Berechne Matrix $A$ \\
+	2. Berechne Vektor $b$ \\
+	3. $u = b\backslash A$ 
+\end{algorithm}
+Da sowohl $A$ als auch $b$ aus fast nur Nullen besteht, verwende ich in Matlab Sparse Matrizen. Dies führt zu einer wesentlich kürzeren Laufzeit. 
+%todo andere Darstellung des Algorithmus? 
+
+ %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% neuer Absatz: Diskretisierung für Newton, G'     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%Zur Diskretisierung der rechten Seite kann man die linke Seite nutzen. Also mit dem Galerkinansatz und der gleichen Notation wie oben erhalten wir 
+%
+%\begin{align*}
+%\int_{\Omega} (v^2+ \epsilon) |\nabla \varphi|^2 \diff x & = \int_{\Omega} (v^2+ \epsilon) |\nabla \sum\limits_{i=1}^{k} T_i|^2 \diff x \\
+%		& =  \sum\limits_{i,j=1}^{k} \int_{\Omega} (v^2+ \epsilon) \nabla T_i \nabla T_j \diff x 
+%\end{align*}   
+%%Wir sehen, dass das die Diagonale der rechten Seite ist. Alle anderen Einträge bleiben 0. 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% neuer Absatz: Zusammenfügen der Diskretisierungen		%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% alte sachen                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{alte Sachen}
+%
+%Um zu dem Problem ein Newtonsystem aufstellen zu können, muss zuerst das KKT System bestimmt werden. Dies erweist sich als schwierig, wenn wir keine Nullranddaten haben, da die Randterme stören. Wir können aber das Problem vereinfachen, indem wir statt $u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2$ Nullranddaten annehmen. Dazu wählen wir $u \in \overline{H_0^1}(\Omega):=\{u \in H^1(\Omega)| u=0 \text{ auf } \Gamma_1 \cup \Gamma_2\}$ Also lautet nun das Problem:
+%
+%\begin{align*}
+%	& \min\limits_{u \in \overline{H_0^1}(\Omega), v \in H^1(\Omega)} \int_{\Omega} \left( v^2 + \epsilon \right) | \nabla u|^2 + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- v \right)^2 dx \\
+%	& \text{s.t.} \hspace{1ex} 0 \le v \le v_0
+%\end{align*}
+%
+%\begin{quest}
+%Wie geht die vereinafachung? 
+%\end{quest}
+%
+%Der erste Schritt ist es nun, die Funktionen für das KKT System zu bestimmen: 
+%
+%$
+%\begin{array}{ll}
+%	f: \overline{H_0^1}(\Omega) \times H^1(\Omega) \rightarrow \R & f(u,v):=\int\limits_{\Omega}  \left( v^2 + \epsilon \right) | \nabla u|^2 + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- v \right)^2 \diff x \\
+%	 c: H^1(\Omega) \times H^1(\Omega) \rightarrow L^2(\Omega)^2 & c(u,v):= 
+%	 \begin{pmatrix}
+%	 v- v_0 \\
+%	 -v
+%	 \end{pmatrix}	
+%\end{array}	 
+%$
+%
+%Nun wird die Lagrangefunktion f\"ur dieses Problem aufgestellt:
+%
+%$	
+%\begin{array}{ll}
+%	 \multicolumn{2}{l}{ L: \overline{H_0^1}(\Omega) \times H^1(\Omega) \times L^2(\Omega)^2 \rightarrow \R} \\ 
+%	 L(u,v,\lambda):= &\int\limits_{\Omega}  \left( v^2 + \epsilon \right) | \nabla u|^2 + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- v \right)^2 \diff x \\
+%	 & + \int\limits_{\Omega} \lambda_1 (v-v_0) - \lambda_2 v \diff x 	 
+%\end{array}
+%$
+%
+%Die KKT Bedingungen für das System lauten:
+%
+%\begin{quest}
+%	Allgemeine Formulierung?
+%\end{quest}
+%
+%Also muss $L_u$ und $L_v$ berechnet werden.
+%
+%$
+%\begin{array}{lrcl}
+%	L_u(u,v, \lambda): 	& \overline{H_0^1}(\Omega) 	& \rightarrow 	& \R \\
+%						& s							& \mapsto		& \partial_u L(u,v,\lambda|s)
+%\end{array}	
+%$
+%
+%Nun muss $\partial_u L(u,v,\lambda|s)$ berechnet werden:
+%
+%$
+%\begin{array}{lcrl}
+%	\partial_u L(u,v,\lambda|s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big( &
+%		L(u+ts,v, \lambda)-L(u,v, \lambda)
+%	\Big) \\
+%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big(	& 
+%		\int\limits_{\Omega}  \left( v^2 + \epsilon \right) | \nabla (u+ts)|^2 + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- v \right)^2 + \lambda_1 (v-v_0) - \lambda_2 v\diff x \\
+%		& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon \right) | \nabla u|^2 \hspace{6.5ex} + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- v \right)^2 + \lambda_1 (v-v_0) - \lambda_2 v\diff x
+%	\Big) \\
+%								& =& \lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big( &
+%		\int\limits_{\Omega} (v^2+ \epsilon) \left(  | \nabla (u+ts)|^2 - | \nabla u|^2 \right) \diff x 
+%	\Big) \\
+%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big( & 
+%		\int\limits_{\Omega} (v^2+ \epsilon) \left(  | \nabla u+t \nabla s)|^2 - | \nabla u|^2  \right) \diff x
+%	\Big) \\
+%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big( & 
+%		\int\limits_{\Omega} (v^2+ \epsilon) \left(  | \nabla u |^2 + 2 t|\nabla u| |\nabla s| - t^2 |\nabla s|^2 - | \nabla u|^2  \right) \diff x
+%	\Big) \\
+%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big( & 
+%		\int\limits_{\Omega} (v^2+ \epsilon) \left(  2 t|\nabla u| |\nabla s| - t^2 |\nabla s|^2  \right) \diff x 
+%	\Big) \\
+%								& = &\lim\limits_{t \rightarrow 0}	
+%	\Big( & 
+%		\int\limits_{\Omega} (v^2+ \epsilon) \left(  2 |\nabla u| |\nabla s| - t |\nabla s|^2   \right) \diff x
+%	\Big) \\
+%		& = & &	\int\limits_{\Omega} (v^2+ \epsilon)  2 |\nabla u| |\nabla s|   \diff x \\
+%		& = & &	\int\limits_{\partial \Omega} (v^2+ \epsilon) 2 |\nabla u| s \nu  \diff x - 
+%		\int\limits_{\Omega} 4 v v' \nabla u \cdot s + 2 (v^2 + \epsilon) \Delta u s \diff x\\
+%		& = & &	\hspace{-4.2ex}\int\limits_{\partial \Omega \setminus (\Gamma_1 \cup \Gamma_2)} (v^2+ \epsilon) 2 |\nabla u| s \nu  \diff x + \int\limits_{\Gamma_1 \cup \Gamma_2} (v^2+ \epsilon) 2 |\nabla u| s \nu  \diff x  \\
+%		& & & \hspace{-1.8ex}- \int\limits_{\Omega} 4 v v' \nabla u \cdot s + 2 (v^2 + \epsilon) \Delta u s \diff x\\	
+%		& = & & \hspace{-4.2ex} \int\limits_{\partial \Omega \setminus (\Gamma_1 \cup \Gamma_2)} 2 (v^2+ \epsilon)  |\nabla u| s \nu  \diff x - 
+%		\int\limits_{\Omega} 4 v v' \nabla u \cdot s + 2 (v^2 + \epsilon) \Delta u s \diff x\\	 
+%		& = & & \hspace{-4.2ex} \left(2(v^2+ \epsilon)  |\nabla u| \nu, s \right)_{L^2(\partial \Omega \setminus (\Gamma_1 \cup \Gamma_2) )}  - \left( 4 v v' \nabla u \cdot s + 2 (v^2 + \epsilon) \Delta u,s \right)_{L^2(\Omega)}	 	
+%\end{array}
+%$
+%
+%Da $s \in \overline{H_0^1(\Omega)}$ fällt der Randterm bei $\Gamma_1 \cup \Gamma_2$ weg. 
+%\begin{quest}
+%eigentlich existiert $\Delta v$ nicht...
+%\end{quest}
+%
+%\begin{quest}
+%wie komme ich von dort aus genau zur frechet ableitung? also ohne integrale? 
+%\end{quest}
+%
+%Genau das gleiche muss für die Ableitung nach v gemacht werden. 
+%
+%$
+%\begin{array}{lrcl}
+%	L_v(u,v, \lambda): 	& \overline{H_0^1}(\Omega) 	& \rightarrow 	& \R \\
+%						& s							& \mapsto		& \partial_v L(u,v,\lambda|s)
+%\end{array}	
+%$
+%
+%
+%$
+%\begin{array}{lcrl}
+%	\partial_v L(u,v,\lambda|s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big( &
+%		L(u,v+ts, \lambda)-L(u,v, \lambda)
+%	\Big) \\
+%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big(	& 
+%		\int\limits_{\Omega}  \left( (v+ts)^2 + \epsilon \right) | \nabla (u)|^2 + \epsilon |\nabla (v+ts)|^2 + \frac{1}{\epsilon} \left( 1- (v+ts) \right)^2 \\ 
+%		& & & + \lambda_1 (v+ts-v_0) - \lambda_2 (v+ts) \diff x \\
+%		& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon \right) | \nabla u|^2 \hspace{8ex} + \epsilon |\nabla v|^2 \hspace{6.5ex}+ \frac{1}{\epsilon} \left( 1- v \right)^2 \\
+%		& & & + \lambda_1 (v-v_0)\hspace{5.5ex} - \lambda_2 v \diff x
+%	\Big) \\
+%	
+%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big(	& 
+%		\int\limits_{\Omega}  \left( \left( (v+ts)^2 + \epsilon \right) - \left( v^2 + \epsilon \right) \right) | \nabla (u)|^2 \\
+%		& & & \hspace{2ex} + \epsilon \left( |\nabla (v+ts)|^2 - |\nabla v|^2 \right) \\
+%		& & & \hspace{2ex} + \frac{1}{\epsilon} \left( (1- v- ts)^2 -  (1- v)^2 \right) \\ 
+%		& & & \hspace{2ex} + \lambda_1 \left( (v+ts-v_0)- (v-v_0) \right)  - \lambda_2 \left( (v+ts) - v\right) \diff x 
+%	\Big) \\	
+%	
+%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big(	& 
+%		\int\limits_{\Omega}  \left( v^2 + 2vts + t^2s^2 - v^2  \right) | \nabla (u)|^2 \\
+%		& & & \hspace{2ex} + \epsilon \left( |\nabla v|^2 + 2 t \nabla v \nabla s + t^2 |\nabla s|^2 - |\nabla v|^2 \right) \\
+%		& & & \hspace{2ex} + \frac{1}{\epsilon} \left( (1- v)^2 - 2(1-v)ts + t^2s^2 -  (1- v)^2 \right) \\ 
+%		& & & \hspace{2ex} + \lambda_1 ts  - \lambda_2 ts  \diff x
+%	\Big) \\		
+%	
+%								& = &\lim\limits_{t \rightarrow 0} 
+%	\Big(	& 
+%		\int\limits_{\Omega}  \left( 2vs + ts^2  \right) | \nabla (u)|^2 + \epsilon \left( 2 \nabla v \nabla s + t |\nabla s|^2 \right) \\
+%		& & & \hspace{2ex} - \frac{1}{\epsilon} \left(2(1-v)s + ts^2 \right) + \lambda_1 s  - \lambda_2 s  \diff x
+%	\Big) \\	
+%								& = &\hspace{6.5ex} & 
+%		\int\limits_{\Omega} 2s v | \nabla (u)|^2 + \epsilon 2 \nabla v \nabla s - \frac{2}{\epsilon} (1-v)s + \lambda_1 s  - \lambda_2 s  \diff x\\	
+%								& = &\hspace{6.5ex} & 
+%		\int\limits_{\Omega} 2  v | \nabla (u)|^2 s - \epsilon 2 \Delta v  s - \frac{2}{\epsilon} (1-v)s + \lambda_1 s  - \lambda_2 s  \diff x \\
+%		& & & + \int\limits_{\partial \Omega} 2 \epsilon \nabla v \nu s \diff x  \\
+%	& = &\hspace{6.5ex} & 
+%		\left( 2  v | \nabla (u)|^2  - \epsilon 2 \Delta v - \frac{2}{\epsilon} (1-v) + \lambda_1 - \lambda_2, s \right)_{L^2(\Omega)} \\
+%		& & & + \left( 2 \epsilon \nabla v \nu , s \right)_{L^2(\partial \Omega)}  \\									 	
+%\end{array}
+%$
+
+
+\section{Optimierung nach v}
+%todo evtl mit u zusammenfassen
+
+Die Optimierung nach $v$ ist ein Optimierungsproblem mit einfacher Nebenbedingung und lässt sich in folgender Form schreiben:
+\begin{align*}
+ \min\limits_{w \in W} J(w) \quad s.t. \quad w \in C 
+\end{align*}
+wobei W ein Banachraum, $J: W \rightarrow \R $ G-diffbar und $C \subset W$. 
+
+In diesem Fall bedeutet das also, dass 
+
+\begin{align*}
+	\begin{array}{lrcl}
+		J: 	& H^1(\Omega)	& \rightarrow 	& \R \\
+			& v				& \mapsto		& \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\
+		\multicolumn{4}{l}{ C:= \left\{ v \in H^1(\Omega) | 0 \le v \le v_0 \right\} }	
+	\end{array}
+\end{align*}
+
+\begin{thm}
+Das Problem  \eqref{eq:problem_von_v} besitzt genau eine Lösung, falls $v_0$ stetig ist. 
+\end{thm}
+\begin{proof}
+Wir wollen \ref{thm:existenz_eindeutigkeit_loesung} anwenden. Zunächst müssen wir alle Voraussetzungen prüfen. 
+\begin{itemize}
+	\item  $W=H^1(\Omega)$ ist ein Hilbertraum, also ist er ein reflexiver Banachraum. 
+	\item Nun muss gezeigt werden, dass $C$ nichtleer, abgeschlossen und konvex ist. 
+$C$ ist nichtleer, da $0 \in C$. 
+
+Sei $v_n$ eine konvergente Folge in C. Dann gilt $0 \le v_n \le v_0 \hspace{1ex} \forall n \in \N$. Es gilt auch $0 \le \lim_{n \rightarrow \infty} u_n \le v_0$. Also ist $C$ abgeschlossen. 
+
+Für Konvexität sei $0<\lambda<1 $ und $v, w \in C$. Dann gilt $0 \le \lambda v + (1- \lambda) w$, da $\lambda>0$. Außerdem gilt $\lambda v + (1- \lambda) w \le \lambda v_0 + (1- \lambda) v_0 = v_0$. Also ist jede Konvexkombination in $C$ enthalten, $C$ ist konvex. 
+	\item J ist strikt konvex. Der Beweis dazu kann durch einfaches nachrechnen geführt werden. Für Stetigkeit gilt dasselbe. 
+	\item Sei $w \in C$ mit $\|v\|_{H^1(\Omega)} \rightarrow \infty$. Dann gilt
+\begin{align*}
+	\begin{array}{ll}
+		J(v) 	& = \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\
+		& = \int_{\Omega} v^2  | \nabla u|^2 + \epsilon_1  | \nabla u|^2  + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- 2v + v^2 \right) \diff x \\
+		& = \int_{\Omega} v^2  | \nabla u|^2 - \frac{2}{\epsilon_3} v + \frac{1}{\epsilon_3}v^2  \diff x + \int_{\Omega} \epsilon_1  | \nabla u|^2  + \frac{1}{\epsilon_3}\diff x  +  \int_{\Omega} \epsilon_2 |\nabla v|^2 \diff x \\
+		& \le \int_{\Omega} v^2  \left(| \nabla u|^2 + \frac{1}{\epsilon_3} \right)   \diff x + c  +  \epsilon_2 \| \nabla v\|_{L^2(\Omega)}^2 \\
+		& \le c' \|v\|_{L^2(\Omega)}^2 + c + \epsilon_2 \| \nabla v\|_{L^2(\Omega)}^2 \\
+		& \le c'' \left( \|v\|_{L^2(\Omega)}^2 + \| \nabla v\|_{L^2(\Omega)}^2 \right) + c \\
+		& \le c'' \|v\|_{H^1(\Omega)}^2   + c \\
+		& \rightarrow \infty
+	\end{array}
+\end{align*}
+
+mit $c,c',c''>0$ passende Konstanten. 
+\end{itemize}
+Alle Vorraussetzungen aus \ref{thm:existenz_eindeutigkeit_loesung} sind erfüllt, alse existiert genau eine Lösung des Optimierungsproblems. 
+\end{proof}
+  
+Nun stellen wir das KKT-System auf. . 
+
+\begin{thm}
+	Sei $a:=\inf \{J(w)|G(w) \le_P 0\}$. Dann gilt:
+	\begin{align*}
+		a= \inf\limits_{v \in H^1(\Omega)} J(v)+ \langle G(v), \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega), H^{-1}(\Omega)}
+	\end{align*} 
+\end{thm}
+\begin{proof}
+	Die Bedingungen aus \ref{thm:kkt_system} müssen gelten: 
+	Sei $P:=\{(v,w) \in H^1(\Omega) \times H^1(\Omega) | v\ge 0 \text{ und } w \ge 0\} \subset H^1(\Omega) \times H^1(\Omega)$. $\mathring{P} \neq \emptyset$, da $H^1(\Omega)$ nur stetige Funktionen enthält. Also ist $P$ ein positiver Kegel. 
+	
+	$J:H^1(\Omega) \rightarrow \R $ sei wie oben definiert. 
+	\begin{align*}
+		G:H^1(\Omega) \rightarrow H^1(\Omega) \\
+		v \mapsto	\begin{pmatrix} -v \\ v-v_0 \end{pmatrix}
+	\end{align*}
+	G ist linear, also konvex. 
+	
+	Das Bild von $J$ enthält ein $\hat{v}$, sodass $G(\hat{v})<_P 0 $ gilt, da es ein $v \in H^1(\Omega)$ geben muss, das echt zwischen $0$ und $v_0$ liegt. 
+	%todo genauer
+	
+	Außerdem ist $a:=\inf \{J(w)|G(w) \le_P 0\}< \infty$, da J stetig und beschränkt ist. 
+	
+	Also kann \ref{thm:kkt_system} angewendet werden. Damit existiert $(\mu, \lambda) \in H^{-1}(\Omega) \times H^{-1}(\Omega)$ mit $(\mu,\lambda) \ge 0$ Komponentenweise, sodass 
+	\begin{align*}
+		a= \inf\limits_{v \in H^1(\Omega)} J(v)+ \langle G(v), \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega), H^{-1}(\Omega)}
+	\end{align*}
+\end{proof}
+
+Um das KKT System konkret angeben brauchen wir die G\^ateaux Ableitung von $J$.
+\begin{thm}
+	$J$ ist Gâteaux-Differenzierbar mit 
+	\begin{align*}
+		\begin{array}{lrcl}
+			J'(v): 	& \overline{H^1}(\Omega) 	& \rightarrow 	& \R \\
+			& s							& \mapsto		&  \left( 2  v | \nabla (u)|^2  - \epsilon_2 2 \Delta v - \frac{2}{\epsilon_3} (1-v), s \right)_{L^2(\Omega)} + \left( 2 \epsilon_2 \nabla v \nu , s \right)_{L^2(\partial \Omega)}  \\
+		\end{array}	
+	\end{align*}
+\end{thm}
+\begin{proof}
+	 Zunächst kommt die Richtungsableitung:  
+	 \begin{align*}
+	 	\begin{array}{lcrl}
+	 		\partial J(v,s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+	 		\Big( & J(v+ts)-J(v) \Big) \\
+	 		& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+	 		\Big(	& 
+	 		\int\limits_{\Omega}  \left( (v+ts)^2 + \epsilon_1 \right) | \nabla (u)|^2 + \epsilon_2 |\nabla (v+ts)|^2 + \frac{1}{\epsilon_3} \left( 1- (v+ts) \right)^2 \\ 
+	 		& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla u|^2 \hspace{8ex} + \epsilon_2 |\nabla v|^2 \hspace{6.5ex}+ \frac{1}{\epsilon_3} \left( 1- v \right)^2 \Big) \\
+	 		& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+	 		\Big(	& 
+	 		\int\limits_{\Omega}  \left( \left( (v+ts)^2 + \epsilon_1 \right) - \left( v^2 + \epsilon_1 \right) \right) | \nabla (u)|^2 \\
+	 		& & & \hspace{2ex} + \epsilon_2 \left( |\nabla (v+ts)|^2 - |\nabla v|^2 \right) \\
+	 		& & & \hspace{2ex} + \frac{1}{\epsilon_3} \left( (1- v- ts)^2 -  (1- v)^2 \right)
+	 		\Big) \\	
+	 		& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+	 		\Big(	& 
+	 		\int\limits_{\Omega}  \left( v^2 + 2vts + t^2s^2 - v^2  \right) | \nabla u|^2 \\
+	 		& & & \hspace{2ex} + \epsilon_2 \left( |\nabla v|^2 + 2 t \nabla v \nabla s + t^2 |\nabla s|^2 - |\nabla v|^2 \right) \\
+	 		& & & \hspace{2ex} + \frac{1}{\epsilon_3} \left( (1- v)^2 - 2(1-v)ts + t^2s^2 -  (1- v)^2 \right)
+	 		\Big) \\		
+	 		& = &\lim\limits_{t \rightarrow 0} 
+	 		\Big(	& 
+	 		\int\limits_{\Omega}  \left( 2vs + ts^2  \right) | \nabla u|^2 + \epsilon_2 \left( 2 \nabla v \nabla s + t |\nabla s|^2 \right) \\
+	 		& & & \hspace{2ex} - \frac{1}{\epsilon_3} \left(2(1-v)s + ts^2 \right)  \diff x
+	 		\Big) \\	
+	 		& = &\hspace{6.5ex} & 
+	 		\int\limits_{\Omega} 2s v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla s - \frac{2}{\epsilon_3} (1-v)s  \diff x\\	
+	 		& = &\hspace{6.5ex} & 
+	 		\int\limits_{\Omega} 2  v | \nabla u|^2 s - \epsilon_2 2 \Delta v  s - \frac{2}{\epsilon_3} (1-v)s \diff x + \int\limits_{\partial \Omega} 2 \epsilon_2 \nabla v \nu s \diff x  							 
+	 	\end{array}
+	 \end{align*}
+	 Damit es auch eine G\^ateaux Ableitung ist, muss sie beschränkt und linear sein. Dies ist einfach zu sehen. 
+\end{proof}
+
+
+%
+%Auch die Ableitung von $\langle G(v), \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega)^2, H^{-1}(\Omega )^2}$ nach v wird benötigt. Also \\
+%
+%$
+%\begin{array}{rl}
+%	\frac{\partial}{\partial v} \langle G(v), \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega)^2, H^{-1}(\Omega )^2} & = \frac{\partial}{\partial v} \langle \begin{pmatrix} -v \\ v-v_0 \end{pmatrix}, \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega)^2, H^{-1}(\Omega )^2 }\\
+%	& = \frac{\partial}{\partial v}  \int\limits_{\Omega} -v \lambda + \mu (v-v_0) \diff x\\
+%	& = \int\limits_{\Omega} -\lambda + \mu \diff x
+%\end{array}
+%$
+%\begin{quest}
+%ist das Skalarprodukt richtig interpretiert? Weil $H^1$ skalarprodukt. Ableitung sieht komisch aus...
+%\end{quest}
+
+ Aus $\nabla J(v)+ \lambda - \mu=0$ folgt , dass 
+\begin{align*}
+	& 2  v | \nabla u|^2  - \epsilon_2 2 \Delta v   - \frac{2}{\epsilon_3} (1-v) + \lambda - \mu = 0 & \text{ auf } \Omega \\
+	& 2 \epsilon_2 \nabla v \nu  =0 & \text{ auf } \partial \Omega
+\end{align*} 
+
+Damit lautet das KKT System: 
+\begin{align*}
+	\begin{array}{lll}
+	 	\multicolumn{3}{l}{  2  \overline{v} | \nabla u|^2  - \epsilon_2 2 \Delta \overline{v}   - \frac{2}{\epsilon_3} (1-\overline{v}) + \lambda - \mu = 0 \text{ auf } \Omega } \\
+	 	\multicolumn{3}{l}{2 \epsilon_2 \nabla \overline{v} \nu  =0 \text{ auf } \partial \Omega} \\
+	 	\overline{v} \ge a & \mu \ge 0 & \mu \overline{v}=0 \\
+	 	\overline{v} \le b & \lambda \ge 0 & \lambda (v_0-\overline{v})=0 \\
+	\end{array}
+\end{align*}
+
+Die Projektion für die Nebenbedingung lautet nach \eqref{min_max_theorie}:
+\begin{align*}
+\mu - \lambda = \max\{0, \mu- \lambda + c(\overline{v}-v_0)\}+ \min\{0, \mu- \lambda + c\overline{v}\} \vspace{2ex} \forall c>0
+\end{align*}
+
+Daraus ergibt sich eine starke und schwache Formulierung. Die Starke lautet: 
+ Suche $v \in H^1$, sodass 
+\begin{align*}
+	\begin{array}{lll}
+		\multicolumn{3}{l}{  2  \overline{v} | \nabla u|^2  - \epsilon_2 2 \Delta \overline{v}   - \frac{2}{\epsilon_3} (1-\overline{v}) + \eta = 0 \text{ auf } \Omega } \\
+		\multicolumn{3}{l}{2 \epsilon_2 \nabla \overline{v} \nu  =0 \text{ auf } \partial \Omega} \\
+		\eta = \max\{0, \eta + c(\overline{v}-v_0)\}+ \min\{0, \eta + c\overline{v}\} \hspace{1ex} \forall c>0
+	\end{array}
+\end{align*}
+gilt. Die schwache Formulierung ist dann
+
+\begin{align*}
+ 	& \int\limits_{\Omega} 2 \varphi  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi  - \frac{2}{\epsilon_3} (1-v)\varphi + \eta \varphi \diff x = 0 & \forall \varphi \in \h \\
+	& \int\limits_{\Omgea} \left( \eta - \max\{0, \eta + c(\overline{v}-v_0)\}- \min\{0, \eta + c\overline{v}\} \right) \varphi \diff x = 0 & \forall c>0, \forall  \varphi \in \h 
+\end{align*}
+mit $\eta = \mu - \lambda$
+
+\subsection{Newtonmethode}
+%todo in Theorie, umändern!
+Wir wollen das Problem implementieren, indem wir die Newton Methode anwenden. Diese sieht wie folgt aus: 
+
+\begin{algorithm}[H]
+\caption{Newton Methode}
+\KwData{$u^0$ (möglichst nah an der Lösung $\overline{w}$)}
+\For{$k=0,1,\cdots$} {
+	\emph{Löse $G'(w^k) s^k=-G(w^k)$}\;
+	$w^{k+1}=w^k+s^k $\;
+}
+\end{algorithm}
+%todo andere NM einfügen, da das nur die einfache ist. Für diese Ableitung brauchen wir eine andere. 
+
+Hier betrachten wir die Funktion \\
+\begin{align*}
+	\begin{array}{rcl}
+		G: H^1(\Omega) \times H^1(\Omega)	& \rightarrow 	& H^{-1}(\Omega)^2 \\
+		(v, \eta)								& \mapsto  	& 
+		\begin{pmatrix}
+			\int\limits_{\Omega} 2 \varphi  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi  - \frac{2}{\epsilon_3} (1-v)\varphi + \eta \varphi  \diff x  \\
+			\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \varphi \diff x
+		\end{pmatrix}
+	\end{array}
+\end{align*}
+Nun brauchen wir die Ableitung. Da $G_2$ offensichtlich keine G\^ateaux-Ableitung hat, brauchen wir das Semidifferenzial. Bei $G_1$ entspricht das Semidifferenzial der G\^ateaux-Ableitung. Diese lässt sich einfach hinschreiben mit der Richtung $\phi$. 
+\begin{align*}
+	& G_{1 v} (v, \eta) = \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x \\
+	& G_{1 \eta} (v, \eta) = \int\limits_{\Omega}  \phi \varphi  \diff x
+\end{align*}
+
+Das Semidifferenzial von $G_2$ ist nicht ganz so einfach. Beweisen wir zunächst ein Lemma
+
+\begin{lem}
+	Betrachte $f: \h^2 \rightarrow H^{-1}(\Omega)$ mit 
+	\begin{align}
+		\label{eq:H}
+		\eta, v \mapsto  \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\}
+	\end{align}
+	Dann ist $f$ semidifferenzierbar mit 
+	\begin{align*}
+		\frac{\partial f}{\partial \eta} = 
+		\left\{
+		\begin{array}{ll}
+			\{0\}		& \text{ falls }  -c(v-v_0) < \eta \text{ oder }  \eta < -cv \\
+			\{1\} 		& \text{ falls } -cv < \eta < -c(v-v_0) \\
+			\lbrack 0,1 \rbrack	& \text{ falls }  -c(v-v_0) = \eta \text{ oder }  \eta = -cv 
+		\end{array}
+		\right .
+	\end{align*}	
+	und 
+	\begin{align*}
+		\frac{\partial f}{\partial v}= 
+		\left\{
+		\begin{array}{ll}
+			\{-c\}		& \text{ falls }  -c(v-v_0) < \eta \text{ oder }  \eta < -cv \\
+			\{0\}		& \text{ falls } -cv < \eta < -c(v-v_0) \\
+			\lbrack -c,0 \rbrack	& \text{ falls }  -c(v-v_0) = \eta \text{ oder }  \eta = -cv 
+		\end{array}
+		\right .
+	\end{align*}	
+\end{lem}
+\begin{proof}
+	$f$ kann in einer anderen Form dargestellt werden: 
+	\begin{align*}
+		f(v, \eta) = 
+		\left\{
+		\begin{array}{ll}
+			-c(v-v_0) 	& \text{ falls }  -c(v-v_0) \le \eta \\
+			\eta 		& \text{ falls } -cv < \eta < -c(v-v_0) \\
+			-cv		& \text{ falls }  \eta \le -c v 
+		\end{array}
+		\right .
+	\end{align*}
+	Die Äquivalenz von diese Form von $f$ und \eqref{eq:H}, kann einfach nachgerechnet werden. 
+	Betrachten wir zunächst die Ableitung nach $\eta$ Es reicht, die Semidifferenzierbarkeit der einzelnen Abschnitte zu betrachten. Falls jeder Abschnitt semidifferenzierbar ist und die Übergänge auch, so ist $f$ Semidifferenzierbar. 
+	
+	Sei dazu $-c(v-v_0) < \eta$ oder $ \eta < -c v $. Mit \ref{lem:semidiffbar_f_diffbar} gilt, dass, falls $f$ stetig Fréchet-Differenzierbar ist, $f$ $\partial f$ semidifferenzierbar. Um Fréchet-Differenzierbarkeit zu zeigen, bestimmen wir zunächst die Richtungsableitung. Diese ist offensichtlich $0$. Dadurch folgt sofort die Fréchet-Differenzierbarkeit. 
+	
+	Sei nun $-cv < \eta < -c(v-v_0) $. Durch \ref{lem:semidiffbar_f_diffbar} müssen wir wieder die Fréchet-Differenzierbarkeit überprüfen. Offensichtlich ist die Identität Fréchet-Differenzierbar. Das Differenzial ist hier 1. 
+	
+	Sei $\eta =-c(v-v_0)$. Sei zunächst $d>0$. Die Abschätzung \ref{eq:semidiffbar_abschaetzung} muss gelten. Hier ist $\partial f(\eta+d, v) = \{0\}$ und damit 
+	\begin{align*}
+		& \sup\limits_{M \in \partial f(\eta+d,v) } \| f(\eta+d,v)-f(\eta)-M d\|_{H^{-1}(\Omega)} \\
+		& \hspace{3ex}= \| -c(v-v_0) +c(v-v_0) \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right)  \text{ für } \| d \|_{\h} \rightarrow 0
+	\end{align*}	
+	Sei nun $d<0$. Da $d$ nahe an 0 ist, gilt auch $d>-cv_0$ mit $v_0>0$. Jetzt ist $\partial G_2^{\eta}(\eta+d) = \{1\}$ und damit 
+	\begin{align*}
+		& \sup\limits_{M \in \partial f(\eta+d,v) } \| f(\eta+d,v)-f(\eta,v)-M d\|_{H^{-1}(\Omega)} \\
+		& \hspace{3ex} = \| -c(v-v_0) +d +c(v-v_0) -d \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right)  \text{ für } \| d \|_{\h} \rightarrow 0
+	\end{align*}	
+	
+	Fehlt nur noch $\eta = -cv$. Sei zunächst $d>0$. Da $d$ nahe an 0 ist, gilt auch $d<cv_0$. Es gilt $\partial f(\eta+d,v) = \{1\}$ und damit 	
+	\begin{align*}
+		& \sup\limits_{M \in \partial G_2^{\eta}(\eta+d) } \| f(\eta+d,v)-f(\eta)-M d\|_{H^{-1}(\Omega)} \\
+		& \hspace{3ex} = \| -cv +d +cv -d \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right)  \text{ für } \| d \|_{\h} \rightarrow 0
+	\end{align*}	
+	Sei nun $d<0$. Es gilt: Es gilt $\partial G_2^{\eta}(\eta+d) = \{0\}$ und damit 	
+	\begin{align*}
+		& \sup\limits_{M \in \partial f(\eta+d,v) } \| f(\eta+d,v)-f(\eta,v)-M d\|_{H^{-1}(\Omega)} \\
+		& \hspace{3ex}= \| -cv+cv \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right)  \text{ für } \| d \|_{\h} \rightarrow 0
+	\end{align*}
+	Damit ist $f$ semidifferenzierbar nach $\eta$. Für die semidifferenzierbarkeit nach $v$ gilt die gleiche Rechnung.  
+\end{proof}
+
+Das eigentliche Ziel war es, das Semidifferenzial von $G_2$ zu finden. Dieses können wir nun tun
+
+\begin{thm}
+	$G_2: \h^2 \rightarrow H^{-1}(\Omega)$ mit 
+\begin{align*}
+			(v, \eta) \mapsto	\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \varphi \diff x
+\end{align*}
+ist semidifferenzierbar mit 
+	\begin{align*}
+		\partial G_{2 \eta}(\eta, v)(\varphi, \phi) = \int\limits_{\Omega} \frac{\partial f}{\partial \eta} \varphi \phi \diff x 
+	\end{align*}
+	\begin{align*}
+		\partial G_{2 v}(\eta, v) (\varphi, \phi) = \int\limits_{\Omega}  \frac{\partial f}{\partial v} \varphi \phi \diff x 
+	\end{align*}
+\end{thm}
+\begin{proof}
+	
+\end{proof}
+%todo beweis ordentlich. mit kettenregel? einfach so lassen? mal schaun...
+%todo Räume korrekt? 
+
+Damit ergibt sich als Ableitung 
+\begin{align*}
+	G'(v,\eta)= 
+	\begin{pmatrix}
+			G_{1 v} & G_{1 \eta} \\
+			G_{2 v} & G_{2 \eta}  
+	\end{pmatrix}
+\end{align*}
+
+Also lautet das Gleichungssystem, das für das Newtonverfahren nach $s$ gelöst werden muss
+\begin{align*}
+	- \begin{pmatrix}
+		G_1 \\
+		G_2
+	\end{pmatrix}
+	= 
+	\begin{pmatrix}
+			G_{1 v} & G_{1 \eta} \\
+			G_{2 v} & G_{2 \eta}  
+	\end{pmatrix}
+	\begin{pmatrix}
+	s^1 \\
+	s^2
+	\end{pmatrix}
+\end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%			old				% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%Mit der Theorie zu Optimalitätsbedingungen können wir unser Problem zu einer Nullstellensuche umschreiben. 
+%
+%\begin{thm}
+%Sei das Problem \eqref{eq:problem_von_v} gegeben. Folgende Aussagen sind äquivalent:
+%\begin{itemize}
+%	\item $\overline{v}$ löst \eqref{eq:problem_von_v}
+%	\item $\overline{v}$ löst $\overline{v}=P(\overline{v}- \gamma \nabla J(\overline{v}))$
+%\end{itemize}
+%Desweiteren existiert genau eine Lösung des Optimierungsproblems. 
+%\end{thm}  
+%\begin{proof}
+%Wir wollen \ref{thm:aus_optimal_folgt_projektion} anwenden. Sei dazu $W=H^1(\Omega)$. W ist ein Hilbertraum. Nun muss gezeigt werden, dass $C$ nichtleer, abgeschlossen und konvex ist. 
+%
+%$C$ ist nichtleer, da $0 \in C$. 
+%
+%Sei $v_n$ eine konvergente Folge in C. Dann gilt $0 \le v_n \le v_0 \hspace{1ex} \forall n \in \N$. Es gilt auch $0 \le \lim_{n \rightarrow \infty} u_n \le v_0$. Also ist $C$ abgeschlossen. 
+%
+%Für Konvexität sei $0<\lambda<1 $ und $v, w \in C$. Dann gilt $0 \le \lambda v + (1- \lambda) w$, da $\lambda>0$ außerdem gilt $\lambda v + (1- \lambda) w \le \lambda v_0 + (1- \lambda) v_0 = v_0$. Also ist jede Konvexkombination in $C$ enthalten, also ist $C$ konvex. 
+%
+%Nun muss $J$ Gâteaux-differenzierbar bei $\overline{v}$ sein. Dazu berechne zunächst die Richtungsableitung: 
+%
+%$
+%\begin{array}{lcrl}
+%	\partial J(v,s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big( & J(v+ts)-J(v) \Big) \\
+%	
+%	& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big(	& 
+%		\int\limits_{\Omega}  \left( (v+ts)^2 + \epsilon \right) | \nabla (u)|^2 + \epsilon |\nabla (v+ts)|^2 + \frac{1}{\epsilon} \left( 1- (v+ts) \right)^2 \\ 
+%		& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon \right) | \nabla u|^2 \hspace{8ex} + \epsilon |\nabla v|^2 \hspace{6.5ex}+ \frac{1}{\epsilon} \left( 1- v \right)^2 \Big) \\
+%		
+%	& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big(	& 
+%		\int\limits_{\Omega}  \left( \left( (v+ts)^2 + \epsilon \right) - \left( v^2 + \epsilon \right) \right) | \nabla (u)|^2 \\
+%		& & & \hspace{2ex} + \epsilon \left( |\nabla (v+ts)|^2 - |\nabla v|^2 \right) \\
+%		& & & \hspace{2ex} + \frac{1}{\epsilon} \left( (1- v- ts)^2 -  (1- v)^2 \right)
+%	\Big) \\	
+%	
+%	& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+%	\Big(	& 
+%		\int\limits_{\Omega}  \left( v^2 + 2vts + t^2s^2 - v^2  \right) | \nabla u|^2 \\
+%		& & & \hspace{2ex} + \epsilon \left( |\nabla v|^2 + 2 t \nabla v \nabla s + t^2 |\nabla s|^2 - |\nabla v|^2 \right) \\
+%		& & & \hspace{2ex} + \frac{1}{\epsilon} \left( (1- v)^2 - 2(1-v)ts + t^2s^2 -  (1- v)^2 \right)
+%	\Big) \\		
+%	
+%	& = &\lim\limits_{t \rightarrow 0} 
+%	\Big(	& 
+%		\int\limits_{\Omega}  \left( 2vs + ts^2  \right) | \nabla u|^2 + \epsilon \left( 2 \nabla v \nabla s + t |\nabla s|^2 \right) \\
+%		& & & \hspace{2ex} - \frac{1}{\epsilon} \left(2(1-v)s + ts^2 \right) + \lambda_1 s  - \lambda_2 s  \diff x
+%	\Big) \\	
+%	& = &\hspace{6.5ex} & 
+%		\int\limits_{\Omega} 2s v | \nabla u|^2 + \epsilon 2 \nabla v \nabla s - \frac{2}{\epsilon} (1-v)s  \diff x\\	
+%								& = &\hspace{6.5ex} & 
+%		\int\limits_{\Omega} 2  v | \nabla u|^2 s - \epsilon 2 \Delta v  s - \frac{2}{\epsilon} (1-v)s \diff x + \int\limits_{\partial \Omega} 2 \epsilon \nabla v \nu s \diff x  							 
+%\end{array}
+%$
+%\\
+%Daraus ergibt sich die Ableitung
+%
+%$
+%\begin{array}{lrcl}
+%	J'(v): 	& \overline{H^1}(\Omega) 	& \rightarrow 	& \R \\
+%						& s							& \mapsto		&  \left( 2  v | \nabla (u)|^2  - \epsilon 2 \Delta v - \frac{2}{\epsilon} (1-v), s \right)_{L^2(\Omega)} + \left( 2 \epsilon \nabla v \nu , s \right)_{L^2(\partial \Omega)}  \\
+%\end{array}	
+%$
+%
+%Diese muss noch beschränkt und linear sein. Linearität in s ist einfach zu sehen und Beschränktheit ebenfalls
+%\begin{quest}
+%genauer? 
+%\end{quest}
+%
+%Nun können wir \ref{thm:aus_optimal_folgt_projektion} anwenden und deswegen auch \ref{VI}. Falls jetzt noch $J$ konvex auf C ist, sind die Aussagen im Theorem oben äquivalent.
+%Dieses ist auch so und J ist sogar strikt konvex. Der Beweis dazu kann durch einfaches Nachrechnen geführt werden. 
+%%todo Nachrechen einfügen evtl 
+%Falls zusätzlich $W$ reflexiv, J strikt konvex und stetig  mit
+%\begin{align*}
+%\lim\limits_{v \in C, \|v\|_{H^1(\Omega)} \rightarrow \infty} J(v)=\infty
+%\end{align*} 
+%ist, dann existiert genau eine Lösung von \eqref{eq:problem_von_v}.
+%Da $W=H^1(\Omega)$ ist W reflexiv. Strikte Konvenxheit von J wurde schon gezeigt. Die Stetigkeit von J ist offensichtlich. Sei nun $w \in C$ mit $\|v\|_{H^1(\Omega)} \rightarrow \infty$. Dann gilt
+%
+%$
+%\begin{array}{ll}
+%	J(v) 	& = \int_{\Omega} \left( v^2 + \epsilon \right) | \nabla u|^2 + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- v \right)^2 \diff x \\
+%			& = \int_{\Omega} v^2  | \nabla u|^2 + \epsilon  | \nabla u|^2  + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- 2v + v^2 \right) \diff x \\
+%			& = \int_{\Omega} v^2  | \nabla u|^2 - \frac{2}{\epsilon} v + \frac{1}{\epsilon}v^2  \diff x + \int_{\Omega} \epsilon  | \nabla u|^2  + \frac{1}{\epsilon}\diff x  +  \int_{\Omega} \epsilon |\nabla v|^2 \diff x \\
+%			& \le \int_{\Omega} v^2  \left(| \nabla u|^2 + \frac{1}{\epsilon} \right)   \diff x + c  +  \epsilon \| \nabla v\|_{L^2(\Omega)}^2 \\
+%			& \le c' \|v\|_{L^2(\Omega)}^2 + c + \epsilon \| \nabla v\|_{L^2(\Omega)}^2 \\
+%			& \le c'' \left( \|v\|_{L^2(\Omega)}^2 + \| \nabla v\|_{L^2(\Omega)}^2 \right) + c \\
+%			& \le c'' \|v\|_{H^1(\Omega)}^2   + c \\
+%			& \rightarrow \infty
+%\end{array}
+%$
+%
+%mit $c,c',c''>0$ passende Konstanten. 
+%Daraus folgt, dass genau eine Lösung des Optimierungsproblems exisitiert. 
+% 
+%\end{proof}
+  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		Numerische Betrachtung			%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{numerische Betrachtung}
+
+Alle Funktionen aus dem Newtonsystem müssen numerisch dargestellt werden. 
+
+Für die Diskretisierung wird dasselbe Gitter und die Selben Elemente genommen wie bei der Optimierung nach u. Auch hier werden wir wieder mit dem Galerkin Ansatz arbeiten d.h. 
+\begin{align*}
+	v=\sum\limits_{i=1}^{k} v_i^h T_i 
+\end{align*}
+wobei die $T_i$ wieder die globalen Formfunktionen sind. 
+
+Da $u$ schon durch den vorherigen Iterationsschritt gegeben ist, ist $u$ ein Vektor mit den Auswertungen an den Ecken der Dreiecke. Die Darstellung ist die gleiche wie in \ref{subsec:darstellung_linear}. Also gilt 
+\begin{align*}
+	|\nabla u|^2= (u_{31}-u_{21})^2+(u_{11}-u_{21})^2+ (u_{32}-u_{22})^2+(u_{12}-u_{22})^2=:u^{dis}
+\end{align*}  
+
+\subsubsection{numerische Darstellung von $G_{1}$}
+
+\begin{align*}
+G_1(v,\eta) =  \int\limits_{\Omega} 2 \varphi v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi - \frac{2}{\epsilon_3} (1-v)\varphi +  \eta \varphi \diff x
+\end{align*}
+
+wird nun diskretisiert:
+\begin{align*}
+	& \hspace{2ex} \int\limits_{\Omega} 2\varphi v | \nabla u|^2 + 2 \epsilon_2  \nabla v \nabla \varphi - \frac{2}{\epsilon_3} (1-v)\varphi  +  \eta \varphi \diff x \\
+	& = \int\limits_{\Omega} 2 T_j  \sum\limits_{i=1}^{k} v_i^h T_i u^{dis} + \epsilon_2 2 \nabla (\sum\limits_{i=1}^{k} v_i^h T_i) \nabla  T_j - \frac{2}{\epsilon_3} (1-\sum\limits_{i=1}^{k} v_i^h T_i) T_j + \eta T_j  \diff x \\
+	& = 2 \sum\limits_{i=1}^{k} v_i^h \int\limits_{\Omega} u^{dis} T_i T_j \diff x 
+	+ 2 \epsilon_2 \sum\limits_{i=1}^{k} v_i^h  \int\limits_{\Omega} \nabla T_i \nabla T_j \diff x
+	- \frac{2}{\epsilon_3} \sum\limits_{i=1}^{k} \int\limits_{\Omega} T_j \diff x \\
+& \hspace{2ex}	+  \frac{2}{\epsilon_3} \sum\limits_{i=1}^{k} \alpha_i  \int\limits_{\Omega} T_i T_j \diff x 
+	+ \int\limits_{\Omega} \eta T_j \diff x \\
+	& = 2 A v^h + 2 \epsilon_2 v^h  B - \frac{2}{\epsilon_3} c + \frac{2}{\epsilon_3}  D v^h \\
+	& = (2 A + 2 \epsilon_2 B + \frac{2}{\epsilon_3} D) v^h - \frac{2}{\epsilon_3} c + e
+\end{align*}
+
+mit $v^h:=(v_1^h, \cdots v_k^h)^T$, $A_{ij}=  \int_{\Omega} u^{dis} T_i T_j \diff x $, $B_{ij}:= \int_{\Omega} \nabla T_i \nabla T_j \diff x$, $c_j:= \int_{\Omega} T_j \diff x$, $D_{ij}:= \int_{\Omega} T_i T_j \diff x $ und $e_j:=\int_{\Omega} \eta T_j \diff x  $. 
+
+Um $A,B,D$ zu berechnen, brauchen wir $\int_E \varphi_i \varphi_j$ bzw $\int_E \nabla \varphi_i \nabla \varphi_j$, wobei E das Einheitsdreieck ist. \\
+\begin{align*}
+	\begin{array}{l|l|l}
+		& \int_E \varphi_i \varphi_j & \int_E \nabla \varphi_i  \nabla \varphi_j \\
+		\hline
+		\varphi_0 \varphi_0  & \frac{1}{12} & 1 \\
+		\varphi_1 \varphi_1  & \frac{1}{12} & \frac{1}{2} \\
+		\varphi_2 \varphi_2  & \frac{1}{12} & \frac{1}{2} \\
+		\varphi_0 \varphi_1  & \frac{1}{24} & -\frac{1}{2} \\
+		\varphi_0 \varphi_2  & \frac{1}{24} & -\frac{1}{2} \\
+		\varphi_1 \varphi_2  & \frac{1}{24} & 0 \\   
+	\end{array} 
+\end{align*}
+
+Nun können wir die einzelnen Matrizen berechnen.
+Die Berechnung erfolgt analog zur Optimierung nach $u$. Bei den Matrizen gibt es immer die Fälle, dass $i$ und $j$ gleich sind, $j$ rechts neben $i$ ist, $j$ direkt unter $i$ liegt und $j$ rechts unter $i$ liegt. Für alle anderen $i$ und $j$ ist der Matrixeintrag immer 0. Die Bezeichnungen sind die Gleichen, wie bei $u$. 
+\paragraph{Berechnung der Matrix $A_{ij}= \int\limits_{\Omega}  u^{dis} T_i T_j$}
+	\begin{align*}
+		A_{i,i}	& = \int\limits_{\Omega}  u^{dis} T_i T_i \\
+					& = \int\limits_{E_3} u^{dis}_{E_3} \varphi_0 \varphi_0 \diff x
+					 + \int\limits_{E_6} u^{dis}_{E_6} \varphi_1 \varphi_1 \diff x
+					 + \int\limits_{E_5} u^{dis}_{E_5} \varphi_2 \varphi_2 \diff x\\
+					 & \hspace{2ex}
+					 + \int\limits_{E_4} u^{dis}_{E_4} \varphi_0 \varphi_0 \diff x
+					 + \int\limits_{E_1} u^{dis}_{E_1} \varphi_1 \varphi_1 \diff x
+					 + \int\limits_{E_2} u^{dis}_{E_2}  \varphi_2 \varphi_2 \diff x \\
+					& = \frac{1}{12} u^{dis}_{E_3} + \frac{1}{12} u^{dis}_{E_6} + \frac{1}{12}  u^{dis}_{E_5}+ \frac{1}{12}  u^{dis}_{E_4}+ \frac{1}{12} u^{dis}_{E_1}+ \frac{1}{12} u^{dis}_{E_2} \\
+					& = \frac{1}{12} \left( \sum\limits_{i=1}^6 u^{dis}_{E_i} \right)
+	\end{align*}
+	\begin{align*}
+		A_{i,i+1}	& = \int\limits_{\Omega}  u^{dis} T_i   T_{i+1} = \int\limits_{E_3}  u^{dis}_{E_3} \varphi_0 \varphi_1 \diff x
+					 + \int\limits_{E_6} u^{dis}_{E_6}  \varphi_0 \varphi_1 \diff x \\
+					 & =  \frac{1}{24} u^{dis}_{E_3} + \frac{1}{24} u^{dis}_{E_6}  = \frac{1}{24} \left( u^{dis}_{E_3} + u^{dis}_{E_6} \right) 
+	\end{align*}
+	\begin{align*}
+		A_{i,i+1+n}	& = \int\limits_{\Omega} u^{dis} T_i   T_{i+1+n} = \int\limits_{E_4} u^{dis}_{E_4} \varphi_0 \varphi_1 \diff x
+					 + \int\limits_{E_5} u^{dis}_{E_5} \varphi_0 \varphi_1 \diff x \\
+					 & = \frac{1}{24} u^{dis}_{E_4} + \frac{1}{24} u^{dis}_{E_5} = \frac{1}{24} \left( u^{dis}_{E_4} + u^{dis}_{E_5} \right)
+	\end{align*}	
+	\begin{align*}
+		A_{i,i+n+2}	& = \int\limits_{\Omega} u^{dis} T_i   T_{i+2+n} = \int\limits_{E_5} u^{dis}_{E_5} \varphi_1 \varphi_2 \diff x
+					 + \int\limits_{E_6} u^{dis}_{E_6} \varphi_1 \varphi_2 \diff x \\
+					 & = \frac{1}{24} u^{dis}_{E_5} + \frac{1}{24} u^{dis}_{E_6}  = \frac{1}{24} \left( u^{dis}_{E_5} +u^{dis}_{E_6} \right)
+	\end{align*}
+
+
+\paragraph{Berechnung der Matrix $B_{ij}= \int\limits_{\Omega} \nabla T_i  \nabla T_j$}
+	\begin{align*}
+		B_{i,i}	& = \int\limits_{\Omega} \nabla T_i \nabla T_i \\
+					& = \int\limits_{E_3} \nabla \varphi_0 \nabla \varphi_0 \diff x
+					 + \int\limits_{E_6} \nabla \varphi_1 \nabla \varphi_1 \diff x
+					 + \int\limits_{E_5} \nabla \varphi_2 \nabla \varphi_2 \diff x\\
+					 & \hspace{2ex}
+					 + \int\limits_{E_4} \nabla \varphi_0 \nabla \varphi_0 \diff x
+					 + \int\limits_{E_1} \nabla \varphi_1 \nabla \varphi_1 \diff x
+					 + \int\limits_{E_2} \nabla \varphi_2 \nabla \varphi_2 \diff x \\
+					& = 1 + \frac{1}{2} + \frac{1}{2} + 1 + \frac{1}{2} + \frac{1}{2}  = 4
+	\end{align*}
+	\begin{align*}
+		B_{i,i+1}	& = \int\limits_{\Omega} \nabla T_i \nabla T_{i+1} = \int\limits_{E_3} \nabla \varphi_0 \nabla \varphi_1 \diff x
+					 + \int\limits_{E_6} \nabla \varphi_0 \nabla \varphi_1 \diff x \\
+					 & = - \frac{1}{2} - \frac{1}{2} = -1 
+	\end{align*}
+	\begin{align*}
+		B_{i,i+n+1}	& = \int\limits_{\Omega} \nabla T_i \nabla T_{i+1+n} = \int\limits_{E_4} \nabla \varphi_0  \nabla \varphi_1 \diff x
+					 + \int\limits_{E_5} \nabla \varphi_0 \nabla \varphi_1 \diff x \\
+					 & = - \frac{1}{2} - \frac{1}{2}  = -1 
+	\end{align*}	  
+	\begin{align*}
+		B_{i,i+n+2}	& = \int\limits_{\Omega} \nabla T_i \nabla T_{i+2+n} \\
+					& = \int\limits_{E_5} \nabla \varphi_1  \nabla \varphi_2 \diff x
+					 + \int\limits_{E_6} \nabla \varphi_1 \nabla \varphi_2 \diff x  = 0 
+	\end{align*}	
+
+\paragraph{Berechnung des Vektors c}
+\begin{align*}
+	c:=\int\limits_{\Omega} T_i \diff x = \sum\limits_{E \in E_k} \int\limits_E T_i \diff x
+\end{align*}
+ Wie immer reicht es, die sechs Dreiecke um den Gitterpunkt $i$ zu betrachten. Es gilt: 
+\begin{align*}
+	\int\limits_E T_i \diff x = \frac{1}{6} \hspace{1ex} \forall i
+\end{align*}
+ 
+ Also berechnen wir 
+ \begin{align*}
+ 	\int\limits_{\Omega} T_i \diff x & = \sum\limits_{E \in E_k} \int\limits_E T_i \diff x = \\
+ 	& = \int\limits_{E_1} T_i \diff x+ \int\limits_{E_2} T_i \diff x+ \int\limits_{E_3} T_i \diff x+ \int\limits_{E_4} T_i\diff x + \int\limits_{E_5} T_i \diff x + \int\limits_{E_6} T_6 \diff x \\
+ 	& = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = 1
+ \end{align*}
+ 
+Falls $i$ an einem Rand liegen sollte, werden die Dreiecke, die nicht vorhanden sind, weggelassen. 
+
+\paragraph{Berechnung der Matrix $D_{ij}= \int\limits_{\Omega}  T_i T_j$}
+	\begin{align*}
+		D_{i,i}	& = \int\limits_{\Omega}  T_i T_i \\
+					& = \int\limits_{E_3}   \varphi_0 \varphi_0 \diff x
+					 + \int\limits_{E_6}   \varphi_1 \varphi_1 \diff x
+					 + \int\limits_{E_5}   \varphi_2 \varphi_2 \diff x \\
+					 & \hspace{2ex}
+					 + \int\limits_{E_4}   \varphi_0 \varphi_0 \diff x
+					 + \int\limits_{E_1}   \varphi_1 \varphi_1 \diff x
+					 + \int\limits_{E_2}   \varphi_2 \varphi_2 \diff x \\
+					& = \frac{1}{12} + \frac{1}{12} + \frac{1}{12} + \frac{1}{12} + \frac{1}{12} + \frac{1}{12}  = \frac{1}{2}
+	\end{align*}
+	\begin{align*}
+		D_{i,i+1}	& = \int\limits_{\Omega}   T_i   T_{i+1} = \int\limits_{E_3}   \varphi_0 \varphi_1 \diff x
+					 + \int\limits_{E_6}   \varphi_0 \varphi_1 \diff x \\
+					 & =  \frac{1}{24} + \frac{1}{24}  = \frac{1}{12}
+	\end{align*}
+	\begin{align*}
+		D_{i,i+n+1}	& = \int\limits_{\Omega}   T_i   T_{i+1+n}  = \int\limits_{E_4}   \varphi_0 \varphi_1 \diff x
+					 + \int\limits_{E_5}   \varphi_0 \varphi_1 \diff x \\
+					 & = \frac{1}{24} + \frac{1}{24} = \frac{1}{12}
+	\end{align*}	 
+	\begin{align*}
+		D_{i,i+n+2}	& = \int\limits_{\Omega}   T_i   T_{i+2+n}  = \int\limits_{E_5}   \varphi_1 \varphi_2 \diff x
+					 + \int\limits_{E_6}   \varphi_1 \varphi_2 \diff x \\
+					 & = \frac{1}{24} + \frac{1}{24}  = \frac{1}{12}
+	\end{align*}
+
+\paragraph{Berechnung des Vektors e}
+\begin{align*}
+	\begin{array}{ll}
+		B(T_i)= \int\limits_{\Omega} \eta T_i 
+	\end{array}
+\end{align*}
+$\eta$ ist auf dem ungeraden Dreieck gegeben durch 
+\begin{align*}
+	\eta(x,y) = (\eta_3 - \eta_2)x + (\eta_1 - \eta_2)y + \eta_2
+\end{align*}
+und auf dem geraden gegeben durch
+\begin{align*}
+	\eta(x,y) = (\eta_1 - \eta_2)x + (\eta_3 - \eta_2)y + \eta_2
+\end{align*}
+Dadurch ergibt sich 
+\begin{align*}
+	\begin{array}{l|l|l}
+		& T_i	& \int_{E_i} \eta T_i \\
+		\hline
+		E_1 & x		& \eta_1 + \eta_2 + 2 \eta_3 \\  
+		E_2 & y		& \eta_1 + \eta_2 + 2 \eta_3 \\  
+		E_3 & 1-x-y	& \eta_1 + 2 \eta_2 + \eta_3 \\  
+		E_4 & 1-x-y & \eta_1 + 2 \eta_2 + \eta_3 \\  
+		E_5 & y 	& 2 \eta_1 + \eta_2 + \eta_3 \\  
+		E_6 & x		& 2 \eta_1 + \eta_2 + \eta_3 
+	\end{array}
+\end{align*}
+In der Tabelle entspricht $\eta_1$ in der Spalte für $E_i$ nicht $\eta_1$ in der Spalte für $E_j$, da die $1$ für das jeweilige Dreieck angibt, dass der Wert oben rechts in der Ecke steht. Das selbe gilt auch für $\eta_2$ und $\eta_3$.
+
+Den Vektor $e$ kann man berechnen, indem man die Werte addiert. Dabei gilt wieder, dass, falls $i$ am Rand liegt, die nicht existenten Dreiecke ausgelassen werden.  
+
+
+\paragraph{Zusammenfassung}
+Also ergibt sich 
+
+\begin{equation*}
+	(2 A + 2 \epsilon_2 B + \frac{2}{\epsilon_3} D) \alpha  - \frac{2}{\epsilon_3} c + e=  
+\end{equation*}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.15]{images/formel.png}	
+	\label{fig:formel}
+\end{figure}
+%todo Grafik bearbeiten und der Formel anpassen. 
+
+wobei bei $A$ auf der Hauptdiagonalen $\frac{1}{12} \left( \sum\limits_{i=1}^6 b_{E_i} \right)$, auf der Nebendiagonalen $\frac{1}{24} \left( u^{dis}_{E_4} + u^{dis}_{E_5} \right) $ , auf der zweiten Nebendiagonalen $ \frac{1}{24} \left( u^{dis}_{E_4} + u^{dis}_{E_5} \right) $  und auf der dritten Nebendiagonalen $ \frac{1}{24} \left( u^{dis}_{E_5} +u^{dis}_{E_6} \right)$ steht. 
+
+Bei $B$ steht  auf der Hauptdiagonalen $4 $, auf der Nebendiagonalen und der zweiten Nebendiagonalen  $-1 $. 
+
+Der Vektor c hat bei allen Einträgen, die nicht zu einem Randpunkt gehören eine $1$, bei Einträgen am Rand und nicht in einer Ecke, eine $\frac{1}{2}$, an der linken oberen und der rechten unteren Ecke eine $\frac{1}{3}$ und der Eintrag auf den anderen beiden Ecken ist $\frac{1}{6}$.   
+
+Bei $D$ steht  auf der Hauptdiagonalen $\frac{1}{2} $, auf der ersten, zweiten und dritten Nebendiagonalen $\frac{1}{12} $. 
+
+Der Vektor $e$ hat überall Eintäge. Da diese von $\eta$ abhängen, haben sie keine erkennbare Form. 
+
+Durch die noch ausstehende Transformation der Dreiecke, muss der gesamte Term mit $1/ h_1 h_2$ multipliziert werden.  
+
+%\begin{equation*}
+%(2 A + 2 \epsilon B + \frac{2}{\epsilon} D) \alpha  - \frac{2}{\epsilon} c = \\
+%\left( 
+%	2
+%	\begin{pmatrix}
+%		4	& -1 		&     	& 		& -1	\\
+%		-1	& \ddots	& \ddots& 		& 			& \ddots	\\
+%			& \ddots	&		&		&			& 			& -1 \\
+%		-1	& 			&		&		&			& \ddots	&	\\
+%			&\ddots		&	  	&		& \ddots	& \ddots 	& -1 \\
+%			&			&	-1	&		&			& -1		& 4 	
+%	\end{pmatrix}
+%	+ 2 \epsilon
+%	\begin{pmatrix}
+%		B
+%	\end{pmatrix}
+%	+ \frac{2}{\epsilon} 
+%	\begin{pmatrix}
+%		D
+%	\end{pmatrix}
+%\right) 
+%\alpha - \frac{2}{\epsilon} 
+%\begin{pmatrix}
+%	c
+%\end{pmatrix}
+%\end{equation*}
+
+\subsubsection{numerische Darstellung von $G_{2}$}
+\begin{align*}
+	\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \varphi \diff x
+\end{align*}
+Um dieses Funktional numerisch darzustellen, benutzen wir den Galerkin Ansatz mit 
+\begin{align*}
+	& v = \sum\limits_{i=1}^k v_i^h T_i(x,y) \\
+	& \eta = \sum\limits_{i=1}^k \eta_i^h T_i(x,y) \\ 
+	& v_0 = \sum\limits_{i=1}^k {v_0}_i^h T_i(x,y) 
+\end{align*}
+Daraus ergibt sich:
+
+\begin{align*}
+	& \int\limits_{\Omega} \left( \eta - \max \left\{ 0, \eta + c(v-v_0) \right\} - \min \left\{ 0, \eta + c v \right\} \right) \varphi \diff x  \\
+	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right - \max \left\{ 0,  \sum\limits_{i=1}^k \eta_i^h T_i + c(\sum\limits_{i=1}^k v_i^h T_i - \sum\limits_{i=1}^k {v_0}_i^h T_i ) \right\} \\
+	& \hspace{5ex} \left - \min \left\{ 0,  \sum\limits_{i=1}^k \eta_i^h T_i + c \sum\limits_{i=1}^k v_i^h T_i \right\} \right) T_j \diff x  \\ 
+	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right - \max\left\{ 0,  \sum\limits_{i=1}^k \left( \eta_i^h + c(v_i^h - {v_0}_i^h ) \right) T_i  \right\} \\
+	& \hspace{5ex} \left - \min \left\{ 0,  \sum\limits_{i=1}^k \left( \eta_i^h + c v_i^h \right) T_i  \right\} \right) T_j \diff x  \\ 
+	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right -   \sum\limits_{i=1}^k \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h )  \right\} T_i \\
+	& \hspace{5ex} \left -\sum\limits_{i=1}^k  \min \left\{ 0,  \eta_i^h + c v_i^h    \right\} T_i  \right) T_j \diff x  \\ 
+	& = \int\limits_{\Omega}  \sum\limits_{i=1}^k \left(  \eta_i^h- \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h ) \right\} -  \min \left\{0,  \eta_i^h + c v_i^h    \right\}  \right) T_i T_j \diff x \\
+	& =  \left( \sum\limits_{i=1}^k   \eta_i^h- \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h ) \right\} -  \min \left\{0,  \eta_i^h + c v_i^h    \right\}  \right) \int\limits_{\Omega} T_i T_j \diff x \\	  
+	& = D w_{v \eta}	
+\end{align*}
+
+mit $D$ aus der numerischen Darstellung von $G_1$ und\\ $(w_{v \eta})_i:=  \eta_i^h- \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h ) \right\} -  \min \left\{0,  \eta_i^h + c v_i^h    \right\}$. 
+$w_{v \eta}	$ kann auch explizit dargestellt werden: 
+
+\begin{align*}
+	(w_{v \eta})_i = 
+		\left\{
+			\begin{array}{ll}
+				- c(v_i^h - {v_0}_i^h ) 	& \text{ falls }  -c(v_i^h - {v_0}_i^h ) \le \eta_i^h \\
+				\eta_i^h 		& \text{ falls } -c v_i^h  < \eta < -c(v_i^h - {v_0}_i^h ) \\
+				-c v_i^h	& \text{ falls }  \eta_i^h \le -c v_i^h
+			\end{array}
+		\right .
+\end{align*}
+%todo erklärungen, warum z.b. die Summe aus dem max/ min gezogen werden darf. 
+
+\subsubsection{numerische Darstellung von $G_{1 v}$}
+\begin{align*}
+ 	G_{1 v} (v, \eta) = \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x
+\end{align*}
+
+wird nun diskretisieren:
+
+\begin{align*}
+	& \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x\\
+	& = \int\limits_{\Omega} 2 \sum\limits_{j=1}^{k} T_j  \sum\limits_{i=1}^{k}  T_i b + \epsilon_2 2 \nabla (\sum\limits_{i=1}^{k} T_i ) \nabla (\sum\limits_{j=1}^{k} T_j ) + \frac{2}{\epsilon_3} \sum\limits_{i=1}^{k}  T_i \sum\limits_{j=1}^{k} T_j \diff x \\
+	& = 2 \sum\limits_{i,j=1}^{k} \int\limits_{\Omega} b T_i T_j \diff x 
+	+ 2 \epsilon_2 \sum\limits_{i,j=1}^{k}   \int\limits_{\Omega} \nabla T_i \nabla T_j \diff x
+	+  \frac{2}{\epsilon_3} \sum\limits_{i,j=1}^{k} \int\limits_{\Omega} T_i T_j \diff x \\
+	& = 2 A  + 2 \epsilon_2  B + \frac{2}{\epsilon_3}  D 
+\end{align*}
+
+Wir benutzen die gleichen Notationen, wie bei der numerischen Darstellung von $G_1$. 
+
+\subsubsection{numerische Darstellung von $G_{1 \eta}$}
+\begin{align*}
+ 	G_{1 \eta} (v, \eta) = \int\limits_{\Omega}  \phi \varphi  \diff x
+\end{align*}
+
+wird nun diskretisieren:
+\begin{align*}
+	& \int\limits_{\Omega}  \phi \varphi \diff x = \int\limits_{\Omega} \sum\limits_{j=1}^{k} T_j  \sum\limits_{i=1}^{k}  T_i =  D 
+\end{align*}
+
+Wir benutzen die gleichen Notationen, wie bei der numerischen Darstellung von $G_1$. 
+
+\subsubsection{numerische Darstellung von $G_{2 v}$}
+Es soll 
+	\begin{align*}
+		\partial G_{2 v}(\eta, v) (\varphi, \phi) = \int\limits_{\Omega}  \frac{\partial f}{\partial v} \varphi \phi \diff x 
+	\end{align*}
+mit 
+	\begin{align*}
+		\frac{\partial f}{\partial v}= 
+		\left\{
+		\begin{array}{ll}
+			\{-c\}		& \text{ falls }  -c(v-v_0) < \eta \text{ oder }  \eta < -cv \\
+			\{0\}		& \text{ falls } -cv < \eta < -c(v-v_0) \\
+			\lbrack -c,0 \rbrack	& \text{ falls }  -c(v-v_0) = \eta \text{ oder }  \eta = -cv 
+		\end{array}
+		\right .
+	\end{align*}
+numerisch dargestellt werden. Statt $\frac{\partial f}{\partial v}$ implementieren wir eine Vereinfachung, die nicht mehr Mengenwertig ist. Dazu wählen wir statt $\lbrack -c,0 \rbrack$ einen Punkt aus dem Intervall z.B. $-c/2$. Nun kann  $\frac{\partial f}{\partial v}$  diskretisiert werden zu $f^h$. Dies ist einfach die Funktion ausgewertet an den Gitterpunkten. Diese diskrete Funktion hat eine explizite Darstellung auf den Dreiecken. Diese ist in \ref{eq:explizite_lineare_fkt_dreieck} dargestellt.
+
+Nun wird $\partial G_{2 v}(\eta, v) (\varphi, \phi)$ diskretisiert. Hier wird wie immer $\varphi, \phi$ durch die globalen Formfunktionen $T_i$ ersetzt und $\Omega $ durch die Vereinigung aller Dreiecke. Nun kann für jedes Dreieck  $\int\limits_E  \frac{\partial f}{\partial v} T_i T_j \diff x $ berechnet werden. Dabei ist wieder zu beachten, dass für gerade und ungerade Dreiecke andere Ergebnisse zustande kommen:
+
+\begin{align*}
+	\begin{array}{l|l|l}
+		ij & \int\limits_E  \frac{\partial f}{\partial v} T_i T_j \diff x \text{ gerades Dreieck} & \int\limits_E  \frac{\partial f}{\partial v} T_i T_j \diff x \text{ ungerades Dreieck} \\
+		\hline
+		00 	& \frac{1}{60} (f_1^h + 3 f_2^h + f_3^h) & \frac{1}{60} (f_1^h + 3 f_2^h + f_3^h) \\
+		11	& \frac{1}{60} (f_1^h + f_2^h + 3f_3^h) & \frac{1}{60} (3f_1^h + f_2^h + f_3^h) \\
+		22	& \frac{1}{60} (3f_1^h + f_2^h + f_3^h) & \frac{1}{60} (f_1^h + f_2^h + 3f_3^h) \\
+		01	& \frac{1}{120} (f_1^h + 2f_2^h + 2f_3^h) & \frac{1}{120} (2f_1^h + 2f_2^h + f_3^h) \\
+		02	& \frac{1}{120} (2f_1^h + 2f_2^h + f_3^h) & \frac{1}{120} (f_1^h + 2f_2^h + 2f_3^h) \\
+		12	& \frac{1}{120} (2f_1^h + f_2^h + 2f_3^h) & \frac{1}{120} (2f_1^h + f_2^h +2 f_3^h) 
+	\end{array}
+\end{align*}
+Dabei ist $f_1^h$ bei einem geraden Dreieck die Auswertung von $f^h$ an der oberen linken Ecke des Dreiecks. Die anderen Bezeichnungen sind darauf aufbauend. 
+
+Damit können wir $\partial G_{2 v}$ diskretisieren. Wir nennen die Diskretisierung $F_{ij}$. Hier hat man wieder die vier Fälle: 
+
+	\begin{align*}
+		F_{i,i}	& = \int\limits_{\Omega}  f^h T_i T_i \\
+		& = \int\limits_{E_3} f^h_{E_3} \varphi_0 \varphi_0 \diff x
+		+ \int\limits_{E_6} f^h_{E_6} \varphi_1 \varphi_1 \diff x
+		+ \int\limits_{E_5} f^h_{E_5} \varphi_2 \varphi_2 \diff x\\
+		& \hspace{2ex}
+		+ \int\limits_{E_4} f^h_{E_4} \varphi_0 \varphi_0 \diff x
+		+ \int\limits_{E_1} f^h_{E_1} \varphi_1 \varphi_1 \diff x
+		+ \int\limits_{E_2} f^h_{E_2}  \varphi_2 \varphi_2 \diff x \\
+		& = \frac{1}{60} \left(  \left( f_1^h +  f_2^h + 3f_3^h\right)_{E_1} 
+		+ \left( f_1^h +  f_2^h + 3f_3^h\right)_{E_2}
+		+ \left( f_1^h +  3f_2^h + f_3^h\right)_{E_3} \right \\
+		& \left
+		+ \left( f_1^h +  3f_2^h + f_3^h\right)_{E_4} 
+		+ \left( 3f_1^h +  f_2^h + f_3^h\right)_{E_5} 
+		+ \left( 3f_1^h +  f_2^h + f_3^h\right)_{E_6} \right)
+	\end{align*}
+	\begin{align*}
+		A_{i,i+1}	& = \int\limits_{\Omega}  f^h T_i   T_{i+1} = \int\limits_{E_3}  f^h_{E_3} \varphi_0 \varphi_1 \diff x
+		+ \int\limits_{E_6} f^h_{E_6}  \varphi_0 \varphi_1 \diff x \\
+		& =   \frac{1}{120} \left(  \left(  f_1^h +  2f_2^h + 2f_3^h\right)_{E_3} 
+		+ \left( 2f_1^h +  2f_2^h + f_3^h\right)_{E_6} \right)
+	\end{align*}
+	\begin{align*}
+		A_{i,i+1+n}	& = \int\limits_{\Omega} f^h T_i   T_{i+1+n} = \int\limits_{E_4} f^h_{E_4} \varphi_0 \varphi_1 \diff x
+		+ \int\limits_{E_5} f^h_{E_5} \varphi_0 \varphi_1 \diff x \\
+		& =   \frac{1}{120} \left(  \left( 2f_1^h +  2f_2^h + f_3^h\right)_{E_4} 
+				+ \left( f_1^h +  2f_2^h + 2f_3^h\right)_{E_5}\right)
+	\end{align*}	
+	\begin{align*}
+		A_{i,i+n+2}	& = \int\limits_{\Omega} f^h T_i   T_{i+2+n} = \int\limits_{E_5} f^h_{E_5} \varphi_1 \varphi_2 \diff x
+		+ \int\limits_{E_6} f^h_{E_6} \varphi_1 \varphi_2 \diff x \\
+		& =   \frac{1}{120} \left(  \left( 2 f_1^h +  f_2^h +2 f_3^h\right)_{E_5} 
+		+ \left(2 f_1^h +  f_2^h + 2f_3^h\right)_{E_6}\right)
+	\end{align*}
+hierbei bedeutet $\left( f_1^h +  f_2^h + f_3^h\right)_{E_j} \right)$, dass $f_i^h$ $f$ auf dem $i$-ten Gitterpunkt des Dreieck $E_j$ ausgewertet wird. 
+
+\subsubsection{numerische Darstellung von $G_{2 \eta}$}
+Die numerische Darstellung ist genau die gleiche, wie bei $G_{2 v}$, nur dass die Funktionsauswertungen von $f$ andere sind. 
+	
+%todo transformation
+
+\subsubsection{Zusammenfassung}
+Nun sind alle Funktionen disktretisiert und das Problem kann implementiert werden. 

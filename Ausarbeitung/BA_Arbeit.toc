@@ -1,0 +1,44 @@
+\select@language {ngerman}
+\contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Mathematische Grundlagen}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Grundlagen Optimierung}{3}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Optimierungsproblem ohne Nebenbedingung}{3}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Optimierungsproblem mit Ungleichungsnebenbedingung}{5}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}Grundlagen pDGL}{6}{section.2.2}
+\contentsline {section}{\numberline {2.3}Finite Elemente}{8}{section.2.3}
+\contentsline {section}{\numberline {2.4}Semidifferenzierbare Newtonmethoden}{10}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Newton Methoden mit einfachen Nebenbedingungen}{10}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Konvergenz der generalisierten Newton Methode}{11}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}Semidifferential}{13}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}semidiffbare Newton Methoden}{15}{subsection.2.4.4}
+\contentsline {chapter}{\numberline {3}Anwendung auf das Phasenfeldmodell f\"ur Rissentstehung}{17}{chapter.3}
+\contentsline {section}{\numberline {3.1}erste Betrachtung der Rissentstehung}{17}{section.3.1}
+\contentsline {section}{\numberline {3.2}Optimierung nach u}{18}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Analytische Betrachtung}{18}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Numerische Betrachtung}{20}{subsection.3.2.2}
+\contentsline {subsubsection}{\nonumberline Berechnung des $u$ Integrals}{23}{section*.7}
+\contentsline {subsubsection}{\nonumberline Betrachtung des $u_0$ Integrals}{26}{section*.15}
+\contentsline {paragraph}{\nonumberline $T_i$ ist auf dem Rand 1}{27}{section*.17}
+\contentsline {subparagraph}{\nonumberline linker Rand}{28}{section*.19}
+\contentsline {subparagraph}{\nonumberline rechter Rand}{28}{section*.20}
+\contentsline {paragraph}{\nonumberline $T_i$ ist neben dem Rand 1}{29}{section*.21}
+\contentsline {subparagraph}{\nonumberline linker Rand}{29}{section*.23}
+\contentsline {subparagraph}{\nonumberline rechter Rand}{30}{section*.24}
+\contentsline {subsection}{\numberline {3.2.3}Zusammenfassung}{31}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Optimierung nach v}{31}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Newtonmethode}{35}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}numerische Betrachtung}{38}{subsection.3.3.2}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1}$}{39}{section*.27}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix $A_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } u^{dis} T_i T_j$}{40}{section*.28}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix $B_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } \nabla T_i \nabla T_j$}{41}{section*.29}
+\contentsline {paragraph}{\nonumberline Berechnung des Vektors c}{42}{section*.30}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix $D_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } T_i T_j$}{42}{section*.31}
+\contentsline {paragraph}{\nonumberline Berechnung des Vektors e}{43}{section*.32}
+\contentsline {paragraph}{\nonumberline Zusammenfassung}{44}{section*.33}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2}$}{45}{section*.35}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 v}$}{47}{section*.36}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 \eta }$}{47}{section*.37}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 v}$}{48}{section*.38}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 \eta }$}{49}{section*.39}
+\contentsline {subsubsection}{\nonumberline Zusammenfassung}{50}{section*.40}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{51}{chapter*.41}

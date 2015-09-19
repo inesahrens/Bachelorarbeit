@@ -1,0 +1,209 @@
+% ===================================
+% Einbindung von Erweiterungspaketen
+% ===================================
+
+% --- Einstellungen fuer deutsche Texte, insbesondere direkte Eingabe der Umlaute im Text
+\usepackage[latin1]{inputenc}%		Kodierung des Eingabezeichensatzes fuer das Dokument - 'latin1' (ISO-8859-1)
+\usepackage[ngerman]{babel}%			Verwendung der neuen deutschen Rechtschreibung mit 'ngerman'
+													 %			'babel' kann Optionen fuer mehrere Sprachen zugleich enthalten
+													 %			\selectlanguage{sprache} wechselt zw. verschiedenen Sprachen
+\usepackage[%
+	autostyle,%											erkennt automatisch die Sprache aus 'babel' Paket
+	german=quotes%									mit dieser Option werden die deutschen Anfuehrungszeichen verwendet
+]{csquotes}%											Paket legt das Aussehen der Anfuehrungszeichen fest; Kommando \enquote{} setzt den Text zw. Klammern in Anfuehrungszeichen
+\usepackage{marvosym}%						Paket enthaelt neben vielen anderen Symbolen auch das Eurozeichen in offizieller Gestalt (Befehl: \EUR)
+
+% --- Verwendung von PostScript Schriften im Skript
+%			Die in LaTeX eingebauten Schriften koennen komplett ausgetauscht werden. Neben aesthetischen Gruenden spricht dafuer auch die Verwendung von PostScript Schriften, die Vektorschriften sind im Gegensatz zu den urspruenglichen Pixelschriften.
+%			Nach dem Austausch sind alle Kommandos wie gehabt zu verwenden; es werden lediglich andere Schriften dargestellt
+%			GENAUE INFORMATIONEN ZU DEN PAKETEN ZUR NUTZUNG STANDARD-PostScript-SCHRIFTEN, SIEHE DOKUMENTATION 'Using common PostScript fonts with LaTeX'
+%\usepackage{mathptmx,charter,courier}
+%\usepackage[scaled]{helvet}%							da die Schrift Helvetica uebrgross ist, wurde Option 'scaled' verwendet, die eine Verkleinerung bewirkt
+
+% --- PostScript Symbole
+\usepackage{pifont}
+
+% --- Paket zur Festsetzung des Raumes zwischen den Zeilen
+\usepackage{setspace}
+\onehalfspacing%	1.5facher Zeilenabstand abhaengig von der verwendeten Schriftgroesse
+
+% --- Paket zur Behebung einiger Inkompatibilitaeten von anderen Paketen mit KOMA-Script
+\usepackage{scrhack}
+
+% --- Paket fuer erweiterte Tabelleneigenschaften
+\usepackage{array}
+
+% --- Paket um Grafiken im Dokument einbetten zu koennen
+% --- In pdfLaTeX sind GIF, PNG und PDF Grafiken moeglich
+\usepackage{graphicx}%	Hauptpaket zur Einbindung von Graphiken
+\usepackage{caption}%		erlaubt eine Anpassung von Bild- und Tabellenbeschriftungen, voraussetzung fuer 'subfig' Paket
+%			Bsp. siehe Dokumentation 'Anpassen der Abbildungs- und Tabellenbeschriftungen mit Hilfe des caption-Paketes'
+%			\usepackage[
+%				format=hang,
+%				font={footnotesize,sf},
+%				labelfont={bf},
+%				margin=1cm,
+%				aboveskip=5pt,
+%				position=bottom
+%			]{caption}		
+\usepackage{subfig}%		Zusammensetzung einer Abbildung aus mehreren Teilabbildungen moeglich
+%\usepackage{picins}%		Vermischung von Text und Graphik moeglich, z.B. dass Text die Abbildung umfliesst, Alternative: 'floatflt', 'wrapfig'
+
+% --- Pakete fuer mathematischen Textsatz
+\usepackage{amsmath}%		Basis-Paket fuer AMS-LaTeX - erleichtert das Schreiben mathematischer Formeln und verbessert die Qualitaet der Darstellung
+\usepackage{amssymb}%		definiert Namen fuer zahlreiche zusaetzliche mathematische Symbole
+%\usepackage{empheq}%		erweitert 'amsmath' um zusaetzliche graphische Anzeigemoeglichkeiten wie z.B. Boxen und Markierungen
+%\usepackage[intlimits]{empheq}%		bewirkt, dass Integralgrenzen oberhalb und unterhalb des Integralzeichens gewetzt werden (ebenso Summenzeichen)
+\usepackage{dsfont}%		
+\usepackage{amstext}%		liefert ein \text-Befehl fuer die Setzung eines kurzen Textes innerhalb einer mathematischen Umgebung
+\usepackage{amsfonts}%	liefert weitere mathematische Schriftarten, wie z.B. \mathbb{R} oder \mathbb{C} als Zeichen der reellen oder komplexen Zahlen
+\usepackage{amsthm}%		Paket zu Definition und Verwendung von Theorem-aehnlichen Umgebungen, wie Satz, Lemma, Definition usw.
+\usepackage{wasysym}%		erweitert die Schriftart 'wasy' mit weiteren Zeichen, wie \int oder \iint fuer einfaches oder doppeltes Integralzeichen
+
+% --- Paket erweitert deutlich die Verwendung von Farben aus dem Paket 'graphicx'
+\usepackage{color}
+
+% --- Paket um Quellcode sauber zu formatieren
+% --- Alternative Pakete sind 'verbatim', 'moreverb' oder 'fancyvrb'
+\usepackage{listings}
+
+% --- Darstellung von Pseudocode und mehr (algorithmicx packages)
+\usepackage{algorithm2e}
+\usepackage{algpseudocode}
+
+% --- Einstellungen des Einzugs
+\usepackage{parskip}%		Einzug aus, Absatzabstand ein
+
+% --- Eigene flexible Gestaltung der Kopf- und Fusszeile moeglich
+\usepackage{fancyhdr}
+
+% --- Programmiersprachentypische Kontrollstrukturen (logische Verzweigungen und Schleifen)
+\usepackage{ifthen}
+
+% --- laesst arithmetische Operationen zu
+%\usepackage{calc}
+
+% --- zur Erzeugung eines Stichwortverzeichnisses
+%\usepackage{makeidx}
+
+
+
+% --- Erweiterungspaket, um die Ausgabe der Zitate an die eigenen Erfordernisse anzupassen
+%				- Paket 'natbib' definiert u.a. zahlreiche Alternativen zum \cite-Befehl
+%				- globale Einstellungen werden ueber die Optionen des Paketes vorgenommen, siehe Paket-Dokumentation
+\usepackage[numbers,sort&compress]{natbib}%		Zitate werden nummeriert ausgegeben; bei mehrfachen Zitaten werden die
+																					 %		vorkommenden Nummern sortiert und ggf. in verkuerzter Darstellung gesetzt
+
+% --- Paket zur Erzeugung von Hypertext-Links aus LaTeX Querverweisen
+\usepackage[%
+	bookmarks,%						Erzeugung von Lesezeichen fuer den Reader
+	raiselinks,%					Korrektur in der Linkausgabe
+	pageanchor,%					PDF-Ankererzeugung auf jeder Seite, um Inhaltsverzeichnis mit Hypertext-Links zu versehen
+%	frenchlinks,%					use small caps instead of color for links
+	colorlinks,%					Verwendung von farbiger Links statt Links mit Rahmen
+% Farben der Linkarten (...color=...)
+	citecolor=green,%			Color for bibliographical citations in text
+	linkcolor=black,%			Color for normal internal links
+	urlcolor=magenta,%		Color for linked URLs					
+	filecolor=cyan,%			Color for URLs which open local files
+	menucolor=red,%				Color for Acrobat menu items
+	pagebackref%					Adds 'backlink' text to the end of each item in the bibliography, as a list of page numbers
+]{hyperref}
+
+% --- Layout-Aenderung leicht moeglich (Erweiterung von dem Paket 'vmargin')
+% --- !!! Bei Verwendung des Paketes 'hyperref' muss die Einbindung von 'geometry' nach 'hyperref' erfolgen !!!
+\usepackage[%
+	left=3cm,right=2.5cm,top=1.5cm,bottom=1.5cm,%		Groesse der Raender
+	headheight=7mm,headsep=1.2cm,%									Hoehe der Kopfzeile; Abstand der Grundlinie der Kopfzeile zum Haupttext
+	footskip=1.5cm,includeheadfoot%									Abstand der Grundlinien der letzten Textzeile und der Fusszeile; Kopf- und Fusszeile werden in die Textseite gesetzt
+]{geometry}
+
+
+% ===========================
+% Definition eigener Befehle
+% ===========================
+
+% --- Eigene Befehle
+%			\newcommand{\Befehl}{Befehlsdefinition} - Befehl ohne Parameter, '\Befehl' kann abkuerzend fuer die 'Befehlsdefinition' verwendet werden
+%			\renewcommand{\Befehl}{Neue Befehlsdefinition} - Befehl ohne Parameter, um einen schon vorhandenen Befehl umzudefinieren
+\newcommand{\R}{\mathbb{R}}%					Symbol fuer reelle Zahlen
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\div}{\mathrm{div}}%		Symbol fuer den Divergenz Operator
+%			\newcommand{\Befehl}[Anzahl]{Befehlsdefinition} - Befehle mit Parametern; 'Anzahl' ist die Zahl der Befehlsparameter, die maximal neun betraegt; innerhalb der 'Befehlsdefinition' werden die Parameter als #1, #2, ... verwendet
+\newcommand{\tv}[1]{|#1|_{BV(\Omega)}}%													TV Halbnorm
+\newcommand{\Lp}[2]{\left\| #2 \right\|_{L^{#1}(\Omega)}}%			L^p Norm
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand{\uotild}{\tilde{u}_0}
+\newcommand{\utild}{\tilde{u}}
+\newcommand{\ho}{H_0^1 (\Omega)}
+\newcommand{\h}{H^1 (\Omega)}
+
+% --- Umgebungen fuer hervorgehobene und nummerierte Textpassagen, wie Definitionen, Saetze, Korollare etc.
+%			\newtheorem{Umgebungsname}{Markierungstext} - erzeugt eine neue Umgebung 'Umgebungsname', die beim Setzen den 'markierungstext' als Name ausgibt. Die Umgebung besitzt einen eigenen Zaehler.
+%			\newtheorem{Umgebungsname}[Anderer Umgebungsname]{Markierungstext} - aehnlich wie oben, nur dass die Umgebung den Zaehler der angegebenen anderen Umgebung verwendet.
+%			\newtheorem{Umgebungsname}{Markierungstext}[section] - aehnlich wie oben, nur dass die Umgebung einen eigenen Zaehler besitzt, der pro \section gesetzt wird.
+%			Definierte Umgebungen haben jeweils einen optionalen Parameter, der eine Ueberschrift oder Kurzbeschreibung des Theorems enthalten kann, z.B. \begin{thm}[Wichtiger Satz] Text \end{thm}
+
+
+\theoremstyle{plain} \newtheorem{lem}{Lemma}[section]
+\theoremstyle{remark} \newtheorem*{rem}{Bemerkung}%		Zaehler wird nicht ausgegeben
+\theoremstyle{plain} \newtheorem{thm}[lem]{Theorem}
+\theoremstyle{plain} \newtheorem{defi}[lem]{Definition}
+\theoremstyle{plain} \newtheorem{cor}[lem]{Korrollar}
+\theoremstyle{plain} \newtheorem{bsp}[lem]{Beispiel}
+\theoremstyle{plain} \newtheorem{nota}[lem]{Notation}
+\theoremstyle{plain} \newtheorem{ann}[lem]{Annahme}
+\newtheorem{quest} {Frage}
+\newtheorem{answ}{Antwort}
+ \newcounter{fallnummer}
+ \newtheorem{fall}[fallnummer]{Fall }
+
+% --- Funktions- und Operatornamen
+%			\DeclareMathOperator{\Operator}{Text} - definiert einen eigenen Operatornamen
+%			\DeclareMathOperator*{\Operator}{Text} - erlaubt zudem, dass Hoch- bzw. Tiefstellungen ueber bzw. unter dem Operatornamen platziert werden
+\DeclareMathOperator*{\argmin}{\arg \min}%
+
+
+% =====================================
+% Ausfuehrung global wirkender Befehle
+% =====================================
+
+% --- Seiten-Layout der Kopf- und Fusszeile
+
+% Vordefinierter Seitenstil
+%\pagestyle{headings}%		Fuss- und Kopfzeile mit Informationenangaben und Seitennummer gemaess der gewaehlten Dokumentenklasse
+
+% Eigene flexible Gestaltung mit dem Paket 'fancyhdr'
+\pagestyle{fancy}%		Flexibler Stil mit dem Paket 'fancyhdr'
+
+% Vereinfachte Darstellung der Kurzinfirmation bei einem Kapitel
+\renewcommand{\chaptermark}[1]{
+	\markboth{\thechapter \quad #1}{}}
+
+\ifthenelse{\boolean{@twoside}}
+{% then Anweisung - also zweiseitiger Druck
+	\fancyhf{}%		Loeschen der Vorbelegung
+	\fancyhead[RO,LE]{\small\sffamily\bfseries\thepage}%		Ausgabe der Seitenzahl im Kopf rechts auf ungeraden und links auf geraden Seiten in kleinen, serifenlosen und fetten Schrift
+	\fancyhead[LO]{\small\sffamily\nouppercase{\leftmark}}%		Ausgabe des Inhaltes von \leftmark im Kopf links auf ungeraden Seiten in kleinen und serifenlosen Schrift, 	wobei die Grossbuchstabenschreibung unerwuenscht ist (\nouppercase{})
+	\renewcommand{\headrulewidth}{0.4pt}%		Kopflinie
+	\renewcommand{\footrulewidth}{0pt}%			Fusslinie
+	\fancypagestyle{plain}{%		zu Beginn von Kapiteln schaltet LaTeX den Seitenstil der ersten Kapitelseite automatisch auf 'plain'. Dieser Seitenstil kann durch 'fancyhdr' umdefiniert werden mit Hilfe von '\fancypagestyle{plain}{Stildefinition}'
+		\fancyhf{}%		Loeschen der Vorbelegung
+		\fancyhead[RO,LE]{\small\sffamily\bfseries\thepage}%		Ausgabe der Seitenzahl im Kopf rechts auf ungeraden und links auf geraden Seiten in kleinen, serifenlosen und fetten Schrift
+		\renewcommand{\headrulewidth}{0.4pt}%		Kopflinie
+		\renewcommand{\footrulewidth}{0pt}%			Fusslinie
+	}
+}
+{% else Anweisung - also einseitige Einstellung
+	\fancyhf{}%		Loeschen der Vorbelegung
+	\fancyhead[R]{\small\sffamily\bfseries\thepage}%	Ausgabe der Seitenzahl im Kopf rechts in kleinen, serifenlosen und fetten Schrift
+	\fancyhead[L]{\small\sffamily\nouppercase{\leftmark}}%		Ausgabe des Inhaltes von \leftmark im Kopf links in kleinen und serifenlosen Schrift, 	wobei die Grossbuchstabenschreibung unerwuenscht ist (\nouppercase{})
+	\renewcommand{\headrulewidth}{0.4pt}%		Kopflinie
+	\renewcommand{\footrulewidth}{0pt}%			Fusslinie
+	\fancypagestyle{plain}{%		zu Beginn von Kapiteln schaltet LaTeX den Seitenstil der ersten Kapitelseite automatisch auf 'plain'. Dieser Seitenstil kann durch 'fancyhdr' umdefiniert werden mit Hilfe von '\fancypagestyle{plain}{Stildefinition}'
+		\fancyhf{}%		Loeschen der Vorbelegung
+		\fancyhead[R]{\small\sffamily\bfseries\thepage}%	Ausgabe der Seitenzahl im Kopf rechts in kleinen, serifenlosen und fetten Schrift
+		\renewcommand{\headrulewidth}{0.4pt}%		Kopflinie
+		\renewcommand{\footrulewidth}{0pt}%			Fusslinie
+	}
+}

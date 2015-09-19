@@ -1,0 +1,30 @@
+% ===============================================
+% Anhang - Einbinden von Graphiken in der Arbeit
+% ===============================================
+
+% --- \chapter[Kurztitel]{Titel}
+%			erzeugt eine formatierte und entsprechend der hierarchischen Ebene nummerierte Ueberschrift 'Titel'. Hier wird aber der 'Kurztitel' in der .toc-Datei gespeichert, um im Inhaltsverzeichnis verwendet zu werden. Außerdem steht der 'Kurztitel' als Kolumnenbeschriftung zur Verfuegung.
+\chapter[Einbinden von Graphiken]{Einbinden von Graphiken in der Arbeit}
+\label{chap:graphiken}
+
+Die richtige Einbindung von Graphiken bzw. numerischen Ergebnissen ist in der Bildverarbeitung ein besonders wichtiger Aspekt. Das Problem dabei ist, dass bei der Verwendung von Bildformaten mit verlustbehafteter Komprimierung möglicherweise Artefakte in den Bildern auftreten könnten. Dies ist insbesondere unerwünscht, wenn es auf die Genauigkeit oder auf den Vergleich der Ergebnisse ankommt. Deshalb sollten die Bilder für die numerischen Ergebnisse am besten in EPS oder PNG Format verwendet werden, da diese keine bzw. verlustfreie Komprimierung von Bildern ermöglichen. Sonstige Graphiken können aber auch in JPG Format eingebunden werden.
+
+Die Einbindung externer Graphiken in LaTeX ist abhängig von der Art des Ausgabedokumentes und man sollte deshalb folgende Punkte beachten.
+
+\begin{itemize}
+	\item Typische Ausgabeformate DVI, PostScript und PDF können nur mit bestimmten Graphiktypen umgehen.
+	\item Die Verwendung von pdfLaTeX, also die direkte Erzeugung von PDF Dokumenten, ist nur mit den Dateitypen PDF, JPG oder PNG zulässig. Die Vektorgraphiken im EPS Format sind bei pdfLaTeX nicht direkt verwendbar und müssen zunächst in einen zulässigen Typ konvertiert werden, z.B. in eine PDF Datei mit Hilfe von GSview und Convert Option oder FreePDF.
+	\item Eine Möglichkeit EPS Graphiken direkt einzubinden, ist die Übersetzung von LaTeX zu einer PDF Datei, die aus einer PostScript Dokument gewonnen wird. Im Fall von TeXnicCenter muss dazu nur das vordefinierte Ausgabeprofil \enquote{LaTeX \ $\Rightarrow$ \ PS \ $\Rightarrow$ \ PDF} ausgewählt werden. Beachte aber, dass diese Vorgehensweise keine Verwendung von PDF, PNG und JPG Dateien zulässt.
+\end{itemize}
+
+Zum Schluss noch einige Hinweise und Bemerkungen zum Einbinden von Graphiken.
+
+\begin{itemize}
+	\item LaTeX benötigt für das Einbinden von Graphiken das Paket \textit{graphicx}.
+	\item Gute Einführungen zum Einbinden von Graphiken unter LaTeX findet man z.B. unter\\
+		\url{http://downloads.chaosmos.de/doc/LaTeX/latex_etti_pub.pdf}\\
+		\url{http://dante.ctan.org/tex-archive/macros/latex/required/graphics/grfguide.pdf}\\
+		\url{ftp://ftp.tex.ac.uk/tex-archive/info/epslatex.pdf}
+	\item Matlab ermöglicht einen direkten Export der Bilder in EPS, PNG oder JPG Format.
+	\item Wird ein Bild nicht von einem selbst erstellt, sondern von einem anderen Autor übernommen, dann muss hinter der Bildunterschrift eine Quellenangabe erscheinen.
+\end{itemize}

@@ -1,0 +1,471 @@
+% =======================
+% endlichdimensionale NM
+% =======================
+
+\chapter{Generalisierte Newton Methoden}
+\label{chap:endlichdimensional}
+
+\section{Newton Methoden mit einfachen Nebenbedingungen}
+Wir betrachten das Problem 
+\begin{align}
+\label{eq:min}
+\min\limits_{w \in \R^n} f(w)
+\end{align}
+wobei $f: \R^n \rightarrow \R$. 
+
+Die Optimalbedingung zu diesem Problem lautet: 
+\begin{align*}
+\nabla f(w)=0
+\end{align*}
+Nun wollen wir ein numerisches Verfahren für dieses Problem entwickeln. Dazu setzen wir $G:= \nabla f$. Da wir ein diskretes Verfahren wollen, setzten wir $w_0, w_1, \cdots $ in $G$ ein. Wir erhalten:   
+\begin{align*}
+G(w_{k+1})=0
+\end{align*}
+Um ein iteratives Verfahren zu erhalten taylorn wir $G$ ist $w_k$. Das ergibt: 
+
+\begin{thm}[einfaches Newtonverfahren]  
+Sei das Problem \eqref{eq:min} gegeben und $G:= \nabla f$. Dann wird das Problem mit folgendem Verfahren gelöst:
+\begin{align*}
+& G(w^k)+G'(w^k)s^k=0 \\
+& w^{k+1}=w^k+s^k
+\end{align*}
+Das Verfahren konvergiert superlinear falls $G \in C^1$ und $G'$ invertierbar ist. 
+\end{thm}
+
+Das Verfahren dazu lautet: 
+
+\begin{algorithm}[H]
+\caption{einfache Newton Methode}
+\KwData{$w^0$ (möglichst Nah an der Lösung $\overline{w}$)}
+\For{$k=0,1,\cdots$} {
+	\emph{Löse $M_k s^k=-G(w^k)$}\;
+	$w^{k+1}=w^k+s^k $\;
+}
+\end{algorithm}
+Hier ist $M^k=G'(w^k)$
+
+Nun wollen wir auch Nebenbedingungen zulassen. Wir haben schon gesehen, dass das Minimierungsproblem
+\begin{align*}
+\min\limits_{w \in \R^n} f(w) \quad s.t. \quad w \in S
+\end{align*} 
+äquivalent ist zu 
+\begin{align*}
+w-P_S(w- \theta \nabla f(w))=0
+\end{align*}
+mit $\theta >0$ fest. 
+Die Projektion betrachten wir, da das Newtonverfahren sonst auch Werte zulassen würde, die nicht in $S$ liegen. Eine genauere Erklärung war in einem vorherigem Vortrag. 
+
+Wir betrachten also die Funktion 
+\begin{align*}
+\phi(w)=w-P_S(w- \theta \nabla f(w))
+\end{align*}
+
+Nun wollen wir also das Newtonverfahren auf $\phi$ anwenden. Dabei ist $\phi$ leider nicht differenzierbar. Also müssen wir unser $M^k$ anders wählen. Wie diese Wahl aussieht, lernen wir später. Um über Newtonverfahren sprechen zu können, brauchen wir zunächst einen Begriff für Konvergenz. Diesen werden wir im folgendem Kapitel betrachten 
+
+\subsection{Konvergenz der generalisierten Newton Methode}
+
+Zunächst eine kleine Wiederholung des Konvergenzbegriffes:
+
+\begin{defi}[Konvergenzgeschwindigkeit]
+Sei $x_k$ eine Folge, die $\overline{x}$ approximiert. 
+\begin{itemize}
+	\item lineare Konvergenz: $ \| x_{k+1}- \overline{x}\| \le c \| x_k- \overline{x}\| \quad \forall k>k_0 $
+	\item superlineare Konvergenz:  Sei $c_k$ eine Nullfolge. $ \| x_{k+1}- \overline{x}\| \le c_k \| x_k- \overline{x}\| \quad \forall k>k_0$
+	\item Konvergenz der Ordnung p: $\| x_{k+1}- \overline{x}\| \le c \| x_k- \overline{x}\|^p \quad \forall k>k_0$
+\end{itemize}
+\end{defi}
+
+%\begin{defi}[Landausymbole]
+%Seien $f,g $ Funktionen.
+%\begin{description}
+%	\item[$f=o(g)$] $ \Leftrightarrow \forall C>0 \quad \exists x_0>0: \forall x>x_0 \text{ gilt: } |f(x)| \le C |g(x)|$
+%	\item[$f=\mathcal{O}(g) $] $ \Leftrightarrow \exists C>0 \quad \exists x_0>0: \forall x>x_0 \text{ gilt: } |f(x)| \le C |g(x)|$
+%\end{description}
+%\end{defi}
+
+Betrachte nun 
+\begin{align}
+\label{eq:g=0}
+G(x)=0
+\end{align}
+mit $G:X \rightarrow Y$, wobei $X,Y$ Banachräume sind. Sei $\overline{x}$ die Lösung der Gleichung. 
+
+Um eine numerische Lösung von \eqref{eq:g=0} zu erhalten, benutzen wir einen ähnlichen Algorithmus, wie den für das einfache Newtonverfahren, nur allgemeiner: 
+
+\begin{algorithm}[H]
+\caption{Generalisierte Newton Methode}
+\label{algo:generalisierte_newton_methode}
+\KwData{$x^0 \in X$ (möglichst Nah an der Lösung $\overline{x}$)}
+\For{$k=0,1,\cdots$} {
+	\emph{Wähle invertierbaren Operator $M_k \in L(X,Y)$}\;
+	\emph{Erhalte $s_k$ beim lösen von $M_ks^k=-G(x^k)$}\;
+	$x^{k+1}=x^k+s^k $\;
+}
+\end{algorithm}
+
+Wie dieser Operator $M_k$ sinnvoll zu wählen ist, wird später genauer bestimmt. 
+
+Nun untersuchen wir die durch diesen Algorithmus gewonnene Folge $x^k$ in einer Umgebung von $\overline{x}$. Sei $d^{k+1} =x^{k+1}-\overline{x}$ der Abstand zwischen der Iteration und der Lösung. Dann gilt: 
+\begin{align*}
+M_kd^{k+1} & = M_k(x^{k+1}-\overline{x})=M_k (x^k+s^k-\overline{x})=M_kd^k-G(x^k) \\
+& = G(\overline{x}) + M_k d^k-G(x^k)
+\end{align*}
+Wir erhalten: 
+
+\begin{thm}
+\label{thm:konvergenz_generalisierte_NM}
+Betrachte \eqref{eq:g=0} mit der Lösung $\overline{x}$. Sei $x^k$ die Folge, die durch den Generalisierten Newton Algorithmus \ref{algo:generalisierte_newton_methode} erzeugt wurde. Sei $x^0$ nah genug an $\overline{x}$ gewählt
+\begin{enumerate}
+    \item Falls $\exists \gamma \in (0,1)$ mit
+    \begin{align*}
+    	& \| d^{k+1}\|_X =\| M_k^{-1} \left(G(\overline{x}+d^k)-G(\overline{x})-M_kd^k \right) \|_X \le \gamma \| d^k\|_X  \\
+	 & \forall k \text{ mit } \| d_k\|_X \text{ klein genug}  
+    \end{align*}
+    gilt, dann konvergiert $x^k \rightarrow \overline{x}$ linear mit Konstante $\gamma$
+    \item Falls $\forall \eta \in (0,1) \quad \exists \delta_{\eta}>0$, sodass
+    \begin{align*}
+    	& \| d^{k+1}\|_X =\| M_k^{-1} \left(G(\overline{x}+d^k)-G(\overline{x})-M_kd^k \right) \|_X  \le \eta \|d^{k+1}\|_X \\ 
+	& \text{ für } \| d_k\|_X < \delta_{\eta}
+    \end{align*}
+     gilt, dann konvergiert $x^k \rightarrow \overline{x}$ super linear
+    \item Falls  $\exists \gamma \in (0,1)$ mit
+    \begin{align*}
+	& \| d^{k+1}\|_X =\| M_k^{-1} \left(G(\overline{x}+d^k)-G(\overline{x})-M_kd^k \right) \|_X \le C \| d^k\|_X^{1+\alpha}  \\
+	& \text{ für } \| d_k\|_X \rightarrow 0    
+    \end{align*}
+     gilt, dann konvergiert $x^k \rightarrow \overline{x}$ super linear der Ordnung $\alpha +1$
+\end{enumerate}
+\end{thm}
+\begin{proof}
+einfaches nachrechnen, siehe Buch. 
+\end{proof}
+
+Oft teilt man diese Kleinheitsannahmen in zwei Teile auf: 
+
+\begin{defi}[Regularitätsannahme]
+Sei $M_k \in L(X,Y)$, wobei X,Y Banachräume sind. Dann ist die Regularitätsannahme gegeben durch:
+\begin{align*}
+\|M_k^{-1}\|_{Y \rightarrow X} \le C \quad \forall k \ge 0
+\end{align*}
+\end{defi}
+
+\begin{rem}[Operatornorm]
+Die Notation für die Operatornorm von einem linearen Operator  $ f:X \rightarrow Y$, wobei $X,Y$ normierte Vektorräume sind lautet:
+\begin{eqnarray*}
+\| f\|_{X \rightarrow Y}:=\sup\limits_{\| x\|_X=1} \| f(x)\|_Y
+\end{eqnarray*}
+\end{rem}
+
+\begin{defi}[Approximationsannahme]
+Sei $M_k \in L(X,Y)$, wobei X,Y Banachräume sind, $\overline{x}$ die Lösung von $G(x)=0$ und $d^k:=x^k-\overline{x}$  Sei $\alpha +1>1 $ Dann ist die Approximationsannahme gegeben durch:
+\begin{align*}
+\|G(\overline{x}+d^k)-G(\overline{x})-M_kd^k\|_{Y} = o(\| d^k\|_X) \text{ für } \| d_k\|_X \rightarrow 0
+\end{align*}
+oder 
+\begin{align*}
+\|G(\overline{x}+d^k)-G(\overline{x})-M_kd^k\|_{Y} = o(\| d^k\|^{1+ \alpha}_X) \text{ für } \| d_k\|_X \rightarrow 0
+\end{align*}
+\end{defi}
+
+Nun probieren wir eine geeignete Wahl für $M_k$ zu finden. 
+
+\subsection{Die klassische Newton Methode}
+
+\begin{thm}[Konvergenz der klassischen Newton Methode]
+Sei das Problem \eqref{eq:g=0} gegeben mit der Lösung $\overline{x}$ und sei $G: X \rightarrow Y$ mit $X,Y $ Banachräume F-diffbar. Sei außerdem $G'(\overline{x})$  stetig invertierbar. Dann konvergiert die Generalisierte Newton Methode \ref{algo:generalisierte_newton_methode} mit $M_k=G'(x^k)$ lokal super linear. 
+
+Falls $G'$ zusätzlich $\alpha$-Hölderstetig ist, dann konvergiert die klassische Newton Methode von der Ordnung $1+ \alpha$  
+\end{thm}
+\begin{proof}
+der Beweis ist im Script und nicht schwer nachzurechnen.
+\end{proof}
+
+\section{verallgemeinerte Ableitung}
+
+Nun wollen wir auch das Newtonverfahren anwenden können, falls $G$ nicht diffbar ist. Dazu wird der Begriff der verallgemeinerten Ableitung eingeführt. Leider gibt es nicht viel Literatur zu diesem Begriff, sodass ich ihn recht informal einführen muss. Beginnen wir mit einem Beispiel.
+
+Wir betrachten die Betragsfunktion $f: \R \rightarrow \R \quad x \mapsto |x|$. Diese ist überall diffbar außer in  0. Nun wollen wir auch hier eine Ableitung finden. Die Ableitung gibt die Steigung der Funktion in einem Punkt an. Unser neuer Begriff der Ableitung soll dieser Eigenschaft genügen. Da aber die Steigung im Punkt 0 nicht eindeutig definiert ist, nimmt man als Ableitung alle möglichen Steigungen in 0. Das ist hier das Intervall $[-1,1]$, da die Steigung wenigstens $-1$ aber höchstens $1$ ist. Alle Werte dazwischen können aber auch angenommen werden. Also gilt:
+\begin{align*}
+\partial^{cl} f(x)= \left\{ 
+	\begin{array}{lll} 
+		\{-1\} & x \in (-\infty, 0) \\
+		\lbrack -1,1 \rbrack & x = 0 \\
+		\{1\} & x \in (0, \infty )
+	\end{array}
+	\right.
+\end{align*}
+Diese Ableitung nennt sich Clarke Differential. 
+
+\begin{defi}[Clarke Differential]
+Sei $G: \R^n \rightarrow \R^m$ lipschitz stetig. Dann wird das Clarke Differential definiert als
+\begin{align*}
+\partial^{cl} G(x):= \text{conv} \left\{ M \in \R^{n \times m}| x^k \rightarrow x, \quad G'(x^k) \rightarrow M, \quad G \text{ ist diffbar in } x^k   \right\}
+\end{align*} 
+\end{defi}
+wobei $conv\{M\}$ die konvexe Hülle von $M$ meint. 
+Dabei zu beachten ist, dass dieses Differenzial keine Funktion, sondern eine Menge ist. 
+
+Die Lipschitzstetigkeit wird gebracht, da nach dem Satz von Rademacher eine lipschitzstetige Funktion fast überall differenzierbar ist. 
+
+Diese Definition stimmt mit unserer Ableitung der Betragsfunktion überein:
+
+Sei $x \in (-\infty,0)$ und $x^k$ eine Folge, die gegen x konvergiert. Dann gilt
+\begin{align*}
+	\lim\limits_{k \rightarrow \infty} f'(x^k)= -1 
+\end{align*} 
+Sei nun  $\overline{x} \in (0, \infty)$ und $\overline{x}^k$ eine Folge, die gegen $\overline{x}$ konvergiert. Dann gilt
+\begin{align*}
+	\lim\limits_{k \rightarrow \infty} f'( \overline{x}^k)= 1 
+\end{align*} 
+Nun gilt für $x \in (-\infty,0)$
+\begin{align*}
+\partial^{cl}f & = \text{conv} \left\{ M| x^k \rightarrow x, \quad f'(x^k) \rightarrow M, \quad f \text{ ist diffbar in } x^k   \right\} \\
+& = \text{conv} \left\{ -1  \right\} = \{-1\} \\
+\end{align*}
+Für $x \in (0, \infty)$ das Gleiche nur mit $1$ statt $-1$. 
+Sei $x=0$. Dann gilt:
+\begin{align*}
+\partial^{cl}f & = \text{conv} \left\{ M| x^k \rightarrow x, \quad f'(x^k) \rightarrow M, \quad f \text{ ist diffbar in } x^k   \right\} \\
+& = \text{conv} \left\{ -1,1  \right\} = [-1,1]\\
+\end{align*}
+
+\begin{thm}
+Sei $G: \R^n \rightarrow \R^m$ eine Funktion, deren Richtungsableitung existiert und stetig ist. Dann gilt, dass $\{ G' \}= \partial^{cl} G$ 
+\end{thm}
+\begin{proof}
+Sei $\{x_k\} \subset \R^n$ eine Folge, die gegen $x \in \R^n$ konvergiert. $G'$ bezeichnet die Richtungsableitung. Dann gilt:
+\begin{align*}
+ \lim\limits_{k \rightarrow \infty} G'(x_k) = G'( \lim\limits_{k \rightarrow \infty} x_k) = G'(x) 
+\end{align*} 	
+Den Limes darf ich reinziehen, da $G'$ stetig ist. Damit ist $\partial^{cl}G=\{G'\}$. 
+\end{proof}
+
+Falls die Richtungsableitung existiert und diese nicht stetig ist, stimmen die Differenziale nicht überein!
+
+Dieses Konzept lässt sich noch weiter verallgemeinern auf Banachräume. 
+
+\begin{defi}[verallgemeinerte Differentiale]
+Seien $X,Y$ Banachräume und $G: X \rightarrow Y$ ein stetiger Operator. Dann ist die Menge der verallgemeinerten Differentiale definiert als 
+\begin{align*}
+\partial G: X \rightrightarrows L(X,Y)
+\end{align*}
+\end{defi}
+Dabei meint $\rightrightarrows L(X,Y)$, dass ein Punkt $x \in X$ auf eine Menge von linearen Operatoren abgebildet wird (und nicht nur auf einen Operator). 
+Ein Beispiel für ein verallgemeinertes Differenzial ist das Clarke Differenzial. Dies ist jedoch nur für Vektorwertige Funktionen definiert. 
+
+Nun können wir, um unser Newtonverfahren umzugestalten $M_k \in \partial G(x^k)$ wählen. Damit unser Verfahren aber super linear konvergiert, muss gelten 
+\begin{align*}
+\sup\limits_{M \in \partial G(\overline{x}+d) } \| G(\overline{x}+d^k)-G(\overline{x})-M_kd\|_Y = o\left( \| d\|_X \right)  \text{ für } \| d\|_X \rightarrow 0
+\end{align*}
+
+Dieses nennt sich semidiffbar. 
+
+\begin{defi}[semidiffbar]
+Sei $G: X \rightarrow Y$ ein stetiger Operator zwischen Banachräumen. Sei $\partial G: X \rightrightarrows L(X,Y) $ mit nicht leeren Bildern gegeben wie oben.
+\begin{enumerate}
+	\item G heißt $\partial G $ semidiffbar in $x \in X$, falls
+	\begin{align*}
+	\sup\limits_{M \in \partial G(x+d) } \| G(x+d^k)-G(x)-M_kd\|_Y = o\left( \| d\|_X \right)  \text{ für } \| d \|_X \rightarrow 0
+	\end{align*}
+	\item G heißt $\partial G $ semidiffbar von der Ordnung $\alpha +1>1$ in $x \in X$, falls
+	\begin{align*}
+	\sup\limits_{M \in \partial G(x+d) } \| G(x+d^k)-G(x)-M_kd\|_Y = \mathcal{O} \left( \| d\|_X^{\alpha+1}\right)  \text{ für } \| d\|_X \rightarrow 0
+	\end{align*}	
+\end{enumerate} 
+\end{defi} 
+
+\begin{lem}
+\label{lem:semidiffbar}
+Sei $G: X \rightarrow Y$ ein Operator zwischen Banachräumen und stetig F-diffbar in einer Umgebung von x. Dann ist G $\{ G' \}$-semidiffbar in x. Falls $G'$ $\alpha$-Hölderstetig in einer Umgebung von x ist, dann ist G $\{ G' \} $-semidiffbar in x von der Ordnung $\alpha$. 
+
+$\{G'\}$ beschreibt den Operator $\{G'\}: X \rightrightarrows L(X,Y)$ mit $\{G'\}(x)=\{G'(x)\}$ 
+\end{lem}
+\begin{proof}
+\begin{align*}
+& \| G(x+d^k)-G(x)-G'(x+d)d\|_Y \\
+& \le \| G(x+d^k)-G(x)-G'(x)d\|_Y + \| G'(x)d-G'(x+d)d\|_Y \\
+& \le o \left( \|d\|_X \right) +   \| G'(x)-G'(x+d)\|_{X \rightarrow Y} \|d\|_X=  o \left( \|d\|_X \right)
+\end{align*}
+zweiter Teil analog, siehe Buch. 
+\end{proof}
+
+\begin{bsp}[Projektion]
+\label{bsp:projektion}
+Betrachte $\psi: \R \rightarrow \R, \psi(x)=P_{[a,b]}(x)$ mit $a<b$. 
+ Dann ist das Clarke Differential gegeben durch: 
+\begin{align*}
+\partial^{cl} \psi(x)= \left\{ 
+	\begin{array}{lll} 
+		\{0\} & x <a \text{ oder } x>b\\
+		\{1\} & a<x<b \\
+		\lbrack 0,1 \rbrack & x=a \text{ oder } x=b 
+	\end{array}
+	\right.
+\end{align*}
+\end{bsp}
+\begin{proof}
+Für alle $x \notin \{ a,b \}$ gilt, dass $\psi $ stetig diffbar in einer Umgebung von x ist. Mit Lemma \ref{lem:semidiffbar} gilt, dass $\psi$ $ \partial^{cl} \psi$- semidiffbar in x ist. 
+
+Sei nun $x=a$ Für kleine $d>0$ ergibt sich, dass $\partial^{cl} \psi(x)= \{\psi'(a+d)\}=\{1\}$ und damit 
+\begin{align*}
+\sup\limits_{M \in \partial^{cl} \psi(x+d)} |\psi(x+d)-\psi(x)-Md|=a+d-a-1d=0
+\end{align*} 
+Für kleine $d<0$ ergibt sich, dass $\partial^{cl} \psi(x)= \{\psi'(a+d)\}=\{0\}$ und damit 
+\begin{align*}
+\sup\limits_{M \in \partial^{cl} \psi(x+d)} |\psi(x+d)-\psi(x)-Md|=a-a-0d=0
+\end{align*} 
+Somit ist die $ \partial^{cl} \psi$- semidiffbarheit in $x=a$ gezeigt. 
+
+Für $x=b$ dasselbe. 
+\end{proof}
+
+\begin{thm}[Rechenregeln semidiffbare Funktionen]
+Seien $X,Y,Z, X_i, Y_i$ Banachräume. 
+\begin{enumerate}
+	\item Falls die Operatoren $G_i: X_i \rightarrow Y_i$ $\partial G_i$-semidiffbar in x sind, dann ist $(G_1,G_2)$ $(\partial G_1, \partial G_2)$-semidiffbar in x.  
+	\item Falls die Operatoren $G_i: X \rightarrow Y$ $\partial G_i$-semidiffbar in x sind, dann ist $ G_1+G_2$ $(\partial G_1 +\partial G_2)$-semidiffbar in x.  
+	\item Seien $G_1: Y \rightarrow Z$ und $G_2: X \rightarrow Y$  $\partial G_i$-semidiffbar in $G_2(x)$ und in x. Sei außerdem $\partial G_1$ beschränkt in einer Umgebung von $x=G_2(x)$ und $G_2$ ist Lipschitzstetig in einer Umgebung von x. Dann ist $G= G_1\circ G_2$ $\partial G$-semidiffbar mit 
+	\begin{align*}
+		\partial G(x)= \left\{ M_1M_2|M_1 \in \partial G_1\left( \partial G_2(x)\right), \quad M_2 \in \partial G_2(x) \right\}
+	\end{align*}	  	
+\end{enumerate}
+\end{thm}
+\begin{proof}
+siehe Buch
+\end{proof}
+
+\section{semidiffbare Newton Methoden}
+Um Konvergenz zu erhalten muss die Approximationsannahme und die Regularitätsannahme erfüllt sein. 
+Die Approximationsannahme ist durch die Semidiffbarkeit gegeben. Jetzt fehlt noch die Regularitätsannahme. 
+
+\begin{defi}[Regularitätsannahme für semidiffbare Newton Verfahren]
+\label{def:regularitaetsbedingung}
+Betrachte \eqref{eq:g=0} mit der Lösung $\overline{x}$. Dann lautet die Regularitätsannahme
+\begin{align}
+\label{eq:regularitaetsbedingung}
+\exists C>0, \quad \exists \delta >0 : \|M^{-1}\|_{X \rightarrow Y} \le C \quad \forall M \in \partial G(x) \quad \forall x \in X, \quad \|x-\overline{x}\|_X<\delta
+\end{align}
+\end{defi}
+
+\begin{algorithm}[H]
+\caption{semidiffbare Newton Methode}
+\label{algo:semidiffbare_newton_methode}
+\KwData{$x^0 \in X$ (möglichst Nah an der Lösung $\overline{x}$)}
+\For{$k=0,1,\cdots$} {
+	\emph{Wähle $M_k \in \partial G(x^k)$}\;
+	\emph{Erhalte $s_k$ beim lösen von $M_ks^k=-G(x^k)$}\;
+	$x^{k+1}=x^k+s^k $\;
+}
+\end{algorithm}
+
+\begin{thm}[Konvergenz des semidiffbaren Newton-Verfahrens]
+\label{thm:konvergenz_des_semidiffbaren_newton_verfahrens}
+Sei das Problem \eqref{eq:g=0} gegeben mit der Lösung $\overline{x}$. Seien $X,Y$ Banachräume, $G: X \rightarrow Y$ stetig und $\partial G$ semidiffbar und die Regularitätsannahme \eqref{eq:regularitaetsbedingung} sei gegeben. Dann existiert $\delta >0$, sodass für alle $x^0 \in X$ mit $\|x^0- \overline{x}\|_X < \delta $   die semidiffbare Newton Methode super linear gegen $\overline{x}$ konvergiert.
+
+Falls G $\partial G$-semidiffbar der Odnung $\alpha >0$ in $\overline{x}$ ist, dann ist die Konvergenzordnung $ 1 + \alpha $ 
+\end{thm}
+\begin{proof}
+\ref{thm:konvergenz_generalisierte_NM} besagt, dass wenn ich ein Newtonverfahren der Form \ref{algo:generalisierte_newton_methode} habe, also $M_k \in \mathcal{L}(X,Y)$, $M_k$ invertierbar ist und 
+\begin{align*}
+ 	\| M_k^{-1} \left(G(\overline{x}+d^k)-G(\overline{x})-M_kd^k \right) \|_X = o( \| d^k\|_X  )
+\end{align*}  
+gilt, dann konvergiert das Newtonverfahren super linear. Da $M_k \in \partial G$, ist $M_k \in \mathcal{L}(X,Y)$. $M_k$ ist invertierbar, da die Regularitätsannahme gilt. Außerdem gilt mit der Regularitätsannahme und der Semidiffbarkeit:
+\begin{align*}
+ 	& \| M_k^{-1} \left(G(\overline{x}+d^k)-G(\overline{x})-M_kd^k \right) \|_X \\
+ 	& \le \| M_k^{-1} \|_X \| \left(G(\overline{x}+d^k)-G(\overline{x})-M_kd^k \right) \|_X \\
+ 	& \le C o( \| d^k\|_X  ) = o( \| d^k\|_X  )
+\end{align*}  
+Also ist \ref{thm:konvergenz_generalisierte_NM} anwendbar. 
+\end{proof}
+
+\subsection{semidiffbare Newtonmethoden für endlich dimensionale KKT Systeme}
+
+Nun wollen wir die Theorie auf das endlich dimensionale KKT System anwenden.
+
+Sei $f: \R^n \rightarrow \R^m $ die zu optimierende Funktion. $e: \R^n \rightarrow \R^p$ und $c: \R^n \rightarrow \R^m$  sind die Nebenbedingungen des Optimierungsproblems. Wir betrachten das Problem 
+\begin{align}
+\label{eq:op}
+\min\limits_{w \in R^n} f(w) \quad s.t. \quad e(w)=0 \quad c(w) \le 0
+\end{align}
+wobei $f \in C^2(\R^n), e \in C^2(\R^n, \R^p), c \in C^2(\R^n, \R^m)$
+
+Sei $\overline{w}$ die Lösung von \eqref{eq:op}. Dann existieren Lagrange Multiplikatoren $\overline{p} \in \R^p$, $\overline{\lambda} \in \R^m$ , sodass $ (\overline{w}, \overline{p}, \overline{\lambda})$ das folgende KKT System löst: 
+\begin{align*}
+& \nabla_w L(\overline{w}, \overline{\lambda}, \overline{\mu}) = \nabla f(\overline{w})+c'(\overline{w})^T \overline{\lambda}+ e'(\overline{w})^T \overline{\mu}=0 \\
+& \overline{\lambda} \ge 0 \\
+& \nabla_{\lambda} L(\overline{w}, \overline{\lambda}, \overline{\mu})(z- \overline{\lambda}) =c(\overline{w})^T (z- \overline{\lambda}) \le 0 \quad \forall z \ge 0 \\
+& \nabla_{\mu} L(\overline{w}, \overline{\lambda}, \overline{\mu}) = e(\overline{w})=0 
+\end{align*}
+ wobei $ L(w,\lambda, \mu):=f(w)+\lambda^T c(w)+ \mu^T e(w)$ die Lagrangefunktion ist. 
+
+Jetzt schreiben wir das KKT zu einer Funktion $G$ um: 
+
+\begin{align}
+\label{eq:G}
+G(w, \lambda, \mu):= \begin{pmatrix}
+\nabla_w L(w,\lambda, \mu) \\
+\lambda - P_{\R_+^p}(\lambda + c(w)) \\
+e(w)
+\end{pmatrix}
+=0
+\end{align}
+
+Damit das Newton Verfahren konvergiert, muss G semidiffbar sein. Das zeigt folgendes Theorem:
+
+\begin{thm}[semidiffbarheit des KKT Systems]
+Wir betrachten das Problem \ref{eq:op}. Sei G wie in \ref{eq:G} definiert.  
+
+Dann ist G semidiffbar mit 
+\begin{align*}
+\partial G= 
+	\left\{ 
+		\begin{pmatrix}
+			\nabla_{ww}L(w, \lambda, \mu) & c'(w)^T 	& e'(w)^T \\
+			-D_g c'(w) 		& I-D_g		& 0 \\
+			e'(w) 			& 0 		& 0 
+		\end{pmatrix}			
+		\bigg|\
+		g_i \in \partial^{cl} \psi(\lambda_i+c_i(w)) 
+	\right\}
+\end{align*}
+wobei $\psi(t):=P_{\R_+}(t)$ und $D_g=diag(g_i)$
+\end{thm}
+\begin{proof}
+Sei $x=(w, \lambda, \mu)$. Zunächst ist $\nabla_w L $ $ \{ \nabla_{wx}L\}$-semidiffbar und $e $ ist $\{e'\}$-semidiffbar, da $L,e$ zweimal stetig diffbar sind.  
+ 
+Außerdem ist $\psi$  $\partial^{cl} \psi $ -semidiffbar, da wir dies für die Projektion schon gezeigt haben, siehe \ref{bsp:projektion}. Nach Summen und Kettenregel ist 
+\begin{align*}
+	\phi_i(w, \lambda_i):= \lambda_i-P_{\R_+}(\lambda_i + c_i(w))
+\end{align*} 
+semidiffbar mit
+\begin{align*}
+	\partial \phi_i(w, \lambda_i):= 
+	\left\{
+		\left(
+			-g_i c'_i(w),1-g_i
+		\right)
+		| g_i \in \partial^{cl} \psi(\lambda_i c'_i(w)) 
+	\right\} 
+\end{align*}
+wobei die erste Komponente die Ableitung nach $w$ und die zweite Komponente die Ableitung nach $\lambda_i$ darstellt. 
+Deshalb ist der Operator 
+\begin{align*}
+	\phi(w, \lambda):= \lambda-P_{\R_+^p}(\lambda + c(w))
+\end{align*}
+semidiffbar mit 
+\begin{align*}
+	\partial \phi(w, \lambda):= 
+	\left\{
+		\left(
+			-D_g c'_i(w),I-D_g
+		\right)
+		| D_g= \text{diag}(g_i), g_i \in \partial^{cl} \psi(\lambda_i c'_i(w)) 
+	\right\} 
+\end{align*}
+Wenn man nun alles ableitet und dabei die Definition von L beachtet, kommt man auf $\partial G(x)$
+\end{proof}
+
+Falls nun auch noch die Regularitätsannahme \ref{def:regularitaetsbedingung} erfüllt ist, ist \ref{thm:konvergenz_des_semidiffbaren_newton_verfahrens} anwendbar und das semidiffbare Newtonverfahren konvergiert superlinear für das KKT. 
+
+
+Hier haben wir angenommen, dass unsere PDGL Nebenbedingung stetig Differenzierbar ist. Das ist jedoch in der Praxis meist nicht der Fall. Deshalb werden wir uns im Nächsten Kapitel mit $L^2$ Funktionen befassen und zeigen, dass wir auch hier Semidifferenzierbarkeit haben. 

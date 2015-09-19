@@ -1,0 +1,106 @@
+% ==============================
+% Vorspann des LaTeX Dokumentes
+% ==============================
+
+% --- Definition der Dokumentenklasse: \documentclass[Optionen]{Klassenname}
+% --- Dokumentenklasse gibt zahlreiche Vereinbarungen ueber Layout und Gliederung vor
+% --- Wir verwenden hier die KOMA-Script Klasse 'srcreprt'
+% --- Siehe dazu Anleitung zum KOMA-Script, insb. Abschnitt 2.6, Kapitel 3,
+\documentclass[%
+	a4paper,%							Papiergroesse im DIN A4-Format
+	oneside,%							Einseitiger Druck
+%	twoside,%							Zweiseitiger Druck
+	12pt,%								Schriftgroesse
+%	draft,%								Option unterscheidet zw. Dokument im Entwurfsstadium und fertigen Dokument
+	toc=listof,%					Abbildungs- und Tabellenverzeichnis erhalten einen Eintrag im Inhaltsverzeichnis ohne Nummerierung
+	toc=bibliography,%		Literaturverzeichnis erhaelt einen Eintrag im Inhaltsverzeichnis ohne Nummerierung
+%	toc=flat,%						Inhaltsverzeichnis erhaelt eine tabellarische Form (ohne Einruecken der unteren Ebenen)
+%	chapterprefix,%				Kapitelueberschriften werden nicht in kompakter Form dargestellt
+%	appendixprefix%				Anhangueberschriften werden nicht in kompakter Form dargestellt
+%	titlepage%						Titel und Zusammenfassung erscheinen auf einer eigenen Seite (Voreinstellung f�r 'book' und 'report')
+	fleqn%								Mathematische Formeln werden linksbuendig statt zentriert gesetzt
+%	leqno%								Mathematische Formeln werden auf der linken Seite statt auf der rechten Seite nummeriert
+]{scrreprt}%
+
+
+% --- Eigene Stildatei (Hier werden alle grundlegenden Einstellungen fuer Layout und Packages vorgenommen)
+% --- Moeglicher Inhalt: Einbindung von haeufig verwendeten Pakete und Erweiterungspaketen
+% ---										 Definition eigener Befehle
+% ---                    Ausfuehrung global wirkender Befehle (z.B. globale Layout Einstellungen etc.)
+\usepackage{styles/abschlussarbeit}
+
+
+% =============================
+%	Hauptdokument mit Textinhalt
+% =============================
+
+% --- Aufteilung in mehrere Quelldateien
+%			LaTeX unterstuetzt die Aufsplittung in Teildokumente, so dass in einem Uebersetzungslauf nur ein gewisser Anteil verarbeitet wird
+%			\include{Dateiname} - bindet 'Dateiname' (ohne .tex Endung) in das Dokument, LaTeX sorgt fuer Seitenumbruch vor und nach dem Inhalt dieser Datei und verwaltet eine eigene Hilfsdatei ('Dateiname'.aux) mit Querreferenzen u.ae.
+%			\includeonly{Dateiname,Dateiname,...} - werden nur diejenigen Dateien tatsaechlich mit \include eingebunden, die hier aufgaehlt werden. Ist \includeonly nicht vorhanden, so werden alle Dateien eingebunden.
+
+%\includeonly{chapters/heranfuehrende_kapitel,chapters/hauptteil}
+
+\begin{document}
+
+% --- Titelblatt
+\include{chapters/titelseite}
+
+% kleine roemische Seitenzahlen im Vorspann der Arbeit, Seitenzaehler wird automatisch auf 1 gesetzt
+\pagenumbering{roman}
+
+% --- Zusammenfassung (Abstract)
+%\include{chapters/zusammenfassung}
+
+% --- Inhaltsverzeichnis wird automatisch erzeugt
+\tableofcontents
+
+% technische Gruende, damit Inhaltsverzeichnis roemische Seitenzahl erhaelt
+\newpage
+% arabische Seitenzahlen im Rest der Arbeit, Seitenzaehler wird automatisch auf 1 gesetzt
+\pagenumbering{arabic}
+
+% --- Einleitung (Introduction)
+%\include{chapters/einleitung}
+
+%----- Problemstellung (Problemstellung)
+\include{chapters/einleitung}
+
+\include{chapters/mathematische_grundlagen}
+
+\include{chapters/problemloesung}
+% --- Heranfuehrende Kapitel
+%\include{chapters/mathematische_grundlagen}
+
+
+%\include{chapters/ToDo}
+
+% --- Zusammenfassung, Fazit und Ausblick
+%\include{chapters/fazit}
+
+% --- Anhang
+% bezeichnet den Beginn des Anhangs; Nummerierung der Kapitel wird auf fortlaufende Buchstaben umgeaendert
+%\appendix
+% einbinden der verschiedenen Kapitel im Anhang
+
+% --- Abbilungsverzeichnis
+%\listoffigures
+
+% --- Tabellenverzeichnis
+%\listoftables
+
+% --- Literaturverzeichnis
+% Befehl wird verwendet, um BibTeX Eintraege ins Literaturverzeichnis aufzunehmen, die in der Arbeit NICHT zitiert werden
+% \nocite{Schluessel,Schluessel,...} oder \nocite{*} uebernimmt alle Eintraege einer BibTeX Literaturdatenbank ins aktuelle Literaturverzeichnis
+\nocite{*}
+% legt die zu verwendete BibTeX Stildatei fest; einige Stildateien gehoeren zu Erweiterungspaketen, die ggf. zusaetzlich einzubinden sind
+\bibliographystyle{plain}
+% Befehl ist an der Stelle zu verwenden, an der das Literaturverzeichnis gesetzt werden soll
+\bibliography{bib/literaturverzeichnis}
+
+\begin{thebibliography}{20px}
+  \bibitem[opt]{opt} Optimazation with PDE Constraints
+\end{thebibliography}
+
+
+\end{document}
