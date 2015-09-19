@@ -17,7 +17,7 @@
 \contentsline {subsection}{\numberline {3.2.1}Analytische Betrachtung}{18}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Numerische Betrachtung}{21}{subsection.3.2.2}
 \contentsline {subsubsection}{\nonumberline Berechnung des $u$ Integrals}{22}{section*.5}
-\contentsline {subsection}{\numberline {3.2.3}Zusammenfassung}{25}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.3}Agregation}{25}{subsection.3.2.3}
 \contentsline {section}{\numberline {3.3}Optimierung nach v}{26}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Analytische Betrachtung}{26}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Newtonmethode}{30}{subsection.3.3.2}

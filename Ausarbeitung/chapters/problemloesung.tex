@@ -57,14 +57,14 @@ Es ist leichter ein Problem ohne Nebenbedingung zu betrachten, also nehmen wir d
 \end{align*}
 Das Problem hat dann folgende Form
 \begin{align}
-	\label{eq:optimierung_u_ohne_nb}
+	\label{eq:optimierung_u_ohne_nb2}
 	& \min\limits_{u \in u_0 +\ho^2} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x 
 \end{align}
 
 Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren. Es tauchen keine Mischung aus den Termen $u_1$ und $u_2$ auf, das heißt, dass wir die Optimierungen trennen können. Beide sind identisch, es müssen später nur unterschiedliche Werte eingesetzt werden.Betrachten wir oBdA die Optimierung nach $u_1$. 
 
 \begin{thm}[Bedingung für ein Minimum]
-	Sei das Minimierungsproblem \eqref{eq:optimierung_u_ohne_nb} gegeben und $\tilde{u_1}$  nimmt das Minimum an. Dann gilt 
+	Sei das Minimierungsproblem \eqref{eq:optimierung_u_ohne_nb2} gegeben und $\tilde{u_1}$  nimmt das Minimum an. Dann gilt 
 	\begin{align}
 		\label{eq:u_gleich_null}
 		\int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla \tilde{u_1} \nabla \varphi \diff x = 0 \forall \varphi \in u_0 + \ho 
@@ -135,7 +135,7 @@ Die Bilinearform lautet:
 Mit den Bezeichnungen aus \ref{sec:grundlagen_pdgl} ist $g = u_0$, $f,b,c=0$ und  
 \begin{align*}
 	A(x):= \begin{pmatrix}
-	v^2(x) + \epsilon_^1 & 0 \\
+	v^2(x) + \epsilon_1 & 0 \\
 	0 & v^2(x) + \epsilon_1 
 	\end{pmatrix}		
 \end{align*}
@@ -288,215 +288,28 @@ Mit diesen Werten können wir nun die Matrix $ \left( \int_{\Omega} (v^2+ \epsilo
 \end{figure}
 Dabei sind auf der Diagonalen die Einträge $B(T_i,T_i)$, auf der Nebendiagonalen die Einträge $B(T_i,T_{i+1})$ und auf der anderen Diagonale die Einträge $B(T_i,T_{i+n+1})$. Wir haben bis jetzt immer nur über das Referenzdreieck integriert. Da wir aber eigentlich über die transformierten Dreiecke integrieren, müssen wir zu der Matrix $1/(h_1 h_2)$ multiplizieren. 
 
-Wir wissen noch, dass auf $\Gamma_1 \cup \Gamma_2$ $u=0$ gilt. Dies ist bis jetzt noch nicht in die Matrix mit eingeflossen. Deshalb ist auf den Rändern $B(T_i,T_j)=0$. Also muss in der Implementierung für $i=1$ und $i=m$ oder $j=1$ und $j=m$ der entsprechende Eintrag $0$ gesetzt werden. Damit entsteht eine singuläre Matrix. Da wir das nicht wollen, setzten wir die Einträge auf der Diagonalen die durch $0$ ersetzt worden sind, auf $1$. Wenn wir nachher bei der linken Seite die entsprechenden Einträge auch 0 setzen, erhalten wir die gewünschten Randterme.  
-%todo andere Begründung vll mit Beweis. 
-
-
 \subsection{Agregation}
 
-Damit haben wir beide Seiten diskretisiert und können nun die Matrizen implementieren.  
+Nun haben wir die Matrix $A$ und den Vektor $u_0^h$ gegeben, um das Gleichungssystem $A u^h = A u_0^h$ zu berechnen. Allerdings haben wir noch nicht eingebracht, dass auf $\Gamma_1 \cup \Gamma_2$ $u=0$ gilt. Eigentlich würden wir das im Vektor $u$ mit aufnehmen, also die Zeilen 0 setzten, die den Rand repräsentieren und dann das Gleichungssystem lösen. Dies geht numerisch jedoch nicht so einfach. Die Information muss in $A$ und in $A u_0^h$ codiert sein. Dazu setzt man die Zeilen in $A$ 0, die zum Rand gehören. Die zugehörigen Diagonaleinträge werden 1 gesetzt. Diese Matrix nennen wir $\tilde{A}$. Die zugehörige Zeile in $A u_0^h$ setzt man 0. Den neuen Vektor nennen wir $\tilde{A u_0^h}$ Dadurch erhält man, dass $u^h$ an dieser Stelle 0 wird. 
+
+
+Damit haben wir beide Seiten diskretisiert und können das Gleichungssystem implementieren.  
 Wir wollen
 \begin{align*}
-	\frac{1}{h_1 h_2}Au=\frac{1}{h_1 h_2}b \Leftrightarrow Au = b
+	\frac{1}{h_1 h_2}\tilde{A} u=\frac{1}{h_1 h_2} \tilde{A u_0^h} \Leftrightarrow \tilde{A}u = \tilde{A u_0^h}
 \end{align*}
 berechnen. Der Code dazu hat folgende Form: 
 
 \begin{algorithm}[H]
 	\caption{Berechnung von u}
-	1. Berechne Matrix $A$ \\
-	2. Berechne Vektor $b$ \\
-	3. $u = b\backslash A$ 
+	1. Berechne Matrix $\tilde{A}$ \\
+	2. Berechne Vektor $\tilde{A u_0^h}$ \\
+	3. $u = \tilde{A u_0^h}\backslash \tilde{A}$ 
 \end{algorithm}
-Da sowohl $A$ als auch $b$ aus fast nur Nullen besteht, verwende ich in Matlab Sparse Matrizen. Dies führt zu einer wesentlich kürzeren Laufzeit. 
-%todo andere Darstellung des Algorithmus? 
-
- %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% neuer Absatz: Diskretisierung für Newton, G'     %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%
-%Zur Diskretisierung der rechten Seite kann man die linke Seite nutzen. Also mit dem Galerkinansatz und der gleichen Notation wie oben erhalten wir 
-%
-%\begin{align*}
-%\int_{\Omega} (v^2+ \epsilon) |\nabla \varphi|^2 \diff x & = \int_{\Omega} (v^2+ \epsilon) |\nabla \sum\limits_{i=1}^{k} T_i|^2 \diff x \\
-%		& =  \sum\limits_{i,j=1}^{k} \int_{\Omega} (v^2+ \epsilon) \nabla T_i \nabla T_j \diff x 
-%\end{align*}   
-%%Wir sehen, dass das die Diagonale der rechten Seite ist. Alle anderen Einträge bleiben 0. 
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% neuer Absatz: Zusammenfügen der Diskretisierungen		%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% alte sachen                 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{alte Sachen}
-%
-%Um zu dem Problem ein Newtonsystem aufstellen zu können, muss zuerst das KKT System bestimmt werden. Dies erweist sich als schwierig, wenn wir keine Nullranddaten haben, da die Randterme stören. Wir können aber das Problem vereinfachen, indem wir statt $u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2$ Nullranddaten annehmen. Dazu wählen wir $u \in \overline{H_0^1}(\Omega):=\{u \in H^1(\Omega)| u=0 \text{ auf } \Gamma_1 \cup \Gamma_2\}$ Also lautet nun das Problem:
-%
-%\begin{align*}
-%	& \min\limits_{u \in \overline{H_0^1}(\Omega), v \in H^1(\Omega)} \int_{\Omega} \left( v^2 + \epsilon \right) | \nabla u|^2 + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- v \right)^2 dx \\
-%	& \text{s.t.} \hspace{1ex} 0 \le v \le v_0
-%\end{align*}
-%
-%\begin{quest}
-%Wie geht die vereinafachung? 
-%\end{quest}
-%
-%Der erste Schritt ist es nun, die Funktionen für das KKT System zu bestimmen: 
-%
-%$
-%\begin{array}{ll}
-%	f: \overline{H_0^1}(\Omega) \times H^1(\Omega) \rightarrow \R & f(u,v):=\int\limits_{\Omega}  \left( v^2 + \epsilon \right) | \nabla u|^2 + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- v \right)^2 \diff x \\
-%	 c: H^1(\Omega) \times H^1(\Omega) \rightarrow L^2(\Omega)^2 & c(u,v):= 
-%	 \begin{pmatrix}
-%	 v- v_0 \\
-%	 -v
-%	 \end{pmatrix}	
-%\end{array}	 
-%$
-%
-%Nun wird die Lagrangefunktion f\"ur dieses Problem aufgestellt:
-%
-%$	
-%\begin{array}{ll}
-%	 \multicolumn{2}{l}{ L: \overline{H_0^1}(\Omega) \times H^1(\Omega) \times L^2(\Omega)^2 \rightarrow \R} \\ 
-%	 L(u,v,\lambda):= &\int\limits_{\Omega}  \left( v^2 + \epsilon \right) | \nabla u|^2 + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- v \right)^2 \diff x \\
-%	 & + \int\limits_{\Omega} \lambda_1 (v-v_0) - \lambda_2 v \diff x 	 
-%\end{array}
-%$
-%
-%Die KKT Bedingungen für das System lauten:
-%
-%\begin{quest}
-%	Allgemeine Formulierung?
-%\end{quest}
-%
-%Also muss $L_u$ und $L_v$ berechnet werden.
-%
-%$
-%\begin{array}{lrcl}
-%	L_u(u,v, \lambda): 	& \overline{H_0^1}(\Omega) 	& \rightarrow 	& \R \\
-%						& s							& \mapsto		& \partial_u L(u,v,\lambda|s)
-%\end{array}	
-%$
-%
-%Nun muss $\partial_u L(u,v,\lambda|s)$ berechnet werden:
-%
-%$
-%\begin{array}{lcrl}
-%	\partial_u L(u,v,\lambda|s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big( &
-%		L(u+ts,v, \lambda)-L(u,v, \lambda)
-%	\Big) \\
-%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big(	& 
-%		\int\limits_{\Omega}  \left( v^2 + \epsilon \right) | \nabla (u+ts)|^2 + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- v \right)^2 + \lambda_1 (v-v_0) - \lambda_2 v\diff x \\
-%		& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon \right) | \nabla u|^2 \hspace{6.5ex} + \epsilon |\nabla v|^2 + \frac{1}{\epsilon} \left( 1- v \right)^2 + \lambda_1 (v-v_0) - \lambda_2 v\diff x
-%	\Big) \\
-%								& =& \lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big( &
-%		\int\limits_{\Omega} (v^2+ \epsilon) \left(  | \nabla (u+ts)|^2 - | \nabla u|^2 \right) \diff x 
-%	\Big) \\
-%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big( & 
-%		\int\limits_{\Omega} (v^2+ \epsilon) \left(  | \nabla u+t \nabla s)|^2 - | \nabla u|^2  \right) \diff x
-%	\Big) \\
-%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big( & 
-%		\int\limits_{\Omega} (v^2+ \epsilon) \left(  | \nabla u |^2 + 2 t|\nabla u| |\nabla s| - t^2 |\nabla s|^2 - | \nabla u|^2  \right) \diff x
-%	\Big) \\
-%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big( & 
-%		\int\limits_{\Omega} (v^2+ \epsilon) \left(  2 t|\nabla u| |\nabla s| - t^2 |\nabla s|^2  \right) \diff x 
-%	\Big) \\
-%								& = &\lim\limits_{t \rightarrow 0}	
-%	\Big( & 
-%		\int\limits_{\Omega} (v^2+ \epsilon) \left(  2 |\nabla u| |\nabla s| - t |\nabla s|^2   \right) \diff x
-%	\Big) \\
-%		& = & &	\int\limits_{\Omega} (v^2+ \epsilon)  2 |\nabla u| |\nabla s|   \diff x \\
-%		& = & &	\int\limits_{\partial \Omega} (v^2+ \epsilon) 2 |\nabla u| s \nu  \diff x - 
-%		\int\limits_{\Omega} 4 v v' \nabla u \cdot s + 2 (v^2 + \epsilon) \Delta u s \diff x\\
-%		& = & &	\hspace{-4.2ex}\int\limits_{\partial \Omega \setminus (\Gamma_1 \cup \Gamma_2)} (v^2+ \epsilon) 2 |\nabla u| s \nu  \diff x + \int\limits_{\Gamma_1 \cup \Gamma_2} (v^2+ \epsilon) 2 |\nabla u| s \nu  \diff x  \\
-%		& & & \hspace{-1.8ex}- \int\limits_{\Omega} 4 v v' \nabla u \cdot s + 2 (v^2 + \epsilon) \Delta u s \diff x\\	
-%		& = & & \hspace{-4.2ex} \int\limits_{\partial \Omega \setminus (\Gamma_1 \cup \Gamma_2)} 2 (v^2+ \epsilon)  |\nabla u| s \nu  \diff x - 
-%		\int\limits_{\Omega} 4 v v' \nabla u \cdot s + 2 (v^2 + \epsilon) \Delta u s \diff x\\	 
-%		& = & & \hspace{-4.2ex} \left(2(v^2+ \epsilon)  |\nabla u| \nu, s \right)_{L^2(\partial \Omega \setminus (\Gamma_1 \cup \Gamma_2) )}  - \left( 4 v v' \nabla u \cdot s + 2 (v^2 + \epsilon) \Delta u,s \right)_{L^2(\Omega)}	 	
-%\end{array}
-%$
-%
-%Da $s \in \overline{H_0^1(\Omega)}$ fällt der Randterm bei $\Gamma_1 \cup \Gamma_2$ weg. 
-%\begin{quest}
-%eigentlich existiert $\Delta v$ nicht...
-%\end{quest}
-%
-%\begin{quest}
-%wie komme ich von dort aus genau zur frechet ableitung? also ohne integrale? 
-%\end{quest}
-%
-%Genau das gleiche muss für die Ableitung nach v gemacht werden. 
-%
-%$
-%\begin{array}{lrcl}
-%	L_v(u,v, \lambda): 	& \overline{H_0^1}(\Omega) 	& \rightarrow 	& \R \\
-%						& s							& \mapsto		& \partial_v L(u,v,\lambda|s)
-%\end{array}	
-%$
-%
-%
-%$
-%\begin{array}{lcrl}
-%	\partial_v L(u,v,\lambda|s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big( &
-%		L(u,v+ts, \lambda)-L(u,v, \lambda)
-%	\Big) \\
-%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big(	& 
-%		\int\limits_{\Omega}  \left( (v+ts)^2 + \epsilon \right) | \nabla (u)|^2 + \epsilon |\nabla (v+ts)|^2 + \frac{1}{\epsilon} \left( 1- (v+ts) \right)^2 \\ 
-%		& & & + \lambda_1 (v+ts-v_0) - \lambda_2 (v+ts) \diff x \\
-%		& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon \right) | \nabla u|^2 \hspace{8ex} + \epsilon |\nabla v|^2 \hspace{6.5ex}+ \frac{1}{\epsilon} \left( 1- v \right)^2 \\
-%		& & & + \lambda_1 (v-v_0)\hspace{5.5ex} - \lambda_2 v \diff x
-%	\Big) \\
-%	
-%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big(	& 
-%		\int\limits_{\Omega}  \left( \left( (v+ts)^2 + \epsilon \right) - \left( v^2 + \epsilon \right) \right) | \nabla (u)|^2 \\
-%		& & & \hspace{2ex} + \epsilon \left( |\nabla (v+ts)|^2 - |\nabla v|^2 \right) \\
-%		& & & \hspace{2ex} + \frac{1}{\epsilon} \left( (1- v- ts)^2 -  (1- v)^2 \right) \\ 
-%		& & & \hspace{2ex} + \lambda_1 \left( (v+ts-v_0)- (v-v_0) \right)  - \lambda_2 \left( (v+ts) - v\right) \diff x 
-%	\Big) \\	
-%	
-%								& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-%	\Big(	& 
-%		\int\limits_{\Omega}  \left( v^2 + 2vts + t^2s^2 - v^2  \right) | \nabla (u)|^2 \\
-%		& & & \hspace{2ex} + \epsilon \left( |\nabla v|^2 + 2 t \nabla v \nabla s + t^2 |\nabla s|^2 - |\nabla v|^2 \right) \\
-%		& & & \hspace{2ex} + \frac{1}{\epsilon} \left( (1- v)^2 - 2(1-v)ts + t^2s^2 -  (1- v)^2 \right) \\ 
-%		& & & \hspace{2ex} + \lambda_1 ts  - \lambda_2 ts  \diff x
-%	\Big) \\		
-%	
-%								& = &\lim\limits_{t \rightarrow 0} 
-%	\Big(	& 
-%		\int\limits_{\Omega}  \left( 2vs + ts^2  \right) | \nabla (u)|^2 + \epsilon \left( 2 \nabla v \nabla s + t |\nabla s|^2 \right) \\
-%		& & & \hspace{2ex} - \frac{1}{\epsilon} \left(2(1-v)s + ts^2 \right) + \lambda_1 s  - \lambda_2 s  \diff x
-%	\Big) \\	
-%								& = &\hspace{6.5ex} & 
-%		\int\limits_{\Omega} 2s v | \nabla (u)|^2 + \epsilon 2 \nabla v \nabla s - \frac{2}{\epsilon} (1-v)s + \lambda_1 s  - \lambda_2 s  \diff x\\	
-%								& = &\hspace{6.5ex} & 
-%		\int\limits_{\Omega} 2  v | \nabla (u)|^2 s - \epsilon 2 \Delta v  s - \frac{2}{\epsilon} (1-v)s + \lambda_1 s  - \lambda_2 s  \diff x \\
-%		& & & + \int\limits_{\partial \Omega} 2 \epsilon \nabla v \nu s \diff x  \\
-%	& = &\hspace{6.5ex} & 
-%		\left( 2  v | \nabla (u)|^2  - \epsilon 2 \Delta v - \frac{2}{\epsilon} (1-v) + \lambda_1 - \lambda_2, s \right)_{L^2(\Omega)} \\
-%		& & & + \left( 2 \epsilon \nabla v \nu , s \right)_{L^2(\partial \Omega)}  \\									 	
-%\end{array}
-%$
-
+Da sowohl $\tilde{A}$ als auch $\tilde{A u_0^h}$ aus fast nur Nullen besteht, verwende ich in Matlab Sparse Matrizen. Dies führt zu einer wesentlich kürzeren Laufzeit. 
 
 \section{Optimierung nach v}
-%todo evtl mit u zusammenfassen
+
 Bei optimierung nach v zunächst existenz und eind. anhand des optimierungsproblems mit nb. dann optimalitätsbedingungen mit kkt system aufstellen. Aus KKT semidiffbare newtonmethode machen aufstellen. 
 Zum schluss beide optimierungen ineinander überführen
 
@@ -675,7 +488,7 @@ gilt. Die schwache Formulierung ist dann
 
 \begin{align*}
  	& \int\limits_{\Omega} 2 \varphi  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi  - \frac{2}{\epsilon_3} (1-v)\varphi + \eta \varphi \diff x = 0 & \forall \varphi \in \h \\
-	& \int\limits_{\Omgea} \left( \eta - \max\{0, \eta + c(\overline{v}-v_0)\}- \min\{0, \eta + c\overline{v}\} \right) \varphi \diff x = 0 & \forall c>0, \forall  \varphi \in \h 
+	& \int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(\overline{v}-v_0)\}- \min\{0, \eta + c\overline{v}\} \right) \varphi \diff x = 0 & \forall c>0, \forall  \varphi \in \h 
 \end{align*}
 mit $\eta = \mu - \lambda$
 
