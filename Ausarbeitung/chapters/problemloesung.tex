@@ -500,47 +500,44 @@ Unser Ziel ist es, eine Methode zu finden, wie wir das KKT System lösen können. 
 		\end{pmatrix}
 	\end{array}
 \end{align*}
-Wir wollen $(v, \eta)$ finden, sodass $G=0$. Direkt kann diese Formel nicht gelöst werden, da $$
+Wir wollen $(v, \eta)$ finden, sodass $G=0$. Direkt kann diese Formel nicht gelöst werden, da wir um $G_2$ zu berechnen $(v,\eta)$ benötigen. Dies ist nicht gegeben. Also lösen wir das Problem mit einer Newton Methode. Für jeden Iterationsschritt ist $(v,\eta)$ durch den vorherigen gegeben. Dafür brauchen wir aber die Ableitung von G.  Da $G_2$ offensichtlich keine G\^ateaux-Ableitung hat, brauchen wir das Semidifferenzial. Also wird die semidifferenzierbare Newton Methode gebraucht. 
 
- 
-direkt implementieren geht nicht, da beide formeln von v und eta abhängen d.h. ich kann keine berechnen, ohne nicht eta oder v zu kennen. 
+Sehen wir uns zunächst die $\partial G_1(v,\eta)(h)$ an. Es gilt:
 
-Wir wollen das Problem implementieren, indem wir die Newton Methode anwenden. Diese sieht wie folgt aus: 
+\begin{thm}
+	$G_1(v,\eta)$ ist semidifferenzierbar mit 
+	\begin{align*}
+		& \partial G_{1 v} (v, \eta)(\phi) = \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x \\
+		& G_{1 \eta} (v, \eta) (\phi) = \int\limits_{\Omega}  \phi \varphi  \diff x
+	\end{align*}	
+\end{thm}
+\begin{proof}
+	Nach \ref{lem:semidiffbar_f_diffbar} ist $G_1$ $\partial G_1$ semidifferenzierbar, falls $G_1$ stetig Fréchet differenzierbar ist. Bestimmen wir zunächst die Richtungsableitung. Diese ist gegeben durch 
+	\begin{align*}
+		& \partial G_{1 v} (v, \eta)(\phi) = \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x \\
+		& G_{1 \eta} (v, \eta) (\phi) = \int\limits_{\Omega}  \phi \varphi  \diff x
+	\end{align*}
+	Die Berechnung wird hier nicht weiter ausgeführt. Die Richtungsableitung muss linear und beschränkt in $\phi$ sein. Linearität ist einfach zu sehen.
+	Für Fréchet Differenzierbarkeit muss eine Abschätzung überprüft werden:
+	\begin{align*}
+		& \|G_1(v + h,\eta) - G_1(v,\eta) - \partial G_{1v}(v,\eta)\| \\
+		& =  \| 	\int\limits_{\Omega} 2 \varphi  (v+h)  | \nabla u|^2 + \epsilon_2 2 \nabla (v+h) \nabla \varphi  - \frac{2}{\epsilon_3} (1-(v+h))\varphi + \eta \varphi  \diff x \\
+		& \hspace{5ex} - 	\int\limits_{\Omega} 2 \varphi  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi  - \frac{2}{\epsilon_3} (1-v)\varphi + \eta \varphi  \diff x \\
+		&  \hspace{5ex} - \int\limits_{\Omega} 2 \varphi  h | \nabla u|^2 + \epsilon_2 2 \nabla h \nabla \varphi  + \frac{2}{\epsilon_3} h \varphi \diff x \| \\
+		& = \| \int\limits_{\Omega} 2 \varphi  h | \nabla u|^2 + \epsilon_2 2 \nabla h \nabla \varphi  + \frac{2}{\epsilon_3} h \varphi \diff x -\int\limits_{\Omega} 2 \varphi  h | \nabla u|^2 + \epsilon_2 2 \nabla h \nabla \varphi  + \frac{2}{\epsilon_3} h \varphi \diff x \| \\
+		& = 0
+	\end{align*} 
+\end{proof}
+%todo beschränktheit nachdenken
+%todo stetigkeit nicht gegeben, oder? mit prof reden... 
 
-\begin{algorithm}[H]
-\caption{Newton Methode}
-\KwData{$u^0$ (möglichst nah an der Lösung $\overline{w}$)}
-\For{$k=0,1,\cdots$} {
-	\emph{Löse $G'(w^k) s^k=-G(w^k)$}\;
-	$w^{k+1}=w^k+s^k $\;
-}
-\end{algorithm}
-%todo andere NM einfügen, da das nur die einfache ist. Für diese Ableitung brauchen wir eine andere. 
-
-Hier betrachten wir die Funktion \\
-\begin{align*}
-	\begin{array}{rcl}
-		G: H^1(\Omega) \times H^1(\Omega)	& \rightarrow 	& H^{-1}(\Omega)^2 \\
-		(v, \eta)								& \mapsto  	& 
-		\begin{pmatrix}
-			\int\limits_{\Omega} 2 \varphi  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi  - \frac{2}{\epsilon_3} (1-v)\varphi + \eta \varphi  \diff x  \\
-			\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \varphi \diff x
-		\end{pmatrix}
-	\end{array}
-\end{align*}
-Nun brauchen wir die Ableitung. Da $G_2$ offensichtlich keine G\^ateaux-Ableitung hat, brauchen wir das Semidifferenzial. Bei $G_1$ entspricht das Semidifferenzial der G\^ateaux-Ableitung. Diese lässt sich einfach hinschreiben mit der Richtung $\phi$. 
-\begin{align*}
-	& G_{1 v} (v, \eta) = \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x \\
-	& G_{1 \eta} (v, \eta) = \int\limits_{\Omega}  \phi \varphi  \diff x
-\end{align*}
-
-Das Semidifferenzial von $G_2$ ist nicht ganz so einfach. Beweisen wir zunächst ein Lemma
+Für das Semidifferenzial von $G_2$  beweisen wir zunächst ein Lemma
 
 \begin{lem}
 	Betrachte $f: \h^2 \rightarrow H^{-1}(\Omega)$ mit 
 	\begin{align}
 		\label{eq:H}
-		\eta, v \mapsto  \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\}
+		(\eta, v ) \mapsto  \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\}
 	\end{align}
 	Dann ist $f$ semidifferenzierbar mit 
 	\begin{align*}
@@ -578,18 +575,18 @@ Das Semidifferenzial von $G_2$ ist nicht ganz so einfach. Beweisen wir zunächst 
 		\right .
 	\end{align*}
 	Die Äquivalenz von diese Form von $f$ und \eqref{eq:H}, kann einfach nachgerechnet werden. 
-	Betrachten wir zunächst die Ableitung nach $\eta$ Es reicht, die Semidifferenzierbarkeit der einzelnen Abschnitte zu betrachten. Falls jeder Abschnitt semidifferenzierbar ist und die Übergänge auch, so ist $f$ Semidifferenzierbar. 
+	Betrachten wir zunächst die Ableitung nach $\eta$ Es reicht, die Semidifferenzierbarkeit der einzelnen Abschnitte zu betrachten. Falls jeder Abschnitt semidifferenzierbar ist und die Übergänge auch, so ist $f$ semidifferenzierbar. 
 	
-	Sei dazu $-c(v-v_0) < \eta$ oder $ \eta < -c v $. Mit \ref{lem:semidiffbar_f_diffbar} gilt, dass, falls $f$ stetig Fréchet-Differenzierbar ist, $f$ $\partial f$ semidifferenzierbar. Um Fréchet-Differenzierbarkeit zu zeigen, bestimmen wir zunächst die Richtungsableitung. Diese ist offensichtlich $0$. Dadurch folgt sofort die Fréchet-Differenzierbarkeit. 
+	Sei dazu $-c(v-v_0) < \eta$ oder $ \eta < -c v $. Mit \ref{lem:semidiffbar_f_diffbar} gilt, dass, falls $f$ stetig Fréchet differenzierbar ist, $f$ $\partial f$ semidifferenzierbar. Um Fréchet Differenzierbarkeit zu zeigen, bestimmen wir zunächst die Richtungsableitung. Diese ist offensichtlich $0$. Dadurch folgt sofort die Fréchet differenzierbarkeit. 
 	
-	Sei nun $-cv < \eta < -c(v-v_0) $. Durch \ref{lem:semidiffbar_f_diffbar} müssen wir wieder die Fréchet-Differenzierbarkeit überprüfen. Offensichtlich ist die Identität Fréchet-Differenzierbar. Das Differenzial ist hier 1. 
+	Sei nun $-cv < \eta < -c(v-v_0) $. Durch \ref{lem:semidiffbar_f_diffbar} müssen wir wieder die Fréchet Differenzierbarkeit überprüfen. Offensichtlich ist die Identität Fréchet differenzierbar. Das Differenzial ist hier 1. 
 	
 	Sei $\eta =-c(v-v_0)$. Sei zunächst $d>0$. Die Abschätzung \ref{eq:semidiffbar_abschaetzung} muss gelten. Hier ist $\partial f(\eta+d, v) = \{0\}$ und damit 
 	\begin{align*}
 		& \sup\limits_{M \in \partial f(\eta+d,v) } \| f(\eta+d,v)-f(\eta)-M d\|_{H^{-1}(\Omega)} \\
 		& \hspace{3ex}= \| -c(v-v_0) +c(v-v_0) \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right)  \text{ für } \| d \|_{\h} \rightarrow 0
 	\end{align*}	
-	Sei nun $d<0$. Da $d$ nahe an 0 ist, gilt auch $d>-cv_0$ mit $v_0>0$. Jetzt ist $\partial G_2^{\eta}(\eta+d) = \{1\}$ und damit 
+	Sei nun $d<0$. Da $d$ nahe an 0 ist, gilt $d>-cv_0$ mit $v_0>0$. Es ist $\partial G_2^{\eta}(\eta+d) = \{1\}$ und damit 
 	\begin{align*}
 		& \sup\limits_{M \in \partial f(\eta+d,v) } \| f(\eta+d,v)-f(\eta,v)-M d\|_{H^{-1}(\Omega)} \\
 		& \hspace{3ex} = \| -c(v-v_0) +d +c(v-v_0) -d \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right)  \text{ für } \| d \|_{\h} \rightarrow 0
@@ -605,7 +602,7 @@ Das Semidifferenzial von $G_2$ ist nicht ganz so einfach. Beweisen wir zunächst 
 		& \sup\limits_{M \in \partial f(\eta+d,v) } \| f(\eta+d,v)-f(\eta,v)-M d\|_{H^{-1}(\Omega)} \\
 		& \hspace{3ex}= \| -cv+cv \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right)  \text{ für } \| d \|_{\h} \rightarrow 0
 	\end{align*}
-	Damit ist $f$ semidifferenzierbar nach $\eta$. Für die semidifferenzierbarkeit nach $v$ gilt die gleiche Rechnung.  
+	Damit ist $f$ semidifferenzierbar nach $\eta$. Für die Semidifferenzierbarkeit nach $v$ gilt die Gleiche Rechnung.  
 \end{proof}
 
 Das eigentliche Ziel war es, das Semidifferenzial von $G_2$ zu finden. Dieses können wir nun tun
@@ -627,7 +624,6 @@ ist semidifferenzierbar mit
 	
 \end{proof}
 %todo beweis ordentlich. mit kettenregel? einfach so lassen? mal schaun...
-%todo Räume korrekt? 
 
 Damit ergibt sich als Ableitung 
 \begin{align*}
@@ -769,11 +765,11 @@ Alle Funktionen aus dem Newtonsystem müssen numerisch dargestellt werden.
 
 Für die Diskretisierung wird dasselbe Gitter und die Selben Elemente genommen wie bei der Optimierung nach u. Auch hier werden wir wieder mit dem Galerkin Ansatz arbeiten d.h. 
 \begin{align*}
-	v=\sum\limits_{i=1}^{k} v_i^h T_i 
+	v=\sum\limits_{i=1}^{k} v_i^h T_i \hspace{9ex} \eta = \sum\limits_{i=1}^{k} \eta_i^h T_i \hspace{9ex} v_0=\sum\limits_{i=1}^{k} {v_0}_i^h T_i
 \end{align*}
 wobei die $T_i$ wieder die globalen Formfunktionen sind. 
 
-Da $u$ schon durch den vorherigen Iterationsschritt gegeben ist, ist $u$ ein Vektor mit den Auswertungen an den Ecken der Dreiecke. Die Darstellung ist die gleiche wie in \ref{subsec:darstellung_linear}. Also gilt 
+Da $u$ gegeben ist, ist $u$ ein Vektor mit den Auswertungen an den Ecken der Dreiecke. Die Darstellung ist die gleiche wie in \eqref{eq:ungerades_dreieck_lineare_fkt} und \eqref{eq:ungerades_dreieck_lineare_fkt}. Also gilt 
 \begin{align*}
 	|\nabla u|^2= (u_{31}-u_{21})^2+(u_{11}-u_{21})^2+ (u_{32}-u_{22})^2+(u_{12}-u_{22})^2=:u^{dis}
 \end{align*}  
@@ -787,17 +783,14 @@ G_1(v,\eta) =  \int\limits_{\Omega} 2 \varphi v | \nabla u|^2 + \epsilon_2 2 \na
 wird nun diskretisiert:
 \begin{align*}
 	& \hspace{2ex} \int\limits_{\Omega} 2\varphi v | \nabla u|^2 + 2 \epsilon_2  \nabla v \nabla \varphi - \frac{2}{\epsilon_3} (1-v)\varphi  +  \eta \varphi \diff x \\
-	& = \int\limits_{\Omega} 2 T_j  \sum\limits_{i=1}^{k} v_i^h T_i u^{dis} + \epsilon_2 2 \nabla (\sum\limits_{i=1}^{k} v_i^h T_i) \nabla  T_j - \frac{2}{\epsilon_3} (1-\sum\limits_{i=1}^{k} v_i^h T_i) T_j + \sum\limits_{i=1}^{k} \eta_i^h T_i T_j  \diff x \\
-	& = 2 \sum\limits_{i=1}^{k} v_i^h \int\limits_{\Omega} u^{dis} T_i T_j \diff x 
-	+ 2 \epsilon_2 \sum\limits_{i=1}^{k} v_i^h  \int\limits_{\Omega} \nabla T_i \nabla T_j \diff x
-	- \frac{2}{\epsilon_3} \sum\limits_{i=1}^{k} \int\limits_{\Omega} T_j \diff x \\
-& \hspace{2ex}	+  \frac{2}{\epsilon_3} \sum\limits_{i=1}^{k} \alpha_i  \int\limits_{\Omega} T_i T_j \diff x 
+	& = \int\limits_{\Omega} 2 T_j  \sum\limits_{i=1}^{k} v_i^h T_i u^{dis} + \epsilon_2 2 \sum\limits_{i=1}^{k} v_i^h \nabla T_i \nabla  T_j - \frac{2}{\epsilon_3} (1-\sum\limits_{i=1}^{k} v_i^h T_i) T_j + \sum\limits_{i=1}^{k} \eta_i^h T_i T_j  \diff x \\
+	& =  \sum\limits_{i=1}^{k} v_i^h \left(  2 \int\limits_{\Omega} u^{dis} T_i T_j \diff x + 2 \epsilon_2 \int\limits_{\Omega} \nabla T_i \nabla T_j \diff x +  \frac{2}{\epsilon_3}  \int\limits_{\Omega} T_i T_j \diff x  \right) \\
+	& - \frac{2}{\epsilon_3} \sum\limits_{i=1}^{k} \int\limits_{\Omega} T_j \diff x 
 	+  \sum\limits_{i=1}^{k} \eta_i^h \int\limits_{\Omega} T_i T_j \diff x \\
-	& = 2 A v^h + 2 \epsilon_2 v^h  B - \frac{2}{\epsilon_3} c + \frac{2}{\epsilon_3}  D v^h + D \eta^h \\
 	& = (2 A + 2 \epsilon_2 B + \frac{2}{\epsilon_3} D) v^h - \frac{2}{\epsilon_3} c + D\eta^h
 \end{align*}
 
-mit $v^h:=(v_1^h, \cdots v_k^h)^T$, $A_{ij}=  \int_{\Omega} u^{dis} T_i T_j \diff x $, $B_{ij}:= \int_{\Omega} \nabla T_i \nabla T_j \diff x$, $c_j:= \int_{\Omega} T_j \diff x$, $D_{ij}:= \int_{\Omega} T_i T_j \diff x $ und $e_j:=\int_{\Omega} \eta T_j \diff x  $. 
+mit $v^h:=(v_1^h, \cdots v_k^h)^T$, $\eta^h:=(\eta_1^h, \cdots \eta_k^h)^T$, $A_{ij}=  \int_{\Omega} u^{dis} T_i T_j \diff x $, $B_{ij}:= \int_{\Omega} \nabla T_i \nabla T_j \diff x$, $c_j:= \int_{\Omega} T_j \diff x$ und $D_{ij}:= \int_{\Omega} T_i T_j \diff x $.
 
 Um $A,B,D$ zu berechnen, brauchen wir $\int_E \varphi_i \varphi_j$ bzw $\int_E \nabla \varphi_i \nabla \varphi_j$, wobei E das Einheitsdreieck ist. \\
 \begin{align*}
@@ -815,9 +808,9 @@ Um $A,B,D$ zu berechnen, brauchen wir $\int_E \varphi_i \varphi_j$ bzw $\int_E \
 
 Nun können wir die einzelnen Matrizen berechnen.
 Die Berechnung erfolgt analog zur Optimierung nach $u$. Bei den Matrizen gibt es immer die Fälle, dass $i$ und $j$ gleich sind, $j$ rechts neben $i$ ist, $j$ direkt unter $i$ liegt und $j$ rechts unter $i$ liegt. Für alle anderen $i$ und $j$ ist der Matrixeintrag immer 0. Die Bezeichnungen sind die Gleichen, wie bei $u$. 
-\paragraph{Berechnung der Matrix $A_{ij}= \int\limits_{\Omega}  u^{dis} T_i T_j$}
+\paragraph{Berechnung der Matrix $A_{ij}= \int\limits_{\Omega}  u^{dis} T_i T_j \diff x$}
 	\begin{align*}
-		A_{i,i}	& = \int\limits_{\Omega}  u^{dis} T_i T_i \\
+		A_{i,i}	& = \int\limits_{\Omega}  u^{dis} T_i T_i \diff x\\
 					& = \int\limits_{E_3} u^{dis}_{E_3} \varphi_0 \varphi_0 \diff x
 					 + \int\limits_{E_6} u^{dis}_{E_6} \varphi_1 \varphi_1 \diff x
 					 + \int\limits_{E_5} u^{dis}_{E_5} \varphi_2 \varphi_2 \diff x\\
@@ -828,26 +821,27 @@ Die Berechnung erfolgt analog zur Optimierung nach $u$. Bei den Matrizen gibt es
 					& = \frac{1}{12} u^{dis}_{E_3} + \frac{1}{12} u^{dis}_{E_6} + \frac{1}{12}  u^{dis}_{E_5}+ \frac{1}{12}  u^{dis}_{E_4}+ \frac{1}{12} u^{dis}_{E_1}+ \frac{1}{12} u^{dis}_{E_2} \\
 					& = \frac{1}{12} \left( \sum\limits_{i=1}^6 u^{dis}_{E_i} \right)
 	\end{align*}
+	%todo reihenfolge ändern
 	\begin{align*}
-		A_{i,i+1}	& = \int\limits_{\Omega}  u^{dis} T_i   T_{i+1} = \int\limits_{E_3}  u^{dis}_{E_3} \varphi_0 \varphi_1 \diff x
+		A_{i,i+1}	& = \int\limits_{\Omega}  u^{dis} T_i   T_{i+1} \diff x = \int\limits_{E_3}  u^{dis}_{E_3} \varphi_0 \varphi_1 \diff x
 					 + \int\limits_{E_6} u^{dis}_{E_6}  \varphi_0 \varphi_1 \diff x \\
 					 & =  \frac{1}{24} u^{dis}_{E_3} + \frac{1}{24} u^{dis}_{E_6}  = \frac{1}{24} \left( u^{dis}_{E_3} + u^{dis}_{E_6} \right) 
 	\end{align*}
 	\begin{align*}
-		A_{i,i+1+n}	& = \int\limits_{\Omega} u^{dis} T_i   T_{i+1+n} = \int\limits_{E_4} u^{dis}_{E_4} \varphi_0 \varphi_1 \diff x
+		A_{i,i+1+n}	& = \int\limits_{\Omega} u^{dis} T_i   T_{i+1+n} \diff x = \int\limits_{E_4} u^{dis}_{E_4} \varphi_0 \varphi_1 \diff x
 					 + \int\limits_{E_5} u^{dis}_{E_5} \varphi_0 \varphi_1 \diff x \\
 					 & = \frac{1}{24} u^{dis}_{E_4} + \frac{1}{24} u^{dis}_{E_5} = \frac{1}{24} \left( u^{dis}_{E_4} + u^{dis}_{E_5} \right)
 	\end{align*}	
 	\begin{align*}
-		A_{i,i+n+2}	& = \int\limits_{\Omega} u^{dis} T_i   T_{i+2+n} = \int\limits_{E_5} u^{dis}_{E_5} \varphi_1 \varphi_2 \diff x
+		A_{i,i+n+2}	& = \int\limits_{\Omega} u^{dis} T_i   T_{i+2+n} \diff x= \int\limits_{E_5} u^{dis}_{E_5} \varphi_1 \varphi_2 \diff x
 					 + \int\limits_{E_6} u^{dis}_{E_6} \varphi_1 \varphi_2 \diff x \\
 					 & = \frac{1}{24} u^{dis}_{E_5} + \frac{1}{24} u^{dis}_{E_6}  = \frac{1}{24} \left( u^{dis}_{E_5} +u^{dis}_{E_6} \right)
 	\end{align*}
 
 
-\paragraph{Berechnung der Matrix $B_{ij}= \int\limits_{\Omega} \nabla T_i  \nabla T_j$}
+\paragraph{Berechnung der Matrix $B_{ij}= \int\limits_{\Omega} \nabla T_i  \nabla T_j \diff x$}
 	\begin{align*}
-		B_{i,i}	& = \int\limits_{\Omega} \nabla T_i \nabla T_i \\
+		B_{i,i}	& = \int\limits_{\Omega} \nabla T_i \nabla T_i \diff x\\
 					& = \int\limits_{E_3} \nabla \varphi_0 \nabla \varphi_0 \diff x
 					 + \int\limits_{E_6} \nabla \varphi_1 \nabla \varphi_1 \diff x
 					 + \int\limits_{E_5} \nabla \varphi_2 \nabla \varphi_2 \diff x\\
@@ -858,17 +852,17 @@ Die Berechnung erfolgt analog zur Optimierung nach $u$. Bei den Matrizen gibt es
 					& = 1 + \frac{1}{2} + \frac{1}{2} + 1 + \frac{1}{2} + \frac{1}{2}  = 4
 	\end{align*}
 	\begin{align*}
-		B_{i,i+1}	& = \int\limits_{\Omega} \nabla T_i \nabla T_{i+1} = \int\limits_{E_3} \nabla \varphi_0 \nabla \varphi_1 \diff x
+		B_{i,i+1}	& = \int\limits_{\Omega} \nabla T_i \nabla T_{i+1} \diff x= \int\limits_{E_3} \nabla \varphi_0 \nabla \varphi_1 \diff x
 					 + \int\limits_{E_6} \nabla \varphi_0 \nabla \varphi_1 \diff x \\
 					 & = - \frac{1}{2} - \frac{1}{2} = -1 
 	\end{align*}
 	\begin{align*}
-		B_{i,i+n+1}	& = \int\limits_{\Omega} \nabla T_i \nabla T_{i+1+n} = \int\limits_{E_4} \nabla \varphi_0  \nabla \varphi_1 \diff x
+		B_{i,i+n+1}	& = \int\limits_{\Omega} \nabla T_i \nabla T_{i+1+n} \diff x= \int\limits_{E_4} \nabla \varphi_0  \nabla \varphi_1 \diff x
 					 + \int\limits_{E_5} \nabla \varphi_0 \nabla \varphi_1 \diff x \\
 					 & = - \frac{1}{2} - \frac{1}{2}  = -1 
 	\end{align*}	  
 	\begin{align*}
-		B_{i,i+n+2}	& = \int\limits_{\Omega} \nabla T_i \nabla T_{i+2+n} \\
+		B_{i,i+n+2}	& = \int\limits_{\Omega} \nabla T_i \nabla T_{i+2+n} \diff x\\
 					& = \int\limits_{E_5} \nabla \varphi_1  \nabla \varphi_2 \diff x
 					 + \int\limits_{E_6} \nabla \varphi_1 \nabla \varphi_2 \diff x  = 0 
 	\end{align*}	
@@ -891,9 +885,9 @@ Die Berechnung erfolgt analog zur Optimierung nach $u$. Bei den Matrizen gibt es
  
 Falls $i$ an einem Rand liegen sollte, werden die Dreiecke, die nicht vorhanden sind, weggelassen. 
 
-\paragraph{Berechnung der Matrix $D_{ij}= \int\limits_{\Omega}  T_i T_j$}
+\paragraph{Berechnung der Matrix $D_{ij}= \int\limits_{\Omega}  T_i T_j \diff x$}
 	\begin{align*}
-		D_{i,i}	& = \int\limits_{\Omega}  T_i T_i \\
+		D_{i,i}	& = \int\limits_{\Omega}  T_i T_i \diff x\\
 					& = \int\limits_{E_3}   \varphi_0 \varphi_0 \diff x
 					 + \int\limits_{E_6}   \varphi_1 \varphi_1 \diff x
 					 + \int\limits_{E_5}   \varphi_2 \varphi_2 \diff x \\
@@ -904,17 +898,17 @@ Falls $i$ an einem Rand liegen sollte, werden die Dreiecke, die nicht vorhanden 
 					& = \frac{1}{12} + \frac{1}{12} + \frac{1}{12} + \frac{1}{12} + \frac{1}{12} + \frac{1}{12}  = \frac{1}{2}
 	\end{align*}
 	\begin{align*}
-		D_{i,i+1}	& = \int\limits_{\Omega}   T_i   T_{i+1} = \int\limits_{E_3}   \varphi_0 \varphi_1 \diff x
+		D_{i,i+1}	& = \int\limits_{\Omega}   T_i   T_{i+1} \diff x= \int\limits_{E_3}   \varphi_0 \varphi_1 \diff x
 					 + \int\limits_{E_6}   \varphi_0 \varphi_1 \diff x \\
 					 & =  \frac{1}{24} + \frac{1}{24}  = \frac{1}{12}
 	\end{align*}
 	\begin{align*}
-		D_{i,i+n+1}	& = \int\limits_{\Omega}   T_i   T_{i+1+n}  = \int\limits_{E_4}   \varphi_0 \varphi_1 \diff x
+		D_{i,i+n+1}	& = \int\limits_{\Omega}   T_i   T_{i+1+n} \diff x = \int\limits_{E_4}   \varphi_0 \varphi_1 \diff x
 					 + \int\limits_{E_5}   \varphi_0 \varphi_1 \diff x \\
 					 & = \frac{1}{24} + \frac{1}{24} = \frac{1}{12}
 	\end{align*}	 
 	\begin{align*}
-		D_{i,i+n+2}	& = \int\limits_{\Omega}   T_i   T_{i+2+n}  = \int\limits_{E_5}   \varphi_1 \varphi_2 \diff x
+		D_{i,i+n+2}	& = \int\limits_{\Omega}   T_i   T_{i+2+n} \diff x = \int\limits_{E_5}   \varphi_1 \varphi_2 \diff x
 					 + \int\limits_{E_6}   \varphi_1 \varphi_2 \diff x \\
 					 & = \frac{1}{24} + \frac{1}{24}  = \frac{1}{12}
 	\end{align*}
@@ -923,7 +917,7 @@ Falls $i$ an einem Rand liegen sollte, werden die Dreiecke, die nicht vorhanden 
 Also ergibt sich 
 
 \begin{equation*}
-	(2 A + 2 \epsilon_2 B + \frac{2}{\epsilon_3} D) \alpha  - \frac{2}{\epsilon_3} c + e=  
+	(2 A + 2 \epsilon_2 B + \frac{2}{\epsilon_3} D) v  - \frac{2}{\epsilon_3} c + e=  
 \end{equation*}
 
 \begin{figure}[ht]
@@ -933,7 +927,7 @@ Also ergibt sich
 \end{figure}
 %todo Grafik bearbeiten und der Formel anpassen. 
 
-wobei bei $A$ auf der Hauptdiagonalen $\frac{1}{12} \left( \sum\limits_{i=1}^6 b_{E_i} \right)$, auf der Nebendiagonalen $\frac{1}{24} \left( u^{dis}_{E_4} + u^{dis}_{E_5} \right) $ , auf der zweiten Nebendiagonalen $ \frac{1}{24} \left( u^{dis}_{E_4} + u^{dis}_{E_5} \right) $  und auf der dritten Nebendiagonalen $ \frac{1}{24} \left( u^{dis}_{E_5} +u^{dis}_{E_6} \right)$ steht. 
+wobei bei $A$ auf der Hauptdiagonalen $\frac{1}{12} \left( \sum\limits_{i=1}^6 b_{E_i} \right)$, auf der Nebendiagonalen $\frac{1}{24} \left( u^{dis}_{E_3} + u^{dis}_{E_6} \right) $ , auf der zweiten Nebendiagonalen $ \frac{1}{24} \left( u^{dis}_{E_4} + u^{dis}_{E_5} \right) $  und auf der dritten Nebendiagonalen $ \frac{1}{24} \left( u^{dis}_{E_5} +u^{dis}_{E_6} \right)$ steht. 
 
 Bei $B$ steht  auf der Hauptdiagonalen $4 $, auf der Nebendiagonalen und der zweiten Nebendiagonalen  $-1 $. 
 
@@ -976,20 +970,18 @@ Durch die noch ausstehende Transformation der Dreiecke, muss der gesamte Term mi
 \end{align*}
 Um dieses Funktional numerisch darzustellen, benutzen wir den Galerkin Ansatz mit 
 \begin{align*}
-	& v = \sum\limits_{i=1}^k v_i^h T_i(x,y) \\
-	& \eta = \sum\limits_{i=1}^k \eta_i^h T_i(x,y) \\ 
-	& v_0 = \sum\limits_{i=1}^k {v_0}_i^h T_i(x,y) 
+	& v = \sum\limits_{i=1}^k v_i^h T_i(x,y) \hspace{9ex} \eta = \sum\limits_{i=1}^k \eta_i^h T_i(x,y) \hspace{9ex} v_0 = \sum\limits_{i=1}^k {v_0}_i^h T_i(x,y) 
 \end{align*}
 Daraus ergibt sich:
 
 \begin{align*}
 	& \int\limits_{\Omega} \left( \eta - \max \left\{ 0, \eta + c(v-v_0) \right\} - \min \left\{ 0, \eta + c v \right\} \right) \varphi \diff x  \\
-	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right - \max \left\{ 0,  \sum\limits_{i=1}^k \eta_i^h T_i + c(\sum\limits_{i=1}^k v_i^h T_i - \sum\limits_{i=1}^k {v_0}_i^h T_i ) \right\} \\
-	& \hspace{5ex} \left - \min \left\{ 0,  \sum\limits_{i=1}^k \eta_i^h T_i + c \sum\limits_{i=1}^k v_i^h T_i \right\} \right) T_j \diff x  \\ 
-	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right - \max\left\{ 0,  \sum\limits_{i=1}^k \left( \eta_i^h + c(v_i^h - {v_0}_i^h ) \right) T_i  \right\} \\
-	& \hspace{5ex} \left - \min \left\{ 0,  \sum\limits_{i=1}^k \left( \eta_i^h + c v_i^h \right) T_i  \right\} \right) T_j \diff x  \\ 
-	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right -   \sum\limits_{i=1}^k \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h )  \right\} T_i \\
-	& \hspace{5ex} \left -\sum\limits_{i=1}^k  \min \left\{ 0,  \eta_i^h + c v_i^h    \right\} T_i  \right) T_j \diff x  \\ 
+	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right. - \max \left\{ 0,  \sum\limits_{i=1}^k \eta_i^h T_i + c(\sum\limits_{i=1}^k v_i^h T_i - \sum\limits_{i=1}^k {v_0}_i^h T_i ) \right\} \\
+	& \hspace{5ex} \left. - \min \left\{ 0,  \sum\limits_{i=1}^k \eta_i^h T_i + c \sum\limits_{i=1}^k v_i^h T_i \right\} \right) T_j \diff x  \\ 
+	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right.- \max\left\{ 0,  \sum\limits_{i=1}^k \left( \eta_i^h + c(v_i^h - {v_0}_i^h ) \right) T_i  \right\} \\
+	& \hspace{5ex} \left. - \min \left\{ 0,  \sum\limits_{i=1}^k \left( \eta_i^h + c v_i^h \right) T_i  \right\} \right) T_j \diff x  \\ 
+	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right. -   \sum\limits_{i=1}^k \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h )  \right\} T_i \\
+	& \hspace{5ex} \left. -\sum\limits_{i=1}^k  \min \left\{ 0,  \eta_i^h + c v_i^h    \right\} T_i  \right) T_j \diff x  \\ 
 	& = \int\limits_{\Omega}  \sum\limits_{i=1}^k \left(  \eta_i^h- \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h ) \right\} -  \min \left\{0,  \eta_i^h + c v_i^h    \right\}  \right) T_i T_j \diff x \\
 	& =  \left( \sum\limits_{i=1}^k   \eta_i^h- \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h ) \right\} -  \min \left\{0,  \eta_i^h + c v_i^h    \right\}  \right) \int\limits_{\Omega} T_i T_j \diff x \\	  
 	& = D w_{v \eta}	
@@ -1006,7 +998,7 @@ $w_{v \eta}	$ kann auch explizit dargestellt werden:
 				\eta_i^h 		& \text{ falls } -c v_i^h  < \eta < -c(v_i^h - {v_0}_i^h ) \\
 				-c v_i^h	& \text{ falls }  \eta_i^h \le -c v_i^h
 			\end{array}
-		\right .
+		\right..
 \end{align*}
 %todo erklärungen, warum z.b. die Summe aus dem max/ min gezogen werden darf. 
 
@@ -1019,8 +1011,8 @@ wird nun diskretisieren:
 
 \begin{align*}
 	& \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x\\
-	& = \int\limits_{\Omega} 2 \sum\limits_{j=1}^{k} T_j  \sum\limits_{i=1}^{k}  T_i b + \epsilon_2 2 \nabla (\sum\limits_{i=1}^{k} T_i ) \nabla (\sum\limits_{j=1}^{k} T_j ) + \frac{2}{\epsilon_3} \sum\limits_{i=1}^{k}  T_i \sum\limits_{j=1}^{k} T_j \diff x \\
-	& = 2 \sum\limits_{i,j=1}^{k} \int\limits_{\Omega} b T_i T_j \diff x 
+	& = \int\limits_{\Omega} 2 \sum\limits_{j=1}^{k} T_j  \sum\limits_{i=1}^{k}  T_i u^{dis} + \epsilon_2 2 \nabla (\sum\limits_{i=1}^{k} T_i ) \nabla (\sum\limits_{j=1}^{k} T_j ) + \frac{2}{\epsilon_3} \sum\limits_{i=1}^{k}  T_i \sum\limits_{j=1}^{k} T_j \diff x \\
+	& = 2 \sum\limits_{i,j=1}^{k} \int\limits_{\Omega} u^{dis} T_i T_j \diff x 
 	+ 2 \epsilon_2 \sum\limits_{i,j=1}^{k}   \int\limits_{\Omega} \nabla T_i \nabla T_j \diff x
 	+  \frac{2}{\epsilon_3} \sum\limits_{i,j=1}^{k} \int\limits_{\Omega} T_i T_j \diff x \\
 	& = 2 A  + 2 \epsilon_2  B + \frac{2}{\epsilon_3}  D 
@@ -1054,9 +1046,9 @@ mit
 			\{0\}		& \text{ falls } -cv < \eta < -c(v-v_0) \\
 			\lbrack -c,0 \rbrack	& \text{ falls }  -c(v-v_0) = \eta \text{ oder }  \eta = -cv 
 		\end{array}
-		\right .
+		\right..
 	\end{align*}
-numerisch dargestellt werden. Statt $\frac{\partial f}{\partial v}$ implementieren wir eine Vereinfachung, die nicht mehr Mengenwertig ist. Dazu wählen wir statt $\lbrack -c,0 \rbrack$ einen Punkt aus dem Intervall z.B. $-c/2$. Nun kann  $\frac{\partial f}{\partial v}$  diskretisiert werden zu $f^h$. Dies ist einfach die Funktion ausgewertet an den Gitterpunkten. Diese diskrete Funktion hat eine explizite Darstellung auf den Dreiecken. Diese ist in \ref{eq:explizite_lineare_fkt_dreieck} dargestellt.
+numerisch dargestellt werden. Statt $\frac{\partial f}{\partial v}$ implementieren wir eine Vereinfachung, die nicht mehr Mengenwertig ist. Dazu wählen wir statt $\lbrack -c,0 \rbrack$ einen Punkt aus dem Intervall z.B. $-c/2$. Nun kann  $\frac{\partial f}{\partial v}$  diskretisiert werden zu $f^h$. Dies ist einfach die Funktion ausgewertet an den Gitterpunkten.
 
 Nun wird $\partial G_{2 v}(\eta, v) (\varphi, \phi)$ diskretisiert. Hier wird wie immer $\varphi, \phi$ durch die globalen Formfunktionen $T_i$ ersetzt und $\Omega $ durch die Vereinigung aller Dreiecke. Nun kann für jedes Dreieck  $\int\limits_E  \frac{\partial f}{\partial v} T_i T_j \diff x $ berechnet werden. Dabei ist wieder zu beachten, dass für gerade und ungerade Dreiecke andere Ergebnisse zustande kommen:
 
@@ -1072,12 +1064,13 @@ Nun wird $\partial G_{2 v}(\eta, v) (\varphi, \phi)$ diskretisiert. Hier wird wi
 		12	& \frac{1}{120} (2f_1^h + f_2^h + 2f_3^h) & \frac{1}{120} (2f_1^h + f_2^h +2 f_3^h) 
 	\end{array}
 \end{align*}
+%todo überprüfen nach richtigen 3 gesetzt
 Dabei ist $f_1^h$ bei einem geraden Dreieck die Auswertung von $f^h$ an der oberen linken Ecke des Dreiecks. Die anderen Bezeichnungen sind darauf aufbauend. 
 
 Damit können wir $\partial G_{2 v}$ diskretisieren. Wir nennen die Diskretisierung $F_{ij}$. Hier hat man wieder die vier Fälle: 
 
 	\begin{align*}
-		F_{i,i}	& = \int\limits_{\Omega}  f^h T_i T_i \\
+		F_{i,i}	& = \int\limits_{\Omega}  f^h T_i T_i \diff x\\
 		& = \int\limits_{E_3} f^h_{E_3} \varphi_0 \varphi_0 \diff x
 		+ \int\limits_{E_6} f^h_{E_6} \varphi_1 \varphi_1 \diff x
 		+ \int\limits_{E_5} f^h_{E_5} \varphi_2 \varphi_2 \diff x\\
@@ -1087,31 +1080,31 @@ Damit können wir $\partial G_{2 v}$ diskretisieren. Wir nennen die Diskretisieru
 		+ \int\limits_{E_2} f^h_{E_2}  \varphi_2 \varphi_2 \diff x \\
 		& = \frac{1}{60} \left(  \left( f_1^h +  f_2^h + 3f_3^h\right)_{E_1} 
 		+ \left( f_1^h +  f_2^h + 3f_3^h\right)_{E_2}
-		+ \left( f_1^h +  3f_2^h + f_3^h\right)_{E_3} \right \\
-		& \left
+		+ \left( f_1^h +  3f_2^h + f_3^h\right)_{E_3} \right. \\
+		& \left.
 		+ \left( f_1^h +  3f_2^h + f_3^h\right)_{E_4} 
 		+ \left( 3f_1^h +  f_2^h + f_3^h\right)_{E_5} 
 		+ \left( 3f_1^h +  f_2^h + f_3^h\right)_{E_6} \right)
 	\end{align*}
 	\begin{align*}
-		A_{i,i+1}	& = \int\limits_{\Omega}  f^h T_i   T_{i+1} = \int\limits_{E_3}  f^h_{E_3} \varphi_0 \varphi_1 \diff x
+		A_{i,i+1}	& = \int\limits_{\Omega}  f^h T_i   T_{i+1} \diff x= \int\limits_{E_3}  f^h_{E_3} \varphi_0 \varphi_1 \diff x
 		+ \int\limits_{E_6} f^h_{E_6}  \varphi_0 \varphi_1 \diff x \\
 		& =   \frac{1}{120} \left(  \left(  f_1^h +  2f_2^h + 2f_3^h\right)_{E_3} 
 		+ \left( 2f_1^h +  2f_2^h + f_3^h\right)_{E_6} \right)
 	\end{align*}
 	\begin{align*}
-		A_{i,i+1+n}	& = \int\limits_{\Omega} f^h T_i   T_{i+1+n} = \int\limits_{E_4} f^h_{E_4} \varphi_0 \varphi_1 \diff x
+		A_{i,i+1+n}	& = \int\limits_{\Omega} f^h T_i   T_{i+1+n} \diff x= \int\limits_{E_4} f^h_{E_4} \varphi_0 \varphi_1 \diff x
 		+ \int\limits_{E_5} f^h_{E_5} \varphi_0 \varphi_1 \diff x \\
 		& =   \frac{1}{120} \left(  \left( 2f_1^h +  2f_2^h + f_3^h\right)_{E_4} 
 				+ \left( f_1^h +  2f_2^h + 2f_3^h\right)_{E_5}\right)
 	\end{align*}	
 	\begin{align*}
-		A_{i,i+n+2}	& = \int\limits_{\Omega} f^h T_i   T_{i+2+n} = \int\limits_{E_5} f^h_{E_5} \varphi_1 \varphi_2 \diff x
+		A_{i,i+n+2}	& = \int\limits_{\Omega} f^h T_i   T_{i+2+n} \diff x= \int\limits_{E_5} f^h_{E_5} \varphi_1 \varphi_2 \diff x
 		+ \int\limits_{E_6} f^h_{E_6} \varphi_1 \varphi_2 \diff x \\
 		& =   \frac{1}{120} \left(  \left( 2 f_1^h +  f_2^h +2 f_3^h\right)_{E_5} 
 		+ \left(2 f_1^h +  f_2^h + 2f_3^h\right)_{E_6}\right)
 	\end{align*}
-hierbei bedeutet $\left( f_1^h +  f_2^h + f_3^h\right)_{E_j} \right)$, dass $f_i^h$ $f$ auf dem $i$-ten Gitterpunkt des Dreieck $E_j$ ausgewertet wird. 
+hierbei bedeutet $\left( f_1^h +  f_2^h + f_3^h\right)_{E_j} $, dass $f_i^h$ $f$ auf dem $i$-ten Gitterpunkt des Dreieck $E_j$ ausgewertet wird. 
 
 \subsubsection{numerische Darstellung von $G_{2 \eta}$}
 Die numerische Darstellung ist genau die gleiche, wie bei $G_{2 v}$, nur dass die Funktionsauswertungen von $f$ andere sind. 

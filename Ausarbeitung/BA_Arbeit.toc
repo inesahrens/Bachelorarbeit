@@ -20,14 +20,14 @@
 \contentsline {subsection}{\numberline {3.2.3}Agregation}{25}{subsection.3.2.3}
 \contentsline {section}{\numberline {3.3}Optimierung nach v}{26}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Analytische Betrachtung}{26}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Newtonmethode}{30}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}numerische Betrachtung}{33}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.2}semidifferenzierbare Newtonmethode}{30}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}numerische Betrachtung}{34}{subsection.3.3.3}
 \contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1}$}{34}{section*.13}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix $A_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } u^{dis} T_i T_j$}{35}{section*.14}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix $B_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } \nabla T_i \nabla T_j$}{36}{section*.15}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix $A_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } u^{dis} T_i T_j \mathop {}\tmspace -\thinmuskip {.1667em}\mathrm {d}x$}{36}{section*.14}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix $B_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } \nabla T_i \nabla T_j \mathop {}\tmspace -\thinmuskip {.1667em}\mathrm {d}x$}{37}{section*.15}
 \contentsline {paragraph}{\nonumberline Berechnung des Vektors c}{37}{section*.16}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix $D_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } T_i T_j$}{37}{section*.17}
-\contentsline {paragraph}{\nonumberline Zusammenfassung}{38}{section*.18}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix $D_{ij}= \DOTSI \intop \ilimits@ \limits _{\Omega } T_i T_j \mathop {}\tmspace -\thinmuskip {.1667em}\mathrm {d}x$}{38}{section*.17}
+\contentsline {paragraph}{\nonumberline Zusammenfassung}{39}{section*.18}
 \contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2}$}{39}{section*.20}
 \contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 v}$}{41}{section*.21}
 \contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 \eta }$}{41}{section*.22}
