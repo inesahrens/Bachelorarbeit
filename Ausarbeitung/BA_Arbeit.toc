@@ -23,17 +23,20 @@
 \contentsline {subsection}{\numberline {3.3.2}semidifferenzierbare Newton Methode}{30}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}numerische Betrachtung}{34}{subsection.3.3.3}
 \contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1}$}{34}{section*.13}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix A}{36}{section*.14}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix B}{37}{section*.15}
-\contentsline {paragraph}{\nonumberline Berechnung des Vektors c}{37}{section*.16}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix D}{38}{section*.17}
-\contentsline {paragraph}{\nonumberline Zusammenfassung}{39}{section*.18}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2}$}{39}{section*.20}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 v}$}{41}{section*.21}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 \eta }$}{41}{section*.22}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 v}$}{42}{section*.23}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 \eta }$}{44}{section*.24}
-\contentsline {subsection}{\numberline {3.3.4}Agregation}{44}{subsection.3.3.4}
-\contentsline {chapter}{\numberline {4}Fazit und Ausblick}{45}{chapter.4}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{46}{chapter*.25}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{47}{chapter*.26}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2}$}{36}{section*.15}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 v}$}{38}{section*.16}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 \eta }$}{38}{section*.17}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 v}$}{39}{section*.18}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 \eta }$}{39}{section*.20}
+\contentsline {subsection}{\numberline {3.3.4}Agregation}{40}{subsection.3.3.4}
+\contentsline {chapter}{\numberline {4}Fazit und Ausblick}{41}{chapter.4}
+\contentsline {chapter}{\numberline {A}Allgemeine Informationen}{42}{appendix.A}
+\contentsline {section}{\numberline {A.1}Rechnungen}{42}{section.A.1}
+\contentsline {subsection}{\numberline {A.1.1}numerische Darstellung von $G_1$}{42}{subsection.A.1.1}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix A}{43}{section*.21}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix B}{44}{section*.22}
+\contentsline {paragraph}{\nonumberline Berechnung des Vektors c}{44}{section*.23}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix D}{45}{section*.24}
+\contentsline {subsection}{\numberline {A.1.2}Berechnung von $G_{2v}$}{46}{subsection.A.1.2}
+\contentsline {section}{\numberline {A.2}Code}{47}{section.A.2}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{48}{appendix*.25}

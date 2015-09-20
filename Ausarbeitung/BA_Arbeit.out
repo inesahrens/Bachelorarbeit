@@ -22,5 +22,9 @@
 \BOOKMARK [2][-]{subsection.3.3.3}{numerische Betrachtung}{section.3.3}% 22
 \BOOKMARK [2][-]{subsection.3.3.4}{Agregation}{section.3.3}% 23
 \BOOKMARK [0][-]{chapter.4}{Fazit und Ausblick}{}% 24
-\BOOKMARK [0][-]{chapter*.25}{Literaturverzeichnis}{}% 25
-\BOOKMARK [0][-]{chapter*.26}{Literaturverzeichnis}{}% 26
+\BOOKMARK [0][-]{appendix.A}{Allgemeine Informationen}{}% 25
+\BOOKMARK [1][-]{section.A.1}{Rechnungen}{appendix.A}% 26
+\BOOKMARK [2][-]{subsection.A.1.1}{numerische Darstellung von G1}{section.A.1}% 27
+\BOOKMARK [2][-]{subsection.A.1.2}{Berechnung von G2v}{section.A.1}% 28
+\BOOKMARK [1][-]{section.A.2}{Code}{appendix.A}% 29
+\BOOKMARK [0][-]{appendix*.25}{Literaturverzeichnis}{}% 30

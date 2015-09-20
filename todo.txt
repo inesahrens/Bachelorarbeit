@@ -9,6 +9,7 @@ todo
 - fazit schreiben 
 - vll anwendung und modell als einzelne unterkapitel?
 - semidiffbar teil überarbeiten nachdem ich konvergenz weiß
+- prof zitaz vorlesung fragen
 
 + ableitung dF() (phi) schreiben einheitlich
 + Thm Titel richtig angeben
@@ -20,7 +21,7 @@ todo
 + transformation von G_2 usw 
 + alle Bezeichnungen bei rechnungen schöber machen. als matrix, nicht als Fkt
 + eq refs statt refs
-- alle Rechnungen im Anhang?
++ alle Rechnungen im Anhang?
 + s.d. statt s.t.
 + triangulierung
 + NM überall gleichschreiben
@@ -29,3 +30,4 @@ todo
 - beweis ableitung G_2 ordentlich
 - m+1 -> n+1 überall
 - einheitliches i,j bei T_i
+- bei Dreiecken a_1 statt a^1

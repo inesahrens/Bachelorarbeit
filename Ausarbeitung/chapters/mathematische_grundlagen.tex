@@ -186,7 +186,7 @@ Seien die Annahmen \ref{ann:ex_und_eind} für das Problem \eqref{eq:pDGL} erfüllt
 \section{Finite Elemente}
 \label{sec:finite_elemente}
 
-Finite Elemente sind die Grundlage, um partielle Differentialgleichungen auf zweidimensionalen Gebieten numerisch darstellen zu können. Dazu wird zunächst das Gebiet trianguliert. In unseren Fall sind Dreiecke. Dann werden Basisfunktionen auf diesen Dreiecken definiert, die sogenannten globalen Formfunktionen. Aus diesen ist die gesuchte Funktion zusammengesetzt und kann damit berechnet werden. Dieses ist der Galerkin-Ansatz. Die hier beschriebene Theorie richtet sich nach der Vorlesung \glqq Numerik Partieller Differentialgleichungen\grqq gelesen von Dr. F. Wübbeling. 
+Finite Elemente sind die Grundlage, um partielle Differentialgleichungen auf zweidimensionalen Gebieten numerisch darstellen zu können. Dazu wird zunächst das Gebiet in Dreiecke trianguliert. Dann werden Basisfunktionen auf diesen Dreiecken definiert, die sogenannten globalen Formfunktionen. Aus diesen ist die gesuchte Funktion zusammengesetzt und kann damit berechnet werden. Dieses ist der Galerkin-Ansatz. Die hier beschriebene Theorie richtet sich nach der Vorlesung \glqq Numerik Partieller Differentialgleichungen\grqq gelesen von Dr. F. Wübbeling. 
 
 Es ist ein rechteckiges Gebiet in 2D gegeben. ObdA $\Omega = [0,a] \times [0,b]$. Auf diesem Gebiet legen wir ein äquidistantes Gitter $G_h$. 
 \begin{align*}
@@ -282,10 +282,10 @@ Die Optimalbedingung zu diesem Problem lautet $\nabla f(w)=0$. Nun wollen wir ei
 \begin{align*}
 	G(w_{k+1})=0
 \end{align*}
-Um ein iteratives Verfahren zu erhalten taylorn wir $G$ ist $w_k$. Das ergibt: 
-
+Um ein iteratives Verfahren zu erhalten taylorn wir $G$ in $w_k$. Das ergibt: 
+%todo tylorn vll komisch
 \begin{thm}[einfaches Newtonverfahren]  
-	Das Verfahren \ref{algo:einfache_nm} löst das Optimierungsproblem \eqref{eq:min}. Es konvergiert superlinear falls $G \in C^1$ und $G'$ invertierbar ist.
+	Der Algorithmus \ref{algo:einfache_nm} löst das Optimierungsproblem \eqref{eq:min}. Es konvergiert superlinear falls $G \in C^1$ und $G'$ invertierbar ist.
 	
 	\begin{algorithm}[H]
 		\caption{einfache Newton Methode}
