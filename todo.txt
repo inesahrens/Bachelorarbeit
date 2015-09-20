@@ -1,0 +1,31 @@
+todo 
+
+- einleitung schreiben
+- konvergenz der NM 
+- F abl stetig, beschränkt?
+- programm zum laufen bringen
+- konvergenz programm untersuchen
+- kapitel numerische Resultate, testbeispiele
+- fazit schreiben 
+- vll anwendung und modell als einzelne unterkapitel?
+- semidiffbar teil überarbeiten nachdem ich konvergenz weiß
+
++ ableitung dF() (phi) schreiben einheitlich
++ Thm Titel richtig angeben
++ überall varphi statt Ti?
++ erklärung, warum min max ti rausgezogen werden darf
++ referenzen prüfen
++ grafiken aktualisieren
++ überprüfen bei den f^i ob die 3 richtig gesetzt wurde
++ transformation von G_2 usw 
++ alle Bezeichnungen bei rechnungen schöber machen. als matrix, nicht als Fkt
++ eq refs statt refs
+- alle Rechnungen im Anhang?
++ s.d. statt s.t.
++ triangulierung
++ NM überall gleichschreiben
++ reihenfolge bei rechnungen anders int_e1 + int_e2
+- beweis von min max
+- beweis ableitung G_2 ordentlich
+- m+1 -> n+1 überall
+- einheitliches i,j bei T_i
