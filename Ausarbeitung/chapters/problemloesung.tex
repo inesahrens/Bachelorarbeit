@@ -205,7 +205,7 @@ Wir kennen $\nabla T_i \nabla T_j$ auf jedem Dreieck. Also muss nur noch $\int_E
 \begin{align*}
 	\int\limits_E v^2 + \epsilon_1 \diff x &  = \int\limits_E v^2  \diff x + \frac{1}{2}\epsilon_1  \\
 \end{align*}
-Da $v$ bereits numerisch berechnet wurde, haben wir nur Funktionsauswertungen von $v$ an den Ecken des Dreieckes gegeben und wir wissen, dass $v \in \mathcal{P}_1$. Also ist v eindeutig bestimmt und kann berechnet werden. Die Berechnung ist in \ref{eq:gerades_dreieck_lineare_fkt} und \ref{eq:ungerades_dreieck_lineare_fkt} zu finden. 
+Da $v$ bereits numerisch berechnet wurde, haben wir nur Funktionsauswertungen von $v$ an den Ecken des Dreieckes gegeben und wir wissen, dass $v \in \mathcal{P}_1$. Also ist v eindeutig bestimmt und kann berechnet werden. Die Berechnung ist in \eqref{eq:gerades_dreieck_lineare_fkt} und \eqref{eq:ungerades_dreieck_lineare_fkt} zu finden. 
 
 Die Berechnung von $\int_E v^2 \diff x$ sieht wie folgt aus
 \begin{align*}
@@ -240,12 +240,12 @@ Betrachten wir nun die vier Fälle.
 \paragraph*{$i$ und $j$ sind gleich}
 \begin{align*}
 	L_{i,i}	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_i   \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x\\
- 				& =  \nabla \varphi_0 \nabla \varphi_0 \int\limits_{E_3}  \left( v^2 + \epsilon \right)   \diff x 
- 				+ \nabla \varphi_0 \nabla \varphi_0 \int\limits_{E_4} \left( v^2 + \epsilon \right) \diff x \\ 
- 				& +  \nabla \varphi_1 \nabla \varphi_1 \int\limits_{E_1}  \left( v^2 + \epsilon \right)   \diff x
- 				+ \nabla \varphi_1 \nabla \varphi_1 \int\limits_{E_6} \left( v^2 + \epsilon \right) \diff x \\			
- 				& +  \nabla \varphi_2 \nabla \varphi_2  \int\limits_{E_2}  \left( v^2 + \epsilon \right)  \diff x
- 				+  \nabla \varphi_2  \nabla \varphi_2  \int\limits_{E_5}  \left( v^2 + \epsilon \right) \diff x		
+		& =  \nabla \varphi_1 \nabla \varphi_1 \int\limits_{E_1}  \left( v^2 + \epsilon \right)   \diff x
+		+  \nabla \varphi_2 \nabla \varphi_2  \int\limits_{E_2}  \left( v^2 + \epsilon \right)  \diff x\\
+		& +  \nabla \varphi_0 \nabla \varphi_0 \int\limits_{E_3}  \left( v^2 + \epsilon \right)   \diff x 
+		+ \nabla \varphi_0 \nabla \varphi_0 \int\limits_{E_4} \left( v^2 + \epsilon \right) \diff x \\ 
+		& +  \nabla \varphi_2  \nabla \varphi_2  \int\limits_{E_5}  \left( v^2 + \epsilon \right) \diff x	
+		+ \nabla \varphi_1 \nabla \varphi_1 \int\limits_{E_6} \left( v^2 + \epsilon \right) \diff x 
 \end{align*}
 %todo falls zeit reihenfolge anders
 \paragraph*{$j$ liegt rechts neben $i$}
@@ -302,7 +302,7 @@ Da sowohl $\tilde{L}$ als auch $\tilde{L u_0^h}$ aus fast nur Nullen besteht, ve
 
 \section{Optimierung nach v}
 
-Bei der Optimierung nach $v$ geht es um die Fortsetzung des Risses. Für dieses Optimierungsproblem mit Ungleichungsnebenbedingung sicheren wir zunächst die Existenz und Eindeutigkeit der Lösung. Danach stellen wir die Optimalitätsbedingungen auf. Das resultiert in ein Karush Kuhn Tucker System. Dieses wollen wir mittels semidifferenzierbarer Newtonmethode lösen. Dazu müssen zunächst alle Funktionen der KKT Systems differenziert und danach diskretisiert werden.Dies geschieht wieder mit Finiten Elementen. Am Schluss führe beide Optimierungsprobleme zu einem Verfahren zusammen.    
+Bei der Optimierung nach $v$ geht es um die Fortsetzung des Risses. Für dieses Optimierungsproblem mit Ungleichungsnebenbedingung sicheren wir zunächst die Existenz und Eindeutigkeit der Lösung. Danach stellen wir die Optimalitätsbedingungen auf. Das resultiert in ein Karush Kuhn Tucker System. Dieses wollen wir mittels semidifferenzierbarer Newton Methode lösen. Dazu müssen zunächst alle Funktionen der KKT Systems differenziert und danach diskretisiert werden.Dies geschieht wieder mit Finiten Elementen. Am Schluss führe beide Optimierungsprobleme zu einem Verfahren zusammen.    
 
 
 \subsection{Analytische Betrachtung}
@@ -477,7 +477,7 @@ Die schwache Formulierung ist dann
 \end{align*}
 mit $\eta = \mu - \lambda$
 
-\subsection{semidifferenzierbare Newtonmethode}
+\subsection{semidifferenzierbare Newton Methode}
 
 Unser Ziel ist es, eine Methode zu finden, wie wir das KKT System lösen können. Betrachten wir also 
 \begin{align*}
@@ -571,7 +571,7 @@ Für das Semidifferenzial von $G_2$  beweisen wir zunächst ein Lemma
 	
 	Sei nun $-cv < \eta < -c(v-v_0) $. Durch \ref{lem:semidiffbar_f_diffbar} müssen wir wieder die Fréchet Differenzierbarkeit überprüfen. Offensichtlich ist die Identität Fréchet differenzierbar. Das Differenzial ist hier 1. 
 	
-	Sei $\eta =-c(v-v_0)$. Sei zunächst $d>0$. Die Abschätzung \ref{eq:semidiffbar_abschaetzung} muss gelten. Hier ist $\partial f(\eta+d, v) = \{0\}$ und damit 
+	Sei $\eta =-c(v-v_0)$. Sei zunächst $d>0$. Die Abschätzung \eqref{eq:semidiffbar_abschaetzung} muss gelten. Hier ist $\partial f(\eta+d, v) = \{0\}$ und damit 
 	\begin{align*}
 		& \sup\limits_{M \in \partial f(\eta+d,v) } \| f(\eta+d,v)-f(\eta)-M d\|_{H^{-1}(\Omega)} \\
 		& \hspace{3ex}= \| -c(v-v_0) +c(v-v_0) \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right)  \text{ für } \| d \|_{\h} \rightarrow 0
@@ -690,17 +690,17 @@ Um $A,B,D$ zu berechnen, brauchen wir $\int_E \varphi_i \varphi_j$ bzw $\int_E \
 
 Nun können wir die einzelnen Matrizen berechnen.
 Die Berechnung erfolgt analog zur Optimierung nach $u$. Bei den Matrizen gibt es immer die Fälle, dass $i$ und $j$ gleich sind, $j$ rechts neben $i$ ist, $j$ direkt unter $i$ liegt und $j$ rechts unter $i$ liegt. Für alle anderen $i$ und $j$ ist der Matrixeintrag immer 0. Die Bezeichnungen sind die Gleichen, wie bei $u$. 
-\paragraph{Berechnung der Matrix $A_{ij}= \int\limits_{\Omega}  u^{dis} T_i T_j \diff x$}
+\paragraph{Berechnung der Matrix A}
 	\begin{align*}
 		A_{i,i}	& = \int\limits_{\Omega}  u^{dis} T_i T_i \diff x\\
-					& = \int\limits_{E_3} u^{dis}_{E_3} \varphi_0 \varphi_0 \diff x
-					 + \int\limits_{E_6} u^{dis}_{E_6} \varphi_1 \varphi_1 \diff x
-					 + \int\limits_{E_5} u^{dis}_{E_5} \varphi_2 \varphi_2 \diff x\\
+					& = \int\limits_{E_1} u^{dis}_{E_1} \varphi_1 \varphi_1 \diff x
+					+ \int\limits_{E_2} u^{dis}_{E_2}  \varphi_2 \varphi_2 \diff x 
+					+ \int\limits_{E_3} u^{dis}_{E_3} \varphi_0 \varphi_0 \diff x \\
 					 & \hspace{2ex}
-					 + \int\limits_{E_4} u^{dis}_{E_4} \varphi_0 \varphi_0 \diff x
-					 + \int\limits_{E_1} u^{dis}_{E_1} \varphi_1 \varphi_1 \diff x
-					 + \int\limits_{E_2} u^{dis}_{E_2}  \varphi_2 \varphi_2 \diff x \\
-					& = \frac{1}{12} u^{dis}_{E_3} + \frac{1}{12} u^{dis}_{E_6} + \frac{1}{12}  u^{dis}_{E_5}+ \frac{1}{12}  u^{dis}_{E_4}+ \frac{1}{12} u^{dis}_{E_1}+ \frac{1}{12} u^{dis}_{E_2} \\
+					+ \int\limits_{E_4} u^{dis}_{E_4} \varphi_0 \varphi_0 \diff x
+					+ \int\limits_{E_5} u^{dis}_{E_5} \varphi_2 \varphi_2 \diff x
+					 + \int\limits_{E_6} u^{dis}_{E_6} \varphi_1 \varphi_1 \diff x \\
+					& = \frac{1}{12} u^{dis}_{E_1} + \frac{1}{12} u^{dis}_{E_2} + \frac{1}{12}  u^{dis}_{E_3}+ \frac{1}{12}  u^{dis}_{E_4}+ \frac{1}{12} u^{dis}_{E_5}+ \frac{1}{12} u^{dis}_{E_6} \\
 					& = \frac{1}{12} \left( \sum\limits_{i=1}^6 u^{dis}_{E_i} \right)
 	\end{align*}
 	%todo reihenfolge ändern
@@ -721,17 +721,16 @@ Die Berechnung erfolgt analog zur Optimierung nach $u$. Bei den Matrizen gibt es
 	\end{align*}
 
 
-\paragraph{Berechnung der Matrix $B_{ij}= \int\limits_{\Omega} \nabla T_i  \nabla T_j \diff x$}
+\paragraph{Berechnung der Matrix B}
 	\begin{align*}
 		B_{i,i}	& = \int\limits_{\Omega} \nabla T_i \nabla T_i \diff x\\
-					& = \int\limits_{E_3} \nabla \varphi_0 \nabla \varphi_0 \diff x
-					 + \int\limits_{E_6} \nabla \varphi_1 \nabla \varphi_1 \diff x
-					 + \int\limits_{E_5} \nabla \varphi_2 \nabla \varphi_2 \diff x\\
-					 & \hspace{2ex}
-					 + \int\limits_{E_4} \nabla \varphi_0 \nabla \varphi_0 \diff x
-					 + \int\limits_{E_1} \nabla \varphi_1 \nabla \varphi_1 \diff x
-					 + \int\limits_{E_2} \nabla \varphi_2 \nabla \varphi_2 \diff x \\
-					& = 1 + \frac{1}{2} + \frac{1}{2} + 1 + \frac{1}{2} + \frac{1}{2}  = 4
+					& = \int\limits_{E_1} \nabla \varphi_1 \nabla \varphi_1 \diff x
+					+ \int\limits_{E_2} \nabla \varphi_2 \nabla \varphi_2 \diff x 
+					+ \int\limits_{E_3} \nabla \varphi_0 \nabla \varphi_0 \diff x \\
+					& + \int\limits_{E_4} \nabla \varphi_0 \nabla \varphi_0 \diff x
+					+ \int\limits_{E_5} \nabla \varphi_2 \nabla \varphi_2 \diff x
+					+ \int\limits_{E_6} \nabla \varphi_1 \nabla \varphi_1 \diff x \\
+					& = \frac{1}{2} + \frac{1}{2} + 1 + 1 + \frac{1}{2} + \frac{1}{2}  = 4
 	\end{align*}
 	\begin{align*}
 		B_{i,i+1}	& = \int\limits_{\Omega} \nabla T_i \nabla T_{i+1} \diff x= \int\limits_{E_3} \nabla \varphi_0 \nabla \varphi_1 \diff x
@@ -767,16 +766,16 @@ Die Berechnung erfolgt analog zur Optimierung nach $u$. Bei den Matrizen gibt es
  
 Falls $i$ an einem Rand liegen sollte, werden die Dreiecke, die nicht vorhanden sind, weggelassen. 
 
-\paragraph{Berechnung der Matrix $D_{ij}= \int\limits_{\Omega}  T_i T_j \diff x$}
+\paragraph{Berechnung der Matrix D}
 	\begin{align*}
 		D_{i,i}	& = \int\limits_{\Omega}  T_i T_i \diff x\\
-					& = \int\limits_{E_3}   \varphi_0 \varphi_0 \diff x
-					 + \int\limits_{E_6}   \varphi_1 \varphi_1 \diff x
-					 + \int\limits_{E_5}   \varphi_2 \varphi_2 \diff x \\
-					 & \hspace{2ex}
-					 + \int\limits_{E_4}   \varphi_0 \varphi_0 \diff x
-					 + \int\limits_{E_1}   \varphi_1 \varphi_1 \diff x
-					 + \int\limits_{E_2}   \varphi_2 \varphi_2 \diff x \\
+					& = \int\limits_{E_1}   \varphi_1 \varphi_1 \diff x
+					+ \int\limits_{E_2}   \varphi_2 \varphi_2 \diff x
+					+ \int\limits_{E_3}   \varphi_0 \varphi_0 \diff x \\
+					& \hspace{2ex}
+					+  \int\limits_{E_4}   \varphi_0 \varphi_0 \diff x
+					+ \int\limits_{E_5}   \varphi_2 \varphi_2 \diff x
+					+ \int\limits_{E_6}   \varphi_1 \varphi_1 \diff x\\
 					& = \frac{1}{12} + \frac{1}{12} + \frac{1}{12} + \frac{1}{12} + \frac{1}{12} + \frac{1}{12}  = \frac{1}{2}
 	\end{align*}
 	\begin{align*}
@@ -799,7 +798,7 @@ Falls $i$ an einem Rand liegen sollte, werden die Dreiecke, die nicht vorhanden 
 Also ergibt sich 
 
 \begin{equation*}
-	(2 A + 2 \epsilon_2 B + \frac{2}{\epsilon_3} D) v  - \frac{2}{\epsilon_3} c + e=  
+	(2 A + 2 \epsilon_2 B + \frac{2}{\epsilon_3} D) v^h  - \frac{2}{\epsilon_3} c + D \eta^h =  
 \end{equation*}
 
 \begin{figure}[ht]
@@ -842,7 +841,7 @@ Daraus ergibt sich:
 	& = D w_{v \eta}	
 \end{align*}
 
-mit $D$ aus der numerischen Darstellung von $G_1$ und\\ $(w_{v \eta})_i:=  \eta_i^h- \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h ) \right\} -  \min \left\{0,  \eta_i^h + c v_i^h    \right\}$. 
+mit $D$ aus der numerischen Darstellung von $G_1$ und\\ $(w_{v \eta})_i:=  \eta_i^h- \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h ) \right\} -  \min \left\{0,  \eta_i^h + c v_i^h    \right\}$. Die Summe und $T_i$ darf aus dem $\max$ bzw. $\min$ herausgezogen werden, da $T_i$ immer nur an einem Punkt ungleich 0 ist. Dadurch kommt niemals zustande, dass mehr als ein Term der Summe ungleich 0 ist. 
 $w_{v \eta}	$ kann auch explizit dargestellt werden: 
 
 \begin{align*}
@@ -855,7 +854,8 @@ $w_{v \eta}	$ kann auch explizit dargestellt werden:
 			\end{array}
 		\right..
 \end{align*}
-%todo erklärungen, warum z.b. die Summe aus dem max/ min gezogen werden darf. 
+
+Auch hier muss das Integral wieder transformiert werden, wodurch der Faktor $^/h_1 h_2$ multipliziert wird. 
 
 \subsubsection{numerische Darstellung von $G_{1 v}$}
 \begin{align*}
@@ -866,14 +866,11 @@ wird nun diskretisieren:
 
 \begin{align*}
 	& \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x\\
-	& = \int\limits_{\Omega} 2 \sum\limits_{j=1}^{k} T_j  \sum\limits_{i=1}^{k}  T_i u^{dis} + \epsilon_2 2 \nabla (\sum\limits_{i=1}^{k} T_i ) \nabla (\sum\limits_{j=1}^{k} T_j ) + \frac{2}{\epsilon_3} \sum\limits_{i=1}^{k}  T_i \sum\limits_{j=1}^{k} T_j \diff x \\
-	& = 2 \sum\limits_{i,j=1}^{k} \int\limits_{\Omega} u^{dis} T_i T_j \diff x 
-	+ 2 \epsilon_2 \sum\limits_{i,j=1}^{k}   \int\limits_{\Omega} \nabla T_i \nabla T_j \diff x
-	+  \frac{2}{\epsilon_3} \sum\limits_{i,j=1}^{k} \int\limits_{\Omega} T_i T_j \diff x \\
+	& = \int\limits_{\Omega} 2  T_j  T_i u^{dis} + \epsilon_2 2 \nabla  T_i  \nabla  T_j  + \frac{2}{\epsilon_3}  T_i T_j \diff x \\
 	& = 2 A  + 2 \epsilon_2  B + \frac{2}{\epsilon_3}  D 
 \end{align*}
 
-Wir benutzen die gleichen Notationen, wie bei der numerischen Darstellung von $G_1$. 
+Wir benutzen die gleichen Notationen, wie bei der numerischen Darstellung von $G_1$ und die gleiche Transformation. 
 
 \subsubsection{numerische Darstellung von $G_{1 \eta}$}
 \begin{align*}
@@ -882,10 +879,10 @@ Wir benutzen die gleichen Notationen, wie bei der numerischen Darstellung von $G
 
 wird nun diskretisieren:
 \begin{align*}
-	& \int\limits_{\Omega}  \phi \varphi \diff x = \int\limits_{\Omega} \sum\limits_{j=1}^{k} T_j  \sum\limits_{i=1}^{k}  T_i =  D 
+	& \int\limits_{\Omega}  \phi \varphi \diff x = \int\limits_{\Omega} T_j  T_i =  D 
 \end{align*}
 
-Wir benutzen die gleichen Notationen, wie bei der numerischen Darstellung von $G_1$. 
+Auch hier muss wieder transformiert werden. 
 
 \subsubsection{numerische Darstellung von $G_{2 v}$}
 Es soll 
@@ -926,13 +923,13 @@ Damit können wir $\partial G_{2 v}$ diskretisieren. Wir nennen die Diskretisieru
 
 	\begin{align*}
 		F_{i,i}	& = \int\limits_{\Omega}  f^h T_i T_i \diff x\\
-		& = \int\limits_{E_3} f^h_{E_3} \varphi_0 \varphi_0 \diff x
-		+ \int\limits_{E_6} f^h_{E_6} \varphi_1 \varphi_1 \diff x
-		+ \int\limits_{E_5} f^h_{E_5} \varphi_2 \varphi_2 \diff x\\
+		& =  \int\limits_{E_1} f^h_{E_1} \varphi_1 \varphi_1 \diff x
+		+ \int\limits_{E_2} f^h_{E_2}  \varphi_2 \varphi_2 \diff x
+		+ \int\limits_{E_3} f^h_{E_3} \varphi_0 \varphi_0 \diff x \\
 		& \hspace{2ex}
 		+ \int\limits_{E_4} f^h_{E_4} \varphi_0 \varphi_0 \diff x
-		+ \int\limits_{E_1} f^h_{E_1} \varphi_1 \varphi_1 \diff x
-		+ \int\limits_{E_2} f^h_{E_2}  \varphi_2 \varphi_2 \diff x \\
+		+ \int\limits_{E_5} f^h_{E_5} \varphi_2 \varphi_2 \diff x
+		+ \int\limits_{E_6} f^h_{E_6} \varphi_1 \varphi_1 \diff x\\
 		& = \frac{1}{60} \left(  \left( f_1^h +  f_2^h + 3f_3^h\right)_{E_1} 
 		+ \left( f_1^h +  f_2^h + 3f_3^h\right)_{E_2}
 		+ \left( f_1^h +  3f_2^h + f_3^h\right)_{E_3} \right. \\
@@ -959,15 +956,13 @@ Damit können wir $\partial G_{2 v}$ diskretisieren. Wir nennen die Diskretisieru
 		& =   \frac{1}{120} \left(  \left( 2 f_1^h +  f_2^h +2 f_3^h\right)_{E_5} 
 		+ \left(2 f_1^h +  f_2^h + 2f_3^h\right)_{E_6}\right)
 	\end{align*}
-hierbei bedeutet $\left( f_1^h +  f_2^h + f_3^h\right)_{E_j} $, dass $f_i^h$ $f$ auf dem $i$-ten Gitterpunkt des Dreieck $E_j$ ausgewertet wird. 
+hierbei bedeutet $\left( f_1^h +  f_2^h + f_3^h\right)_{E_j} $, dass $f_i^h$ $f$ auf dem $i$-ten Gitterpunkt des Dreieck $E_j$ ausgewertet wird. Die Transformation mit $1/h_1 h_2$ wird auch hier ausgeführt
 
 \subsubsection{numerische Darstellung von $G_{2 \eta}$}
 Die numerische Darstellung ist genau die gleiche, wie bei $G_{2 v}$, nur dass die Funktionsauswertungen von $f$ andere sind. 
-	
-%todo transformation
 
 \subsection{Agregation}
-Nun sind alle Funktionen disktretisiert und das Problem kann implementiert werden. Stellen wir die genaue Newtonmethode auf: 
+Nun sind alle Funktionen disktretisiert und das Problem kann implementiert werden. Stellen wir die genaue Newton Methode auf: 
 
 \begin{algorithm}[H]
 	\caption{semidiffbare Newton Methode}
@@ -1003,3 +998,4 @@ mit
 	\end{array}
 \end{align*}
 
+$1/h_1 h_2$ kommt nicht in der Newton Methode vor, da es vorher gekürzt wurde. 

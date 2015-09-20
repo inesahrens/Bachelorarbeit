@@ -166,7 +166,7 @@ Es existieren $\lambda, \Lambda, \nu >0$, sodass $ \forall x \in \Omega$, $ \for
 
 \begin{thm}[Eindeutigkeit der schwachen Lösung]
 \label{thm:eindeutigkeit_schwach_loesung}
-Seien die Annahmen \ref{ann:ex_und_eind} für das Problem \ref{eq:pDGL} erfüllt. Falls eine schwache Lösung  für \ref{eq:pDGL} existiert, ist sie eindeutig.  
+Seien die Annahmen \ref{ann:ex_und_eind} für das Problem \eqref{eq:pDGL} erfüllt. Falls eine schwache Lösung  für \eqref{eq:pDGL} existiert, ist sie eindeutig.  
 \end{thm}
 \begin{proof}
 	Der Beweis wird im Script von Prof. B. Wirth zur Vorlesung \glqq Partielle Differentialgleichungen\grqq geführt. 
@@ -175,7 +175,7 @@ Seien die Annahmen \ref{ann:ex_und_eind} für das Problem \ref{eq:pDGL} erfüllt. 
 
 \begin{thm}[Existenz der schwachen Lösung]
 \label{thm:existenz_schwache_loesung}
-	Sei $\Omega$ beschränkt mit Lipschitz Rand. $A,b,c$ seien beschränkt, $f \in L^2(\Omega)$. Dann existiert eine schwache Lösung $u \in H^1(\Omega)$ von \ref{eq:pDGL}. 
+	Sei $\Omega$ beschränkt mit Lipschitz Rand. $A,b,c$ seien beschränkt, $f \in L^2(\Omega)$. Dann existiert eine schwache Lösung $u \in H^1(\Omega)$ von \eqref{eq:pDGL}. 
 \end{thm}
 \begin{proof}
 	Der Beweis wird im Script von Prof. B. Wirth zur Vorlesung \glqq Partielle Differentialgleichungen\grqq geführt.  
@@ -268,12 +268,12 @@ a(x,y)=(a^1-a^2)x + (a^3 - a^2)y + a^2  \hspace{1ex} \text{ mit } \hspace{1ex}
 	\end{pmatrix}
 \end{align}
 
-\section{Semidifferenzierbare Newtonmethoden}
+\section{Semidifferenzierbare Newton Methoden}
 
-Semiglatte Newtonmethoden werden gebraucht, um Nullstellen von nicht differenzierbaren Funktionen numerisch zu berechnen. Die Rissentstehung ist ein nicht differenzierbares Problem. Um die Idee der Newtonmethoden zu verstehen, führe ich zunächst einfache Newton Methoden ohne Nebenbedingung und dann solche mit einfachen Nebenbedingungen ein. Um diese realisieren zu können, wird der Begriff der Semidifferenzierbarkeit benötigt. Das ist eine Mengenwertige Ableitung, mit der auch nicht-differenzierbare, aber stetige Punkte in einer Funktion abgeleitet werden können. Damit kann dann die semidifferenzierbare Newtonmethode eingeführt werden, von der wir auch die Konvergenz betrachten werden.  Dieses Kapitel richtet sich nach \cite[S. 115 ff]{hinze:op_pde_constraints}. 
+Semiglatte Newton Methoden werden gebraucht, um Nullstellen von nicht differenzierbaren Funktionen numerisch zu berechnen. Die Rissentstehung ist ein nicht differenzierbares Problem. Um die Idee der Newton Methoden zu verstehen, führe ich zunächst einfache Newton Methoden ohne Nebenbedingung und dann solche mit einfachen Nebenbedingungen ein. Um diese realisieren zu können, wird der Begriff der Semidifferenzierbarkeit benötigt. Das ist eine Mengenwertige Ableitung, mit der auch nicht-differenzierbare, aber stetige Punkte in einer Funktion abgeleitet werden können. Damit kann dann die semidifferenzierbare Newton Methode eingeführt werden, von der wir auch die Konvergenz betrachten werden.  Dieses Kapitel richtet sich nach \cite[S. 115 ff]{hinze:op_pde_constraints}. 
 
 \subsection{Newton Methoden mit einfachen Nebenbedingungen}
-Als erstes leiten wir uns zum Verständnis die einfache Newtonmethode her. Dazu betrachten wir wie vorher das Minimierungsproblem 
+Als erstes leiten wir uns zum Verständnis die einfache Newton Methode her. Dazu betrachten wir wie vorher das Minimierungsproblem 
 \begin{align}
 	\label{eq:min}
 	\min\limits_{w \in \R^n} f(w) \hspace{6ex} f: \R^n \rightarrow \R
