@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.7)  20 SEP 2015 12:05
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.7)  20 SEP 2015 13:34
 entering extended mode
 **BA_Arbeit.tex
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\BA_Arbeit.tex
@@ -839,46 +839,46 @@ Package natbib Warning: Citation `hinze:op_pde_constraints' on page 5 undefined
 File: images/triang.png Graphic file (type png)
 
 <use images/triang.png>
-Package pdftex.def Info: images/triang.png used on input line 202.
+Package pdftex.def Info: images/triang.png used on input line 206.
 (pdftex.def)             Requested size: 108.56192pt x 74.68336pt.
 
 <images/referenzdreieck.png, id=254, 411.03563pt x 313.9228pt>
 File: images/referenzdreieck.png Graphic file (type png)
 
 <use images/referenzdreieck.png>
-Package pdftex.def Info: images/referenzdreieck.png used on input line 209.
+Package pdftex.def Info: images/referenzdreieck.png used on input line 213.
 (pdftex.def)             Requested size: 102.75865pt x 78.4805pt.
  [8 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/triang.p
-ng> <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/referenz
-dreieck.png>]
-<images/dreieck_oben_unten_u0.png, id=263, 677.53125pt x 292.84406pt>
+ng>] [9 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/refe
+renzdreieck.png>]
+<images/dreieck_oben_unten_u0.png, id=268, 677.53125pt x 292.84406pt>
 File: images/dreieck_oben_unten_u0.png Graphic file (type png)
 
 <use images/dreieck_oben_unten_u0.png>
 Package pdftex.def Info: images/dreieck_oben_unten_u0.png used on input line 24
-4.
+8.
 (pdftex.def)             Requested size: 169.38239pt x 73.21083pt.
- [9]
+
 
 Package natbib Warning: Citation `hinze:op_pde_constraints' on page 10 undefine
-d on input line 273.
+d on input line 277.
 
 [10 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/dreieck_
 oben_unten_u0.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 306.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 310.
 
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 306.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 310.
  [11] [12]
 
 Package natbib Warning: Citation `hinze:op_pde_constraints' on page 13 undefine
-d on input line 366.
+d on input line 370.
 
 
-Overfull \hbox (0.76457pt too wide) in paragraph at lines 372--373
+Overfull \hbox (0.76457pt too wide) in paragraph at lines 376--377
 [][]\OT1/cmr/bx/n/12 Definition 2.4.4 \OT1/cmr/m/n/12 (Re-gu-la-rit[]atsannahme
 )\OT1/cmr/bx/n/12 . []\OT1/cmr/m/it/12 Sei $\OML/cmm/m/it/12 M[] \OMS/cmsy/m/n/
 12 2 \OML/cmm/m/it/12 L\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 X; Y\OT1/cmr/m/n/12 )$
@@ -888,14 +888,14 @@ Overfull \hbox (0.76457pt too wide) in paragraph at lines 372--373
 [13] [14]
 
 Package natbib Warning: Citation `hinze:op_pde_constraints' on page 15 undefine
-d on input line 443.
+d on input line 447.
 
 
 Package natbib Warning: Citation `hinze:op_pde_constraints' on page 15 undefine
-d on input line 459.
+d on input line 463.
 
 
-Overfull \hbox (10.04002pt too wide) in paragraph at lines 476--478
+Overfull \hbox (10.04002pt too wide) in paragraph at lines 480--482
 []\OT1/cmr/m/n/12 Damit die-se kon-ver-giert, muss die Ap-pro-xi-ma-ti-ons-an-n
 ah-me und die Re-gu-la-rit[]atsannahme
  []
@@ -960,12 +960,12 @@ Overfull \hbox (25.9016pt too wide) in paragraph at lines 375--375
  []
 
 [27] [28] [29]
-Overfull \hbox (16.59837pt too wide) in paragraph at lines 492--492
+Overfull \hbox (16.59837pt too wide) in paragraph at lines 493--493
 [] 
  []
 
 [30] [31]
-Overfull \hbox (15.18996pt too wide) in paragraph at lines 583--583
+Overfull \hbox (15.18996pt too wide) in paragraph at lines 584--584
 [] 
  []
 
@@ -973,10 +973,10 @@ Overfull \hbox (15.18996pt too wide) in paragraph at lines 583--583
 File: images/formel.png Graphic file (type png)
 
 <use images/formel.png>
-Package pdftex.def Info: images/formel.png used on input line 684.
+Package pdftex.def Info: images/formel.png used on input line 685.
 (pdftex.def)             Requested size: 395.20952pt x 66.39519pt.
 
-Overfull \hbox (20.96469pt too wide) in paragraph at lines 688--689
+Overfull \hbox (20.96469pt too wide) in paragraph at lines 689--690
 []\OT1/cmr/m/n/12 wobei bei $\OML/cmm/m/it/12 A$ \OT1/cmr/m/n/12 auf der Haupt-
 dia-go-na-len $[] []$, auf der Ne-ben-dia-go-na-len $[] []$
  []
@@ -984,7 +984,7 @@ dia-go-na-len $[] []$, auf der Ne-ben-dia-go-na-len $[] []$
 [35 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/formel.p
 ng>] [36] [37] [38]
 
-LaTeX Warning: File `images/matrix_4_diag.png' not found on input line 787.
+LaTeX Warning: File `images/matrix_4_diag.png' not found on input line 788.
 
 
 ! Package pdftex.def Error: File `images/matrix_4_diag.png' not found.
@@ -993,7 +993,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.787 ...ics[scale=0.25]{images/matrix_4_diag.png}
+l.788 ...ics[scale=0.25]{images/matrix_4_diag.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
@@ -1002,7 +1002,7 @@ If that doesn't work, type  X <return>  to quit.
 ! Missing { inserted.
 <to be read again> 
                    \unskip 
-l.816 	}
+l.817 	}
         
 A left brace was mandatory here, so I've put one in.
 You might want to delete and/or insert some corrections
@@ -1012,7 +1012,7 @@ so that I will find a matching right brace soon.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.816 	}
+l.817 	}
         
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1124,7 +1124,7 @@ nts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
 s/type1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
 type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
 ts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on BA_Arbeit.pdf (51 pages, 868242 bytes).
+Output written on BA_Arbeit.pdf (51 pages, 868763 bytes).
 PDF statistics:
  665 PDF objects out of 1000 (max. 8388607)
  190 named destinations out of 1000 (max. 500000)

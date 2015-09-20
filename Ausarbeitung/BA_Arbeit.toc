@@ -4,12 +4,12 @@
 \contentsline {section}{\numberline {2.1}Grundlagen Optimierung}{3}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Optimierungsproblem ohne Nebenbedingung}{3}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}Optimierungsproblem mit Ungleichungsnebenbedingung}{5}{subsection.2.1.2}
-\contentsline {section}{\numberline {2.2}Grundlagen pDGL}{6}{section.2.2}
+\contentsline {section}{\numberline {2.2}Grundlagen pDGL}{7}{section.2.2}
 \contentsline {section}{\numberline {2.3}Finite Elemente}{8}{section.2.3}
 \contentsline {section}{\numberline {2.4}Semidifferenzierbare Newton Methoden}{10}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Newton Methoden mit einfachen Nebenbedingungen}{10}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.1}Newton Methoden mit einfachen Nebenbedingungen}{11}{subsection.2.4.1}
 \contentsline {subsection}{\numberline {2.4.2}Konvergenz der generalisierten Newton Methode}{11}{subsection.2.4.2}
-\contentsline {subsection}{\numberline {2.4.3}Semidifferential}{13}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.3}Semidifferential}{14}{subsection.2.4.3}
 \contentsline {subsection}{\numberline {2.4.4}semidiffbare Newton Methoden}{15}{subsection.2.4.4}
 \contentsline {chapter}{\numberline {3}Anwendung auf das Phasenfeldmodell f\"ur Rissentstehung}{17}{chapter.3}
 \contentsline {section}{\numberline {3.1}erste Betrachtung der Rissentstehung}{17}{section.3.1}

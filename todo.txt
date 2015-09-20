@@ -9,7 +9,9 @@ todo
 - fazit schreiben 
 - vll anwendung und modell als einzelne unterkapitel?
 - semidiffbar teil überarbeiten nachdem ich konvergenz weiß
-- prof zitaz vorlesung fragen
+- prof zitat vorlesung fragen
+- zitat internet weg
+- prof frageliste schreiben
 
 + ableitung dF() (phi) schreiben einheitlich
 + Thm Titel richtig angeben
@@ -26,7 +28,7 @@ todo
 + triangulierung
 + NM überall gleichschreiben
 + reihenfolge bei rechnungen anders int_e1 + int_e2
-- beweis von min max
++ beweis von min max
 - beweis ableitung G_2 ordentlich
 - m+1 -> n+1 überall
 - einheitliches i,j bei T_i

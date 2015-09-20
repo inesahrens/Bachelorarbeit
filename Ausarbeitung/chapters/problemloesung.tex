@@ -413,29 +413,30 @@ Alle Vorraussetzungen aus \ref{thm:existenz_eindeutigkeit_loesung} sind erfüllt,
 Nachdem wir nun wissen, dass die Lösung existiert und eindeutig ist, wollen wir das Minimum finden. Dazu brauchen wir Optimalitätsbedingungen. Diese stellt das folgende Theorem auf: 
 
 \begin{thm}[Optimalitätsbedingungen]
-	Sei $a:=\inf \{J(w)|G(w) \le_P 0\}$. Dann gilt:
+	Sei $a:=\inf \{J(w)|H(w) \le_P 0\}$. Dann gilt:
 	\begin{align*}
-		a= \inf\limits_{v \in H^1(\Omega)} J(v)+ \langle G(v), \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega), H^{-1}(\Omega)}
+		a= \inf\limits_{v \in H^1(\Omega)} J(v)+ \langle H(v), \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega), H^{-1}(\Omega)}
 	\end{align*} 
+	mit 
+	\begin{align*}
+		H:H^1(\Omega) \rightarrow H^1(\Omega) \\
+		v \mapsto	\begin{pmatrix} -v \\ v-v_0 \end{pmatrix}
+	\end{align*}
 \end{thm}
 \begin{proof}
 	Die Bedingungen aus \ref{thm:kkt_system} müssen gelten: 
 	Sei $P:=\{(v,w) \in H^1(\Omega) \times H^1(\Omega) | v\ge 0 \text{ und } w \ge 0\} \subset H^1(\Omega) \times H^1(\Omega)$. $\mathring{P} \neq \emptyset$, da $H^1(\Omega)$ nur stetige Funktionen enthält. Also ist $P$ ein positiver Kegel. 
 	
 	$J:H^1(\Omega) \rightarrow \R $ sei wie oben definiert. 
-	\begin{align*}
-		G:H^1(\Omega) \rightarrow H^1(\Omega) \\
-		v \mapsto	\begin{pmatrix} -v \\ v-v_0 \end{pmatrix}
-	\end{align*}
-	G ist linear, also konvex. 
+	$H$ ist linear, also konvex. 
 	
-	Das Bild von $J$ enthält ein $\hat{v}$, sodass $G(\hat{v})<_P 0 $ gilt, da es ein $v \in H^1(\Omega)$ geben muss, das echt zwischen $0$ und $v_0$ liegt. 
+	Das Bild von $J$ enthält ein $\hat{v}$, sodass $H(\hat{v})<_P 0 $ gilt, da es ein $v \in H^1(\Omega)$ geben muss, das echt zwischen $0$ und $v_0$ liegt. 
 	
-	Außerdem ist $a:=\inf \{J(w)|G(w) \le_P 0\}< \infty$, da J stetig und beschränkt ist. 
+	Außerdem ist $a:=\inf \{J(w)|H(w) \le_P 0\}< \infty$, da J stetig und beschränkt ist. 
 	
 	Also kann \ref{thm:kkt_system} angewendet werden. Damit existiert $(\mu, \lambda) \in H^{-1}(\Omega) \times H^{-1}(\Omega)$ mit $(\mu,\lambda) \ge 0$ Komponentenweise, sodass 
 	\begin{align*}
-		a= \inf\limits_{v \in H^1(\Omega)} J(v)+ \langle G(v), \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega), H^{-1}(\Omega)}
+		a= \inf\limits_{v \in H^1(\Omega)} J(v)+ \langle H(v), \begin{pmatrix} \lambda \\ \mu \end{pmatrix} \rangle_{H^1(\Omega), H^{-1}(\Omega)}
 	\end{align*}
 \end{proof}
 

@@ -122,15 +122,19 @@ Nun haben wir die Bedingungen gegeben, sodass wir von  \eqref{eq:optimierungspro
 		\overline{w} \le b & \lambda \ge 0 & \lambda (b-\overline{w})=0 \\
 	\end{array}
 \end{align*}
-
-Aus den letzten beiden Zeilen folgt, dass
+Die unteren beiden Zeilen kann man als Projektion darstellen. Es gilt für alle $c>0$
+\begin{align*}
+	\mu = \max\{0, \mu + c(\overline{w}-a)\} \\
+	\lambda = \max\{0, \lambda + c(b-\overline{w})\} 
+\end{align*} 
+Daraus ergibt sich:
 \begin{align}
 	\label{eq:min_max_theorie}
-	\mu - \lambda = \max\{0, \mu- \lambda + c(\overline{w}-b)\}+ \min\{0, \mu- \lambda + c(\overline{w}-a)\} \vspace{2ex} \forall c>0
+	\mu - \lambda & =  \max\{0, \mu + c(\overline{w}-a)\}  -  \max\{0, \lambda + c(b-\overline{w})\} \\ \notag
+	& =  \max\{0, \mu + c(\overline{w}-a)\}   + \min\{ - \lambda + c(\overline{w}-b)\} \\ \notag
+	& = \max\{0, \mu - \lambda + c(\overline{w}-a)\}   + \min\{ \mu - \lambda + c(\overline{w}-b)\} 
 \end{align}
-
 Diese Darstellung werde ich später nutzen, um das Problem über die Rissentstehung zu lösen. 
-%todo: falls Zeit beweis, siehe mails. 
 %todo Ref: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.163.7781&rep=rep1&type=pdf S. 7
 
 \section{Grundlagen pDGL}

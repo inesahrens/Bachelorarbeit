@@ -1,0 +1,87 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+
+\paragraph{1. Frage: Anwendung und Bedeutung des Problems}
+(siehe teilweise mail)
+Mir ist aufgefallen, dass ich mir keine Notizen zur Interpretation der einzelnen Terme des Optimierungsproblems gemacht habe. Können Sie mir noch mal erklären, was die einzelnen Terme bedeuten?
+
+Ich wollte auch noch kurz was zur Anwendung von dem Optimierungsproblem schreiben. Wo braucht man Rissentstehung?
+
+\paragraph{2. Frage: Zitieren}
+Wie Zitiere ich richtig eine Internetquelle? die eine für die Darstellung von min + max ist nicht mehr online verfügbar...
+
+Wie zitiere ich aus einer Vorlesung? ich habe bei der Theorie häufig was aus pdgl, der optimierungs II vorlesung und der numerik PDGL Vl sachen genommen.
+
+\paragraph{3. Frage: stetigkeit von $ \partial G_1$}
+Damit ich die semidifferenzierbarkeit von $G_1$ zeigen kann, muss $\partial G_1$ stetig Fréchet Differenzierbar sein. Fréchedifferenzierbarkeit bekomme ich hin. Stetigkeit ist noch ein Problem. Ist die Funktion
+\begin{align*}
+	& \partial G_{1 v} (v, \eta)(\phi) = \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi dx
+\end{align*}
+stetig in $\phi \in H^1$? Stetigkeit für alle Terme außer der $\nabla \phi \nabla \varphi $ Teil ist kein Problem mit $\epsilon -\delta$ kriterium. Wie kann ich den  $\nabla \phi \nabla \varphi $ Teil abschätzen? 
+
+\paragraph{4. Frage: Konvergenz meiner Newton Methode}
+Um die Konvergenz der Newton Methode zu zeigen, muss ich die Regularitätsannahme zeigen. Diese ist: 
+
+	Betrachte  $G=0$ mit der Lösung $\overline{x}$. Dann lautet die Regularitätsannahme
+	\begin{align}
+	\label{eq:regularitaetsbedingung}
+	\exists C>0, \quad \exists \delta >0 : \|M^{-1}\|_{X \rightarrow Y} \le C \quad \forall M \in \partial G(x) \quad \forall x \in X, \quad \|x-\overline{x}\|_X<\delta
+	\end{align}
+
+
+Bei mir gilt:
+\begin{align*}
+	M:= \begin{pmatrix}
+	\partial G_{1 v} & \partial G_{1 \eta} \\
+	\partial G_{2 v} & \partial G_{2 \eta} 
+	\end{pmatrix}
+\end{align*}
+mit
+\begin{align*}
+	 \partial G_{1 v} (v, \eta)(\phi) &= \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi d x \\
+	\partial G_{1 \eta} (v, \eta) (\phi) &= \int\limits_{\Omega}  \phi \varphi  dx \\
+	\partial G_{2 v} (v, \eta)(\phi) & = \int\limits_{\Omega} \frac{\partial f}{\partial v} \varphi \phi dx  \\
+	\partial G_{2 \eta} (v, \eta)(\phi) & = \int\limits_{\Omega} \frac{\partial f}{\partial \eta} \varphi \phi dx 	
+\end{align*}
+und
+\begin{align*}
+	\frac{\partial f}{\partial \eta} = 
+	\left\{
+	\begin{array}{ll}
+	\{0\}		& \text{ falls }  -c(v-v_0) < \eta \text{ oder }  \eta < -cv \\
+	\{1\} 		& \text{ falls } -cv < \eta < -c(v-v_0) \\
+	\lbrack 0,1 \rbrack	& \text{ falls }  -c(v-v_0) = \eta \text{ oder }  \eta = -cv 
+	\end{array}
+	\right .
+\end{align*}	
+\begin{align*}
+	\frac{\partial f}{\partial v}= 
+	\left\{
+	\begin{array}{ll}
+	\{-c\}		& \text{ falls }  -c(v-v_0) < \eta \text{ oder }  \eta < -cv \\
+	\{0\}		& \text{ falls } -cv < \eta < -c(v-v_0) \\
+	\lbrack -c,0 \rbrack	& \text{ falls }  -c(v-v_0) = \eta \text{ oder }  \eta = -cv 
+	\end{array}
+	\right .
+\end{align*}	
+ 
+Ich habe Probleme beim Bilden der Inverse. Eigentlich sollte die Inverse ja sein:
+\begin{align*}
+	\frac{1}{\partial G_{1v} \partial G_{2 \eta} - \partial G_{2v} \partial G_{1 \eta} } 
+	\begin{pmatrix}
+		\partial G_{2 \eta} & - \partial G_{1 \eta}\\
+		-  \partial G_{2v} & \partial G_{1v} 
+	\end{pmatrix}
+\end{align*}
+Dafür muss $\partial G_{1v} \partial G_{2 \eta} - \partial G_{2v} \partial G_{1 \eta} \neq 0$ gelten. Gilt das überhaupt? z.b. für die $\phi=0$ gilt es nicht. 
+
+\paragraph{5. Frage: Probleme mit dem Code}
+(siehe mail)
+ich habe jetzt soweit alles implementiert, aber die Ergebnisse, die ich bekomme, sehen "komisch" aus. Ich habe, wie schon bei der Optimierung nach u wieder Probleme am Rand. Ich weiß leider nicht, woher die kommen. Alle tests laufen soweit.
+Außerdem sieht mein v bzw mein eta merkwürdig, da ich erwarten würde, dass sich der riss fortsetzt. Aber es ergibt sich ein komisches Muster. sodass abwechseln ein riss vorhanden ist und dann wieder nicht. 
+\end{document}
