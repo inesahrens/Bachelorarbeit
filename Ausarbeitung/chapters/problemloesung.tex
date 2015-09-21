@@ -11,7 +11,7 @@ Zunächst teilen wir das Minimierungsproblem in zwei voneinander unabhängige Opti
 \section{erste Betrachtung der Rissentstehung}
 \label{sec:allgemeines_kkt}
 
-Erinnern wir uns an die vorangegangene Problemstellung: 
+Erinnern wir uns an die vorangegangene Problemstellung 
 \begin{align*}
 	& \min\limits_{u \in  \h^2 , v \in \h } \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 dx \\
 	& \text{s.d.} \hspace{1ex} 0 \le v \le v_0 \\\
@@ -28,7 +28,7 @@ Beim genaueren Betrachten bemerkt man, dass die Ungleichungsnebenbedingung nur v
 	& \text{s.d.} \hspace{1ex} 0 \le v \le v_0 
 \end{align*}
 
-Wenn man beide Probleme implementiert, löst man zunächst die Optimierung nach u und setzt die Lösung dann in die Optimierung nach $v$ ein. Dieses Vorgehen wird mit der semidifferenzierbaren Newtonmethode wiederholt. Betrachten wir zuerst die Optimierung nach u. 
+Wenn man beide Probleme implementiert, löst man zunächst die Optimierung nach $u$ und setzt die Lösung dann in die Optimierung nach $v$ ein. Danach setzt man die Lösung von $v$ in die Optimierung nach $u$ ein. Dieses Vorgehen wird mit der semidifferenzierbaren Newtonmethode wiederholt. Betrachten wir zuerst die Optimierung nach u. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -40,7 +40,7 @@ Das Kapitel ist in zwei Unterkapitel aufgeteilt: Die analytische und numerische 
 
 Im analytischen Teil formulieren wir das Problem zu einem Problem ohne Nebenbedingung und. Dieses lässt sich dann als partielle Differentialgleichung schreiben. Die Existenz und Eindeutigkeit der schwachen Lösung sichern wir uns am Schluss des ersten Teils. 
 
-Für die numerische Betrachtung schreiben wir das Problem nochmal um und wenden dann Finite Elemente und den Galerkin Ansatz an. Das Resultat ist ein Gleichungsssytem, das sich einfach lösen lässt. 
+Für die numerische Betrachtung schreiben wir das Problem nochmal um und wenden dann Finite Elemente und den Galerkin Ansatz an. Das Resultat ist ein Gleichungssytem, das sich einfach lösen lässt. 
 
 \subsection{Analytische Betrachtung}
 
@@ -60,7 +60,7 @@ Das Problem hat dann folgende Form
 	& \min\limits_{u \in u_0 +\ho^2} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x 
 \end{align}
 
-Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren. Es tauchen keine Mischung aus den Termen $u_1$ und $u_2$ auf, das heißt, dass wir die Optimierungen trennen können. Beide sind identisch, es müssen später nur unterschiedliche Werte eingesetzt werden.Betrachten wir oBdA die Optimierung nach $u_1$. 
+Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren. Es tauchen keine Mischung aus den Termen $u_1$ und $u_2$ auf, das heißt, dass wir die Optimierungen trennen können. Beide sind identisch, es müssen später nur unterschiedliche Werte eingesetzt werden. Betrachten wir oBdA die Optimierung nach $u_1$. 
 
 \begin{thm}[Bedingung für ein Minimum]
 	Sei das Minimierungsproblem \eqref{eq:optimierung_u_ohne_nb2} gegeben und $\tilde{u_1}$  nimmt das Minimum an. Dann gilt 
@@ -109,7 +109,7 @@ Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren
 \end{proof}
 
 Also lautet unser analytisches Problem:
-Finde $u_1 \in u_0+\ho$, sodass  $\forall \varphi  \in u_0 +\ho$ gilt: 
+Finde $u_1 \in u_0+\ho$, sodass  $\forall \varphi  \in u_0 +\ho$ gilt 
 \begin{align}
 \label{eq:problem_u}
 	0 = \int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla u_1 \nabla \varphi   \diff x 
@@ -121,7 +121,7 @@ Nun ist noch interessant, ob eine Lösung existiert und ob sie eindeutig ist. Die
 \end{thm}
 \begin{proof}
 Wir wenden \ref{thm:existenz_schwache_loesung} an. Dazu müssen wir die Bilinearform aufstellen und dann \ref{ann:ex_und_eind} zeigen. 
-Die Bilinearform lautet: 
+Die Bilinearform lautet 
 \begin{align*}
 	\begin{array}{rrcl}
 		B(u_1,\varphi ): 	& \left( u_0 +\h0^2 \right)^2  & \rightarrow 	& \R \\
@@ -165,7 +165,7 @@ Finde $u_1 \in u_0+ H_0^1(\Omega)$, sodass
 \end{align*}
 
 Da die Nullstelle im Raum $H_0^1(\Omega)$ einfacher zu finden ist, als im Raum $u_0 + H_0^1(\Omega)$, stellen wir das Problem um. 
-Dazu definieren wir $\uotild \in u_0 + \ho$, sodass $\uotild$ $u_{0_1}$ auf dem Rand $\Gamma_1 \cup \Gamma_2$ entspricht und sonst $0$ ist. Dafiniere zusätzlich $\utild \in \ho$, sodass $u_1=\utild + \uotild$. 
+Dazu definieren wir $\uotild \in u_0 + \ho$, sodass $\uotild$ $u_{0_1}$ auf dem Rand $\Gamma_1 \cup \Gamma_2$ entspricht und sonst $0$ ist. Definiere zusätzlich $\utild \in \ho$, sodass $u_1=\utild + \uotild$. 
 Damit lässt sich das Problem umschreiben zu 
 
 Finde $\utild \in \ho$, sodass  $\forall \varphi \in \ho$  
@@ -194,7 +194,7 @@ wobei $u^h:= (u^h_1, \cdots u^h_{k})^T $, $u_0^h:= ({u^h_0}_1, \cdots {u^h_0}_k)
 Also müssen wir $L$ berechnen und dann das Gleichungssystem $ L*u_0^h =  L * u^h$ lösen. 
 
 \subsubsection{Berechnung des $u$ Integrals} 
-Als erste Vereinfacherung betrachten wir nicht mehr das Integral über $\Omega$, sondern über die einzelnen Dreiecke der Triangulierung. Desweiteren ist $T_i$ linear, also $\nabla T_i$ konstant. Es gilt:  
+Als erste Vereinfacherung betrachten wir nicht mehr das Integral über $\Omega$, sondern über die einzelnen Dreiecke der Triangulierung. Desweiteren ist $T_i$ linear, also $\nabla T_i$ konstant. Es gilt  
 \begin{align*}
   \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla T_i \nabla T_j  \diff x  
  & = \sum\limits_{\tilde{E} \in E_k} \int\limits_{\tilde{E}}  \left( v^2 + \epsilon_1 \right) \nabla T_i \nabla T_j  \diff x \\
@@ -233,7 +233,14 @@ $T_i$ ist nur auf dem Gitterpunkt $i$ $1$ und sonst $0$. Das heißt genauer, dass
 	\label{fig:triang_inner}
 \end{figure}
 
-Jetzt können wir $B(T_i,T_j)$ für festes $i,j$ berechnen. Falls $i$ und $j$ nicht adjazent sind, ist $B(T_i,T_j)=0$, da $T_i T_j=0$ gilt. Seien nun $T_I$ und $T_j$ adjazent. Hier haben wir vier Fälle: $i$ liegt auf $j$, also $j=i$, $j$ liegt rechts neben $i$ also $j=i+1$, $j$ liegt direkt unter $i$, $j=i+n+1$ und $j$ liegt schräg unter $i$, also $j=i+n+2$.  Betrachten wir für die einzelnen Berechnungen \ref{fig:triang_inner}. $T_i$ ist immer der Mittelpunkt dieser Zeichnung, $T_j$ ist entsprechend des jeweiligen $j$ positioniert. In den Berechnungen stimmen die Nummerierungen der Dreiecke mit den Nummerierungen in der Abbildung \ref{fig:triang_inner} überein und $\varphi_k, k \in \{0,1,2\}$ entspricht den $\varphi_k$ in \eqref{eq:varphi}. 
+Jetzt können wir $L_{ij}$ für festes $i,j$ berechnen. Falls $i$ und $j$ nicht adjazent sind, ist $L_{ij}=0$, da $T_i T_j=0$ gilt. Seien nun $T_I$ und $T_j$ adjazent. Hier haben wir vier Fälle:
+\begin{itemize}
+	\item  $i$ liegt auf $j$, also $j=i$ 
+	\item  $j$ liegt rechts neben $i$ also $j=i+1$
+	\item $j$ liegt direkt unter $i$, $j=i+n+1$ 
+	\item  $j$ liegt schräg unter $i$, also $j=i+n+2$
+\end{itemize}
+Betrachten wir für die einzelnen Berechnungen \ref{fig:triang_inner}. $T_i$ ist immer der Mittelpunkt dieser Zeichnung, $T_j$ ist entsprechend des jeweiligen $j$ positioniert. In den Berechnungen stimmen die Nummerierungen der Dreiecke mit den Nummerierungen in der Abbildung \ref{fig:triang_inner} überein und $\varphi_k, k \in \{0,1,2\}$ entspricht den $\varphi_k$ in \eqref{eq:varphi}. 
 
 Betrachten wir nun die vier Fälle. 
 
@@ -280,7 +287,7 @@ Mit diesen Werten können wir nun die Matrix $ \left( \int_{\Omega} (v^2+ \epsilo
 \end{figure}
 Dabei sind auf der Diagonalen die Einträge $L_{i,i}$, auf der Nebendiagonalen die Einträge $BL_{i,i+1}$ und auf der anderen Diagonale die Einträge $BL_{i,i+n+1}$. Wir haben bis jetzt immer nur über das Referenzdreieck integriert. Da wir aber eigentlich über die transformierten Dreiecke integrieren, müssen wir zu der Matrix $1/(h_1 h_2)$ multiplizieren. 
 
-\subsection{Agregation}
+\subsection{Aggregation}
 
 Nun haben wir die Matrix $L$ und den Vektor $u_0^h$ gegeben, um das Gleichungssystem $L u^h = L u_0^h$ zu berechnen. Allerdings haben wir noch nicht eingebracht, dass auf $\Gamma_1 \cup \Gamma_2$ $u=0$ gilt. Eigentlich würden wir das im Vektor $u$ mit aufnehmen, also die Zeilen 0 setzten, die den Rand repräsentieren und dann das Gleichungssystem lösen. Dies geht numerisch jedoch nicht so einfach. Die Information muss in $L$ und in $L u_0^h$ codiert sein. Dazu setzt man die Zeilen in $L$ 0, die zum Rand gehören. Die zugehörigen Diagonaleinträge werden 1 gesetzt. Diese Matrix nennen wir $\tilde{L}$. Die zugehörige Zeile in $L u_0^h$ setzt man 0. Den neuen Vektor nennen wir $\tilde{L u_0^h}$ Dadurch erhält man, dass $u^h$ an dieser Stelle 0 wird. 
 
@@ -290,7 +297,7 @@ Wir wollen
 \begin{align*}
 	\frac{1}{h_1 h_2}\tilde{L} u=\frac{1}{h_1 h_2} \tilde{L u_0^h} \Leftrightarrow \tilde{L}u = \tilde{L u_0^h}
 \end{align*}
-berechnen. Der Code dazu hat folgende Form: 
+berechnen. Der Code dazu hat folgende Form 
 
 \begin{algorithm}[H]
 	\caption{Berechnung von u}
@@ -298,11 +305,11 @@ berechnen. Der Code dazu hat folgende Form:
 	2. Berechne Vektor $\tilde{L u_0^h}$ \\
 	3. $u = \tilde{L u_0^h}\backslash \tilde{L}$ 
 \end{algorithm}
-Da sowohl $\tilde{L}$ als auch $\tilde{L u_0^h}$ aus fast nur Nullen besteht, verwende ich in Matlab Sparse Matrizen. Dies führt zu einer wesentlich kürzeren Laufzeit. 
+Da sowohl $\tilde{L}$ als auch $\tilde{L u_0^h}$ aus fast nur Nullen besteht, verwende ich in Matlab Sparse Matrizen. Dies führt zu einer wesentlich besseren Laufzeit. 
 
 \section{Optimierung nach v}
 
-Bei der Optimierung nach $v$ geht es um die Fortsetzung des Risses. Für dieses Optimierungsproblem mit Ungleichungsnebenbedingung sicheren wir zunächst die Existenz und Eindeutigkeit der Lösung. Danach stellen wir die Optimalitätsbedingungen auf. Das resultiert in ein Karush Kuhn Tucker System. Dieses wollen wir mittels semidifferenzierbarer Newton Methode lösen. Dazu müssen zunächst alle Funktionen der KKT Systems differenziert und danach diskretisiert werden.Dies geschieht wieder mit Finiten Elementen. Am Schluss führe beide Optimierungsprobleme zu einem Verfahren zusammen.    
+Bei der Optimierung nach $v$ geht es um die Fortsetzung des Risses. Für dieses Optimierungsproblem mit Ungleichungsnebenbedingung sicheren wir zunächst die Existenz und Eindeutigkeit der Lösung. Danach stellen wir die Optimalitätsbedingungen auf. Das resultiert in ein Karush Kuhn Tucker System. Dieses wollen wir mittels semidifferenzierbarer Newton Methode lösen. Dazu müssen zunächst alle Funktionen der KKT Systems differenziert und danach diskretisiert werden. Dies geschieht wieder mit Finiten Elementen. Am Schluss führe beide Optimierungsprobleme zu einem Verfahren zusammen.    
 
 
 \subsection{Analytische Betrachtung}
@@ -313,7 +320,7 @@ Die Optimierung nach $v$ hat folgende Form:
 	& \min\limits_{v \in\h} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\
 	& \text{s.d.} \hspace{1ex} 0 \le v \le v_0 \notag
 \end{align}
-Das lässt sich allgemein als Optimierungsproblem mit Ungleichungsnebenbedingungen darstellen:  
+Das lässt sich allgemein als Optimierungsproblem mit Ungleichungsnebenbedingungen darstellen  
 \begin{align*}
  \min\limits_{w \in W} J(w) \quad \text{s.d.} \quad w \in C 
 \end{align*}
@@ -341,7 +348,7 @@ Zunächst wollen wir die Existenz und Eindeutigkeit der Lösung zeigen. Dafür brau
 	\end{align*}
 \end{lem}
 \begin{proof}
-	Zunächst kommt die Richtungsableitung:  
+	Zunächst müssen wir die Richtungsableitung bestimmen.   
 	\begin{align*}
 		\begin{array}{lcrl}
 			\partial J(v)(s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
@@ -382,13 +389,13 @@ Das Problem  \eqref{eq:problem_von_v} besitzt genau eine Lösung, falls $v_0$ ste
 \begin{proof}
 Wir wollen \ref{thm:existenz_eindeutigkeit_loesung} anwenden. Zunächst müssen wir alle Voraussetzungen prüfen. 
 \begin{enumerate}
-	\item  $W=H^1(\Omega)$ ist ein Hilbertraum, also ist er ein reflexiver Banachraum. 
+	\item  $W=H^1(\Omega)$ ist ein Hilbertraum, also auch ein reflexiver Banachraum. 
 	\item Nun muss gezeigt werden, dass $C$ nichtleer, abgeschlossen und konvex ist. 
 $C$ ist nichtleer, da $0 \in C$. 
 
 Sei $v_n$ eine konvergente Folge in C. Dann gilt $0 \le v_n \le v_0 \hspace{1ex} \forall n \in \N$. Es gilt auch $0 \le \lim_{n \rightarrow \infty} u_n \le v_0$. Also ist $C$ abgeschlossen. 
 
-Für Konvexität sei $0<\lambda<1 $ und $v, w \in C$. Dann gilt $0 \le \lambda v + (1- \lambda) w$, da $\lambda>0$. Außerdem gilt $\lambda v + (1- \lambda) w \le \lambda v_0 + (1- \lambda) v_0 = v_0$. Also ist jede Konvexkombination in $C$ enthalten, $C$ ist konvex. 
+Um Konvexität von C zu zeigen, sei $0<\lambda<1 $ und $v, w \in C$. Dann gilt $0 \le \lambda v + (1- \lambda) w$, da $\lambda>0$. Außerdem gilt $\lambda v + (1- \lambda) w \le \lambda v_0 + (1- \lambda) v_0 = v_0$. Also ist jede Konvexkombination in $C$ enthalten, $C$ ist konvex. 
 	\item $J$ ist strikt konvex. Der Beweis dazu kann durch einfaches nachrechnen geführt werden. Für Stetigkeit gilt dasselbe. 
 	\item $J$ ist Gâteaux differenzierbar nach \eqref{lem:J_g_diffbar}
 	\item Sei $w \in C$ mit $\|v\|_{H^1(\Omega)} \rightarrow \infty$. Dann gilt
@@ -407,10 +414,10 @@ Für Konvexität sei $0<\lambda<1 $ und $v, w \in C$. Dann gilt $0 \le \lambda v +
 
 mit $c,c',c''>0$ passende Konstanten. 
 \end{enumerate}
-Alle Vorraussetzungen aus \ref{thm:existenz_eindeutigkeit_loesung} sind erfüllt, alse existiert genau eine Lösung des Optimierungsproblems. 
+Alle Voraussetzungen aus \ref{thm:existenz_eindeutigkeit_loesung} sind erfüllt, also existiert genau eine Lösung des Optimierungsproblems. 
 \end{proof}
   
-Nachdem wir nun wissen, dass die Lösung existiert und eindeutig ist, wollen wir das Minimum finden. Dazu brauchen wir Optimalitätsbedingungen. Diese stellt das folgende Theorem auf: 
+Nachdem wir nun wissen, dass die Lösung existiert und eindeutig ist, wollen wir das Minimum finden. Dazu brauchen wir Optimalitätsbedingungen. Diese stellt das folgende Theorem auf 
 
 \begin{thm}[Optimalitätsbedingungen]
 	Sei $a:=\inf \{J(w)|H(w) \le_P 0\}$. Dann gilt:
@@ -424,7 +431,7 @@ Nachdem wir nun wissen, dass die Lösung existiert und eindeutig ist, wollen wir 
 	\end{align*}
 \end{thm}
 \begin{proof}
-	Die Bedingungen aus \ref{thm:kkt_system} müssen gelten: 
+	Die Bedingungen aus \ref{thm:kkt_system} müssen gelten 
 	Sei $P:=\{(v,w) \in H^1(\Omega) \times H^1(\Omega) | v\ge 0 \text{ und } w \ge 0\} \subset H^1(\Omega) \times H^1(\Omega)$. $\mathring{P} \neq \emptyset$, da $H^1(\Omega)$ nur stetige Funktionen enthält. Also ist $P$ ein positiver Kegel. 
 	
 	$J:H^1(\Omega) \rightarrow \R $ sei wie oben definiert. 
@@ -440,7 +447,7 @@ Nachdem wir nun wissen, dass die Lösung existiert und eindeutig ist, wollen wir 
 	\end{align*}
 \end{proof}
 
-Damit müssen wir nur noch das Minimum der Lagrangefunktion suchen. Dies funktioniert, indem wir die Ableitung bestimmen und 0 setzen. Wir leiten die Lagragefunktion ab und erhalten  $\nabla J(v)+ \lambda - \mu=0$. Ausformuliert sieht das so aus:  
+Damit müssen wir nur noch das Minimum der Lagrangefunktion suchen. Dies funktioniert, indem wir die Ableitung bestimmen und 0 setzen. Wir leiten die Lagragefunktion ab und erhalten  $\nabla J(v)+ \lambda - \mu=0$. Ausformuliert sieht das so aus  
 \begin{align*}
 	& 2  v | \nabla u|^2  - \epsilon_2 2 \Delta v   - \frac{2}{\epsilon_3} (1-v) + \lambda - \mu = 0 & \text{ auf } \Omega \\
 	& 2 \epsilon_2 \nabla v \nu  =0 & \text{ auf } \partial \Omega
@@ -461,7 +468,7 @@ Die Projektion für die Nebenbedingung lautet nach \eqref{eq:min_max_theorie}:
 \mu - \lambda = \max\{0, \mu- \lambda + c(\overline{v}-v_0)\}+ \min\{0, \mu- \lambda + c\overline{v}\} \vspace{2ex} \forall c>0
 \end{align*}
 
-Daraus ergibt sich eine starke und schwache Formulierung. Die Starke lautet: 
+Daraus ergibt sich eine starke und schwache Formulierung. Die Starke lautet 
  Suche $v \in H^1$, sodass 
 \begin{align*}
 	\begin{array}{lll}
@@ -471,7 +478,6 @@ Daraus ergibt sich eine starke und schwache Formulierung. Die Starke lautet:
 	\end{array}
 \end{align*}
 Die schwache Formulierung ist dann
-
 \begin{align*}
  	& \int\limits_{\Omega} 2 \varphi  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi  - \frac{2}{\epsilon_3} (1-v)\varphi + \eta \varphi \diff x = 0 & \forall \varphi \in \h \\
 	& \int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(\overline{v}-v_0)\}- \min\{0, \eta + c\overline{v}\} \right) \varphi \diff x = 0 & \forall c>0, \forall  \varphi \in \h 
@@ -554,7 +560,7 @@ Für das Semidifferenzial von $G_2$  beweisen wir zunächst ein Lemma
 	\end{align*}	
 \end{lem}
 \begin{proof}
-	$f$ kann in einer anderen Form dargestellt werden: 
+	$f$ kann in einer anderen Form dargestellt werden 
 	\begin{align*}
 		f(v, \eta) = 
 		\left\{
@@ -566,7 +572,7 @@ Für das Semidifferenzial von $G_2$  beweisen wir zunächst ein Lemma
 		\right .
 	\end{align*}
 	Die Äquivalenz von diese Form von $f$ und \eqref{eq:H}, kann einfach nachgerechnet werden. 
-	Betrachten wir zunächst die Ableitung nach $\eta$ Es reicht, die Semidifferenzierbarkeit der einzelnen Abschnitte zu betrachten. Falls jeder Abschnitt semidifferenzierbar ist und die Übergänge auch, so ist $f$ semidifferenzierbar. 
+	Betrachten wir zunächst die Ableitung nach $\eta$. Es reicht, die Semidifferenzierbarkeit der einzelnen Abschnitte zu betrachten. Falls jeder Abschnitt semidifferenzierbar ist und die Übergänge auch, so ist $f$ semidifferenzierbar. 
 	
 	Sei dazu $-c(v-v_0) < \eta$ oder $ \eta < -c v $. Mit \ref{lem:semidiffbar_f_diffbar} gilt, dass, falls $f$ stetig Fréchet differenzierbar ist, $f$ $\partial f$ semidifferenzierbar. Um Fréchet Differenzierbarkeit zu zeigen, bestimmen wir zunächst die Richtungsableitung. Diese ist offensichtlich $0$. Dadurch folgt sofort die Fréchet differenzierbarkeit. 
 	
@@ -624,7 +630,6 @@ Damit ergibt sich als Ableitung
 			G_{2 v} & G_{2 \eta}  
 	\end{pmatrix}
 \end{align*}
-
 Also lautet das Gleichungssystem, das für das Newtonverfahren nach $s$ gelöst werden muss
 \begin{align*}
 	- \begin{pmatrix}
@@ -662,7 +667,6 @@ Da $u$ gegeben ist, ist $u$ ein Vektor mit den Auswertungen an den Ecken der Dre
 \begin{align*}
 G_1(v,\eta) =  \int\limits_{\Omega} 2 \varphi v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi - \frac{2}{\epsilon_3} (1-v)\varphi +  \eta \varphi \diff x
 \end{align*}
-
 wird nun diskretisiert:
 \begin{align*}
 	& \hspace{2ex} \int\limits_{\Omega} 2\varphi v | \nabla u|^2 + 2 \epsilon_2  \nabla v \nabla \varphi - \frac{2}{\epsilon_3} (1-v)\varphi  +  \eta \varphi \diff x \\
@@ -675,7 +679,7 @@ wird nun diskretisiert:
 
 mit $v^h:=(v_1^h, \cdots v_k^h)^T$, $\eta^h:=(\eta_1^h, \cdots \eta_k^h)^T$, $A_{ij}=  \int_{\Omega} u^{dis} T_i T_j \diff x $, $B_{ij}:= \int_{\Omega} \nabla T_i \nabla T_j \diff x$, $c_j:= \int_{\Omega} T_j \diff x$ und $D_{ij}:= \int_{\Omega} T_i T_j \diff x $.
 
-Die Berechnung der Matrizen $A,B,D$ und des Vektors $c$ erfolgt im Anhang \ref{sec:rechnungen}. Es ergibt sich: 
+Die Berechnung der Matrizen $A,B,D$ und des Vektors $c$ erfolgt im Anhang \ref{sec:rechnungen}. Es ergibt sich 
 \begin{equation*}
 	(2 A + 2 \epsilon_2 B + \frac{2}{\epsilon_3} D) v^h  - \frac{2}{\epsilon_3} c + D \eta^h =  
 \end{equation*}
@@ -705,23 +709,18 @@ Um dieses Funktional numerisch darzustellen, benutzen wir den Galerkin Ansatz mi
 	& v = \sum\limits_{i=1}^k v_i^h T_i(x,y) \hspace{9ex} \eta = \sum\limits_{i=1}^k \eta_i^h T_i(x,y) \hspace{9ex} v_0 = \sum\limits_{i=1}^k {v_0}_i^h T_i(x,y) 
 \end{align*}
 Daraus ergibt sich:
-
 \begin{align*}
 	& \int\limits_{\Omega} \left( \eta - \max \left\{ 0, \eta + c(v-v_0) \right\} - \min \left\{ 0, \eta + c v \right\} \right) \varphi \diff x  \\
 	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right. - \max \left\{ 0,  \sum\limits_{i=1}^k \eta_i^h T_i + c(\sum\limits_{i=1}^k v_i^h T_i - \sum\limits_{i=1}^k {v_0}_i^h T_i ) \right\} \\
 	& \hspace{5ex} \left. - \min \left\{ 0,  \sum\limits_{i=1}^k \eta_i^h T_i + c \sum\limits_{i=1}^k v_i^h T_i \right\} \right) T_j \diff x  \\ 
-	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right.- \max\left\{ 0,  \sum\limits_{i=1}^k \left( \eta_i^h + c(v_i^h - {v_0}_i^h ) \right) T_i  \right\} \\
-	& \hspace{5ex} \left. - \min \left\{ 0,  \sum\limits_{i=1}^k \left( \eta_i^h + c v_i^h \right) T_i  \right\} \right) T_j \diff x  \\ 
 	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right. -   \sum\limits_{i=1}^k \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h )  \right\} T_i \\
 	& \hspace{5ex} \left. -\sum\limits_{i=1}^k  \min \left\{ 0,  \eta_i^h + c v_i^h    \right\} T_i  \right) T_j \diff x  \\ 
 	& = \int\limits_{\Omega}  \sum\limits_{i=1}^k \left(  \eta_i^h- \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h ) \right\} -  \min \left\{0,  \eta_i^h + c v_i^h    \right\}  \right) T_i T_j \diff x \\
 	& =  \left( \sum\limits_{i=1}^k   \eta_i^h- \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h ) \right\} -  \min \left\{0,  \eta_i^h + c v_i^h    \right\}  \right) \int\limits_{\Omega} T_i T_j \diff x \\	  
 	& = D w_{v \eta}	
 \end{align*}
-
 mit $D$ aus der numerischen Darstellung von $G_1$ und\\ $(w_{v \eta})_i:=  \eta_i^h- \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h ) \right\} -  \min \left\{0,  \eta_i^h + c v_i^h    \right\}$. Die Summe und $T_i$ darf aus dem $\max$ bzw. $\min$ herausgezogen werden, da $T_i$ immer nur an einem Punkt ungleich 0 ist. Dadurch kommt niemals zustande, dass mehr als ein Term der Summe ungleich 0 ist. 
 $w_{v \eta}	$ kann auch explizit dargestellt werden: 
-
 \begin{align*}
 	(w_{v \eta})_i = 
 		\left\{
@@ -732,7 +731,6 @@ $w_{v \eta}	$ kann auch explizit dargestellt werden:
 			\end{array}
 		\right..
 \end{align*}
-
 Auch hier muss das Integral wieder transformiert werden, wodurch der Faktor $^/h_1 h_2$ multipliziert wird. 
 
 \subsubsection{numerische Darstellung von $G_{1 v}$}
@@ -796,10 +794,10 @@ Jeder Eintrag, der nicht 0 ist, besteht aus der Summe von unterschiedlichen Ausw
 Die numerische Darstellung ist genau die gleiche, wie bei $G_{2 v}$, nur dass die Funktionsauswertungen von $f$ andere sind. 
 
 \subsection{Agregation}
-Nun sind alle Funktionen disktretisiert und das Problem kann implementiert werden. Stellen wir die genaue Newton Methode auf: 
+Nun sind alle Funktionen diskretisiert und das Problem kann implementiert werden. Stellen wir die genaue Newton Methode auf 
 
 \begin{algorithm}[H]
-	\caption{semidiffbare Newton Methode}
+	\caption{semidifferenzierbare Newton Methode}
 	\label{algo:semidiffbare_nm_anw}
 	\KwData{$v^0, \eta^h $ (möglichst Nah an der Lösung $(\overline{v},\overline{\eta})$)}
 	\For{$k=0,1,\cdots$} {
@@ -816,7 +814,6 @@ Nun sind alle Funktionen disktretisiert und das Problem kann implementiert werde
 		$v^{k+1}=v^k+s_1^k \hspace{2ex} \eta^{k+1}= \eta^k + s_2^k$\;
 	}
 \end{algorithm}
-
 mit
 \begin{align*}
 	\begin{array}{rcl}
@@ -831,5 +828,4 @@ mit
 		f					& = &  \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\}				
 	\end{array}
 \end{align*}
-
 $1/h_1 h_2$ kommt nicht in der Newton Methode vor, da es vorher gekürzt wurde. 

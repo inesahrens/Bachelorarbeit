@@ -145,15 +145,15 @@ Es muss $\int\limits_{\Omega}  \frac{\partial f}{\partial v} T_i T_j \diff x $ b
 Dabei ist zu beachten, dass für gerade und ungerade Dreiecke andere Ergebnisse zustande kommen:
 
 \begin{align*}
-	\begin{array}{l|l|l}
-		ij & \int\limits_E  \frac{\partial f}{\partial v} T_i T_j \diff x \text{ gerades Dreieck} & \int\limits_E  \frac{\partial f}{\partial v} T_i T_j \diff x \text{ ungerades Dreieck} \\
+	\begin{array}{ll|l|l}
+		i&j & \int\limits_E  \frac{\partial f}{\partial v} T_i T_j \diff x \text{ gerades Dreieck} & \int\limits_E  \frac{\partial f}{\partial v} T_i T_j \diff x \text{ ungerades Dreieck} \\
 		\hline
-		00 	& \frac{1}{60} (f_1^h + 3 f_2^h + f_3^h) & \frac{1}{60} (f_1^h + 3 f_2^h + f_3^h) \\
-		11	& \frac{1}{60} (f_1^h + f_2^h + 3f_3^h) & \frac{1}{60} (3f_1^h + f_2^h + f_3^h) \\
-		22	& \frac{1}{60} (3f_1^h + f_2^h + f_3^h) & \frac{1}{60} (f_1^h + f_2^h + 3f_3^h) \\
-		01	& \frac{1}{120} (f_1^h + 2f_2^h + 2f_3^h) & \frac{1}{120} (2f_1^h + 2f_2^h + f_3^h) \\
-		02	& \frac{1}{120} (2f_1^h + 2f_2^h + f_3^h) & \frac{1}{120} (f_1^h + 2f_2^h + 2f_3^h) \\
-		12	& \frac{1}{120} (2f_1^h + f_2^h + 2f_3^h) & \frac{1}{120} (2f_1^h + f_2^h +2 f_3^h) 
+		0&0 	& \frac{1}{60} (f_1^h + 3 f_2^h + f_3^h) & \frac{1}{60} (f_1^h + 3 f_2^h + f_3^h) \\
+		0&1	& \frac{1}{120} (f_1^h + 2f_2^h + 2f_3^h) & \frac{1}{120} (2f_1^h + 2f_2^h + f_3^h) \\
+		0&2	& \frac{1}{120} (2f_1^h + 2f_2^h + f_3^h) & \frac{1}{120} (f_1^h + 2f_2^h + 2f_3^h) \\				
+		1&1	& \frac{1}{60} (f_1^h + f_2^h + 3f_3^h) & \frac{1}{60} (3f_1^h + f_2^h + f_3^h) \\
+		1&2	& \frac{1}{120} (2f_1^h + f_2^h + 2f_3^h) & \frac{1}{120} (2f_1^h + f_2^h +2 f_3^h) 	\\	
+		2&2	& \frac{1}{60} (3f_1^h + f_2^h + f_3^h) & \frac{1}{60} (f_1^h + f_2^h + 3f_3^h) 
 	\end{array}
 \end{align*}
 Dabei ist $f_1^h$ bei einem geraden Dreieck die Auswertung von $f^h$ an der oberen linken Ecke des Dreiecks. Die anderen Bezeichnungen sind darauf aufbauend. 

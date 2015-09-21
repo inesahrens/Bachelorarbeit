@@ -7,7 +7,7 @@ Das Phasenfeldmodell für die Rissentstehung ist ein Optimierungsproblem mit Ungl
 
 \subsection{Optimierungsproblem ohne Nebenbedingung}
 
-Optimierungsprobleme ohne Nebenbedingung kennt man im endlichdimensionalen bereits aus der Schule. Wir wollen ein Minimum oder Maximum finden und leiten dazu die zu optimierende Funktion ab und setzen die Ableitung gleich 0. Allerdings betrachten wir jetzt nicht mehr nur endlichdimensionale Probleme, sondern auch unendlichdimensionale. Sei also $W$ ein Banachraum und $J:W \rightarrow \R$ ein Funktional. Das Optimierungsproblem ohne Nebenbedingung hat dann folgende Form: 
+Optimierungsprobleme ohne Nebenbedingung kennt man im endlichdimensionalen bereits aus der Schule. Wir wollen ein Minimum oder Maximum finden und leiten dazu die zu optimierende Funktion ab und setzen die Ableitung gleich 0. Allerdings betrachten wir jetzt nicht mehr nur endlichdimensionale Probleme, sondern auch unendlichdimensionale. Sei also $W$ ein Banachraum und $J:W \rightarrow \R$ ein Funktional. Das Optimierungsproblem ohne Nebenbedingung hat dann folgende Form
 \begin{align}
 	\label{eq:op_ohne_nb}
 	\min_{w \in W} J(w)
@@ -34,7 +34,7 @@ Sei $F: U \subset X \rightarrow Y$ ein Operator zwischen Banachräumen und $U \ne
 \end{defi}
 
 \begin{defi}[Fr\'echet differenzierbar]
-	F heißt Fréchet differenzierbar in $x \in U$, falls F Gâteaux differenzierbar ist und folgende Approximation gilt:
+	F heißt Fréchet differenzierbar in $x \in U$, falls F Gâteaux differenzierbar ist und folgende Approximation gilt
 	\begin{align*}
 		\|F(x+h)-F(x)-F'(x)h\|_Y= o \left( \|h\|_X \right) \text{ für } \|h\|_X  \rightarrow 0
 	\end{align*} 
@@ -45,14 +45,14 @@ Nun können wir die Ableitung von $J$ bestimmen und daraus resultierend das Optim
 \begin{thm}
 	\label{thm:ableitung_gleich_null}
 	Sei das Optimierungsproblem \eqref{eq:op_ohne_nb} gegeben. 
-	Sei $J:W \rightarrow \R$ Gâteaux differenzierbar in $\tilde{w} \in W$. Wenn $\tilde{w}$ das Optimierungsproblem löst, gilt:  
+	Sei $J:W \rightarrow \R$ Gâteaux differenzierbar in $\tilde{w} \in W$. Wenn $\tilde{w}$ das Optimierungsproblem löst, gilt 
 	\begin{align*}
 		\partial J(\tilde{w})(h)=0 \hspace{2ex} \forall h \in W
 	\end{align*}
 	Dabei ist $h$ die Richtung der Ableitung.  
 \end{thm}
 \begin{proof}
-	Für alle $h \in W$ muss $\alpha \mapsto J(\tilde{w}+ \alpha h)$ minimal in $\alpha = 0$ sein. Daraus folgt:
+	Für alle $h \in W$ muss $\alpha \mapsto J(\tilde{w}+ \alpha h)$ minimal in $\alpha = 0$ sein. Daraus folgt
 	\begin{align*}
 		\frac{\partial}{\partial \alpha} f(x+\alpha h)|_{\alpha  =0} = 0
 	\end{align*}
@@ -76,7 +76,7 @@ Wir werden Probleme der Form
 	%\label{eq:optimierungsproblem_funktionbedingung}
 \end{align*}
 
-bearbeiten, wobei $W,Z$  Banachräume sind, $J: W \rightarrow \R $ Gâteaux differenzierbar und  $G: W \rightarrow Z$ die Nebenbedingung des Optimierungsproblems ist. $P \subset Z$ ist ein positiver Kegel. Die Nebenbedingung lässt sich in eine Raumnebenbedingung umschreiben, $C:=\{w \in W| G(w) \le_P 0 \}$. Dabei ist $C$ nichtleer, abgeschlossen und konvex. Das Problem lautet: 
+bearbeiten, wobei $W,Z$  Banachräume sind, $J: W \rightarrow \R $ Gâteaux differenzierbar und  $G: W \rightarrow Z$ die Nebenbedingung des Optimierungsproblems ist. $P \subset Z$ ist ein positiver Kegel. Die Nebenbedingung lässt sich in eine Raumnebenbedingung umschreiben, $C:=\{w \in W| G(w) \le_P 0 \}$. Dabei ist $C$ nichtleer, abgeschlossen und konvex. Das Problem lautet  
 \begin{align}
 	\min\limits_{w \in W} J(w) \quad s.d. \quad w \in C 
 	\label{eq:optimierungsproblem_raumbedingung}
@@ -156,10 +156,10 @@ $u \in g + \ho$ heißt schwache Lösung zu \eqref{eq:pDGL}, falls
 	B(u,v):= \int\limits_{\Omega} \nabla v^T A \nabla u + b \nabla u  v + c u v \diff x = \int_{\Omega }f v \diff x \hspace{2ex} \forall v \in \ho 
 \end{align*}
 \end{defi}
-Damit eine schwache Lösung eindeutig ist, brauchen wir ein paar Voraussetzungen: 
+Damit eine schwache Lösung eindeutig ist, brauchen wir ein paar Voraussetzungen
 \begin{ann}
 \label{ann:ex_und_eind}
-Es existieren $\lambda, \Lambda, \nu >0$, sodass $ \forall x \in \Omega$, $ \forall \xi, \zeta \in \R^n$ gilt: 
+Es existieren $\lambda, \Lambda, \nu >0$, sodass $ \forall x \in \Omega$, $ \forall \xi, \zeta \in \R^n$ gilt 
 \begin{enumerate}
 	\item $\xi^T A(x) \xi \ge \lambda |\xi|^2 $
 	\item $|\xi^T A(x) \zeta| \le \Lambda |\xi| |\zeta| $
@@ -282,11 +282,11 @@ Als erstes leiten wir uns zum Verständnis die einfache Newton Methode her. Dazu 
 	\label{eq:min}
 	\min\limits_{w \in \R^n} f(w) \hspace{6ex} f: \R^n \rightarrow \R
 \end{align}
-Die Optimalbedingung zu diesem Problem lautet $\nabla f(w)=0$. Nun wollen wir ein numerisches Verfahren für dieses Problem entwickeln. Dazu setzen wir $G:= \nabla f$. Da wir ein diskretes Verfahren wollen, setzten wir $w_0, w_1, \cdots $ in $G$ ein. Wir erhalten:   
+Die Optimalbedingung zu diesem Problem lautet $\nabla f(w)=0$. Nun wollen wir ein numerisches Verfahren für dieses Problem entwickeln. Dazu setzen wir $G:= \nabla f$. Da wir ein diskretes Verfahren wollen, setzten wir $w_0, w_1, \cdots $ in $G$ ein. Wir erhalten 
 \begin{align*}
 	G(w_{k+1})=0
 \end{align*}
-Um ein iteratives Verfahren zu erhalten taylorn wir $G$ in $w_k$. Das ergibt: 
+Um ein iteratives Verfahren zu erhalten taylorn wir $G$ in $w_k$. Das ergibt 
 %todo tylorn vll komisch
 \begin{thm}[einfaches Newtonverfahren]  
 	Der Algorithmus \ref{algo:einfache_nm} löst das Optimierungsproblem \eqref{eq:min}. Es konvergiert superlinear falls $G \in C^1$ und $G'$ invertierbar ist.
@@ -320,7 +320,7 @@ Betrachte nun
 \end{align}
 mit $G:X \rightarrow Y$, wobei $X,Y$ Banachräume sind. Sei $\overline{x}$ die Lösung der Gleichung. 
 
-Um eine numerische Lösung von \eqref{eq:g=0} zu erhalten, benutzen wir einen ähnlichen Algorithmus, wie den für das einfache Newtonverfahren, nur allgemeiner: 
+Um eine numerische Lösung von \eqref{eq:g=0} zu erhalten, benutzen wir einen ähnlichen Algorithmus, wie den für das einfache Newtonverfahren, nur allgemeiner 
 
 \begin{algorithm}[H]
 	\caption{Generalisierte Newton Methode}
@@ -335,12 +335,12 @@ Um eine numerische Lösung von \eqref{eq:g=0} zu erhalten, benutzen wir einen ähn
 
 Bis jetzt war der Operator $M_k$ die Ableitung von $G$. Dies ist jedoch nicht möglich, wenn $G$ nicht differenzierbar ist. Wie der Operator $M_k$ in diesem Fall sinnvoll zu wählen ist, wird später bestimmt. 
 
-Nun untersuchen wir die durch diesen Algorithmus gewonnene Folge $x^k$ in einer Umgebung von $\overline{x}$. Sei $d^{k+1} =x^{k+1}-\overline{x}$ der Abstand zwischen dem Iterationsschritt und der Lösung. Dann gilt: 
+Nun untersuchen wir die durch diesen Algorithmus gewonnene Folge $x^k$ in einer Umgebung von $\overline{x}$. Sei $d^{k+1} =x^{k+1}-\overline{x}$ der Abstand zwischen dem Iterationsschritt und der Lösung. Dann gilt 
 \begin{align*}
 	M_kd^{k+1} & = M_k(x^{k+1}-\overline{x})=M_k (x^k+s^k-\overline{x})=M_kd^k-G(x^k) \\
 	& = G(\overline{x}) + M_k d^k-G(x^k)
 \end{align*}
-Wir erhalten: 
+Wir erhalten 
 
 \begin{thm}[Konvrgenz der generalisierten Newton Methode]
 	\label{thm:konvergenz_generalisierte_NM}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.7)  20 SEP 2015 15:19
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.7)  20 SEP 2015 16:02
 entering extended mode
 **BA_Arbeit.tex
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\BA_Arbeit.tex
@@ -908,64 +908,77 @@ File: images/triang_inner.png Graphic file (type png)
 <use images/triang_inner.png>
 Package pdftex.def Info: images/triang_inner.png used on input line 231.
 (pdftex.def)             Requested size: 110.28676pt x 77.16309pt.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 238.
  [23 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/triang_
-inner.png>]
-Overfull \hbox (13.26733pt too wide) in paragraph at lines 273--274
+inner.png>] [24]
+Overfull \hbox (13.26733pt too wide) in paragraph at lines 280--281
 [] []\OT1/cmss/bx/n/12 Zusammenfassung[] \OT1/cmr/m/n/12 Mit die-sen Wer-ten k[
 ]onnen wir nun die Ma-trix $[][]$
  []
 
-<images/matrix.png, id=404, 395.97937pt x 395.97937pt>
+<images/matrix.png, id=410, 395.97937pt x 395.97937pt>
 File: images/matrix.png Graphic file (type png)
  <use images/matrix.png>
-Package pdftex.def Info: images/matrix.png used on input line 277.
+Package pdftex.def Info: images/matrix.png used on input line 284.
 (pdftex.def)             Requested size: 98.9946pt x 98.9946pt.
 
-[24] [25 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/mat
-rix.png>] [26]
-Overfull \hbox (9.55705pt too wide) in paragraph at lines 341--341
+[25 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/matrix.p
+ng>] [26]
+Overfull \hbox (9.55705pt too wide) in paragraph at lines 348--348
 [] 
  []
 
 
-Overfull \hbox (25.9016pt too wide) in paragraph at lines 375--375
+Overfull \hbox (25.9016pt too wide) in paragraph at lines 382--382
 [] 
  []
 
-[27] [28] [29]
-Overfull \hbox (16.59837pt too wide) in paragraph at lines 493--493
+[27] [28]
+Overfull \hbox (5.79166pt too wide) in paragraph at lines 434--436
+[]\OT1/cmr/m/n/12 Die Be-din-gun-gen aus [][]2.1.7[][] m[]ussen gel-ten Sei $\O
+ML/cmm/m/it/12 P \OT1/cmr/m/n/12 := \OMS/cmsy/m/n/12 f\OT1/cmr/m/n/12 (\OML/cmm
+/m/it/12 v; w\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 H[]\OT1/cmr/
+m/n/12 (
+) \OMS/cmsy/m/n/12  \OML/cmm/m/it/12 H[]\OT1/cmr/m/n/12 (
+)\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 v \OMS/cmsy/m/n/12 $
+ []
+
+[29] [30]
+Overfull \hbox (16.59837pt too wide) in paragraph at lines 499--499
 [] 
  []
 
-[30] [31]
-Overfull \hbox (15.18996pt too wide) in paragraph at lines 584--584
+[31] [32]
+Overfull \hbox (15.18996pt too wide) in paragraph at lines 590--590
 [] 
  []
 
-[32] [33] [34] <images/formel.png, id=489, 2634.84375pt x 442.65375pt>
+[33] [34] [35] <images/formel.png, id=493, 2634.84375pt x 442.65375pt>
 File: images/formel.png Graphic file (type png)
 
 <use images/formel.png>
-Package pdftex.def Info: images/formel.png used on input line 685.
+Package pdftex.def Info: images/formel.png used on input line 689.
 (pdftex.def)             Requested size: 395.20952pt x 66.39519pt.
 
-Overfull \hbox (20.96469pt too wide) in paragraph at lines 689--690
+Overfull \hbox (20.96469pt too wide) in paragraph at lines 693--694
 []\OT1/cmr/m/n/12 wobei bei $\OML/cmm/m/it/12 A$ \OT1/cmr/m/n/12 auf der Haupt-
 dia-go-na-len $[] []$, auf der Ne-ben-dia-go-na-len $[] []$
  []
 
-[35 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/formel.p
-ng>] [36] [37] [38] <images/matrix2.png, id=512, 395.97937pt x 395.97937pt>
+[36 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/formel.p
+ng>] [37] [38] <images/matrix2.png, id=512, 395.97937pt x 395.97937pt>
 File: images/matrix2.png Graphic file (type png)
 
 <use images/matrix2.png>
-Package pdftex.def Info: images/matrix2.png used on input line 788.
+Package pdftex.def Info: images/matrix2.png used on input line 786.
 (pdftex.def)             Requested size: 98.9946pt x 98.9946pt.
-
+ [39 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/matrix2
+.png>]
 ! Missing { inserted.
 <to be read again> 
                    \unskip 
-l.817 	}
+l.815 	}
         
 A left brace was mandatory here, so I've put one in.
 You might want to delete and/or insert some corrections
@@ -975,7 +988,7 @@ so that I will find a matching right brace soon.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.817 	}
+l.815 	}
         
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -983,12 +996,9 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-[39 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/matrix2.
-png>]) [40]
+) [40]
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\chapters/fazit.tex
 Kapitel 4.
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 13.
 ) [41
 
 
@@ -1054,14 +1064,14 @@ gemein.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 102.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 102.
 Package rerunfilecheck Info: File `BA_Arbeit.out' has not changed.
-(rerunfilecheck)             Checksum: 89E9CBB451C7A5A94B0ADD46D8B53C5E;2218.
+(rerunfilecheck)             Checksum: 5553FA3796C342D4FE1DA02B9B9CAD7D;2219.
 Package rerunfilecheck Info: File `BA_Arbeit.brf' has not changed.
 (rerunfilecheck)             Checksum: 9782EE3C860D1D7CFB2B5D45CEF09719;369.
  ) 
 Here is how much of TeX's memory you used:
  15445 strings out of 493921
  234887 string characters out of 3144880
- 427981 words of memory out of 3000000
+ 428981 words of memory out of 3000000
  18265 multiletter control sequences out of 15000+200000
  17840 words of font info for 67 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -1085,7 +1095,7 @@ X 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX
 nts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
 s/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files (x86)/MiKTeX 2.9/f
 onts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on BA_Arbeit.pdf (51 pages, 880253 bytes).
+Output written on BA_Arbeit.pdf (51 pages, 881050 bytes).
 PDF statistics:
  674 PDF objects out of 1000 (max. 8388607)
  190 named destinations out of 1000 (max. 500000)
