@@ -34,11 +34,11 @@
 
 % n+1 ist die Anzahl der Stützstellen nach rechts
 % m+1 ist die Anzahl der Stützstellen nach unten
-n=20;
-m=20;
-
+n=50;
+m=50;
+nu = .010; 
 % Deklaration aller epsilons
-epsilon = [0.01;0.1;0.05]; 
+epsilon = [0.01;nu* 20*1/n ;(20*1/n )/nu]; 
 
 % setzten von v für Anfangsdaten. Hier liegt ein Riss in der Mitte des Gebietes vor.  
 v = ones((m+1)*(n+1),1); 
@@ -47,17 +47,18 @@ for i=0:m
     v(i*(n+1)+n/2 + 1) = 0;
 end
 
+
 % eta ist der Lagrangemultiplikator. Er muss auch vorab gesetzt werden. 
 eta = .5*ones((n+1)*(m+1),1);  
 
 %v0 ist die Schranke. Im Problem gilt, dass 0<v<v0
-v0 = ones((n+1)*(m+1),1); 
+v0 =2* ones((n+1)*(m+1),1); 
 
 % die Konstante kommt durch den Lagrangemultiplikator rein. 
 const = 1; 
 
 %Anzahl der Newtonschritte die durchgeführt werden sollen
-k=15; 
+k=1; 
 
 % u0 sind die Randdaten von u. Hier wird u am rechten und am linken Rand
 % eingespannt, sodass an einem Rand u 1 und und am anderen 2. 
@@ -75,6 +76,10 @@ end
 % i ten Zeile alle indizes der Dreiecke, die um den Punkt i liegen. 
 [edges, allSurroundingTriangles] = triangulasation(m,n); 
 
+u1 = calculate_u(edges, allSurroundingTriangles, u0, epsilon(1), v, m, n); 
+u2 = calculate_u(edges, allSurroundingTriangles, u0, epsilon(1), v, m, n); 
+u = [u1,u2] ; 
+
 
 for i=1:k
 %while (norm(v1-v)>.00002)
@@ -82,13 +87,13 @@ for i=1:k
     %u1 und u2 bekommen eig unterschiedliche Randwerte? sonst sind sie
     %immer gleich? 
     % u1 und u2 werden berechnet. 
-    u1 = calculate_u(edges, allSurroundingTriangles, u0, epsilon(1), v, m, n); 
-    u2 = calculate_u(edges, allSurroundingTriangles, u0, epsilon(1), v, m, n); 
+    %u1 = calculate_u(edges, allSurroundingTriangles, u0, epsilon(1), v, m, n); 
+    %u2 = calculate_u(edges, allSurroundingTriangles, u0, epsilon(1), v, m, n); 
     
     
     %u1 = [1;1;2;2;2; 1;1;2;2;2; 1;1;2;2;2; 1;1;2;2;2; 1;1;2;2;2]; 
     %u2 = [1;1;2;2;2; 1;1;2;2;2; 1;1;2;2;2; 1;1;2;2;2; 1;1;2;2;2]; 
-    u = [u1,u2] ; 
+    %u = [u1,u2] ; 
     % als nächstes soll das Gleichungssystem gelöst werden, Dazu muss G
     % berechnte werden. Alle Matrizen, die gebraucht werden, werden hier
     % berechnet. 
@@ -110,7 +115,7 @@ for i=1:k
 
     % Berechnung von G1eta. Die Ableitung ist recht einfach zu sehen
     G1eta = D; 
-     
+    test = 4/epsilon(3) *G1v\(D*ones( (n+1)*(m+1),1))
     % Berechnung von G2 und den Ableitungen
     [G2, G2v, G2eta] = G2_and_deratives(v, eta, const, v0, D, edges, allSurroundingTriangles, m, n); 
     
@@ -139,7 +144,8 @@ for i=1:k
     % gelöst wird. 
     s = gradG\G ;
     % berechnet das neue v
-    v = s(1:(m+1)*(n+1)) + v; 
+    v = s(1:(m+1)*(n+1)) + v;
+    v = test; 
     % berechnet das neue eta
     eta = s((m+1)*(n+1)+ 1:(m+1)*(n+1)*2) + eta; 
 end

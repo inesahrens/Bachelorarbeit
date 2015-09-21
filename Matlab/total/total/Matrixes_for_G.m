@@ -109,7 +109,7 @@ function result = integrate_gti_gtj( allSurroundingTriangles, m, n)
     secDiag2 =  [0; secDiag(1:(n+1)*(m+1)-1)]; 
     farDiag2 = [zeros(n+1,1) ; farDiag(1:(n+1)*(m+1)-(n+1))] ;
     % Ergebnisse werden in der Sparsematrix geschrieben. 
-    result = spdiags([farDiag secDiag diag secDiag2 farDiag2 ],[-n-1 -1 0 1 n+1],(n+1)*(m+1),(n+1)*(m+1) );  
+    result = spdiags([farDiag secDiag diag secDiag2 farDiag2 ],[-n-1 -1 0 1 n+1],(n+1)*(m+1),(n+1)*(m+1) ); 
 end
 
 function result = integrate_ti(sur, m, n)

@@ -1,18 +1,47 @@
 todo 
 
 - einleitung schreiben
+  - ordentlich aufschreiben, was prof mir gesagt hat		.5	0			
+  - in Braess Finite Elemente nachschlagen, elastische Energie	2	6
+  - in Braides Delta sowieso oder Phasenkonvergenz nachlesen 	2	7
+    nach Ambrosio Tornelli Phasenfeld
 - konvergenz der NM 
+  - komisches zeugs; probieren zu verstehen
+  - obsacle Problem suchen und lösung davon suchen		4	2
 - F abl stetig, beschränkt?
+  - siehe Blatt 3, ordentlich mit begründung			.5	3
 - programm zum laufen bringen
+  - Matrix B mit code vom Prof untersuchen			1	1
 - konvergenz programm untersuchen
-- kapitel numerische Resultate, testbeispiele
-- fazit schreiben 
+- kapitel numerische Resultate, testbeispiele			8
+- fazit schreiben 						8
 - vll anwendung und modell als einzelne unterkapitel?
 - semidiffbar teil überarbeiten nachdem ich konvergenz weiß
-- prof zitat vorlesung fragen
+- prof zitat vorlesung fragen 
+  -> alles ok,vll noch mit ins literaturverzeichnis aufnehmen	.5	5
 - zitat internet weg
-- prof frageliste schreiben
+  - nach Karl Kunisch suchen litschitz lectures; irgendwas in 2008 .5	4
+- notation ableitungen anders 
+  -> unterschiedliche phi/ varphi jenachdem welche ableitung!	1	0
+- Anwendung: 
+  - Material wird eingespannt und auf Ränder kraft ausgeübt	.5	8
+								___
+								28.5
+korrektur lesen							8 
+								36.5
 
+Mo: 1
+Di: 2
+Mi: 10
+Do: 10
+Fr: 4
+Sa: 6
+So: 6
+Mo: 8
+Di: 10
+   ___
+    51 
++ prof frageliste schreiben
 + ableitung dF() (phi) schreiben einheitlich
 + Thm Titel richtig angeben
 + überall varphi statt Ti?
