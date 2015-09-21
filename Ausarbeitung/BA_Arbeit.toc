@@ -1,42 +1,42 @@
 \select@language {ngerman}
 \contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}
-\contentsline {chapter}{\numberline {2}Mathematische Grundlagen}{3}{chapter.2}
-\contentsline {section}{\numberline {2.1}Grundlagen Optimierung}{3}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Optimierungsproblem ohne Nebenbedingung}{3}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Optimierungsproblem mit Ungleichungsnebenbedingung}{5}{subsection.2.1.2}
-\contentsline {section}{\numberline {2.2}Grundlagen pDGL}{7}{section.2.2}
-\contentsline {section}{\numberline {2.3}Finite Elemente}{8}{section.2.3}
-\contentsline {section}{\numberline {2.4}Semidifferenzierbare Newton Methoden}{10}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Newton Methoden mit einfachen Nebenbedingungen}{11}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Konvergenz der generalisierten Newton Methode}{11}{subsection.2.4.2}
-\contentsline {subsection}{\numberline {2.4.3}Semidifferential}{14}{subsection.2.4.3}
-\contentsline {subsection}{\numberline {2.4.4}semidiffbare Newton Methoden}{15}{subsection.2.4.4}
-\contentsline {chapter}{\numberline {3}Anwendung auf das Phasenfeldmodell f\"ur Rissentstehung}{17}{chapter.3}
-\contentsline {section}{\numberline {3.1}erste Betrachtung der Rissentstehung}{17}{section.3.1}
-\contentsline {section}{\numberline {3.2}Optimierung nach u}{18}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Analytische Betrachtung}{19}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Numerische Betrachtung}{21}{subsection.3.2.2}
-\contentsline {subsubsection}{\nonumberline Berechnung des $u$ Integrals}{22}{section*.5}
-\contentsline {subsection}{\numberline {3.2.3}Aggregation}{25}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Optimierung nach v}{26}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Analytische Betrachtung}{26}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}semidifferenzierbare Newton Methode}{31}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}numerische Betrachtung}{35}{subsection.3.3.3}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1}$}{35}{section*.13}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2}$}{37}{section*.15}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 v}$}{38}{section*.16}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 \eta }$}{38}{section*.17}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 v}$}{39}{section*.18}
-\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 \eta }$}{40}{section*.20}
-\contentsline {subsection}{\numberline {3.3.4}Agregation}{40}{subsection.3.3.4}
-\contentsline {chapter}{\numberline {4}Fazit und Ausblick}{41}{chapter.4}
-\contentsline {chapter}{\numberline {A}Allgemeine Informationen}{42}{appendix.A}
-\contentsline {section}{\numberline {A.1}Rechnungen}{42}{section.A.1}
-\contentsline {subsection}{\numberline {A.1.1}numerische Darstellung von $G_1$}{42}{subsection.A.1.1}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix A}{43}{section*.21}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix B}{44}{section*.22}
-\contentsline {paragraph}{\nonumberline Berechnung des Vektors c}{44}{section*.23}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix D}{45}{section*.24}
-\contentsline {subsection}{\numberline {A.1.2}Berechnung von $G_{2v}$}{46}{subsection.A.1.2}
-\contentsline {section}{\numberline {A.2}Code}{47}{section.A.2}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{49}{appendix*.25}
+\contentsline {chapter}{\numberline {2}Mathematische Grundlagen}{4}{chapter.2}
+\contentsline {section}{\numberline {2.1}Grundlagen Optimierung}{4}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Optimierungsproblem ohne Nebenbedingung}{4}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Optimierungsproblem mit Ungleichungsnebenbedingung}{6}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}Grundlagen pDGL}{8}{section.2.2}
+\contentsline {section}{\numberline {2.3}Finite Elemente}{9}{section.2.3}
+\contentsline {section}{\numberline {2.4}Semidifferenzierbare Newton Methoden}{11}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Newton Methoden mit einfachen Nebenbedingungen}{12}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Konvergenz der generalisierten Newton Methode}{12}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}Semidifferential}{15}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}semidiffbare Newton Methoden}{16}{subsection.2.4.4}
+\contentsline {chapter}{\numberline {3}Anwendung auf das Phasenfeldmodell f\"ur Rissentstehung}{18}{chapter.3}
+\contentsline {section}{\numberline {3.1}erste Betrachtung der Rissentstehung}{18}{section.3.1}
+\contentsline {section}{\numberline {3.2}Optimierung nach u}{19}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Analytische Betrachtung}{20}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Numerische Betrachtung}{22}{subsection.3.2.2}
+\contentsline {subsubsection}{\nonumberline Berechnung des $u$ Integrals}{23}{section*.5}
+\contentsline {subsection}{\numberline {3.2.3}Aggregation}{26}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Optimierung nach v}{27}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Analytische Betrachtung}{27}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}semidifferenzierbare Newton Methode}{32}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}numerische Betrachtung}{36}{subsection.3.3.3}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1}$}{36}{section*.13}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2}$}{38}{section*.15}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 v}$}{39}{section*.16}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{1 \eta }$}{39}{section*.17}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 v}$}{40}{section*.18}
+\contentsline {subsubsection}{\nonumberline numerische Darstellung von $G_{2 \eta }$}{41}{section*.20}
+\contentsline {subsection}{\numberline {3.3.4}Agregation}{41}{subsection.3.3.4}
+\contentsline {chapter}{\numberline {4}Fazit und Ausblick}{42}{chapter.4}
+\contentsline {chapter}{\numberline {A}Allgemeine Informationen}{43}{appendix.A}
+\contentsline {section}{\numberline {A.1}Rechnungen}{43}{section.A.1}
+\contentsline {subsection}{\numberline {A.1.1}numerische Darstellung von $G_1$}{43}{subsection.A.1.1}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix A}{44}{section*.21}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix B}{45}{section*.22}
+\contentsline {paragraph}{\nonumberline Berechnung des Vektors c}{45}{section*.23}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix D}{46}{section*.24}
+\contentsline {subsection}{\numberline {A.1.2}Berechnung von $G_{2v}$}{47}{subsection.A.1.2}
+\contentsline {section}{\numberline {A.2}Code}{48}{section.A.2}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{50}{appendix*.25}

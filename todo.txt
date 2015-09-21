@@ -1,7 +1,7 @@
 todo 
 
 - einleitung schreiben
-  - ordentlich aufschreiben, was prof mir gesagt hat		.5	0			
+  + ordentlich aufschreiben, was prof mir gesagt hat		.5	0			
   - in Braess Finite Elemente nachschlagen, elastische Energie	2	6
   - in Braides Delta sowieso oder Phasenkonvergenz nachlesen 	2	7
     nach Ambrosio Tornelli Phasenfeld
