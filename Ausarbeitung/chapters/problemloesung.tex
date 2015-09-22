@@ -649,6 +649,37 @@ Also lautet das Gleichungssystem, das für das Newtonverfahren nach $s$ gelöst we
 	\end{pmatrix}
 \end{align*}
 
+Stellen wir dazu die Newton Methode auf
+
+\begin{algorithm}[H]
+	\caption{semidiffbare Newton Methode}
+	\label{algo:semidiffbare_nm_anw}
+	\KwData{$v^0, \eta^0 $ möglichst Nah an der Lösung $\overline{v}, \overline{\eta}$}
+	\For{$k=0,1,\cdots$} {
+		\emph{Erhalte $s_1^k$ beim lösen von $
+			 - \begin{pmatrix}
+			 G_1 \\
+			 G_2
+			 \end{pmatrix}
+			 = 
+			 \begin{pmatrix}
+			 G_{1 v} & G_{1 \eta} \\
+			 G_{2 v} & G_{2 \eta}  
+			 \end{pmatrix}
+			 \begin{pmatrix}
+			 s^1 \\
+			 s^2
+			 \end{pmatrix}$}\;
+		$v^{k+1}=v^k+s_1^k \hspace{2ex}  \eta^{k+1}=\eta^k+s_2^k$\;
+	}
+\end{algorithm}
+
+Nun wollen wir noch herausfinden, ob die Newton Methode konvergiert.
+
+\begin{thm}[Konvergenz der Newton Methode]
+	
+\end{thm}
+
 \subsection{numerische Betrachtung}
 
 Alle Funktionen aus dem Newtonsystem müssen numerisch dargestellt werden. 

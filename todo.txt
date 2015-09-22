@@ -1,30 +1,34 @@
 todo 
-
++ notation ableitungen anders 
+  -> unterschiedliche phi/ varphi jenachdem welche ableitung!	1	0
 - einleitung schreiben
   + ordentlich aufschreiben, was prof mir gesagt hat		.5	0			
-  - in Braess Finite Elemente nachschlagen, elastische Energie	2	6
-  - in Braides Delta sowieso oder Phasenkonvergenz nachlesen 	2	7
-    nach Ambrosio Tornelli Phasenfeld
+- programm zum laufen bringen
+  + Matrix B mit code vom Prof untersuchen			1	1
 - konvergenz der NM 
   - komisches zeugs; probieren zu verstehen
   - obsacle Problem suchen und lösung davon suchen		4	2
 - F abl stetig, beschränkt?
   - siehe Blatt 3, ordentlich mit begründung			.5	3
-- programm zum laufen bringen
-  - Matrix B mit code vom Prof untersuchen			1	1
+- zitat internet weg
+  - nach Karl Kunisch suchen litschitz lectures; irgendwas in 2008 .5	4
+- prof zitat vorlesung fragen 
+  -> alles ok,vll noch mit ins literaturverzeichnis aufnehmen	.5	5
+- einleitung schreiben
+  - in Braess Finite Elemente nachschlagen, elastische Energie	2	6
+  - in Braides Delta sowieso oder Phasenkonvergenz nachlesen 	2	7
+    nach Ambrosio Tornelli Phasenfeld
+- Anwendung: 
+  - Material wird eingespannt und auf Ränder kraft ausgeübt	.5	8
+
 - konvergenz programm untersuchen
 - kapitel numerische Resultate, testbeispiele			8
 - fazit schreiben 						8
 - vll anwendung und modell als einzelne unterkapitel?
 - semidiffbar teil überarbeiten nachdem ich konvergenz weiß
-- prof zitat vorlesung fragen 
-  -> alles ok,vll noch mit ins literaturverzeichnis aufnehmen	.5	5
-- zitat internet weg
-  - nach Karl Kunisch suchen litschitz lectures; irgendwas in 2008 .5	4
-+ notation ableitungen anders 
-  -> unterschiedliche phi/ varphi jenachdem welche ableitung!	1	0
-- Anwendung: 
-  - Material wird eingespannt und auf Ränder kraft ausgeübt	.5	8
+
+
+
 								___
 								28.5
 korrektur lesen							8 
