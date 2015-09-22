@@ -307,6 +307,19 @@ berechnen. Der Code dazu hat folgende Form
 \end{algorithm}
 Da sowohl $\tilde{L}$ als auch $\tilde{L u_0^h}$ aus fast nur Nullen besteht, verwende ich in Matlab Sparse Matrizen. Dies führt zu einer wesentlich besseren Laufzeit. 
 
+\subsection{Auswertung der Implementation}
+
+Falls u an beiden Seiten auf unterschiedlicher aber jeweils konstanter Höhe eingespannt ist und ein Riss in der Mitte des Materials entsteht (der mind. 2 Pixel breit sein muss, sonst wird v nicht richtig 0, sondern wird interpoliert), sehen wir die Unstetigkeitsstelle genau an dem Riss. 
+Unterschiedliche Gitterweiten?
+
+Falls wir $u$ nicht konstant einspannen, also an beiden Seiten schräg, aber gleiche Höhe
+Unterschiedliche Gitterweiten?
+
+schräg aber unterschiedliche Höhe
+unterschiedliche Gitterweiten
+
+entgegengesetzt schräg
+
 \section{Optimierung nach v}
 
 Bei der Optimierung nach $v$ geht es um die Fortsetzung des Risses. Für dieses Optimierungsproblem mit Ungleichungsnebenbedingung sicheren wir zunächst die Existenz und Eindeutigkeit der Lösung. Danach stellen wir die Optimalitätsbedingungen auf. Das resultiert in ein Karush Kuhn Tucker System. Dieses wollen wir mittels semidifferenzierbarer Newton Methode lösen. Dazu müssen zunächst alle Funktionen der KKT Systems differenziert und danach diskretisiert werden. Dies geschieht wieder mit Finiten Elementen. Am Schluss führe beide Optimierungsprobleme zu einem Verfahren zusammen.    

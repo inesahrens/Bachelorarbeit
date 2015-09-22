@@ -5,6 +5,31 @@
 \chapter{Einleitung}
 \label{chap:einleitung}
 
+Konvergenz S 38 in Script 
+
+Betrachten wir zunächst ein Beispiel. Ein Material z.B. ein Blatt Papier, bezeichnen wir die Punkte auf diesem Material mit $\Omega \subset \R^3$, ist an zwei gegenüberliegenden Seiten eingespannt und an diesen Seiten wird Kraft ausgeübt. Was passiert? Zunächst wird sich das Blatt Papier ein wenig dehnen, also Deformieren. Dieses beschreibt $x \mapsto \varphi(x)$. Die Verschiebung eines Punkts x auf dem Blatt Papier wird also angegeben durch 
+\begin{align*}
+	u: \R^3 \rightarrow \R^3 \\x \mapsto \varphi(x) -x
+\end{align*}   
+Solange das Papier nicht reißt, ist die Verschiebung stetig. $u$ erfüllt die Elastizitätsgleichung. 
+\begin{align*}
+	\min_{u} \int_{\Omega \backslash \text{ Riss}} v^2 \frac{\nabla u + \nabla u^T}{2}^2 + \frac{\lambda}{2} \div(v)^2 \diff x
+\end{align*}
+Dabei beschreibt 
+\begin{align*}
+V: \Omega \rightarrow [0,1]
+\end{align*}
+wo und wie stark ein Riss vorhanden ist. 0 bedeutet, dass das Material vollständig gerissen ist und 1, das kein Riss vorhanden ist.
+Der erste Term wird groß, sobald die Verschiebung des Gebietes stark wird, also wenn das Material kurz davor ist zu reißen.  
+
+ Sobald es reißt, wird das Papier zu beiden Seiten weggezogen und die Verschiebung wird unstetig. An den stellen, an denen das Papier nicht durchreißt, erfüllt es die Elasitzitätsgleichung:
+	\begin{align*}
+	\min_{u} \int_{\Omega \backslash \text{ Riss}}  \frac{\nabla u + \nabla u^T}{2}^2 \diff x
+	\end{align*}
+
+
+
+
 %todo einleitung besser schreiben.
 % dazu gehört:
 % - Anwendung/ Erklärungen
@@ -19,7 +44,7 @@ Wir betrachten die Darstellung von Rissen.
 	\item genaues Problem aufschreiben
 	\item $u: \R^3 \rightarrow \R^3$ ist die Verschiebung des Materials
 	\item $x \mapsto \varphi(x)$ ist die Deformation des Materials bei einem Riss
-	\item damit gilt $u(x) = \varphi(x)-x$ Warum genau. Kurz nachdenken
+	\item damit gilt $u(x) = \varphi(x)-x$ 
 	\item u ist stetig, wenn es nicht reißt. Gleichung der Elastizität ist erfüllt. 
 	\item Betrachte 
 	\begin{align*}
@@ -72,10 +97,9 @@ Das Problem lautet:
 dabei ist $\epsilon_i>0 \hspace{1ex}\forall i \in \{1,2,3\}$ ein kleiner Parameter und $\Gamma_1, \Gamma_2 \subset \Omega$  der rechte bzw. linke Rand eines rechteckigen Gebietes $\Omega \subset \R^2$, d.h., $\Omega=[0,a] \times [0,b] \hspace{1ex} \Gamma_1=\{0\} \times [0,b] \hspace{1ex} \Gamma_2=\{a\} \times [0,b] $
 
 $u:\Omega \rightarrow \R^2 $ beschreibt die Verschiebung eines Körpers auf dem Gebiet $\Omega$, wenn ein Riss entsteht. Der Körper ist an $\Gamma_1$ und $\Gamma_2$ befestigt, was die Randbedingung $u_0$ angibt.  
- $v: \Omega \rightarrow \R$ gibt an, wo und wie stark der Körper gerissen ist. 1 bedeutet, dass der Körper vollständig gerissen ist und 0, das kein Riss vorhanden ist.  
+ $v: \Omega \rightarrow \R$ gibt an, wo und wie stark der Körper gerissen ist. 0 bedeutet, dass der Körper vollständig gerissen ist und 1, das kein Riss vorhanden ist.  
  
- Analytische und numerische Grundlagen werden gebraucht, um die Verschiebung des Gebietes und die Entstehung des Risses zu finden. Für die analytische Betrachtung nutze ich partielle Differentialgleichungen und Optimierung. Da die Lösung des Problems analytisch nicht zu finden ist, diskretisiere ich das Problem mit dreieckig lineare Lagrange Elemente und implementiere es mittels semiglatter Newton Methoden. Die Grundlagen dazu sind im zweiten Kapitel zu finden. Alle Themen sind sehr umfangreich und ich werde nur die wichtigsten Begriffe einführen können. Der Leser sollte schon Wissen über Finite Elemente, insbesondere die dreieckig linearen Lagrange Elemente mitbringen.
- %todo brauche ich die noch nach meiner Einführung?
+ Analytische und numerische Grundlagen werden gebraucht, um die Verschiebung des Gebietes und die Entstehung des Risses zu finden. Für die analytische Betrachtung nutze ich partielle Differentialgleichungen und Optimierung. Da die Lösung des Problems analytisch nicht zu finden ist, diskretisiere ich das Problem mit dreieckig lineare Lagrange Elemente und implementiere es mittels semiglatter Newton Methoden. Die Grundlagen dazu sind im zweiten Kapitel zu finden. Alle Themen sind sehr umfangreich und ich werde nur die wichtigsten Begriffe einführen können. 
  
  Die Untersuchung des Problems folgt in Kapitel drei. Beim ersten Betrachten fällt auf, dass die Optimierung nach $u$ und $v$ getrennt werden kann. Dieses wird im ersten Teil des dritten Kapitels erläutert. Im zweiten Teil wird die Optimierung nach $u$ betrachtet. Zuerst wird die Existenz und Eindeutigkeit gesichert, um dann numerisch die Lösung mit dreieckig linearen Lagrange Elementen zu suchen. Die Optimierung nach $v$ im dritten Teil hat den selben Aufbau. Nur ist hier das Problem komplizierter und die numerische Lösung erfolgt mit der semiglatten Newton Methode. 
  Im letzten Kapitel werte ich die numerischen Resultate aus und ziehe Rückschlüsse für die Konvergenz der Methode aufgrund der Gitterweite.  
