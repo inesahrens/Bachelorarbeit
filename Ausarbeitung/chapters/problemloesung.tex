@@ -66,7 +66,7 @@ Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren
 	Sei das Minimierungsproblem \eqref{eq:optimierung_u_ohne_nb2} gegeben und $\tilde{u_1}$  nimmt das Minimum an. Dann gilt 
 	\begin{align}
 		\label{eq:u_gleich_null}
-		\int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla \tilde{u_1} \nabla \varphi \diff x = 0 \forall \varphi \in u_0 + \ho 
+		\int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla \tilde{u_1} \nabla  \psi \diff x = 0 \forall  \psi \in u_0 + \ho 
 	\end{align}
 \end{thm}
 \begin{proof}
@@ -80,39 +80,39 @@ Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren
 	\eqref{eq:u_gleich_null} ist. Leiten wir $J$ ab: 
 	\begin{align*}
 		\begin{array}{lcrl}
-			\partial J(u)(\varphi ) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-			\Big( & J(u_1+t \varphi,u_2)-J(u_1,u_2) \Big) \\
+			\partial J(u)( \psi ) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\Big( & J(u_1+t  \psi,u_2)-J(u_1,u_2) \Big) \\
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
-			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla (u_1+t \varphi )|^2 + |\nabla u_2|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\ 
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla (u_1+t  \psi )|^2 + |\nabla u_2|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \\ 
 			& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla u_1|^2 \hspace{6ex} + |\nabla u_2|^2  + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_3} \left( 1- v \right)^2 \diff x \Big) \\
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
-			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \left( | \nabla (u_1+t \varphi )|^2 - | \nabla u_1|^2 \right) \diff x  
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \left( | \nabla (u_1+t  \psi )|^2 - | \nabla u_1|^2 \right) \diff x  
 			\Big) \\	
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
-			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( | \nabla u_1+t \nabla \varphi |^2 - | \nabla u_1|^2 ) \diff x  
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( | \nabla u_1+t \nabla  \psi |^2 - | \nabla u_1|^2 ) \diff x  
 			\Big) \\	
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
-			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( | \nabla u_1|^2 + 2 t  \nabla u_1 \nabla \varphi  + t^2 |\nabla \varphi |^2 - | \nabla u_1|^2 ) \diff x  
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( | \nabla u_1|^2 + 2 t  \nabla u_1 \nabla  \psi  + t^2 |\nabla  \psi |^2 - | \nabla u_1|^2 ) \diff x  
 			\Big) \\					
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
-			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( 2 t  \nabla u_1 \nabla \varphi  + t^2 |\nabla \varphi |^2 ) \diff x  
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( 2 t  \nabla u_1 \nabla  \psi  + t^2 |\nabla  \psi |^2 ) \diff x  
 			\Big) \\	
-			& = & &\int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right) \nabla u_1 \nabla \varphi \diff x  
+			& = & &\int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right) \nabla u_1 \nabla  \psi \diff x  
 		\end{array}	
 	\end{align*}
-	Damit dies eine G\^ateaux Ableitung ist, muss die Abbildung $J'(u_1): \varphi  \mapsto \partial J(u_1,\varphi ) \in \R $ linear und beschränkt sein. Linearität ist einfach nachzurechnen. Beschränktheit lässt sich durch Cauchy-Schwarz zeigen.   
+	Damit dies eine G\^ateaux Ableitung ist, muss die Abbildung $J'(u_1):  \psi  \mapsto \partial J(u_1, \psi ) \in \R $ linear und beschränkt sein. Linearität ist einfach nachzurechnen. Beschränktheit lässt sich durch Cauchy-Schwarz zeigen.   
 \end{proof}
 
 Also lautet unser analytisches Problem:
-Finde $u_1 \in u_0+\ho$, sodass  $\forall \varphi  \in u_0 +\ho$ gilt 
+Finde $u_1 \in u_0+\ho$, sodass  $\forall  \psi  \in u_0 +\ho$ gilt 
 \begin{align}
 \label{eq:problem_u}
-	0 = \int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla u_1 \nabla \varphi   \diff x 
+	0 = \int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla u_1 \nabla  \psi   \diff x 
 \end{align}
 Nun ist noch interessant, ob eine Lösung existiert und ob sie eindeutig ist. Dieses hängt von $u_0$ und $v_0$ ab. 
 
@@ -124,8 +124,8 @@ Wir wenden \ref{thm:existenz_schwache_loesung} an. Dazu müssen wir die Bilinearf
 Die Bilinearform lautet 
 \begin{align*}
 	\begin{array}{rrcl}
-		B(u_1,\varphi ): 	& \left( u_0 +\h0^2 \right)^2  & \rightarrow 	& \R \\
-		& (u_1,\varphi )											& \mapsto		& \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) 2  \nabla u_1 \nabla \varphi   \diff x 
+		B(u_1, \psi ): 	& \left( u_0 +\h0^2 \right)^2  & \rightarrow 	& \R \\
+		& (u_1, \psi )											& \mapsto		& \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) 2  \nabla u_1 \nabla  \psi   \diff x 
 	\end{array}
 \end{align*}
 Mit den Bezeichnungen aus \ref{sec:grundlagen_pdgl} ist $g = u_0$, $f,b,c=0$ und  
@@ -161,16 +161,16 @@ Wir haben grade bewiesen, dass wir folgendes Problem lösen müssen:
 
 Finde $u_1 \in u_0+ H_0^1(\Omega)$, sodass
 \begin{align*}
-	0 = \int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_1 \nabla \varphi \diff x \hspace{2ex} \forall \varphi \in u_0 + H_0^1(\Omega)
+	0 = \int\limits_{\Omega} \left( v^2 + \epsilon_1 \right) \nabla u_1 \nabla  \psi \diff x \hspace{2ex} \forall  \psi \in u_0 + H_0^1(\Omega)
 \end{align*}
 
 Da die Nullstelle im Raum $H_0^1(\Omega)$ einfacher zu finden ist, als im Raum $u_0 + H_0^1(\Omega)$, stellen wir das Problem um. 
 Dazu definieren wir $\uotild \in u_0 + \ho$, sodass $\uotild$ $u_{0_1}$ auf dem Rand $\Gamma_1 \cup \Gamma_2$ entspricht und sonst $0$ ist. Definiere zusätzlich $\utild \in \ho$, sodass $u_1=\utild + \uotild$. 
 Damit lässt sich das Problem umschreiben zu 
 
-Finde $\utild \in \ho$, sodass  $\forall \varphi \in \ho$  
+Finde $\utild \in \ho$, sodass  $\forall  \psi \in \ho$  
 \begin{align*}
-	- \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla \uotild \nabla \varphi \diff x  = \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \utild \nabla \varphi \diff x 
+	- \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla \uotild \nabla  \psi \diff x  = \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \utild \nabla  \psi \diff x 
 \end{align*}
 
 Zur numerischen Betrachtung bieten sich Finite Elemente, insbesondere die dreieckig-linearen Lagrange Elemente an. Dafür triangulieren wir das Gebiet, wie in \ref{sec:finite_elemente} dargestellt. Nun nutzen wir den Galerkin Ansatz. Dafür gilt ab jetzt $k:=(m+1)(n+1)$
@@ -178,9 +178,9 @@ Zur numerischen Betrachtung bieten sich Finite Elemente, insbesondere die dreiec
 	\utild(x,y):= \sum\limits_{i=1}^{k} u^h_i T_i(x,y) 
 \end{align*}
 
-Dabei sind  $T_i(x,y)$ die globalen Formfunktionen und $u^h_i$ die gesuchten Konstanten. Setzt man die Definition von $\utild$ ein und ersetzt $\varphi \in \ho$ durch die Basis von $P^*$, also den globalen Formfunktionen $T_i$, so gilt $\forall i \in \{1, \cdots , k\}$  
+Dabei sind  $T_i(x,y)$ die globalen Formfunktionen und $u^h_i$ die gesuchten Konstanten. Setzt man die Definition von $\utild$ ein und ersetzt $ \psi \in \ho$ durch die Basis von $P^*$, also den globalen Formfunktionen $T_i$, so gilt $\forall i \in \{1, \cdots , k\}$  
 \begin{align*}
-	& - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \uotild \nabla \varphi \diff x  = \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla \utild \nabla \varphi \diff x \\
+	& - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \uotild \nabla  \psi \diff x  = \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla \utild \nabla  \psi \diff x \\
 	\Leftrightarrow 
 	& - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \sum\limits_{i=1}^{k} {u^h_0}_i \nabla T_i \nabla T_i \diff x  =\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \sum\limits_{i=1}^{k} u^h_i \nabla T_i  \nabla T_j  \diff x \\
 	\Leftrightarrow
@@ -343,7 +343,7 @@ Zunächst wollen wir die Existenz und Eindeutigkeit der Lösung zeigen. Dafür brau
 	\begin{align*}
 		\begin{array}{lrcl}
 			J'(v): 	& \overline{H^1}(\Omega) 	& \rightarrow 	& \R \\
-			& s							& \mapsto		&  \left( 2  v | \nabla (u)|^2  - \epsilon_2 2 \Delta v - \frac{2}{\epsilon_3} (1-v), s \right)_{L^2(\Omega)} + \left( 2 \epsilon_2 \nabla v \nu , s \right)_{L^2(\partial \Omega)}  \\
+			&\psi_1							& \mapsto		&  \left( 2  v | \nabla (u)|^2  - \epsilon_2 2 \Delta v - \frac{2}{\epsilon_3} (1-v),\psi_1 \right)_{L^2(\Omega)} + \left( 2 \epsilon_2 \nabla v \nu ,\psi_1 \right)_{L^2(\partial \Omega)}  \\
 		\end{array}	
 	\end{align*}
 \end{lem}
@@ -351,33 +351,33 @@ Zunächst wollen wir die Existenz und Eindeutigkeit der Lösung zeigen. Dafür brau
 	Zunächst müssen wir die Richtungsableitung bestimmen.   
 	\begin{align*}
 		\begin{array}{lcrl}
-			\partial J(v)(s) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-			\Big( & J(v+ts)-J(v) \Big) \\
+			\partial J(v)(\psi_1) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
+			\Big( & J(v+t\psi_1)-J(v) \Big) \\
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
-			\int\limits_{\Omega}  \left( (v+ts)^2 + \epsilon_1 \right) | \nabla (u)|^2 + \epsilon_2 |\nabla (v+ts)|^2 + \frac{1}{\epsilon_3} \left( 1- (v+ts) \right)^2 \\ 
+			\int\limits_{\Omega}  \left( (v+t\psi_1)^2 + \epsilon_1 \right) | \nabla (u)|^2 + \epsilon_2 |\nabla (v+t\psi_1)|^2 + \frac{1}{\epsilon_3} \left( 1- (v+t\psi_1) \right)^2 \\ 
 			& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla u|^2 \hspace{8ex} + \epsilon_2 |\nabla v|^2 \hspace{6.5ex}+ \frac{1}{\epsilon_3} \left( 1- v \right)^2 \Big) \\
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
-			\int\limits_{\Omega}  \left( \left( (v+ts)^2 + \epsilon_1 \right) - \left( v^2 + \epsilon_1 \right) \right) | \nabla (u)|^2 \\
-			& & & \hspace{2ex} + \epsilon_2 \left( |\nabla (v+ts)|^2 - |\nabla v|^2 \right) \\
-			& & & \hspace{2ex} + \frac{1}{\epsilon_3} \left( (1- v- ts)^2 -  (1- v)^2 \right)
+			\int\limits_{\Omega}  \left( \left( (v+t\psi_1)^2 + \epsilon_1 \right) - \left( v^2 + \epsilon_1 \right) \right) | \nabla (u)|^2 \\
+			& & & \hspace{2ex} + \epsilon_2 \left( |\nabla (v+t\psi_1)|^2 - |\nabla v|^2 \right) \\
+			& & & \hspace{2ex} + \frac{1}{\epsilon_3} \left( (1- v- t\psi_1)^2 -  (1- v)^2 \right)
 			\Big) \\	
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
-			\int\limits_{\Omega}  \left( v^2 + 2vts + t^2s^2 - v^2  \right) | \nabla u|^2 \\
-			& & & \hspace{2ex} + \epsilon_2 \left( |\nabla v|^2 + 2 t \nabla v \nabla s + t^2 |\nabla s|^2 - |\nabla v|^2 \right) \\
-			& & & \hspace{2ex} + \frac{1}{\epsilon_3} \left( (1- v)^2 - 2(1-v)ts + t^2s^2 -  (1- v)^2 \right)
+			\int\limits_{\Omega}  \left( v^2 + 2vt\psi_1 + t^2\psi_1^2 - v^2  \right) | \nabla u|^2 \\
+			& & & \hspace{2ex} + \epsilon_2 \left( |\nabla v|^2 + 2 t \nabla v \nabla \psi_1 + t^2 |\nabla \psi_1|^2 - |\nabla v|^2 \right) \\
+			& & & \hspace{2ex} + \frac{1}{\epsilon_3} \left( (1- v)^2 - 2(1-v)t\psi_1 + t^2\psi_1^2 -  (1- v)^2 \right)
 			\Big) \\		
 			& = &\lim\limits_{t \rightarrow 0} 
 			\Big(	& 
-			\int\limits_{\Omega}  \left( 2vs + ts^2  \right) | \nabla u|^2 + \epsilon_2 \left( 2 \nabla v \nabla s + t |\nabla s|^2 \right) \\
-			& & & \hspace{2ex} - \frac{1}{\epsilon_3} \left(2(1-v)s + ts^2 \right)  \diff x
+			\int\limits_{\Omega}  \left( 2v\psi_1 + t\psi_1^2  \right) | \nabla u|^2 + \epsilon_2 \left( 2 \nabla v \nabla \psi_1 + t |\nabla \psi_1|^2 \right) \\
+			& & & \hspace{2ex} - \frac{1}{\epsilon_3} \left(2(1-v)\psi_1 + t\psi_1^2 \right)  \diff x
 			\Big) \\	
 			& = &\hspace{6.5ex} & 
-			\int\limits_{\Omega} 2s v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla s - \frac{2}{\epsilon_3} (1-v)s  \diff x\\	
+			\int\limits_{\Omega} 2\psi_1 v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \psi_1 - \frac{2}{\epsilon_3} (1-v)\psi_1  \diff x\\	
 			& = &\hspace{6.5ex} & 
-			\int\limits_{\Omega} 2  v | \nabla u|^2 s - \epsilon_2 2 \Delta v  s - \frac{2}{\epsilon_3} (1-v)s \diff x + \int\limits_{\partial \Omega} 2 \epsilon_2 \nabla v \nu s \diff x  							 
+			\int\limits_{\Omega} 2  v | \nabla u|^2 \psi_1 - \epsilon_2 2 \Delta v  \psi_1 - \frac{2}{\epsilon_3} (1-v)\psi_1 \diff x + \int\limits_{\partial \Omega} 2 \epsilon_2 \nabla v \nu \psi_1 \diff x  							 
 		\end{array}
 	\end{align*}
 	Damit es auch eine G\^ateaux Ableitung ist, muss sie beschränkt und linear sein. Dies ist einfach zu sehen. 
@@ -479,8 +479,8 @@ Daraus ergibt sich eine starke und schwache Formulierung. Die Starke lautet
 \end{align*}
 Die schwache Formulierung ist dann
 \begin{align*}
- 	& \int\limits_{\Omega} 2 \varphi  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi  - \frac{2}{\epsilon_3} (1-v)\varphi + \eta \varphi \diff x = 0 & \forall \varphi \in \h \\
-	& \int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(\overline{v}-v_0)\}- \min\{0, \eta + c\overline{v}\} \right) \varphi \diff x = 0 & \forall c>0, \forall  \varphi \in \h 
+ 	& \int\limits_{\Omega} 2 \psi_1  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \psi_1  - \frac{2}{\epsilon_3} (1-v)\psi_1 + \eta \psi_1 \diff x = 0 & \forall \psi_1 \in \h \\
+	& \int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(\overline{v}-v_0)\}- \min\{0, \eta + c\overline{v}\} \right) \psi_1 \diff x = 0 & \forall c>0, \forall  \psi_1 \in \h 
 \end{align*}
 mit $\eta = \mu - \lambda$
 
@@ -492,8 +492,8 @@ Unser Ziel ist es, eine Methode zu finden, wie wir das KKT System lösen können. 
 		G: H^1(\Omega) \times H^1(\Omega)	& \rightarrow 	& H^{-1}(\Omega)^2 \\
 		(v, \eta)								& \mapsto  	& 
 		\begin{pmatrix}
-			\int\limits_{\Omega} 2 \varphi  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi  - \frac{2}{\epsilon_3} (1-v)\varphi + \eta \varphi  \diff x  \\
-			\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \varphi \diff x
+			\int\limits_{\Omega} 2 \psi_1  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \psi_1  - \frac{2}{\epsilon_3} (1-v)\psi_1 + \eta \psi_1  \diff x  \\
+			\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \psi_2 \diff x
 		\end{pmatrix}
 	\end{array}
 \end{align*}
@@ -504,24 +504,26 @@ Sehen wir uns zunächst die $\partial G_1(v,\eta)(h)$ an. Es gilt:
 \begin{thm}
 	$G_1(v,\eta)$ ist semidifferenzierbar mit 
 	\begin{align*}
-		& \partial G_{1 v} (v, \eta)(\phi) = \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x \\
-		& \partial G_{1 \eta} (v, \eta) (\phi) = \int\limits_{\Omega}  \phi \varphi  \diff x
+		& \partial G_{1 v} (v, \eta)(\phi_1) = \int\limits_{\Omega} 2 \psi_1  \phi_1 | \nabla u|^2 + \epsilon_2 2 \nabla \phi_1 \nabla \psi_1  + \frac{2}{\epsilon_3} \phi_1 \psi_1 \diff x \\
+		& \partial G_{1 \eta} (v, \eta) (\phi_2) = \int\limits_{\Omega}  \phi_2 \psi_1  \diff x
 	\end{align*}	
 \end{thm}
 \begin{proof}
 	Nach \ref{lem:semidiffbar_f_diffbar} ist $G_1$ $\partial G_1$ semidifferenzierbar, falls $G_1$ stetig Fréchet differenzierbar ist. Bestimmen wir zunächst die Richtungsableitung. Diese ist gegeben durch 
 	\begin{align*}
-		& \partial G_{1 v} (v, \eta)(\phi) = \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x \\
-		& G_{1 \eta} (v, \eta) (\phi) = \int\limits_{\Omega}  \phi \varphi  \diff x
+		& \partial G_{1 v} (v, \eta)(\phi_1) = \int\limits_{\Omega} 2 \psi_1  \phi_1 | \nabla u|^2 + \epsilon_2 2 \nabla \phi_1 \nabla \psi_1  + \frac{2}{\epsilon_3} \phi_1 \psi_1 \diff x \\
+		& G_{1 \eta} (v, \eta) (\phi_2) = \int\limits_{\Omega}  \phi_2 \psi_1  \diff x
 	\end{align*}
-	Die Berechnung wird hier nicht weiter ausgeführt. Die Richtungsableitung muss linear und beschränkt in $\phi$ sein. Linearität ist einfach zu sehen.
+	Die Berechnung wird hier nicht weiter ausgeführt. Die Richtungsableitung muss linear und beschränkt in $\phi$ sein. 
+	%todo in was denn?
+	Linearität ist einfach zu sehen.
 	Für Fréchet Differenzierbarkeit muss eine Abschätzung überprüft werden:
 	\begin{align*}
 		& \|G_1(v + h,\eta) - G_1(v,\eta) - \partial G_{1v}(v,\eta)(h)\| \\
-		& =  \| 	\int\limits_{\Omega} 2 \varphi  (v+h)  | \nabla u|^2 + \epsilon_2 2 \nabla (v+h) \nabla \varphi  - \frac{2}{\epsilon_3} (1-(v+h))\varphi + \eta \varphi  \diff x \\
-		& \hspace{5ex} - 	\int\limits_{\Omega} 2 \varphi  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi  - \frac{2}{\epsilon_3} (1-v)\varphi + \eta \varphi  \diff x \\
-		&  \hspace{5ex} - \int\limits_{\Omega} 2 \varphi  h | \nabla u|^2 + \epsilon_2 2 \nabla h \nabla \varphi  + \frac{2}{\epsilon_3} h \varphi \diff x \| \\
-		& = \| \int\limits_{\Omega} 2 \varphi  h | \nabla u|^2 + \epsilon_2 2 \nabla h \nabla \varphi  + \frac{2}{\epsilon_3} h \varphi \diff x -\int\limits_{\Omega} 2 \varphi  h | \nabla u|^2 + \epsilon_2 2 \nabla h \nabla \varphi  + \frac{2}{\epsilon_3} h \varphi \diff x \| \\
+		& =  \| 	\int\limits_{\Omega} 2 \psi_1  (v+h)  | \nabla u|^2 + \epsilon_2 2 \nabla (v+h) \nabla \psi_1  - \frac{2}{\epsilon_3} (1-(v+h))\psi_1 + \eta \psi_1  \diff x \\
+		& \hspace{5ex} - 	\int\limits_{\Omega} 2 \psi_1  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \psi_1  - \frac{2}{\epsilon_3} (1-v)\psi_1 + \eta \psi_1  \diff x \\
+		&  \hspace{5ex} - \int\limits_{\Omega} 2 \psi_1  h | \nabla u|^2 + \epsilon_2 2 \nabla h \nabla \psi_1  + \frac{2}{\epsilon_3} h \psi_1 \diff x \| \\
+		& = \| \int\limits_{\Omega} 2 \psi_1  h | \nabla u|^2 + \epsilon_2 2 \nabla h \nabla \psi_1  + \frac{2}{\epsilon_3} h \psi_1 \diff x -\int\limits_{\Omega} 2 \psi_1  h | \nabla u|^2 + \epsilon_2 2 \nabla h \nabla \psi_1  + \frac{2}{\epsilon_3} h \psi_1 \diff x \| \\
 		& = 0
 	\end{align*} 
 \end{proof}
@@ -607,14 +609,14 @@ Das eigentliche Ziel war es, das Semidifferenzial von $G_2$ zu finden. Dieses kö
 \begin{thm}
 	$G_2: \h^2 \rightarrow H^{-1}(\Omega)$ mit 
 \begin{align*}
-			(v, \eta) \mapsto	\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \varphi \diff x
+			(v, \eta) \mapsto	\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \psi_2 \diff x
 \end{align*}
 ist semidifferenzierbar mit 
 	\begin{align*}
-		\partial G_{2 \eta}(\eta, v)(\varphi, \phi) = \int\limits_{\Omega} \frac{\partial f}{\partial \eta} \varphi \phi \diff x 
+		\partial G_{2 \eta}(\eta, v)(\psi_2, \phi_2) = \int\limits_{\Omega} \frac{\partial f}{\partial \eta} \psi_2 \phi_2 \diff x 
 	\end{align*}
 	\begin{align*}
-		\partial G_{2 v}(\eta, v) (\varphi, \phi) = \int\limits_{\Omega}  \frac{\partial f}{\partial v} \varphi \phi \diff x 
+		\partial G_{2 v}(\eta, v) (\psi_2, \phi_1) = \int\limits_{\Omega}  \frac{\partial f}{\partial v} \psi_2 \phi_1 \diff x 
 	\end{align*}
 \end{thm}
 \begin{proof}
@@ -665,11 +667,11 @@ Da $u$ gegeben ist, ist $u$ ein Vektor mit den Auswertungen an den Ecken der Dre
 \subsubsection{numerische Darstellung von $G_{1}$}
 
 \begin{align*}
-G_1(v,\eta) =  \int\limits_{\Omega} 2 \varphi v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \varphi - \frac{2}{\epsilon_3} (1-v)\varphi +  \eta \varphi \diff x
+G_1(v,\eta) =  \int\limits_{\Omega} 2 \psi_1 v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \psi_1 - \frac{2}{\epsilon_3} (1-v)\psi_1 +  \eta \psi_1 \diff x
 \end{align*}
 wird nun diskretisiert:
 \begin{align*}
-	& \hspace{2ex} \int\limits_{\Omega} 2\varphi v | \nabla u|^2 + 2 \epsilon_2  \nabla v \nabla \varphi - \frac{2}{\epsilon_3} (1-v)\varphi  +  \eta \varphi \diff x \\
+	& \hspace{2ex} \int\limits_{\Omega} 2\psi_1 v | \nabla u|^2 + 2 \epsilon_2  \nabla v \nabla \psi_1 - \frac{2}{\epsilon_3} (1-v)\psi_1  +  \eta \psi_1 \diff x \\
 	& = \int\limits_{\Omega} 2 T_j  \sum\limits_{i=1}^{k} v_i^h T_i u^{dis} + \epsilon_2 2 \sum\limits_{i=1}^{k} v_i^h \nabla T_i \nabla  T_j - \frac{2}{\epsilon_3} (1-\sum\limits_{i=1}^{k} v_i^h T_i) T_j + \sum\limits_{i=1}^{k} \eta_i^h T_i T_j  \diff x \\
 	& =  \sum\limits_{i=1}^{k} v_i^h \left(  2 \int\limits_{\Omega} u^{dis} T_i T_j \diff x + 2 \epsilon_2 \int\limits_{\Omega} \nabla T_i \nabla T_j \diff x +  \frac{2}{\epsilon_3}  \int\limits_{\Omega} T_i T_j \diff x  \right) \\
 	& - \frac{2}{\epsilon_3} \sum\limits_{i=1}^{k} \int\limits_{\Omega} T_j \diff x 
@@ -702,7 +704,7 @@ Durch die noch ausstehende Transformation der Dreiecke, muss der gesamte Term mi
 
 \subsubsection{numerische Darstellung von $G_{2}$}
 \begin{align*}
-	\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \varphi \diff x
+	\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \psi_2 \diff x
 \end{align*}
 Um dieses Funktional numerisch darzustellen, benutzen wir den Galerkin Ansatz mit 
 \begin{align*}
@@ -710,7 +712,7 @@ Um dieses Funktional numerisch darzustellen, benutzen wir den Galerkin Ansatz mi
 \end{align*}
 Daraus ergibt sich:
 \begin{align*}
-	& \int\limits_{\Omega} \left( \eta - \max \left\{ 0, \eta + c(v-v_0) \right\} - \min \left\{ 0, \eta + c v \right\} \right) \varphi \diff x  \\
+	& \int\limits_{\Omega} \left( \eta - \max \left\{ 0, \eta + c(v-v_0) \right\} - \min \left\{ 0, \eta + c v \right\} \right) \psi_2 \diff x  \\
 	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right. - \max \left\{ 0,  \sum\limits_{i=1}^k \eta_i^h T_i + c(\sum\limits_{i=1}^k v_i^h T_i - \sum\limits_{i=1}^k {v_0}_i^h T_i ) \right\} \\
 	& \hspace{5ex} \left. - \min \left\{ 0,  \sum\limits_{i=1}^k \eta_i^h T_i + c \sum\limits_{i=1}^k v_i^h T_i \right\} \right) T_j \diff x  \\ 
 	& = \int\limits_{\Omega} \left(  \sum\limits_{i=1}^k \eta_i^h T_i \right. -   \sum\limits_{i=1}^k \max \left\{ 0,  \eta_i^h + c(v_i^h - {v_0}_i^h )  \right\} T_i \\
@@ -735,13 +737,13 @@ Auch hier muss das Integral wieder transformiert werden, wodurch der Faktor $^/h
 
 \subsubsection{numerische Darstellung von $G_{1 v}$}
 \begin{align*}
- 	G_{1 v} (v, \eta) = \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x
+ 	G_{1 v} (v, \eta) = \int\limits_{\Omega} 2 \psi_1  \phi_1 | \nabla u|^2 + \epsilon_2 2 \nabla \phi_1 \nabla \psi_1  + \frac{2}{\epsilon_3} \phi_1 \psi_1 \diff x
 \end{align*}
 
 wird nun diskretisieren:
 
 \begin{align*}
-	& \int\limits_{\Omega} 2 \varphi  \phi | \nabla u|^2 + \epsilon_2 2 \nabla \phi \nabla \varphi  + \frac{2}{\epsilon_3} \phi \varphi \diff x\\
+	& \int\limits_{\Omega} 2 \psi_1  \phi_1 | \nabla u|^2 + \epsilon_2 2 \nabla \phi_1 \nabla \psi_1  + \frac{2}{\epsilon_3} \phi_1 \psi_1 \diff x\\
 	& = \int\limits_{\Omega} 2  T_j  T_i u^{dis} + \epsilon_2 2 \nabla  T_i  \nabla  T_j  + \frac{2}{\epsilon_3}  T_i T_j \diff x \\
 	& = 2 A  + 2 \epsilon_2  B + \frac{2}{\epsilon_3}  D 
 \end{align*}
@@ -750,12 +752,12 @@ Wir benutzen die gleichen Notationen, wie bei der numerischen Darstellung von $G
 
 \subsubsection{numerische Darstellung von $G_{1 \eta}$}
 \begin{align*}
- 	G_{1 \eta} (v, \eta) = \int\limits_{\Omega}  \phi \varphi  \diff x
+ 	G_{1 \eta} (v, \eta) = \int\limits_{\Omega}  \phi_2 \psi_1  \diff x
 \end{align*}
 
 wird nun diskretisieren:
 \begin{align*}
-	& \int\limits_{\Omega}  \phi \varphi \diff x = \int\limits_{\Omega} T_j  T_i =  D 
+	& \int\limits_{\Omega}  \phi_2 \psi_1 \diff x = \int\limits_{\Omega} T_j  T_i =  D 
 \end{align*}
 
 Auch hier muss wieder transformiert werden. 
@@ -763,7 +765,7 @@ Auch hier muss wieder transformiert werden.
 \subsubsection{numerische Darstellung von $G_{2 v}$}
 Es soll 
 	\begin{align*}
-		\partial G_{2 v}(\eta, v) (\varphi, \phi) = \int\limits_{\Omega}  \frac{\partial f}{\partial v} \varphi \phi \diff x 
+		\partial G_{2 v}(\eta, v) (\psi_2, \phi_1) = \int\limits_{\Omega}  \frac{\partial f}{\partial v} \psi_2 \phi_1 \diff x 
 	\end{align*}
 mit 
 	\begin{align*}
@@ -778,7 +780,7 @@ mit
 	\end{align*}
 numerisch dargestellt werden. Statt $\frac{\partial f}{\partial v}$ implementieren wir eine Vereinfachung, die nicht mehr Mengenwertig ist. Dazu wählen wir statt $\lbrack -c,0 \rbrack$ einen Punkt aus dem Intervall z.B. $-c/2$. Nun kann  $\frac{\partial f}{\partial v}$  diskretisiert werden zu $f^h$. Dies ist einfach die Funktion ausgewertet an den Gitterpunkten.
 
-Nun wird $\partial G_{2 v}(\eta, v) (\varphi, \phi)$ diskretisiert. Hier wird wie immer $\varphi, \phi$ durch die globalen Formfunktionen $T_i$ ersetzt und $\Omega $ durch die Vereinigung aller Dreiecke. Nun kann für jedes Dreieck  $\int\limits_E  \frac{\partial f}{\partial v} T_i T_j \diff x $ berechnet werden. Dies erfolgt im Anhang \ref{sec:rechnungen}. 
+Nun wird $\partial G_{2 v}(\eta, v) (\psi_2, \phi_1)$ diskretisiert. Hier wird wie immer $\psi_2, \phi_1$ durch die globalen Formfunktionen $T_i$ ersetzt und $\Omega $ durch die Vereinigung aller Dreiecke. Nun kann für jedes Dreieck  $\int\limits_E  \frac{\partial f}{\partial v} T_i T_j \diff x $ berechnet werden. Dies erfolgt im Anhang \ref{sec:rechnungen}. 
  
 Wir erhalten wieder eine Matrix folgender Form:
 \begin{figure}[ht]

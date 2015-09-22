@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.7)  21 SEP 2015 18:32
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.7)  22 SEP 2015 10:47
 entering extended mode
 **BA_Arbeit.tex
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\BA_Arbeit.tex
@@ -902,15 +902,6 @@ itHub/Bachelorarbeit/Ausarbeitung/images/WWU_Logo1_1c.jpg>]
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\chapters/einleitung
 .tex
 Kapitel 1.
-! Undefined control sequence.
-l.31  	\item $v: \Omega \righarrow
-                                   [0,1]$ mit $v=0$ falls Riss, $v=1$ ungefä...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
@@ -919,20 +910,7 @@ l.40 \end{itemize}
                    [1
 
 
-]
-
-! LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.45 \end{itemize}
-                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[2]) [3]
+] [2]) [3]
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\chapters/mathematis
 che_grundlagen.tex
 Kapitel 2.
@@ -1002,7 +980,7 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Overfull \hbox (25.7838pt too wide) in paragraph at lines 107--107
+Overfull \hbox (26.15604pt too wide) in paragraph at lines 107--107
 [] 
  []
 
@@ -1028,12 +1006,12 @@ Package pdftex.def Info: images/matrix.png used on input line 284.
 
 [26 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/matrix.p
 ng>] [27]
-Overfull \hbox (9.55705pt too wide) in paragraph at lines 348--348
+Overfull \hbox (23.2654pt too wide) in paragraph at lines 348--348
 [] 
  []
 
 
-Overfull \hbox (25.9016pt too wide) in paragraph at lines 382--382
+Overfull \hbox (53.31828pt too wide) in paragraph at lines 382--382
 [] 
  []
 
@@ -1047,13 +1025,23 @@ m/n/12 (
 )\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 v \OMS/cmsy/m/n/12 $
  []
 
-[30] [31]
-Overfull \hbox (16.59837pt too wide) in paragraph at lines 499--499
+[30]
+Overfull \hbox (1.45747pt too wide) in paragraph at lines 484--484
 [] 
  []
 
-[32] [33]
-Overfull \hbox (15.18996pt too wide) in paragraph at lines 590--590
+[31]
+Overfull \hbox (21.29012pt too wide) in paragraph at lines 499--499
+[] 
+ []
+
+[32]
+Overfull \hbox (26.52873pt too wide) in paragraph at lines 528--528
+[] 
+ []
+
+[33]
+Overfull \hbox (15.18996pt too wide) in paragraph at lines 592--592
 [] 
  []
 
@@ -1061,10 +1049,10 @@ Overfull \hbox (15.18996pt too wide) in paragraph at lines 590--590
 File: images/formel.png Graphic file (type png)
 
 <use images/formel.png>
-Package pdftex.def Info: images/formel.png used on input line 689.
+Package pdftex.def Info: images/formel.png used on input line 691.
 (pdftex.def)             Requested size: 395.20952pt x 66.39519pt.
 
-Overfull \hbox (20.96469pt too wide) in paragraph at lines 693--694
+Overfull \hbox (20.96469pt too wide) in paragraph at lines 695--696
 []\OT1/cmr/m/n/12 wobei bei $\OML/cmm/m/it/12 A$ \OT1/cmr/m/n/12 auf der Haupt-
 dia-go-na-len $[] []$, auf der Ne-ben-dia-go-na-len $[] []$
  []
@@ -1074,14 +1062,14 @@ ng>] [38] [39] <images/matrix2.png, id=518, 395.97937pt x 395.97937pt>
 File: images/matrix2.png Graphic file (type png)
 
 <use images/matrix2.png>
-Package pdftex.def Info: images/matrix2.png used on input line 786.
+Package pdftex.def Info: images/matrix2.png used on input line 788.
 (pdftex.def)             Requested size: 98.9946pt x 98.9946pt.
  [40 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/matrix2
 .png>]
 ! Missing { inserted.
 <to be read again> 
                    \unskip 
-l.815 	}
+l.817 	}
         
 A left brace was mandatory here, so I've put one in.
 You might want to delete and/or insert some corrections
@@ -1091,7 +1079,7 @@ so that I will find a matching right brace soon.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.815 	}
+l.817 	}
         
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1253,7 +1241,7 @@ eX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX
 9/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files (x86)/MiKTeX
  2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files (x86)/MiK
 TeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on BA_Arbeit.pdf (53 pages, 912038 bytes).
+Output written on BA_Arbeit.pdf (53 pages, 912288 bytes).
 PDF statistics:
  751 PDF objects out of 1000 (max. 8388607)
  235 named destinations out of 1000 (max. 500000)

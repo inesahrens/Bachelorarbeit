@@ -21,7 +21,7 @@ todo
   -> alles ok,vll noch mit ins literaturverzeichnis aufnehmen	.5	5
 - zitat internet weg
   - nach Karl Kunisch suchen litschitz lectures; irgendwas in 2008 .5	4
-- notation ableitungen anders 
++ notation ableitungen anders 
   -> unterschiedliche phi/ varphi jenachdem welche ableitung!	1	0
 - Anwendung: 
   - Material wird eingespannt und auf Ränder kraft ausgeübt	.5	8

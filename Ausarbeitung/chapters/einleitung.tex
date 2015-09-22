@@ -17,7 +17,7 @@ Erklärung des Problems
 Wir betrachten die Darstellung von Rissen. 
 \begin{itemize}
 	\item genaues Problem aufschreiben
-	\item $u: \Re^3 \rightarrow \Re^3$ ist die Verschiebung des Materials
+	\item $u: \R^3 \rightarrow \R^3$ ist die Verschiebung des Materials
 	\item $x \mapsto \varphi(x)$ ist die Deformation des Materials bei einem Riss
 	\item damit gilt $u(x) = \varphi(x)-x$ Warum genau. Kurz nachdenken
 	\item u ist stetig, wenn es nicht reißt. Gleichung der Elastizität ist erfüllt. 
@@ -28,7 +28,7 @@ Wir betrachten die Darstellung von Rissen.
  	gilt nur für einen festen Riss
  	\item $\frac{\nabla u + \nabla u^T}{2}^2 =|\nabla u|^2$ ungefähr, mit $u: \R^2 \rightarrow \R$
  	\item die Elastische Energiedichte ist $\mu \frac{\nabla u + \nabla u^T}{2}^2 + \frac{\lambda}{2} \div(v)^2  $  und nur von $\nabla u$ abhängig. 
- 	\item $v: \Omega \righarrow [0,1]$ mit $v=0$ falls Riss, $v=1$ ungefähr! sonst
+ 	\item $v: \Omega \rightarrow [0,1]$ mit $v=0$ falls Riss, $v=1$ ungefähr! sonst
  	\item Oberflächenenergie ist proportional zur Oberfläche.
  	\item $\min_{u,v} \int_{\Omega} v^2 |\nabla u|^2 + v*\text{ Riss oberfläche} dx$
  	\item oberfläche von v, wo v=0 ist muss berechnet werden (oder ungleich 0?) das ist der Term 
@@ -41,7 +41,7 @@ Wir betrachten die Darstellung von Rissen.
 
 Anwendung des Problem: 
 \begin{itemize}
-	Material wird eingespannt an zwei Ecken und dann wird gezogen
+	\item Material wird eingespannt an zwei Seiten und dann wird gezogen
 \end{itemize}
 
 Ich befasse mich mit Rissen und der Darstellung des Problems als Newtonmethode. Dabei sind meine Aufgaben:
