@@ -1,30 +1,30 @@
 \BOOKMARK [0][-]{chapter.1}{Einleitung}{}% 1
 \BOOKMARK [0][-]{chapter.2}{Mathematische Grundlagen}{}% 2
-\BOOKMARK [1][-]{section.2.1}{Grundlagen Optimierung}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.1}{Optimierung}{chapter.2}% 3
 \BOOKMARK [2][-]{subsection.2.1.1}{Optimierungsproblem ohne Nebenbedingung}{section.2.1}% 4
 \BOOKMARK [2][-]{subsection.2.1.2}{Optimierungsproblem mit Ungleichungsnebenbedingung}{section.2.1}% 5
-\BOOKMARK [1][-]{section.2.2}{Grundlagen pDGL}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.2}{Partielle Differentialgleichungen}{chapter.2}% 6
 \BOOKMARK [1][-]{section.2.3}{Finite Elemente}{chapter.2}% 7
-\BOOKMARK [1][-]{section.2.4}{Semidifferenzierbare Newton Methoden}{chapter.2}% 8
-\BOOKMARK [2][-]{subsection.2.4.1}{Newton Methoden mit einfachen Nebenbedingungen}{section.2.4}% 9
+\BOOKMARK [1][-]{section.2.4}{Semidifferenzierbare Newton Methode}{chapter.2}% 8
+\BOOKMARK [2][-]{subsection.2.4.1}{Newton Methoden ohne Nebenbedingungen}{section.2.4}% 9
 \BOOKMARK [2][-]{subsection.2.4.2}{Konvergenz der generalisierten Newton Methode}{section.2.4}% 10
 \BOOKMARK [2][-]{subsection.2.4.3}{Semidifferential}{section.2.4}% 11
-\BOOKMARK [2][-]{subsection.2.4.4}{semidiffbare Newton Methoden}{section.2.4}% 12
+\BOOKMARK [2][-]{subsection.2.4.4}{Semidifferenzierbare Newton Methode}{section.2.4}% 12
 \BOOKMARK [0][-]{chapter.3}{Anwendung auf das Phasenfeldmodell f\374r Rissentstehung}{}% 13
-\BOOKMARK [1][-]{section.3.1}{erste Betrachtung der Rissentstehung}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.1}{Erste Betrachtung des Modells}{chapter.3}% 14
 \BOOKMARK [1][-]{section.3.2}{Optimierung nach u}{chapter.3}% 15
 \BOOKMARK [2][-]{subsection.3.2.1}{Analytische Betrachtung}{section.3.2}% 16
 \BOOKMARK [2][-]{subsection.3.2.2}{Numerische Betrachtung}{section.3.2}% 17
 \BOOKMARK [2][-]{subsection.3.2.3}{Aggregation}{section.3.2}% 18
 \BOOKMARK [1][-]{section.3.3}{Optimierung nach v}{chapter.3}% 19
 \BOOKMARK [2][-]{subsection.3.3.1}{Analytische Betrachtung}{section.3.3}% 20
-\BOOKMARK [2][-]{subsection.3.3.2}{semidifferenzierbare Newton Methode}{section.3.3}% 21
-\BOOKMARK [2][-]{subsection.3.3.3}{numerische Betrachtung}{section.3.3}% 22
+\BOOKMARK [2][-]{subsection.3.3.2}{Anwendung auf semidifferenzierbare Newton Methode}{section.3.3}% 21
+\BOOKMARK [2][-]{subsection.3.3.3}{Numerische Betrachtung}{section.3.3}% 22
 \BOOKMARK [2][-]{subsection.3.3.4}{Agregation}{section.3.3}% 23
 \BOOKMARK [0][-]{chapter.4}{Fazit und Ausblick}{}% 24
 \BOOKMARK [0][-]{appendix.A}{Allgemeine Informationen}{}% 25
 \BOOKMARK [1][-]{section.A.1}{Rechnungen}{appendix.A}% 26
-\BOOKMARK [2][-]{subsection.A.1.1}{numerische Darstellung von G1}{section.A.1}% 27
+\BOOKMARK [2][-]{subsection.A.1.1}{Numerische Darstellung von G1}{section.A.1}% 27
 \BOOKMARK [2][-]{subsection.A.1.2}{Berechnung von G2v}{section.A.1}% 28
 \BOOKMARK [1][-]{section.A.2}{Code}{appendix.A}% 29
 \BOOKMARK [0][-]{appendix*.25}{Literaturverzeichnis}{}% 30

@@ -1,9 +1,9 @@
 \chapter{Mathematische Grundlagen}
 \label{chap:mathematische_grundlagen}
 
-\section{Grundlagen Optimierung}
+\section{Optimierung}
 
-Das Phasenfeldmodell für die Rissentstehung ist ein Optimierungsproblem mit Ungleichungsnebenbedingungen. Um die Eindeutigkeit und Existenz einer Lösung zu sichern, werden Grundlagen in der Optimierung benötigt. Außerdem werden wir Bedingungen kennenlernen, mit denen sich das Optimierungsproblem in ein einfacheres Problem umschreiben lässt. Grundsätzlich lassen sich Optimierungsprobleme in Probleme mit und ohne Nebenbedingung aufteilen. Fangen wir zunächst mit der einfacheren Variante an. 
+Das Phasenfeldmodell für die Rissentstehung ist ein Optimierungsproblem mit Ungleichungsnebenbedingung. Um die Eindeutigkeit und Existenz einer Lösung zu sichern, werden Grundlagen in der Optimierung benötigt. Außerdem werden wir Bedingungen kennenlernen, mit denen sich das Optimierungsproblem in ein einfacheres Problem umschreiben lässt. Grundsätzlich lassen sich Optimierungsprobleme in Probleme mit und ohne Nebenbedingung aufteilen. Fangen wir zunächst mit der einfacheren Variante an. 
 
 \subsection{Optimierungsproblem ohne Nebenbedingung}
 
@@ -40,7 +40,7 @@ Sei $F: U \subset X \rightarrow Y$ ein Operator zwischen Banachräumen und $U \ne
 	\end{align*} 
 \end{defi}
 
-Nun können wir die Ableitung von $J$ bestimmen und daraus resultierend das Optimeriungsproblem lösen. Das Theorem stammt aus der Vorlesung \glqq Optimierung 2\grqq, gelesen von Prof. B. Wirth. 
+Nun können wir die Ableitung von $J$ bestimmen und daraus resultierend das Optimeriungsproblem lösen. Das Theorem stammt aus der Vorlesung \glqq Optimierung 2\grqq, gelesen von Prof. B. Wirth \cite{op}. 
 
 \begin{thm}
 	\label{thm:ableitung_gleich_null}
@@ -58,14 +58,14 @@ Nun können wir die Ableitung von $J$ bestimmen und daraus resultierend das Optim
 	\end{align*}
 \end{proof}
 
-Damit ist eine Bedingung für ein Optimum gegeben. Das Optimierungsproblem ist zu einer Nullstellensuche geworden. Oftmals ist die Ableitung eine partielle Differentialgleichung. Für diese muss eine Lösung gefunden werden. Dies wird in den Grundlagen Partieller Differentialgleichungen \ref{sec:grundlagen_pdgl} erklärt.  
+Damit ist Optimierungsproblem zu einer Nullstellensuche geworden. Oftmals ist die Ableitung eine partielle Differentialgleichung. Für diese muss eine Lösung gefunden werden. Dies wird in den Grundlagen Partieller Differentialgleichungen \ref{sec:grundlagen_pdgl} erklärt.  
 
 \subsection{Optimierungsproblem mit Ungleichungsnebenbedingung}
 
-Oftmals tauchen als Nebenbedingungen Ungleichungsbedingungen wie $a \le u \le b$ auf, wobei $a,b,u \in X$ gilt und $X$ ein Vektorraum ist. Damit überhaupt klar ist, wie das $\le$ gemeint ist, wird ein positiver Kegel nach der Vorlesung \glqq Optimierung 2\grqq  von Prof. Wirth definiert. 
+Oftmals tauchen als Nebenbedingungen Ungleichungsbedingungen wie $a \le u \le b$ auf, wobei $a,b,u \in X$ gilt und $X$ ein Vektorraum ist.Dabei ist $u$ die zu optimierende Funktion, $a$ die untere und $b$ die obere Schranke. Damit überhaupt klar ist, wie das $\le$ gemeint ist, wird ein positiver Kegel nach der Vorlesung \glqq Optimierung 2\grqq  von Prof. Wirth \cite{op} definiert. 
 
 \begin{defi}[positiver Kegel] 
-	Sei X ein Vektorraum, $P \subset X$ ein konvexer Kegel. Für $x,y \in X$ schreiben wir $x \le_P y$ oder $y \ge_p x$ falls $y-x \in P$. P heißt positiver Kegel. 
+	Sei X ein Vektorraum, $P \subset X$ ein konvexer Kegel. Für $x,y \in X$ schreiben wir $x \le_P y$ oder $y \ge_p x$, falls $y-x \in P$. P heißt positiver Kegel. 
 	
 	$x<_P y $ oder $y>_P x$ bedeutet $y-x \in \mathring{P}$ 
 \end{defi}
@@ -76,7 +76,7 @@ Wir werden Probleme der Form
 	%\label{eq:optimierungsproblem_funktionbedingung}
 \end{align*}
 
-bearbeiten, wobei $W,Z$  Banachräume sind, $J: W \rightarrow \R $ Gâteaux differenzierbar und  $G: W \rightarrow Z$ die Nebenbedingung des Optimierungsproblems ist. $P \subset Z$ ist ein positiver Kegel. Die Nebenbedingung lässt sich in eine Raumnebenbedingung umschreiben, $C:=\{w \in W| G(w) \le_P 0 \}$. Dabei ist $C$ nichtleer, abgeschlossen und konvex. Das Problem lautet  
+bearbeiten, wobei $W,Z$  Banachräume sind, $J: W \rightarrow \R $ Gâteaux differenzierbar und  $G: W \rightarrow Z$ die Nebenbedingung des Optimierungsproblems ist. $P \subset Z$ ist ein positiver Kegel. Die Nebenbedingung lässt sich in eine Raumnebenbedingung umschreiben, also $C:=\{w \in W| G(w) \le_P 0 \}$. Dabei ist $C$ nichtleer, abgeschlossen und konvex. Das Problem lautet  
 \begin{align}
 	\min\limits_{w \in W} J(w) \quad s.d. \quad w \in C 
 	\label{eq:optimierungsproblem_raumbedingung}
@@ -107,14 +107,14 @@ Bei Optimierungsproblemen mit Nebenbedingung reicht als Bedingung für das Optimu
 	\label{thm:kkt_system}
 	Seien X,Y normierte Räume, $P \subset Z$ ein positiver Kegel mit \r{P}$ \neq \emptyset$. Sei $J:W \rightarrow \R \cup \{\infty\}$, $G:W \rightarrow Z$ konvex. Es existiert ein $\hat{w} $ im Bild(J),  sodass $G(\hat{w})<_P 0$. Außerdem gelte $\mu=\inf\{J(w)|G(w)\le_P 0\}< \infty $. 
 	
-	Dann $\exists z' \in Z^*$ mit$ z' \ge_{P^*} 0$, sodass $\mu=\inf_{w \in W} J(w)+ \langle G(w),z'\rangle_{Z,Z^*}$.
+	Dann existiert $ z' \in Z^*$ mit $ z' \ge_{P^*} 0$, sodass $\mu=\inf_{w \in W} J(w)+ \langle G(w),z'\rangle_{Z,Z^*}$.
 	Falls ein optimales $\overline{w}$ existiert, dann minimiert $\overline{w}$  $J(w)+ \langle G(w),z'\rangle_{Z,Z^*}$. 
 \end{thm}
 \begin{proof}
-	Der Beweis ist im Script zu der Vorlesung \glqq Optimierung II \grqq, gelesen von Prof. Wirth, zu finden. 
+	Der Beweis ist im Script zu der Vorlesung \glqq Optimierung II \grqq, gelesen von Prof. Wirth \cite{op}, zu finden. 
 \end{proof}
 
-Nun haben wir die Bedingungen gegeben, sodass wir von  \eqref{eq:optimierungsproblem_raumbedingung} mit $C$ wie oben das KKT System aufstellen können. Dabei ist $\overline{w}$ die Lösung des Problems. $\mu$ und $\lambda$ heißen Lagrange Multiplikatoren. 
+Nun haben wir die Bedingungen gegeben, sodass wir von  \eqref{eq:optimierungsproblem_raumbedingung} das KKT System aufstellen können. Dabei ist $\overline{w}$ die Lösung des Problems. $\mu$ und $\lambda$ heißen Lagrange Multiplikatoren. 
 \begin{align*}
 	\begin{array}{lll}
 		\multicolumn{3}{l}{ \nabla J(\overline{w})+ \lambda - \mu =0} \\
@@ -134,13 +134,13 @@ Daraus ergibt sich:
 	& =  \max\{0, \mu + c(\overline{w}-a)\}   + \min\{ - \lambda + c(\overline{w}-b)\} \\ \notag
 	& = \max\{0, \mu - \lambda + c(\overline{w}-a)\}   + \min\{ \mu - \lambda + c(\overline{w}-b)\} 
 \end{align}
-Diese Darstellung werde ich später nutzen, um das Problem über die Rissentstehung zu lösen. 
+Diese Darstellung stammt aus \cite{kunisch} und werde ich später nutzen, um das Problem über die Rissentstehung zu lösen. 
 %todo Ref: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.163.7781&rep=rep1&type=pdf S. 7
 
-\section{Grundlagen pDGL}
+\section{Partielle Differentialgleichungen}
 \label{sec:grundlagen_pdgl}
 
-Optimierungsprobleme kann man oft umschreiben, sodass statt dem Optimierungsproblem eine partielle Differentialgleichung gelöst wird. Dadurch kann man Rückschlüsse auf die Existenz und Eindeutigkeit von dem Optimierungsproblem ziehen. Die Theorie, die ich dazu verwende ist aus der Vorlesung \glqq partielle Differentialgleichungen\grqq gelesen vom Professor B. Wirth. 
+Optimierungsprobleme kann man oft umschreiben, sodass, statt dem Optimierungsproblem, eine partielle Differentialgleichung gelöst wird. Dadurch kann man Rückschlüsse auf die Existenz und Eindeutigkeit von dem Optimierungsproblem ziehen. Die Theorie, die ich dazu verwende ist aus der Vorlesung \glqq partielle Differentialgleichungen\grqq gelesen vom Professor B. Wirth \cite{pdgl}. 
 
 Wir betrachten das elliptische Dirichlet-Problem auf einem beschränkten Gebiet $\Omega \subset \R^n$
 \begin{align}
@@ -190,14 +190,14 @@ Seien die Annahmen \ref{ann:ex_und_eind} für das Problem \eqref{eq:pDGL} erfüllt
 \section{Finite Elemente}
 \label{sec:finite_elemente}
 
-Finite Elemente sind die Grundlage, um partielle Differentialgleichungen auf zweidimensionalen Gebieten numerisch darstellen zu können. Dazu wird zunächst das Gebiet in Dreiecke trianguliert. Dann werden Basisfunktionen auf diesen Dreiecken definiert, die sogenannten globalen Formfunktionen. Aus diesen ist die gesuchte Funktion zusammengesetzt und kann damit berechnet werden. Dieses ist der Galerkin-Ansatz. Die hier beschriebene Theorie richtet sich nach der Vorlesung \glqq Numerik Partieller Differentialgleichungen\grqq gelesen von Dr. F. Wübbeling. 
+Finite Elemente sind die Grundlage, um partielle Differentialgleichungen auf zweidimensionalen Gebieten numerisch darstellen zu können. Dazu wird zunächst das Gebiet in Dreiecke trianguliert. Dann werden Basisfunktionen auf diesen Dreiecken definiert, die sogenannten globalen Formfunktionen. Aus diesen ist die gesuchte Funktion zusammengesetzt und kann damit berechnet werden. DiesesVorgehen nennt man Galerkin-Ansatz. Die hier beschriebene Theorie richtet sich nach der Vorlesung \glqq Numerik partieller Differentialgleichungen\grqq gelesen von Dr. F. Wübbeling \cite{npdgl}. 
 
 Es ist ein rechteckiges Gebiet in 2D gegeben. ObdA $\Omega = [0,a] \times [0,b]$. Auf diesem Gebiet legen wir ein äquidistantes Gitter $G_h$. 
 \begin{align*}
 	G_h:= \left\{ (ih_1,jh_2)| i=0, \cdots , \frac{a}{h_1}, j=0, \cdots , \frac{b}{h_2}  \right\}
 \end{align*}
 $h=(h_1,h_2)$ ist die Schrittweite mit $a=(n+1) h_1$ und $b=(m+1) h_2$, $n+1$ die Anzahl der Stützpunkte in x-Richtung und $m+1$ die Anzahl der Stützpunkte in y-Richtung.
-Um ein sinnvolles Gitter zu erhalten, sollten m und n recht nahe beieinander gewählt werden. 
+Um ein sinnvolles Gitter zu erhalten, sollten $h_1$ und $h_2$ recht nahe beieinander gewählt werden. 
 Nun wird durch die Gitterpunkte die Triangulierung gelegt. Diese nennen wir $E_k$ und ist in \ref{fig:triangulierung} dargestellt. 
 %todo m+1 -> m überall? einfachere notation!
 
@@ -219,20 +219,19 @@ Stellen wir das Referenzelement unserer Finiten Elemente auf.  Wir benutzen drei
 \begin{align*}
 	p_1(x,y):=1 \hspace{5ex} p_2(x,y):=x \hspace{5ex} p_3(x,y):=y 
 \end{align*}
-und $\Psi:=\{\varphi_0, \varphi_1, \varphi_2\}$ sind Funktionale auf $P$ und damit eine Basis von $P^*$. $\varphi_i$ sind lokale Formfunktionen d.h. $\varphi_i(p_j)= \delta_{ij}$, $i,j \in \{ 0,1,2 \}$. Dabei ist $\delta_{ij}$ das Kronecker-Delta. Außerdem soll gelten $\varphi_i(p_j)=p_j(a_i)$, wobei $a_i$ eine Auswertung in einer Ecke des Dreiecks ist. Daraus ergibt sich, dass 
+und $\Psi:=\{\varphi_0, \varphi_1, \varphi_2\}$ sind Funktionale auf $P$ und damit eine Basis von $P^*$. $\varphi_i$ sind lokale Formfunktionen d.h. $\varphi_i(p_j)= \delta_{ij}$, $i,j \in \{ 1,2,3 \}$. Dabei ist $\delta_{ij}$ das Kronecker-Delta. Außerdem soll gelten $\varphi_i(p_j)=p_j(a_i)$, wobei $a_i$ eine Auswertung in einer Ecke des Dreiecks ist. Daraus ergibt sich, dass 
 \begin{align}
 	\label{eq:varphi}
-	\varphi_1=1-x-y, \hspace{1ex} \varphi_2=x, \hspace{1ex} \varphi_3=y
+	\varphi_1=1-x-y \hspace{6ex} \varphi_2=x \hspace{6ex} \varphi_3=y
 \end{align} 
-Nun ist das Referenzelement gegeben. Jedes Element $(E_k, P_k, \Psi_k)$ lässt sich nun mit der affin linearen Transformation \\
-$
-\begin{array}{lrcl}
-T: 	& \R^2 									& \rightarrow 	& \R^2 \\
-& \begin{pmatrix} x \\ y \end{pmatrix}	& \mapsto		& \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} \pm \begin{pmatrix} h_1 x \\ h_2 y \end{pmatrix}
-\end{array}	
-$
-
-durch das Referenzelement darstellen. Dabei entspricht $(a_1,a_2)^t$ dem Eckpunkt mit dem $90^{\circ}$ Winkel des Rechteckes und $(h_1,h_2)^t$ ist die Höhe des Dreiecks. Mit dem Transformationssatz können wir alle Berechnungen auf dem Referenzelement ausführen und dann auf das transformierte Element übertragen. Durch die Transformation muss dann zu allen Integralen $|\det D T(x,y)|^{-1}$ multipliziert werden. Das ergibt
+Nun ist das Referenzelement gegeben. Jedes Element $(E_k, P_k, \Psi_k)$ lässt sich  mit der affin linearen Transformation 
+\begin{align*}
+	\begin{array}{lrcl}
+	T: 	& \R^2 									& \rightarrow 	& \R^2 \\
+	& \begin{pmatrix} x \\ y \end{pmatrix}	& \mapsto		& \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} \pm \begin{pmatrix} h_1 x \\ h_2 y \end{pmatrix}
+	\end{array}	
+\end{align*}
+durch das Referenzelement darstellen. Dabei entspricht $(a_1,a_2)^t$ dem Eckpunkt mit dem $90^{\circ}$ Winkel des Dreiecks und $(h_1,h_2)^t$ ist die Höhe bzw Breite des Dreiecks. Mit dem Transformationssatz können wir alle Berechnungen auf dem Referenzelement ausführen und dann auf das transformierte Element übertragen. Durch die Transformation muss dann zu allen Integralen $|\det D T(x,y)|^{-1}$ multipliziert werden. Das ergibt
 \begin{align*}
 	|\det \text{D } T(x,y)|^{-1} = |\det \begin{pmatrix}
 		h_1 & 0 \\ 0 & h_2
@@ -241,12 +240,12 @@ durch das Referenzelement darstellen. Dabei entspricht $(a_1,a_2)^t$ dem Eckpunk
 
 Die Familie $\{(E_k,P_k, \Psi_k)\}$ von Finiten Elementen, die durch unsere Triangulierung hervorgegangen ist, ist verträglich. Also können wir die globalen Formfunktionen aufstellen, die auf dem gesamten Gebiet $\Omega$ definiert sind. Die globale Formfunktion $T_j$ ist $1$ auf dem Gitterpunkt $j$ und 0 sonst. 
 
-Für die Berechnung von linearen Funktionen auf dreieckig-linearen Lagrange Elementen, brauchen wir oft eine explizite Darstellung. Durch die Triangulierung haben wir 2 Arten von Dreiecken. Dabei entspricht $a^i$ der Wert der Funktion $a$ an dem Eckpunkt $i$.
+Für die Berechnung von linearen Funktionen auf dreieckig linearen Lagrange Elementen, brauchen wir oft eine explizite Darstellung. Durch die Triangulierung haben wir 2 Arten von Dreiecken. Dabei entspricht $a^i$ der Wert der Funktion $a$ an dem Eckpunkt $i$. 
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=0.25]{images/dreieck_oben_unten_u0.png}	
-	\caption{gerade und ungerade Dreiecke mit den Werten von $a$ }
+	\caption{gerade (links) und ungerade Dreiecke mit den Werten von $a$ }
 	\label{fig:oben_unten_dreieck}
 \end{figure}
 
@@ -272,11 +271,11 @@ a(x,y)=(a_1-a_2)x + (a_3 - a_2)y + a_2  \hspace{1ex} \text{ mit } \hspace{1ex}
 	\end{pmatrix}
 \end{align}
 
-\section{Semidifferenzierbare Newton Methoden}
+\section{Semidifferenzierbare Newton Methode}
 
-Semiglatte Newton Methoden werden gebraucht, um Nullstellen von nicht differenzierbaren Funktionen numerisch zu berechnen. Die Rissentstehung ist ein nicht differenzierbares Problem. Um die Idee der Newton Methoden zu verstehen, führe ich zunächst einfache Newton Methoden ohne Nebenbedingung und dann solche mit einfachen Nebenbedingungen ein. Um diese realisieren zu können, wird der Begriff der Semidifferenzierbarkeit benötigt. Das ist eine Mengenwertige Ableitung, mit der auch nicht-differenzierbare, aber stetige Punkte in einer Funktion abgeleitet werden können. Damit kann dann die semidifferenzierbare Newton Methode eingeführt werden, von der wir auch die Konvergenz betrachten werden.  Dieses Kapitel richtet sich nach \cite[S. 115 ff]{hinze:op_pde_constraints}. 
+Semiglatte Newton Methoden werden gebraucht, um Nullstellen von nicht differenzierbaren Funktionen numerisch zu berechnen. Die Rissentstehung ist ein nicht differenzierbares Problem. Um die Idee der Newton Methoden zu verstehen, führe ich zunächst  die einfache Newton Methode ohne Nebenbedingung und dann solche mit einfachen Nebenbedingungen ein. Um diese realisieren zu können, wird der Begriff der Semidifferenzierbarkeit benötigt. Das ist eine Mengenwertige Ableitung, mit der auch nicht differenzierbare, aber stetige Punkte in einer Funktion abgeleitet werden können. Damit kann die semidifferenzierbare Newton Methode eingeführt werden, von der wir auch die Konvergenz betrachten werden.  Dieses Kapitel richtet sich nach \cite[S. 115 ff]{hinze:op_pde_constraints}. 
 
-\subsection{Newton Methoden mit einfachen Nebenbedingungen}
+\subsection{Newton Methoden ohne Nebenbedingungen}
 Als erstes leiten wir uns zum Verständnis die einfache Newton Methode her. Dazu betrachten wir wie vorher das Minimierungsproblem 
 \begin{align}
 	\label{eq:min}
@@ -407,7 +406,7 @@ Die geeingnete Wahl von $M_k$ ist das sogenannte Semidifferential. Was das genau
 		\partial G: X \rightrightarrows L(X,Y)
 	\end{align*}
 \end{defi}
-Dabei meint $\rightrightarrows L(X,Y)$, dass ein Punkt $x \in X$ auf eine Menge von linearen Operatoren abgebildet wird (und nicht nur auf einen Operator). 
+Dabei meint $X \rightrightarrows L(X,Y)$, dass ein Punkt $x \in X$ auf eine Menge von linearen Operatoren abgebildet wird. 
 Ein Beispiel für ein verallgemeinertes Differenzial ist das Clarke Differenzial. Dies ist jedoch nur für Vektorwertige Funktionen definiert. 
 
 Nun können wir, um unser Newtonverfahren umzugestalten $M_k \in \partial G(x^k)$ wählen. Damit unser Verfahren aber super linear konvergiert, muss gelten 
@@ -434,7 +433,7 @@ Dieses nennt sich semidiffbar.
 
 \begin{lem}
 	\label{lem:semidiffbar_f_diffbar}
-	Sei $G: X \rightarrow Y$ ein Operator zwischen Banachräumen und stetig F-diffbar in einer Umgebung von x. Dann ist G $\{ G' \}$-semidiffbar in x. Falls $G'$ $\alpha$-Hölderstetig in einer Umgebung von x ist, dann ist G $\{ G' \} $-semidiffbar in x von der Ordnung $\alpha$. 
+	Sei $G: X \rightarrow Y$ ein Operator zwischen Banachräumen und stetig Fréchet-differenzierbar in einer Umgebung von x. Dann ist G $\{ G' \}$-semidifferenzierbar in x. Falls $G'$ $\alpha$-Hölderstetig in einer Umgebung von x ist, dann ist G $\{ G' \} $-semidifferenzierbar in x von der Ordnung $\alpha$. 
 	
 	$\{G'\}$ beschreibt den Operator $\{G'\}: X \rightrightarrows L(X,Y)$ mit $\{G'\}(x)=\{G'(x)\}$ 
 \end{lem}
@@ -447,13 +446,13 @@ Dieses nennt sich semidiffbar.
 	Der zweite Teil des Beweises erfolgt analog, siehe \cite[S. 121]{hinze:op_pde_constraints}
 \end{proof}
 
-\begin{thm}[Rechenregeln semidiffbare Funktionen]
+\begin{thm}[Rechenregeln semidifferenzierbare Funktionen]
 	\label{thm:rechenregeln_semidiffbare_fkt}
 	Seien $X,Y,Z, X_i, Y_i$ Banachräume. 
 	\begin{enumerate}
-		\item Falls die Operatoren $G_i: X_i \rightarrow Y_i$ $\partial G_i$-semidiffbar in x sind, dann ist $(G_1,G_2)$ $(\partial G_1, \partial G_2)$-semidiffbar in x.  
-		\item Falls die Operatoren $G_i: X \rightarrow Y$ $\partial G_i$-semidiffbar in x sind, dann ist $ G_1+G_2$ $(\partial G_1 +\partial G_2)$-semidiffbar in x.  
-		\item Seien $G_1: Y \rightarrow Z$ und $G_2: X \rightarrow Y$  $\partial G_i$-semidiffbar in $G_2(x)$ und in x. Sei außerdem $\partial G_1$ beschränkt in einer Umgebung von $x=G_2(x)$ und $G_2$ ist Lipschitzstetig in einer Umgebung von x. Dann ist $G= G_1\circ G_2$ $\partial G$-semidiffbar mit 
+		\item Falls die Operatoren $G_i: X_i \rightarrow Y_i$ $\partial G_i$-semidifferenzierbar in x sind, dann ist $(G_1,G_2)$ $(\partial G_1, \partial G_2)$-semidifferenzierbar in x.  
+		\item Falls die Operatoren $G_i: X \rightarrow Y$ $\partial G_i$-semidifferenzierbar in x sind, dann ist $ G_1+G_2$ $(\partial G_1 +\partial G_2)$-semidifferenzierbar in x.  
+		\item Seien $G_1: Y \rightarrow Z$ und $G_2: X \rightarrow Y$  $\partial G_i$-semidifferenzierbar in $G_2(x)$ und in x. Sei außerdem $\partial G_1$ beschränkt in einer Umgebung von $x=G_2(x)$ und $G_2$ ist Lipschitzstetig in einer Umgebung von x. Dann ist $G= G_1\circ G_2$ $\partial G$-semidifferenzierbar mit 
 		\begin{align*}
 			\partial G(x)= \left\{ M_1M_2|M_1 \in \partial G_1\left( \partial G_2(x)\right), \quad M_2 \in \partial G_2(x) \right\}
 		\end{align*}	  	
@@ -463,7 +462,7 @@ Dieses nennt sich semidiffbar.
 	Der Beweis ist in \cite[S. 122]{hinze:op_pde_constraints} zu finden. 
 \end{proof}
 
-\subsection{semidiffbare Newton Methoden}
+\subsection{Semidifferenzierbare Newton Methode}
 
 Mit dem Semidifferential können wir nun die semidifferenzierbare Newton Methode definieren. 
 
@@ -478,9 +477,9 @@ Mit dem Semidifferential können wir nun die semidifferenzierbare Newton Methode 
 	}
 \end{algorithm}
 Damit diese konvergiert, muss die Approximationsannahme und die Regularitätsannahme erfüllt sein. 
-Die Approximationsannahme ist durch die Semidiffbarkeit gegeben. Fehlt noch die Regularitätsannahme. 
+Die Approximationsannahme ist durch die Semidifferenzierbarkeit gegeben. Fehlt noch die Regularitätsannahme. 
 
-\begin{defi}[Regularitätsannahme für semidiffbare Newton Verfahren]
+\begin{defi}[Regularitätsannahme für semidifferenzierbare Newton Verfahren]
 	\label{def:regularitaetsbedingung}
 	Betrachte \eqref{eq:g=0} mit der Lösung $\overline{x}$. Dann lautet die Regularitätsannahme
 	\begin{align}
@@ -489,9 +488,9 @@ Die Approximationsannahme ist durch die Semidiffbarkeit gegeben. Fehlt noch die 
 	\end{align}
 \end{defi}
 
-\begin{thm}[Konvergenz des semidiffbaren Newton-Verfahrens]
+\begin{thm}[Konvergenz das semidifferenzierbare Newton Verfahrens]
 	\label{thm:konvergenz_des_semidiffbaren_newton_verfahrens}
-	Sei das Problem \eqref{eq:g=0} gegeben mit der Lösung $\overline{x}$. Seien $X,Y$ Banachräume, $G: X \rightarrow Y$ stetig und $\partial G$ semidiffbar und die Regularitätsannahme \eqref{eq:regularitaetsbedingung} sei gegeben. Dann existiert $\delta >0$, sodass für alle $x^0 \in X$ mit $\|x^0- \overline{x}\|_X < \delta $   die semidiffbare Newton Methode super linear gegen $\overline{x}$ konvergiert.
+	Sei das Problem \eqref{eq:g=0} gegeben mit der Lösung $\overline{x}$. Seien $X,Y$ Banachräume, $G: X \rightarrow Y$ stetig und $\partial G$ semidifferenzierbar und die Regularitätsannahme \eqref{eq:regularitaetsbedingung} sei gegeben. Dann existiert $\delta >0$, sodass für alle $x^0 \in X$ mit $\|x^0- \overline{x}\|_X < \delta $   die semidifferenzierbar Newton Methode super linear gegen $\overline{x}$ konvergiert.
 	
 	Falls G $\partial G$-semidiffbar der Odnung $\alpha >0$ in $\overline{x}$ ist, dann ist die Konvergenzordnung $ 1 + \alpha $ 
 \end{thm}
@@ -500,7 +499,7 @@ Die Approximationsannahme ist durch die Semidiffbarkeit gegeben. Fehlt noch die 
 	\begin{align*}
 		\| M_k^{-1} \left(G(\overline{x}+d^k)-G(\overline{x})-M_kd^k \right) \|_X = o( \| d^k\|_X  )
 	\end{align*}  
-	gilt, dann konvergiert das Newtonverfahren super linear. Da $M_k \in \partial G$, ist $M_k \in \mathcal{L}(X,Y)$. $M_k$ ist invertierbar, da die Regularitätsannahme gilt. Außerdem gilt mit der Regularitätsannahme und der Semidiffbarkeit:
+	gilt, dann konvergiert das Newtonverfahren super linear. Da $M_k \in \partial G$, ist $M_k \in \mathcal{L}(X,Y)$. $M_k$ ist invertierbar, da die Regularitätsannahme gilt. Außerdem gilt mit der Regularitätsannahme und der Semidifferenzierbarkeit
 	\begin{align*}
 		& \| M_k^{-1} \left(G(\overline{x}+d^k)-G(\overline{x})-M_kd^k \right) \|_X \\
 		& \le \| M_k^{-1} \|_X \| \left(G(\overline{x}+d^k)-G(\overline{x})-M_kd^k \right) \|_X \\

@@ -1,6 +1,6 @@
 todo 
 + notation ableitungen anders 
-  -> unterschiedliche phi/ varphi jenachdem welche ableitung!	1	0
+  + unterschiedliche phi/ varphi jenachdem welche ableitung!	1	0
 - einleitung schreiben
   + ordentlich aufschreiben, was prof mir gesagt hat		.5	0			
 - programm zum laufen bringen
@@ -8,8 +8,8 @@ todo
 - konvergenz der NM 
   - komisches zeugs; probieren zu verstehen
   - obsacle Problem suchen und lösung davon suchen		4	2
-- F abl stetig, beschränkt?
-  - siehe Blatt 3, ordentlich mit begründung			.5	3
++ F abl stetig, beschränkt?
+  + siehe Blatt 3, ordentlich mit begründung			.5	3
 - zitat internet weg
   - nach Karl Kunisch suchen litschitz lectures; irgendwas in 2008 .5	4
 - prof zitat vorlesung fragen 

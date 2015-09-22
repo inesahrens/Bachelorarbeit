@@ -5,4 +5,22 @@ M.~Hinze, R.~Pinnau, M.~Ulbrich, and S.~Ulbrich.
 \newblock {\em Optimazation with PDE Constraints}.
 \newblock Springer, 2009.
 
+\bibitem{kunisch}
+Karl Kunisch.
+\newblock {\em Semi-smooth Newton Methods for Non-differentiable Optimazation
+  Problems}.
+\newblock 2008.
+
+\bibitem{npdgl}
+Dr.~Frank Wübbeling.
+\newblock Vorlesung numerik partieller differentialgleichungen.
+
+\bibitem{op}
+Prof.~Benedikt Wirth.
+\newblock Vorlesung optimierung ii.
+
+\bibitem{pdgl}
+Prof.~Benedikt Wirth.
+\newblock Vorlesung partielle differentialgleichungen.
+
 \end{thebibliography}

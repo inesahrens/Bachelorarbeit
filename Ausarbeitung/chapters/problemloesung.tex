@@ -8,7 +8,7 @@ Nachdem wir die Mathematischen Grundlagen für die Betrachtung eines Optimierungs
 Zunächst teilen wir das Minimierungsproblem in zwei voneinander unabhängige Optimierungen auf: Die Optimierung nach $u$ und die Optimierung nach $v$. Im Anschluss betrachten wir beide Optimierungen genauer, indem wir sie umschreiben und numerische Verfahren zur Lösung entwickeln. Zum Schluss fusionieren wir beide Verfahren.
 
 
-\section{erste Betrachtung der Rissentstehung}
+\section{Erste Betrachtung des Modells}
 \label{sec:allgemeines_kkt}
 
 Erinnern wir uns an die vorangegangene Problemstellung 
@@ -484,7 +484,7 @@ Die schwache Formulierung ist dann
 \end{align*}
 mit $\eta = \mu - \lambda$
 
-\subsection{semidifferenzierbare Newton Methode}
+\subsection{Anwendung auf semidifferenzierbare Newton Methode}
 
 Unser Ziel ist es, eine Methode zu finden, wie wir das KKT System lösen können. Betrachten wir also 
 \begin{align*}
@@ -502,21 +502,29 @@ Wir wollen $(v, \eta)$ finden, sodass $G=0$. Direkt kann diese Formel nicht gelö
 Sehen wir uns zunächst die $\partial G_1(v,\eta)(h)$ an. Es gilt:
 
 \begin{thm}
+	\label{thm:G1_semidiffbar}
 	$G_1(v,\eta)$ ist semidifferenzierbar mit 
 	\begin{align*}
 		& \partial G_{1 v} (v, \eta)(\phi_1) = \int\limits_{\Omega} 2 \psi_1  \phi_1 | \nabla u|^2 + \epsilon_2 2 \nabla \phi_1 \nabla \psi_1  + \frac{2}{\epsilon_3} \phi_1 \psi_1 \diff x \\
 		& \partial G_{1 \eta} (v, \eta) (\phi_2) = \int\limits_{\Omega}  \phi_2 \psi_1  \diff x
 	\end{align*}	
+	falls $u$ fest gewählt ist, oder $u \in L^{\infty}$ 
 \end{thm}
 \begin{proof}
-	Nach \ref{lem:semidiffbar_f_diffbar} ist $G_1$ $\partial G_1$ semidifferenzierbar, falls $G_1$ stetig Fréchet differenzierbar ist. Bestimmen wir zunächst die Richtungsableitung. Diese ist gegeben durch 
+	Nach \ref{lem:semidiffbar_f_diffbar} ist $G_1$ $\partial G_1$ semidifferenzierbar, falls $G_1$ stetig Fréchet differenzierbar ist. Bestimmen wir zunächst die Richtungsableitung in Richtung $\phi_1$ bzw $\phi_2$. Diese ist gegeben durch 
 	\begin{align*}
-		& \partial G_{1 v} (v, \eta)(\phi_1) = \int\limits_{\Omega} 2 \psi_1  \phi_1 | \nabla u|^2 + \epsilon_2 2 \nabla \phi_1 \nabla \psi_1  + \frac{2}{\epsilon_3} \phi_1 \psi_1 \diff x \\
+		& \partial G_{1 v} (v, \eta)(\psi_1,\phi_1) = \int\limits_{\Omega} 2 \psi_1  \phi_1 | \nabla u|^2 + \epsilon_2 2 \nabla \phi_1 \nabla \psi_1  + \frac{2}{\epsilon_3} \phi_1 \psi_1 \diff x \\
 		& G_{1 \eta} (v, \eta) (\phi_2) = \int\limits_{\Omega}  \phi_2 \psi_1  \diff x
 	\end{align*}
-	Die Berechnung wird hier nicht weiter ausgeführt. Die Richtungsableitung muss linear und beschränkt in $\phi$ sein. 
-	%todo in was denn?
+	Die Berechnung wird hier nicht weiter ausgeführt. Die Richtungsableitungen müssen linear und beschränkt sein. 
 	Linearität ist einfach zu sehen.
+	Für Beschränktheit von $\partial G_{1v}(v,\eta)( \psi_1,\phi_1 ) $ gilt: 
+	\begin{align*}
+		\|\partial G_{1v}(v,\eta)(\psi_1,\phi_1)\|_{H^{-1}} \le & = \int\limits_{\Omega} 2 \psi_1  \phi_1 | \nabla u|^2 + \epsilon_2 2 \nabla \phi_1 \nabla \psi_1  + \frac{2}{\epsilon_3} \phi_1 \psi_1 \diff x \\
+		& \le 2 \|\nabla u\|^2 |(\psi_1,\phi_1)_{H^1}|+  \max\{2 \epsilon_2, \frac{2}{\epsilon_3}\} |(\psi_1, \phi_1)_{H^1}| \\
+		& \le \left( C + \tilde{C} \|\nabla u\|^2 \right)\|\psi_1\|_{H^1} \|\phi_1\|_{H^1}
+	\end{align*}
+	Da $u \in L^{\infty}$, ist $\|\nabla u\|^2$ beschränkt.  Damit ist $G_{1v}$ beschränkt. 
 	Für Fréchet Differenzierbarkeit muss eine Abschätzung überprüft werden:
 	\begin{align*}
 		& \|G_1(v + h,\eta) - G_1(v,\eta) - \partial G_{1v}(v,\eta)(h)\| \\
@@ -526,9 +534,8 @@ Sehen wir uns zunächst die $\partial G_1(v,\eta)(h)$ an. Es gilt:
 		& = \| \int\limits_{\Omega} 2 \psi_1  h | \nabla u|^2 + \epsilon_2 2 \nabla h \nabla \psi_1  + \frac{2}{\epsilon_3} h \psi_1 \diff x -\int\limits_{\Omega} 2 \psi_1  h | \nabla u|^2 + \epsilon_2 2 \nabla h \nabla \psi_1  + \frac{2}{\epsilon_3} h \psi_1 \diff x \| \\
 		& = 0
 	\end{align*} 
+	Da $G_{1v}$ beschränkt und linear ist, ist $G_{1v}$ auch stetig. 
 \end{proof}
-%todo beschränktheit nachdenken
-%todo stetigkeit nicht gegeben, oder? mit prof reden... 
 
 Für das Semidifferenzial von $G_2$  beweisen wir zunächst ein Lemma
 
@@ -677,10 +684,25 @@ Stellen wir dazu die Newton Methode auf
 Nun wollen wir noch herausfinden, ob die Newton Methode konvergiert.
 
 \begin{thm}[Konvergenz der Newton Methode]
-	
+	Der Algorithmus \ref{algo:semidiffbare_nm_anw} konvergiert.	
 \end{thm}
+\begin{proof}
+	Wir wollen Theorem \ref{thm:konvergenz_des_semidiffbaren_newton_verfahrens} anwenden. Dazu muss $G$ stetig sein und $\partial G$ semidifferenzierbar und die Regularitätsannahme muss erfüllt sein. 
+	Die Semidifferenzierbarkeit wurde in \ref{thm:G1_semidiffbar} schon gezeigt. Fehlt noch die Reguaritätsannahme.  
+	Dazu muss gezeigt werden, dass 
+	\begin{align*}
+		\exists C>0, \quad \exists \delta >0 : \|M^{-1}\|_{X \rightarrow Y} \le C \quad \forall M \in \partial G(x) \quad \forall x \in X, \quad \|x-\overline{x}\|_X<\delta
+	\end{align*}
+	mit 
+	\begin{align*}
+	M:= \begin{pmatrix}
+		\partial G_{1 v} & \partial G_{1 \eta} \\
+		\partial G_{2 v} & \partial G_{2 \eta} 
+	\end{pmatrix}
+	\end{align*} 
+\end{proof}
 
-\subsection{numerische Betrachtung}
+\subsection{Numerische Betrachtung}
 
 Alle Funktionen aus dem Newtonsystem müssen numerisch dargestellt werden. 
 
@@ -695,7 +717,7 @@ Da $u$ gegeben ist, ist $u$ ein Vektor mit den Auswertungen an den Ecken der Dre
 	|\nabla u|^2= (u_{31}-u_{21})^2+(u_{11}-u_{21})^2+ (u_{32}-u_{22})^2+(u_{12}-u_{22})^2=:u^{dis}
 \end{align*}  
 
-\subsubsection{numerische Darstellung von $G_{1}$}
+\subsubsection{Numerische Darstellung von $G_{1}$}
 
 \begin{align*}
 G_1(v,\eta) =  \int\limits_{\Omega} 2 \psi_1 v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \psi_1 - \frac{2}{\epsilon_3} (1-v)\psi_1 +  \eta \psi_1 \diff x
@@ -733,7 +755,7 @@ Bei $D$ steht  auf der Hauptdiagonalen $\frac{1}{2} $, auf der ersten, zweiten u
 
 Durch die noch ausstehende Transformation der Dreiecke, muss der gesamte Term mit $1/ h_1 h_2$ multipliziert werden.  
 
-\subsubsection{numerische Darstellung von $G_{2}$}
+\subsubsection{Numerische Darstellung von $G_{2}$}
 \begin{align*}
 	\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \psi_2 \diff x
 \end{align*}
@@ -766,7 +788,7 @@ $w_{v \eta}	$ kann auch explizit dargestellt werden:
 \end{align*}
 Auch hier muss das Integral wieder transformiert werden, wodurch der Faktor $^/h_1 h_2$ multipliziert wird. 
 
-\subsubsection{numerische Darstellung von $G_{1 v}$}
+\subsubsection{Numerische Darstellung von $G_{1 v}$}
 \begin{align*}
  	G_{1 v} (v, \eta) = \int\limits_{\Omega} 2 \psi_1  \phi_1 | \nabla u|^2 + \epsilon_2 2 \nabla \phi_1 \nabla \psi_1  + \frac{2}{\epsilon_3} \phi_1 \psi_1 \diff x
 \end{align*}
@@ -781,7 +803,7 @@ wird nun diskretisieren:
 
 Wir benutzen die gleichen Notationen, wie bei der numerischen Darstellung von $G_1$ und die gleiche Transformation. 
 
-\subsubsection{numerische Darstellung von $G_{1 \eta}$}
+\subsubsection{Numerische Darstellung von $G_{1 \eta}$}
 \begin{align*}
  	G_{1 \eta} (v, \eta) = \int\limits_{\Omega}  \phi_2 \psi_1  \diff x
 \end{align*}
@@ -793,7 +815,7 @@ wird nun diskretisieren:
 
 Auch hier muss wieder transformiert werden. 
 
-\subsubsection{numerische Darstellung von $G_{2 v}$}
+\subsubsection{Numerische Darstellung von $G_{2 v}$}
 Es soll 
 	\begin{align*}
 		\partial G_{2 v}(\eta, v) (\psi_2, \phi_1) = \int\limits_{\Omega}  \frac{\partial f}{\partial v} \psi_2 \phi_1 \diff x 
@@ -823,7 +845,7 @@ Wir erhalten wieder eine Matrix folgender Form:
 %todo matrix erstellen. 
 Jeder Eintrag, der nicht 0 ist, besteht aus der Summe von unterschiedlichen Auswertungen der Funktion $f$ auf den Dreiecken, über denen integriert wurde. 
 
-\subsubsection{numerische Darstellung von $G_{2 \eta}$}
+\subsubsection{Numerische Darstellung von $G_{2 \eta}$}
 Die numerische Darstellung ist genau die gleiche, wie bei $G_{2 v}$, nur dass die Funktionsauswertungen von $f$ andere sind. 
 
 \subsection{Agregation}
