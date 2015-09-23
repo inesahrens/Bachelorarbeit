@@ -307,19 +307,6 @@ berechnen. Der Code dazu hat folgende Form
 \end{algorithm}
 Da sowohl $\tilde{L}$ als auch $\tilde{L u_0^h}$ aus fast nur Nullen besteht, verwende ich in Matlab Sparse Matrizen. Dies führt zu einer wesentlich besseren Laufzeit. 
 
-\subsection{Auswertung der Implementation}
-
-Falls u an beiden Seiten auf unterschiedlicher aber jeweils konstanter Höhe eingespannt ist und ein Riss in der Mitte des Materials entsteht (der mind. 2 Pixel breit sein muss, sonst wird v nicht richtig 0, sondern wird interpoliert), sehen wir die Unstetigkeitsstelle genau an dem Riss. 
-Unterschiedliche Gitterweiten?
-
-Falls wir $u$ nicht konstant einspannen, also an beiden Seiten schräg, aber gleiche Höhe
-Unterschiedliche Gitterweiten?
-
-schräg aber unterschiedliche Höhe
-unterschiedliche Gitterweiten
-
-entgegengesetzt schräg
-
 \section{Optimierung nach v}
 
 Bei der Optimierung nach $v$ geht es um die Fortsetzung des Risses. Für dieses Optimierungsproblem mit Ungleichungsnebenbedingung sicheren wir zunächst die Existenz und Eindeutigkeit der Lösung. Danach stellen wir die Optimalitätsbedingungen auf. Das resultiert in ein Karush Kuhn Tucker System. Dieses wollen wir mittels semidifferenzierbarer Newton Methode lösen. Dazu müssen zunächst alle Funktionen der KKT Systems differenziert und danach diskretisiert werden. Dies geschieht wieder mit Finiten Elementen. Am Schluss führe beide Optimierungsprobleme zu einem Verfahren zusammen.    
@@ -897,3 +884,46 @@ mit
 	\end{array}
 \end{align*}
 $1/h_1 h_2$ kommt nicht in der Newton Methode vor, da es vorher gekürzt wurde. 
+
+\section{Numerische Resultate}
+\begin{itemize}
+	\item stärkere Einsicht in die vorher beschriebenen Numerischen Methoden
+	\item Verifizierung Theretischer Aussagen
+	\begin{itemize}
+		\item Konvergiert die Newtonmethode?
+		\item Beispiele dazu bringen
+		\item vll auch, dass einige vorraussetzungen nicht gebraucht werden? da mal testen
+	\end{itemize}
+	\item justierung der Parameter
+	\begin{itemize}
+		\item epsilon $> gitterweite, < Gitterweite$ und warum
+		\item wahl von $c$ (ob egal oder nicht)
+		\item Wahl von $\eta$. Was geht, was nicht?
+		\item Wahl von $v_0$ was ergibt sinn?  
+		\item Wahl von $u_0$ was ergibt sinn? 
+	\end{itemize}
+	\item Messung der Leistungsfähigkeit der Software (schnelligkeit? einsatz?)
+	\begin{itemzie}
+		\item eher nicht. hat ja kaum anwendung
+	\end{itemzie}
+	\item einige Fallbeispiele: genügend beschreibung zum nachvollziehen/ nachmachen und interpretation
+	\item testbeispiele: extremverhalten? charakteristische Probleme aus der Praxis; Testprobleme mit bekannten Ergebnissen?
+	\begin{itemize}
+		\item gerader riss
+		\item krummer riss
+		\item nur kurz angerissen
+		\item unterschiedliche gitterweite
+	\end{itemize}
+\end{itemize}
+
+
+Falls u an beiden Seiten auf unterschiedlicher aber jeweils konstanter Höhe eingespannt ist und ein Riss in der Mitte des Materials entsteht (der mind. 2 Pixel breit sein muss, sonst wird v nicht richtig 0, sondern wird interpoliert), sehen wir die Unstetigkeitsstelle genau an dem Riss. 
+Unterschiedliche Gitterweiten?
+
+Falls wir $u$ nicht konstant einspannen, also an beiden Seiten schräg, aber gleiche Höhe
+Unterschiedliche Gitterweiten?
+
+schräg aber unterschiedliche Höhe
+unterschiedliche Gitterweiten
+
+entgegengesetzt schräg

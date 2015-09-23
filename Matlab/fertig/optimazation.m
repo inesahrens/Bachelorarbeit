@@ -34,8 +34,8 @@
 
 % n+1 ist die Anzahl der Stützstellen nach rechts
 % m+1 ist die Anzahl der Stützstellen nach unten
-n=100;
-m=100;
+n=20;
+m=20;
 nu = .1; 
 % Deklaration aller epsilons
 epsilon = [0.01;nu* 5/(n+1) ;(5/(n+1) )*(1/nu)]; 
@@ -57,7 +57,7 @@ v0 =2* ones((n+1)*(m+1),1);
 const = 1; 
 
 %Anzahl der Newtonschritte die durchgeführt werden sollen
-k=1; 
+k=200; 
 
 % u0 sind die Randdaten von u. Hier wird u am rechten und am linken Rand
 % eingespannt, sodass an einem Rand u 1 und und am anderen 2. 
@@ -65,7 +65,7 @@ u0=zeros((n+1)*(m+1), 1);
 
 for i=0:m
      u0(i*(n+1)+1) = 1;
-     u0(i*(n+1)+n+1) = 0;
+     u0(i*(n+1)+n+1) = 2;
 end
 
 % Da alles mit dreieckig linearen Lagrangeelementen implementiert ist, muss
@@ -138,16 +138,18 @@ resultu = reshape(u(:,1),n+1,m+1);
 resultv = reshape(v,n+1,m+1); 
 resulteta = reshape(eta,n+1,m+1);
 
+
 % Plotten des Ergebnisses 
 % noch geht das nur für Gitter, die gleichhoch wie breit sind. 
 [X,Y] = meshgrid(0:1/n:1);
 
-figure 
-mesh(X,Y,resulteta)
+% figure 
+% mesh(X,Y,resulteta)
 
 figure 
   subplot(1,2,1);
-  surf(X,Y,resultu);
+  mesh(X,Y,resultu);
   subplot(1,2,2);
-  surf(X,Y,resultv);
+  mesh(X,Y,resultv);
+  
 

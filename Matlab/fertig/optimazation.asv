@@ -138,9 +138,11 @@ resultu = reshape(u(:,1),n+1,m+1);
 resultv = reshape(v,n+1,m+1); 
 resulteta = reshape(eta,n+1,m+1);
 
+
 % Plotten des Ergebnisses 
 % noch geht das nur für Gitter, die gleichhoch wie breit sind. 
-[X,Y] = meshgrid(0:1/n:1);
+[X,Y] = meshgrid(0:1/n:1); 
+resultphi = resultu ; 
 
 figure 
 mesh(X,Y,resulteta)
@@ -150,4 +152,5 @@ figure
   surf(X,Y,resultu);
   subplot(1,2,2);
   surf(X,Y,resultv);
+  
 
