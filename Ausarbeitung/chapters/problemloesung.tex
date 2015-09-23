@@ -886,38 +886,71 @@ mit
 $1/h_1 h_2$ kommt nicht in der Newton Methode vor, da es vorher gekürzt wurde. 
 
 \section{Numerische Resultate}
+Dieses Kapitel behandelt die Implementation der Optimierung. Zunächst werde ich darauf eingehen, wie man die festen Parameter im Code \ref{sec:code} wählen muss. Dabei meint feste Parameter, dass deren Veränderung zu keinen brauchbaren Ergebnissen mehr führt. Hier sind das $c, \epsilon, \eta$ und $v_0$. Danach werde ich einige Beispiele für unterschiedliche Gitterweiten, verschiedene Risse und Möglichkeiten des Einspannens des Materials betrachten. Zum Schluss gehen wir kurz auf die Konvergenz der Methode ein.    
+
+Ganz am Anfang ist zu sagen, dass man immer Risse betrachtet, die mindestens zwei Gitterpunkte breit sind. 
+%todo warum
+
+\subsection{Justieren der festen Parameter}
+\begin{itemize}
+	\item $\epsilon_1<\frac{1}{(n+1)(m+1)}$ und $\epsilon_2> \frac{1}{(n+1)(m+1)}$ $\epsilon_2=\epsilon_3$. (gleich in aufgabenstellung mit reinnehmen) warum??
+	\item wahl von $c$ (ob egal oder nicht) falls c gaaanz groß, so bei 500, dann wird der Riss steiler, also weniger übergang
+	\item Wahl von $\eta$. Was geht, was nicht?$\eta=1$ geht nichts (kein bild) $\eta=2$ riss zu steil; $\eta=.9$ riss ist nicht bei 0, geht nur bis $.15$, $\eta=.5$ riss fängt bei 0 an, geht jedoch nur bis $.3$ dann geht immer etwas höher $\eta=.34$ fast perfekt bei 1 der Rand. aber nur bei gerader riss. bei ungeraden zu niedrig. bei riss am rand und in der mitte $\eta=-.99$ gut, aber $\eta=.34$ nur wenig besser, da nicht bei 1 ankommt, eher 0.9 oder .8 hoch ist. 
+	\item Wahl von $v_0$ was ergibt sinn?  Eig erwartet man, dass $v_0<1$ keinen Sinn ergibt, da dann nicht kein Riss zugelassen ist, jedoch kommen beim testen normale ergebnisse raus bis $v_0>.7$. Ob $v_0$ jetzt $1$ oder 10 gewählt ist, ist egal. -> kann man die bedingung streichen? (newtonverfahren nur nach u und v machen)
+\end{itemize}
+
+\subsection{Beispiele}
+Zunächst ist es wichtig, dass $u_0$ an beiden Rändern unterschiedlich ist. Wenn $u_0$ an beiden Rändern gleich ist, ist die Verschiebung des Materials überall gleich, d.h. das Material   
+
+\paragraph{$u_0$ ist konstant und der Riss ist durchgängig}
+
+\paragraph{$u_0$ ist konstant und der Riss ist nur an einem Rand}
+
+\paragraph{$u_0$ ist konstant und der Riss ist in der Mitte}
+
+\paragraph{$u_0$ ist konstant und der Riss ist an beiden Rändern}
+
+\paragraph{$u_0$ ist linear und der Riss ist durchgängig}
+
+\paragraph{$u_0$ ist linear und der Riss ist nur an einem Rand}
+
+\paragraph{$u_0$ ist linear und der Riss ist an beiden Rändern}
+
+\paragraph{$u_0$ ist linear und der Riss ist in der Mitte}
+
+\paragraph{$u_0$ ist entgegengesetzt linear und der Riss ist durchgängig}
+
+\paragraph{$u_0$ ist entgegengesetzt linear und der Riss ist nur an einem Rand}
+
+\paragraph{$u_0$ ist entgegengesetzt linear und der Riss ist in der Mitte}
+
+\paragraph{$u_0$ ist entgegengesetzt linear und der Riss ist an beiden Rändern}
+
+\paragraph{$u_0$ ist eine parabel an beiden Seiten und der Riss ist durchgängig}
+
+\paragraph{$u_0$ ist eine seite linear und andere konstant}
+
+
+\begin{itemize} 
+	\item Gitterweiten: jeweil 1,2,5,10,20,50,100,200 was sinn ergibt
+\end{itemize}
+
+
+
 \begin{itemize}
 	\item stärkere Einsicht in die vorher beschriebenen Numerischen Methoden
-	\item Verifizierung Theretischer Aussagen
 	\begin{itemize}
-		\item Konvergiert die Newtonmethode?
-		\item Beispiele dazu bringen
-		\item vll auch, dass einige vorraussetzungen nicht gebraucht werden? da mal testen
+		\item noch keine ahnung
 	\end{itemize}
-	\item justierung der Parameter
+	\item Verifizierung Theoretischer Aussagen
 	\begin{itemize}
-		\item epsilon $> gitterweite, < Gitterweite$ und warum
-		\item wahl von $c$ (ob egal oder nicht)
-		\item Wahl von $\eta$. Was geht, was nicht?
-		\item Wahl von $v_0$ was ergibt sinn?  
-		\item Wahl von $u_0$ was ergibt sinn? 
-	\end{itemize}
-	\item Messung der Leistungsfähigkeit der Software (schnelligkeit? einsatz?)
-	\begin{itemzie}
-		\item eher nicht. hat ja kaum anwendung
-	\end{itemzie}
-	\item einige Fallbeispiele: genügend beschreibung zum nachvollziehen/ nachmachen und interpretation
-	\item testbeispiele: extremverhalten? charakteristische Probleme aus der Praxis; Testprobleme mit bekannten Ergebnissen?
-	\begin{itemize}
-		\item gerader riss
-		\item krummer riss
-		\item nur kurz angerissen
-		\item unterschiedliche gitterweite
+		\item Konvergiert die Newtonmethode? deformation wird ziemlich ähnlich, obwohl riss einmal am anfang als loch und ein anderes mal als kompletter Riss gegeben; Riss sieht auch ähnlich aus, nur dass beim mittleren Riss der Riss wirklich in der Mitte geblieben ist und beim Loch an eine Seite gewandert ist. 
+		\item vll auch, dass einige vorraussetzungen nicht gebraucht werden? eher unwichtig!
 	\end{itemize}
 \end{itemize}
 
 
-Falls u an beiden Seiten auf unterschiedlicher aber jeweils konstanter Höhe eingespannt ist und ein Riss in der Mitte des Materials entsteht (der mind. 2 Pixel breit sein muss, sonst wird v nicht richtig 0, sondern wird interpoliert), sehen wir die Unstetigkeitsstelle genau an dem Riss. 
+Falls u an beiden Seiten auf unterschiedlicher aber jeweils konstanter Höhe eingespannt ist und ein Riss in der Mitte des Materials entsteht, sehen wir die Unstetigkeitsstelle genau an dem Riss. 
 Unterschiedliche Gitterweiten?
 
 Falls wir $u$ nicht konstant einspannen, also an beiden Seiten schräg, aber gleiche Höhe

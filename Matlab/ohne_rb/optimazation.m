@@ -42,7 +42,7 @@ epsilon = [0.01;nu* 5/(n+1) ;(5/(n+1) )*(1/nu)];
 
 % setzten von v für Anfangsdaten. Hier liegt ein Riss in der Mitte des Gebietes vor.  
 v = ones((m+1)*(n+1),1); 
-for i=0:5
+for i=0:m
     v(i*(n+1)+n/2) = 0;
     v(i*(n+1)+n/2 + 1) = 0;
 end
@@ -57,7 +57,7 @@ v0 =.9*ones((n+1)*(m+1),1);
 const = 1; 
 
 %Anzahl der Newtonschritte die durchgeführt werden sollen
-k=200; 
+k=10; 
 
 % u0 sind die Randdaten von u. Hier wird u am rechten und am linken Rand
 % eingespannt, sodass an einem Rand u 1 und und am anderen 2. 

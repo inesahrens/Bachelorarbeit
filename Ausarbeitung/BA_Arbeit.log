@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.7)  23 SEP 2015 17:25
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.7.7)  23 SEP 2015 22:07
 entering extended mode
 **BA_Arbeit.tex
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\BA_Arbeit.tex
@@ -871,7 +871,7 @@ LaTeX Info: Redefining \nameref on input line 45.
 
 
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\chapters/titelseite
-.tex <images/WWU_Logo1_1c.jpg, id=131, 951.5945pt x 204.96246pt>
+.tex <images/WWU_Logo1_1c.jpg, id=127, 951.5945pt x 204.96246pt>
 File: images/WWU_Logo1_1c.jpg Graphic file (type jpg)
 
 <use images/WWU_Logo1_1c.jpg>
@@ -917,8 +917,8 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.44 	\item g
-             enaues Problem aufschreiben [1
+l.32 
+      [1
 
 
 ] [2] [3]) [4]
@@ -929,14 +929,14 @@ Kapitel 2.
 
 
 
-] [6] [7] [8] [9] <images/triang.png, id=283, 1085.55562pt x 746.79pt>
+] [6] [7] [8] [9] <images/triang.png, id=278, 1085.55562pt x 746.79pt>
 File: images/triang.png Graphic file (type png)
 
 <use images/triang.png>
 Package pdftex.def Info: images/triang.png used on input line 206.
 (pdftex.def)             Requested size: 108.56192pt x 74.68336pt.
 
-<images/referenzdreieck.png, id=285, 411.03563pt x 313.9228pt>
+<images/referenzdreieck.png, id=280, 411.03563pt x 313.9228pt>
 File: images/referenzdreieck.png Graphic file (type png)
 
 <use images/referenzdreieck.png>
@@ -945,7 +945,7 @@ Package pdftex.def Info: images/referenzdreieck.png used on input line 213.
  [10 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/triang.
 png>] [11 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/re
 ferenzdreieck.png>]
-<images/dreieck_oben_unten_u0.png, id=301, 677.53125pt x 292.84406pt>
+<images/dreieck_oben_unten_u0.png, id=296, 677.53125pt x 292.84406pt>
 File: images/dreieck_oben_unten_u0.png Graphic file (type png)
 
 <use images/dreieck_oben_unten_u0.png>
@@ -1003,7 +1003,7 @@ Overfull \hbox (26.15604pt too wide) in paragraph at lines 107--107
  []
 
 [21] [22] [23] [24]
-<images/triang_inner.png, id=425, 441.14813pt x 308.65312pt>
+<images/triang_inner.png, id=420, 441.14813pt x 308.65312pt>
 File: images/triang_inner.png Graphic file (type png)
 
 <use images/triang_inner.png>
@@ -1016,7 +1016,7 @@ Overfull \hbox (13.26733pt too wide) in paragraph at lines 280--281
 ]onnen wir nun die Ma-trix $[][]$
  []
 
-<images/matrix.png, id=440, 395.97937pt x 395.97937pt>
+<images/matrix.png, id=435, 395.97937pt x 395.97937pt>
 File: images/matrix.png Graphic file (type png)
  <use images/matrix.png>
 Package pdftex.def Info: images/matrix.png used on input line 284.
@@ -1063,7 +1063,7 @@ Overfull \hbox (15.18996pt too wide) in paragraph at lines 599--599
 [] 
  []
 
-[35] [36] [37] [38] <images/formel.png, id=534, 2634.84375pt x 442.65375pt>
+[35] [36] [37] [38] <images/formel.png, id=529, 2634.84375pt x 442.65375pt>
 File: images/formel.png Graphic file (type png)
 
 <use images/formel.png>
@@ -1076,7 +1076,7 @@ dia-go-na-len $[] []$, auf der Ne-ben-dia-go-na-len $[] []$
  []
 
 [39 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/formel.p
-ng>] [40] [41] <images/matrix2.png, id=554, 395.97937pt x 395.97937pt>
+ng>] [40] [41] <images/matrix2.png, id=549, 395.97937pt x 395.97937pt>
 File: images/matrix2.png Graphic file (type png)
 
 <use images/matrix2.png>
@@ -1105,10 +1105,20 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 [42 <C:/Users/Ines/Documents/GitHub/Bachelorarbeit/Ausarbeitung/images/matrix2.
-png>] [43]) [44]
+png>]
+
+LaTeX Warning: Reference `sec:code' on page 43 undefined on input line 889.
+
+[43]
+Overfull \hbox (2.2869pt too wide) in paragraph at lines 907--908
+[]\OT1/cmr/m/n/12 u0: gleich, un-ter-schied-lich kon-stant, un-ter-schied-lich 
+schr[]ag, ent-ge-gen-ge-setzt schr[]ag 
+ []
+
+[44]) [45]
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\chapters/fazit.tex
 Kapitel 4.
-) [45
+) [46
 
 
 
@@ -1128,11 +1138,11 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 12.
 
-[46
+[47
 
 
 
-] [47] [48] [49]
+] [48] [49] [50]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 141.
@@ -1145,7 +1155,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 141.
 
-[50]
+[51]
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 205.
 
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
@@ -1176,7 +1186,7 @@ Overfull \hbox (14.98691pt too wide) in paragraph at lines 9--10
  
  []
 
-[51]
+[52]
 LaTeX Font Info:    Try loading font information for TS1+pcr on input line 21.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ts1pcr.fd"
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
@@ -1196,14 +1206,14 @@ Overfull \hbox (116.98795pt too wide) in paragraph at lines 30--31
 [][][][][][][][][][][][] 
  []
 
-)) [52]
+)) [53]
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\BA_Arbeit.bbl
 (C:\Users\Ines\Documents\GitHub\Bachelorarbeit\Ausarbeitung\BA_Arbeit.brf)
 \tf@brf=\write5
 )
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 103.
 
-[53
+[54
 
 
 ]
@@ -1230,51 +1240,51 @@ Package rerunfilecheck Warning: File `BA_Arbeit.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `BA_Arbeit.out':
-(rerunfilecheck)             Before: 01149F573823E424A6846A106E3BF7C4;2382
-(rerunfilecheck)             After:  B8E9AD44800E7284290CAFFED74E767C;2298.
+(rerunfilecheck)             Before: B8E9AD44800E7284290CAFFED74E767C;2298
+(rerunfilecheck)             After:  5E8651EE84836BBB869F1F19655E86B0;2447.
 Package rerunfilecheck Info: File `BA_Arbeit.brf' has not changed.
 (rerunfilecheck)             Checksum: 972E258580562D170893E7640521B481;626.
+
+LaTeX Warning: There were undefined references.
+
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16411 strings out of 493921
- 247614 string characters out of 3144880
+ 16413 strings out of 493921
+ 247629 string characters out of 3144880
  445497 words of memory out of 3000000
  19145 multiletter control sequences out of 15000+200000
  19578 words of font info for 73 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  49i,20n,80p,930b,1913s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{subsection.3.2.4} has been referenced but does no
-t exist, replaced by a fixed one
-
-{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc} <C:\Users\I
-nes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcti1200.pk> <C
-:\Users\Ines\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm12
-00.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.
-pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.p
-fb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb
-><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:
-/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Pr
-ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Progr
-am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program 
-Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Fil
-es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (
-x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files (x86)/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.9/
-fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files (x86)/MiKTeX 2
-.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files (x86)/MiKTe
-X 2.9/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on BA_Arbeit.pdf (56 pages, 926284 bytes).
+{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc} <C:\Users
+\Ines\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcti1200.pk> 
+<C:\Users\Ines\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm
+1200.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx1
+2.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10
+.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.p
+fb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
+C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files
+ (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Program Files (x86)
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Program Files (x86)
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files (x86)/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.
+9/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files (x86)/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on BA_Arbeit.pdf (57 pages, 929672 bytes).
 PDF statistics:
- 799 PDF objects out of 1000 (max. 8388607)
- 247 named destinations out of 1000 (max. 500000)
- 297 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 800 PDF objects out of 1000 (max. 8388607)
+ 249 named destinations out of 1000 (max. 500000)
+ 289 words of extra memory for PDF output out of 10000 (max. 10000000)
 

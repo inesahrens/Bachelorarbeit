@@ -30,14 +30,16 @@
 \contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2 \eta }$}{42}{section*.20}
 \contentsline {subsection}{\numberline {3.3.4}Agregation}{43}{subsection.3.3.4}
 \contentsline {section}{\numberline {3.4}Numerische Resultate}{43}{section.3.4}
-\contentsline {chapter}{\numberline {4}Fazit und Ausblick}{45}{chapter.4}
-\contentsline {chapter}{\numberline {A}Allgemeine Informationen}{46}{appendix.A}
-\contentsline {section}{\numberline {A.1}Rechnungen}{46}{section.A.1}
-\contentsline {subsection}{\numberline {A.1.1}Numerische Darstellung von $G_1$}{46}{subsection.A.1.1}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix A}{47}{section*.21}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix B}{48}{section*.22}
-\contentsline {paragraph}{\nonumberline Berechnung des Vektors c}{48}{section*.23}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix D}{49}{section*.24}
-\contentsline {subsection}{\numberline {A.1.2}Berechnung von $G_{2v}$}{50}{subsection.A.1.2}
-\contentsline {section}{\numberline {A.2}Code}{51}{section.A.2}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{53}{appendix*.25}
+\contentsline {subsection}{\numberline {3.4.1}Justieren der festen Parameter}{44}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Beispiele}{44}{subsection.3.4.2}
+\contentsline {chapter}{\numberline {4}Fazit und Ausblick}{46}{chapter.4}
+\contentsline {chapter}{\numberline {A}Allgemeine Informationen}{47}{appendix.A}
+\contentsline {section}{\numberline {A.1}Rechnungen}{47}{section.A.1}
+\contentsline {subsection}{\numberline {A.1.1}Numerische Darstellung von $G_1$}{47}{subsection.A.1.1}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix A}{48}{section*.21}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix B}{49}{section*.22}
+\contentsline {paragraph}{\nonumberline Berechnung des Vektors c}{49}{section*.23}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix D}{50}{section*.24}
+\contentsline {subsection}{\numberline {A.1.2}Berechnung von $G_{2v}$}{51}{subsection.A.1.2}
+\contentsline {section}{\numberline {A.2}Code}{52}{section.A.2}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{54}{appendix*.25}

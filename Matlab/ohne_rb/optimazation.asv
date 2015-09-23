@@ -42,22 +42,22 @@ epsilon = [0.01;nu* 5/(n+1) ;(5/(n+1) )*(1/nu)];
 
 % setzten von v für Anfangsdaten. Hier liegt ein Riss in der Mitte des Gebietes vor.  
 v = ones((m+1)*(n+1),1); 
-for i=0:5
+for i=0:m
     v(i*(n+1)+n/2) = 0;
     v(i*(n+1)+n/2 + 1) = 0;
 end
 
 % eta ist der Lagrangemultiplikator. Er muss auch vorab gesetzt werden. 
-eta = -.34*ones((n+1)*(m+1),1);  
+eta = -.5*ones((n+1)*(m+1),1);  
 
 %v0 ist die Schranke. Im Problem gilt, dass 0<v<v0
-v0 =.9*ones((n+1)*(m+1),1); 
+v0 =2* ones((n+1)*(m+1),1); 
 
 % die Konstante kommt durch den Lagrangemultiplikator rein. 
 const = 1; 
 
 %Anzahl der Newtonschritte die durchgeführt werden sollen
-k=200; 
+k=1; 
 
 % u0 sind die Randdaten von u. Hier wird u am rechten und am linken Rand
 % eingespannt, sodass an einem Rand u 1 und und am anderen 2. 
@@ -65,7 +65,7 @@ u0=zeros((n+1)*(m+1), 1);
 
 for i=0:m
      u0(i*(n+1)+1) = 1;
-     u0(i*(n+1)+n+1) = 1;
+     u0(i*(n+1)+n+1) = 0;
 end
 
 % Da alles mit dreieckig linearen Lagrangeelementen implementiert ist, muss
@@ -141,15 +141,16 @@ resulteta = reshape(eta,n+1,m+1);
 
 % Plotten des Ergebnisses 
 % noch geht das nur für Gitter, die gleichhoch wie breit sind. 
-[X,Y] = meshgrid(0:1/n:1);
+[X,Y] = meshgrid(0:1/n:1); 
+resultphi = resultu ; 
 
-% figure 
-% mesh(X,Y,resulteta)
+figure 
+mesh(X,Y,resulteta)
 
 figure 
   subplot(1,2,1);
-  mesh(X,Y,resultu);
+  surf(X,Y,resultu);
   subplot(1,2,2);
-  mesh(X,Y,resultv);
+  surf(X,Y,resultv);
   
 
