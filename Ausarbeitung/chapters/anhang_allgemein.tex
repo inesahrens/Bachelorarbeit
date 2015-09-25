@@ -92,24 +92,6 @@ Die Berechnung erfolgt analog zur Optimierung nach $u$. Bei den Matrizen gibt es
 	+ \int\limits_{E_6} \nabla \varphi_1 \nabla \varphi_2 \diff x  = 0 
 \end{align*}	
 
-\paragraph{Berechnung des Vektors c}
-\begin{align*}
-	c:=\int\limits_{\Omega} T_i \diff x = \sum\limits_{E \in E_k} \int\limits_E T_i \diff x
-\end{align*}
-Wie immer reicht es, die sechs Dreiecke um den Gitterpunkt $i$ zu betrachten. Es gilt: 
-\begin{align*}
-	\int\limits_E T_i \diff x = \frac{1}{6} \hspace{1ex} \forall i
-\end{align*}
-
-Also berechnen wir 
-\begin{align*}
-	\int\limits_{\Omega} T_i \diff x & = \sum\limits_{E \in E_k} \int\limits_E T_i \diff x = \\
-	& = \int\limits_{E_1} T_i \diff x+ \int\limits_{E_2} T_i \diff x+ \int\limits_{E_3} T_i \diff x+ \int\limits_{E_4} T_i\diff x + \int\limits_{E_5} T_i \diff x + \int\limits_{E_6} T_6 \diff x \\
-	& = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = 1
-\end{align*}
-
-Falls $i$ an einem Rand liegen sollte, werden die Dreiecke, die nicht vorhanden sind, weggelassen. 
-
 \paragraph{Berechnung der Matrix D}
 \begin{align*}
 	D_{i,i}	& = \int\limits_{\Omega}  T_i T_i \diff x\\
@@ -199,7 +181,7 @@ hierbei bedeutet $\left( f_1^h +  f_2^h + f_3^h\right)_{E_j} $, dass $f_i^h$ $f$
 Die Transformation mit $1/h_1 h_2$ wird auch hier am Schluss ausgeführt. 
 
 \section{Code}
-
+\label{sec:code}
 first test
 
 \lstinputlisting{code/calculate_u.m}

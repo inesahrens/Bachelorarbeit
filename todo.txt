@@ -1,68 +1,31 @@
-todo 
-+ notation ableitungen anders 
-  + unterschiedliche phi/ varphi jenachdem welche ableitung!	0	0
-- einleitung schreiben
-  + ordentlich aufschreiben, was prof mir gesagt hat		0	0			
-- programm zum laufen bringen
-  + Matrix B mit code vom Prof untersuchen			0	1
+todo 	
 - konvergenz der NM 
-  - komisches zeugs; probieren zu verstehen
-  - obsacle Problem suchen und lösung davon suchen		4	2
-+ F abl stetig, beschränkt?
-  + siehe Blatt 3, ordentlich mit begründung			0	3
-+ zitat internet weg
-  + nach Karl Kunisch suchen litschitz lectures; irgendwas in 2008 0	4
-+ prof zitat vorlesung fragen 
-  + alles ok,vll noch mit ins literaturverzeichnis aufnehmen	0	5
+  - komisches zeugs; probieren zu verstehen			1 
+  - obsacle Problem suchen und lösung davon suchen		8	
 - einleitung schreiben
-  - in Braess Finite Elemente nachschlagen, elastische Energie	2	6
-  - in Braides Delta sowieso oder Phasenkonvergenz nachlesen 	2	7
-    nach Ambrosio Tornelli Phasenfeld
-- Anwendung: 
-  - Material wird eingespannt und auf Ränder kraft ausgeübt	.5	8
+  - in Braess Finite Elemente nachschlagen, elastische Energie	1	3
+  - in Braides Delta sowieso oder Phasenkonvergenz nachlesen 	1	4	
+    nach Ambrosio Tornelli Phasenfeld 
+  - Material wird eingespannt und auf Ränder kraft ausgeübt	.5	
+  - einleitung schreiben					4 
 
-- konvergenz programm untersuchen
-- kapitel numerische Resultate, testbeispiele			8
-- fazit schreiben 						8
-- vll anwendung und modell als einzelne unterkapitel?
-- semidiffbar teil überarbeiten nachdem ich konvergenz weiß
-
-- konstante überall mit reintun?
-
+- kapitel numerische Resultate, testbeispiele			
+  - alle festen Parameter testen + erklärung			2	1
+  - testbeispiele + bilder					6	2 (ohne Bilder)	
+  - fazit schreiben 						4	5
+- semidiffbar teil überarbeiten nachdem ich konvergenz weiß     2
+- m+1 -> n+1 überall						~1
+- einheitliches i,j bei T_i					~1	
 								___
-								28.5
+								29.5 +2
 korrektur lesen							8 
-								36.5
+								37.5 +2
 
-Mo: 1
-Di: 2
-Mi: 10
-Do: 10
-Fr: 4
-Sa: 6
-So: 6
+Fr: 6
+Sa: 8
+So: 8
 Mo: 8
 Di: 10
    ___
-    51 
-+ prof frageliste schreiben
-+ ableitung dF() (phi) schreiben einheitlich
-+ Thm Titel richtig angeben
-+ überall varphi statt Ti?
-+ erklärung, warum min max ti rausgezogen werden darf
-+ referenzen prüfen
-+ grafiken aktualisieren
-+ überprüfen bei den f^i ob die 3 richtig gesetzt wurde
-+ transformation von G_2 usw 
-+ alle Bezeichnungen bei rechnungen schöber machen. als matrix, nicht als Fkt
-+ eq refs statt refs
-+ alle Rechnungen im Anhang?
-+ s.d. statt s.t.
-+ triangulierung
-+ NM überall gleichschreiben
-+ reihenfolge bei rechnungen anders int_e1 + int_e2
-+ beweis von min max
-- beweis ableitung G_2 ordentlich
-- m+1 -> n+1 überall
-- einheitliches i,j bei T_i
-- bei Dreiecken a_1 statt a^1
+    40 
+

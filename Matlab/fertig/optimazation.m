@@ -42,9 +42,9 @@ epsilon = [0.01;nu* 5/(n+1) ;(5/(n+1) )*(1/nu)];
 
 % setzten von v für Anfangsdaten. Hier liegt ein Riss in der Mitte des Gebietes vor.  
 v = ones((m+1)*(n+1),1); 
-for i=0:5
-    v(i*(n+1)+n/2) = 0;
-    v(i*(n+1)+n/2 + 1) = 0;
+for i=0:10
+    v(i*(n+1)+90) = 0;
+    v(i*(n+1)+90 + 1) = 0;
 end
 
 % eta ist der Lagrangemultiplikator. Er muss auch vorab gesetzt werden. 
@@ -57,15 +57,16 @@ v0 =.9*ones((n+1)*(m+1),1);
 const = 1; 
 
 %Anzahl der Newtonschritte die durchgeführt werden sollen
-k=200; 
-
+k=200;
+%für plots
+l=1;
 % u0 sind die Randdaten von u. Hier wird u am rechten und am linken Rand
 % eingespannt, sodass an einem Rand u 1 und und am anderen 2. 
 u0=zeros((n+1)*(m+1), 1);
 
 for i=0:m
-     u0(i*(n+1)+1) = 1;
-     u0(i*(n+1)+n+1) = 1;
+     u0(i*(n+1)+1) = 1; 
+     u0(i*(n+1)+n+1) = 2;
 end
 
 % Da alles mit dreieckig linearen Lagrangeelementen implementiert ist, muss
@@ -130,26 +131,41 @@ for i=1:k
     % berechnet das neue v
     v = s(1:(m+1)*(n+1)) + v;
     % berechnet das neue eta
-    eta = s((m+1)*(n+1)+ 1:(m+1)*(n+1)*2) + eta; 
+    eta = s((m+1)*(n+1)+ 1:(m+1)*(n+1)*2) + eta;
+    
+    if i==1 || i==2 || i==5 || i==10 || i==20 || i==50 || i==100 || i==200
+        
+        resultu = reshape(u(:,1),n+1,m+1); 
+        resultv = reshape(v,n+1,m+1); 
+        resulteta = reshape(eta,n+1,m+1);
+        [X,Y] = meshgrid(0:1/n:1);
+        figure(1)
+            subplot(2,4,l);
+            mesh(X,Y,resultu);
+        figure(2)  
+            subplot(2,4,l);
+            mesh(X,Y,resultv);
+        l=l+1    
+    end
 end
-
-% eigentlich sind u und v keine Vektoren, sondern Matrizen. 
-resultu = reshape(u(:,1),n+1,m+1); 
-resultv = reshape(v,n+1,m+1); 
-resulteta = reshape(eta,n+1,m+1);
-
-
-% Plotten des Ergebnisses 
-% noch geht das nur für Gitter, die gleichhoch wie breit sind. 
-[X,Y] = meshgrid(0:1/n:1);
-
+% 
+% % eigentlich sind u und v keine Vektoren, sondern Matrizen. 
+% resultu = reshape(u(:,1),n+1,m+1); 
+% resultv = reshape(v,n+1,m+1); 
+% resulteta = reshape(eta,n+1,m+1);
+% 
+% 
+% % Plotten des Ergebnisses 
+% % noch geht das nur für Gitter, die gleichhoch wie breit sind. 
+% [X,Y] = meshgrid(0:1/n:1);
+% 
+% % figure 
+% % mesh(X,Y,resulteta)
+% 
 % figure 
-% mesh(X,Y,resulteta)
-
-figure 
-  subplot(1,2,1);
-  mesh(X,Y,resultu);
-  subplot(1,2,2);
-  mesh(X,Y,resultv);
-  
-
+%   subplot(1,2,1);
+%   mesh(X,Y,resultu);
+%   subplot(1,2,2);
+%   mesh(X,Y,resultv);
+%   
+% 
