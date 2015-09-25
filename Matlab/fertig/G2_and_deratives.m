@@ -55,19 +55,17 @@ function [f_v, f_eta] = calculate_f_v_eta(v, eta, const, v0, m, n)
     % hier werden einfach wiede die Fallunterscheidungen aufgenommen, die
     % oben bereits erklärt wurden. 
     for i=1:(n+1)*(m+1)
-        for j=i:(n+1)*(m+1)
-            if ( -const*(v(i)-v0(i)) < eta(i) || eta(i) < -const* v(i)) 
-                f_v(i) = -const ; 
-                f_eta(i) = 0 ; 
-            elseif ( - const * v(i) < eta(i) && eta(i) <  -const*(v(i)-v0(i)) )
-                f_v(i) = 0; 
-                f_eta(j) = 1; 
-            elseif ( -const*(v(i)-v0(i)) == eta(i) || eta(i) == -const* v(i) )
-                  % es f_v und f_eta aus dem intervall gewählt werden. Der
-                  % Einfachheit halber habe ich jeweils 0 gewählt. 
-                  f_v(i) = 0; 
-                  f_eta(i) = 0; 
-            end
+        if ( -const*(v(i)-v0(i)) < eta(i) || eta(i) < -const* v(i)) 
+            f_v(i) = -const ; 
+            f_eta(i) = 0 ; 
+        elseif ( - const * v(i) < eta(i) && eta(i) <  -const*(v(i)-v0(i)) )
+            f_v(i) = 0; 
+            f_eta(i) = 1; 
+        elseif ( -const*(v(i)-v0(i)) == eta(i) || eta(i) == -const* v(i) )
+              % es f_v und f_eta aus dem intervall gewählt werden. Der
+              % Einfachheit halber habe ich jeweils 0 gewählt. 
+              f_v(i) = 0; 
+              f_eta(i) = 0; 
         end
     end  
 end
