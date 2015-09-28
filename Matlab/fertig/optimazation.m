@@ -42,10 +42,10 @@ epsilon = [0.01;nu* 5/(n+1) ;(5/(n+1) )*(1/nu)];
 
 % setzten von v für Anfangsdaten. Hier liegt ein Riss in der Mitte des Gebietes vor.  
 v = ones((m+1)*(n+1),1); 
-for i=0:10
-    v(i*(n+1)+90) = 0;
-    v(i*(n+1)+90 + 1) = 0;
-end
+% for i=0:m
+%     v(i*(n+1)+(n)/2) = 0;
+%     v(i*(n+1)+(n)/2 + 1) = 0;
+% end
 
 % eta ist der Lagrangemultiplikator. Er muss auch vorab gesetzt werden. 
 eta = -.34*ones((n+1)*(m+1),1);  
@@ -66,7 +66,7 @@ u0=zeros((n+1)*(m+1), 1);
 
 for i=0:m
      u0(i*(n+1)+1) = 1; 
-     u0(i*(n+1)+n+1) = 2;
+     u0(i*(n+1)+n+1) = 10;
 end
 
 % Da alles mit dreieckig linearen Lagrangeelementen implementiert ist, muss
@@ -139,10 +139,10 @@ for i=1:k
         resultv = reshape(v,n+1,m+1); 
         resulteta = reshape(eta,n+1,m+1);
         [X,Y] = meshgrid(0:1/n:1);
-        figure(1)
+        figure(3)
             subplot(2,4,l);
             mesh(X,Y,resultu);
-        figure(2)  
+        figure(4)  
             subplot(2,4,l);
             mesh(X,Y,resultv);
         l=l+1    

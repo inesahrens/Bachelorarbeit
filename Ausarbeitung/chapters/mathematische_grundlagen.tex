@@ -25,7 +25,7 @@ Sei $F: U \subset X \rightarrow Y$ ein Operator zwischen Banachräumen und $U \ne
 \end{defi}
 
 \begin{defi}[G\^ateaux differenzierbar]
-	F heißt Gâteaux differenzierbar in $x \in U$, falls F Richtungsableitbar ist und die Richtungsableitung 
+	F heißt Gâteaux differenzierbar in $x \in U$, falls F richtungsableitbar ist und die Richtungsableitung 
 	\begin{align*}
 		&  F'(x):X \rightarrow Y \\
 		& h \mapsto \partial F(x)(h)
@@ -62,7 +62,7 @@ Damit ist Optimierungsproblem zu einer Nullstellensuche geworden. Oftmals ist di
 
 \subsection{Optimierungsproblem mit Ungleichungsnebenbedingung}
 
-Oftmals tauchen als Nebenbedingungen Ungleichungsbedingungen wie $a \le u \le b$ auf, wobei $a,b,u \in X$ gilt und $X$ ein Vektorraum ist.Dabei ist $u$ die zu optimierende Funktion, $a$ die untere und $b$ die obere Schranke. Damit überhaupt klar ist, wie das $\le$ gemeint ist, wird ein positiver Kegel nach der Vorlesung \glqq Optimierung 2\grqq  von Prof. Wirth \cite{op} definiert. 
+Oftmals tauchen als Nebenbedingungen Ungleichungsbedingungen wie $a \le u \le b$ auf, wobei $a,b,u \in X$ gilt und $X$ ein Vektorraum ist. Dabei ist $u$ die zu optimierende Funktion, $a$ die untere und $b$ die obere Schranke. Damit überhaupt klar ist, wie das $\le$ gemeint ist, wird ein positiver Kegel nach der Vorlesung \glqq Optimierung 2\grqq  von Prof. Wirth \cite{op} definiert. 
 
 \begin{defi}[positiver Kegel] 
 	Sei X ein Vektorraum, $P \subset X$ ein konvexer Kegel. Für $x,y \in X$ schreiben wir $x \le_P y$ oder $y \ge_p x$, falls $y-x \in P$. P heißt positiver Kegel. 
@@ -114,7 +114,7 @@ Bei Optimierungsproblemen mit Nebenbedingung reicht als Bedingung für das Optimu
 	Der Beweis ist im Script zu der Vorlesung \glqq Optimierung II \grqq, gelesen von Prof. Wirth \cite{op}, zu finden. 
 \end{proof}
 
-Nun haben wir die Bedingungen gegeben, sodass wir von  \eqref{eq:optimierungsproblem_raumbedingung} das KKT System aufstellen können. Dabei ist $\overline{w}$ die Lösung des Problems. $\mu$ und $\lambda$ heißen Lagrange Multiplikatoren. 
+Nun haben wir die Bedingungen gegeben, sodass wir von  \eqref{eq:optimierungsproblem_raumbedingung} das KKT System aufstellen können. Dabei ist $\overline{w}$ die Lösung des Problems. $\mu$ und $\lambda$ sind die Lagrange Multiplikatoren. 
 \begin{align*}
 	\begin{array}{lll}
 		\multicolumn{3}{l}{ \nabla J(\overline{w})+ \lambda - \mu =0} \\
@@ -140,7 +140,7 @@ Diese Darstellung stammt aus \cite{kunisch} und werde ich später nutzen, um das 
 \section{Partielle Differentialgleichungen}
 \label{sec:grundlagen_pdgl}
 
-Optimierungsprobleme kann man oft umschreiben, sodass, statt dem Optimierungsproblem, eine partielle Differentialgleichung gelöst wird. Dadurch kann man Rückschlüsse auf die Existenz und Eindeutigkeit von dem Optimierungsproblem ziehen. Die Theorie, die ich dazu verwende ist aus der Vorlesung \glqq partielle Differentialgleichungen\grqq gelesen vom Professor B. Wirth \cite{pdgl}. 
+Optimierungsprobleme kann man oft umschreiben, sodass, statt dem Optimierungsproblem, eine partielle Differentialgleichung gelöst wird. Dadurch kann man Rückschlüsse auf die Existenz und Eindeutigkeit von dem Optimierungsproblem ziehen. Die Theorie, die ich dazu verwende, ist aus der Vorlesung \glqq partielle Differentialgleichungen\grqq gelesen vom Professor B. Wirth \cite{pdgl}. 
 
 Wir betrachten das elliptische Dirichlet-Problem auf einem beschränkten Gebiet $\Omega \subset \R^n$
 \begin{align}
@@ -275,7 +275,7 @@ a(x,y)=(a_1-a_2)x + (a_3 - a_2)y + a_2  \hspace{1ex} \text{ mit } \hspace{1ex}
 
 Semiglatte Newton Methoden werden gebraucht, um Nullstellen von nicht differenzierbaren Funktionen numerisch zu berechnen. Die Rissentstehung ist ein nicht differenzierbares Problem. Um die Idee der Newton Methoden zu verstehen, führe ich zunächst  die einfache Newton Methode ohne Nebenbedingung und dann solche mit einfachen Nebenbedingungen ein. Um diese realisieren zu können, wird der Begriff der Semidifferenzierbarkeit benötigt. Das ist eine Mengenwertige Ableitung, mit der auch nicht differenzierbare, aber stetige Punkte in einer Funktion abgeleitet werden können. Damit kann die semidifferenzierbare Newton Methode eingeführt werden, von der wir auch die Konvergenz betrachten werden.  Dieses Kapitel richtet sich nach \cite[S. 115 ff]{hinze:op_pde_constraints}. 
 
-\subsection{Newton Methoden ohne Nebenbedingungen}
+\subsection{Newton Methode ohne Nebenbedingung}
 Als erstes leiten wir uns zum Verständnis die einfache Newton Methode her. Dazu betrachten wir wie vorher das Minimierungsproblem 
 \begin{align}
 	\label{eq:min}
@@ -414,17 +414,17 @@ Nun können wir, um unser Newtonverfahren umzugestalten $M_k \in \partial G(x^k)$
 	\sup\limits_{M \in \partial G(\overline{x}+d) } \| G(\overline{x}+d^k)-G(\overline{x})-M_kd\|_Y = o\left( \| d\|_X \right)  \text{ für } \| d\|_X \rightarrow 0
 \end{align*}
 
-Dieses nennt sich semidiffbar. 
+Dieses nennt sich semidifferenzierbar. 
 
 \begin{defi}[semidifferenzierbar]
 	Sei $G: X \rightarrow Y$ ein stetiger Operator zwischen Banachräumen. Sei $\partial G: X \rightrightarrows L(X,Y) $ mit nicht leeren Bildern gegeben wie oben.
 	\begin{enumerate}
-		\item G heißt $\partial G $ semidiffbar in $x \in X$, falls
+		\item G heißt $\partial G $ semidifferenzierbar in $x \in X$, falls
 		\begin{align}
-			\label{eq:semidiffbar_abschaetzung}
+			\label{eq:semidifferenzierbar_abschaetzung}
 			\sup\limits_{M \in \partial G(x+d) } \| G(x+d^k)-G(x)-M_kd\|_Y = o\left( \| d\|_X \right)  \text{ für } \| d \|_X \rightarrow 0
 		\end{align}
-		\item G heißt $\partial G $ semidiffbar von der Ordnung $\alpha +1>1$ in $x \in X$, falls
+		\item G heißt $\partial G $ semidifferenzierbar von der Ordnung $\alpha +1>1$ in $x \in X$, falls
 		\begin{align*}
 			\sup\limits_{M \in \partial G(x+d) } \| G(x+d^k)-G(x)-M_kd\|_Y = \mathcal{O} \left( \| d\|_X^{\alpha+1}\right)  \text{ für } \| d\|_X \rightarrow 0
 		\end{align*}	
@@ -432,7 +432,7 @@ Dieses nennt sich semidiffbar.
 \end{defi} 
 
 \begin{lem}
-	\label{lem:semidiffbar_f_diffbar}
+	\label{lem:semidifferenzierbar_f_differenzierbar}
 	Sei $G: X \rightarrow Y$ ein Operator zwischen Banachräumen und stetig Fréchet-differenzierbar in einer Umgebung von x. Dann ist G $\{ G' \}$-semidifferenzierbar in x. Falls $G'$ $\alpha$-Hölderstetig in einer Umgebung von x ist, dann ist G $\{ G' \} $-semidifferenzierbar in x von der Ordnung $\alpha$. 
 	
 	$\{G'\}$ beschreibt den Operator $\{G'\}: X \rightrightarrows L(X,Y)$ mit $\{G'\}(x)=\{G'(x)\}$ 
@@ -447,7 +447,7 @@ Dieses nennt sich semidiffbar.
 \end{proof}
 
 \begin{thm}[Rechenregeln semidifferenzierbare Funktionen]
-	\label{thm:rechenregeln_semidiffbare_fkt}
+	\label{thm:rechenregeln_semidifferenzierbare_fkt}
 	Seien $X,Y,Z, X_i, Y_i$ Banachräume. 
 	\begin{enumerate}
 		\item Falls die Operatoren $G_i: X_i \rightarrow Y_i$ $\partial G_i$-semidifferenzierbar in x sind, dann ist $(G_1,G_2)$ $(\partial G_1, \partial G_2)$-semidifferenzierbar in x.  
@@ -467,8 +467,8 @@ Dieses nennt sich semidiffbar.
 Mit dem Semidifferential können wir nun die semidifferenzierbare Newton Methode definieren. 
 
 \begin{algorithm}[H]
-	\caption{semidiffbare Newton Methode}
-	\label{algo:semidiffbare_newton_methode}
+	\caption{semidifferenzierbare Newton Methode}
+	\label{algo:semidifferenzierbare_newton_methode}
 	\KwData{$x^0 \in X$ (möglichst Nah an der Lösung $\overline{x}$)}
 	\For{$k=0,1,\cdots$} {
 		\emph{Wähle $M_k \in \partial G(x^k)$}\;
@@ -479,7 +479,7 @@ Mit dem Semidifferential können wir nun die semidifferenzierbare Newton Methode 
 Damit diese konvergiert, muss die Approximationsannahme und die Regularitätsannahme erfüllt sein. 
 Die Approximationsannahme ist durch die Semidifferenzierbarkeit gegeben. Fehlt noch die Regularitätsannahme. 
 
-\begin{defi}[Regularitätsannahme für semidifferenzierbare Newton Verfahren]
+\begin{defi}[Regularitätsannahme für das semidifferenzierbare Newton Verfahren]
 	\label{def:regularitaetsbedingung}
 	Betrachte \eqref{eq:g=0} mit der Lösung $\overline{x}$. Dann lautet die Regularitätsannahme
 	\begin{align}
@@ -489,10 +489,10 @@ Die Approximationsannahme ist durch die Semidifferenzierbarkeit gegeben. Fehlt n
 \end{defi}
 
 \begin{thm}[Konvergenz das semidifferenzierbare Newton Verfahrens]
-	\label{thm:konvergenz_des_semidiffbaren_newton_verfahrens}
+	\label{thm:konvergenz_des_semidifferenzierbaren_newton_verfahrens}
 	Sei das Problem \eqref{eq:g=0} gegeben mit der Lösung $\overline{x}$. Seien $X,Y$ Banachräume, $G: X \rightarrow Y$ stetig und $\partial G$ semidifferenzierbar und die Regularitätsannahme \eqref{eq:regularitaetsbedingung} sei gegeben. Dann existiert $\delta >0$, sodass für alle $x^0 \in X$ mit $\|x^0- \overline{x}\|_X < \delta $   die semidifferenzierbar Newton Methode super linear gegen $\overline{x}$ konvergiert.
 	
-	Falls G $\partial G$-semidiffbar der Odnung $\alpha >0$ in $\overline{x}$ ist, dann ist die Konvergenzordnung $ 1 + \alpha $ 
+	Falls G $\partial G$-semidifferenzierbar der Odnung $\alpha >0$ in $\overline{x}$ ist, dann ist die Konvergenzordnung $ 1 + \alpha $ 
 \end{thm}
 \begin{proof}
 	\ref{thm:konvergenz_generalisierte_NM} besagt, dass wenn ich ein Newtonverfahren der Form \ref{algo:generalisierte_newton_methode} habe, also $M_k \in \mathcal{L}(X,Y)$, $M_k$ invertierbar ist und 

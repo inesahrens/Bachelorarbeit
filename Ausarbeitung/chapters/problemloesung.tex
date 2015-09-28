@@ -4,7 +4,7 @@
 
 \chapter{Anwendung auf das Phasenfeldmodell für Rissentstehung }
 
-Nachdem wir die Mathematischen Grundlagen für die Betrachtung eines Optimierungsproblems kennengelernt haben, wollen wir diese anwenden. 
+Nachdem wir die mathematischen Grundlagen für die Betrachtung eines Optimierungsproblems kennengelernt haben, wollen wir diese anwenden. 
 Zunächst teilen wir das Minimierungsproblem in zwei voneinander unabhängige Optimierungen auf: Die Optimierung nach $u$ und die Optimierung nach $v$. Im Anschluss betrachten wir beide Optimierungen genauer, indem wir sie umschreiben und numerische Verfahren zur Lösung entwickeln. Zum Schluss fusionieren wir beide Verfahren.
 
 
@@ -38,7 +38,7 @@ Wenn man beide Probleme implementiert, löst man zunächst die Optimierung nach $u
 
 Das Kapitel ist in zwei Unterkapitel aufgeteilt: Die analytische und numerische Betrachtung. 
 
-Im analytischen Teil formulieren wir das Problem zu einem Problem ohne Nebenbedingung und. Dieses lässt sich dann als partielle Differentialgleichung schreiben. Die Existenz und Eindeutigkeit der schwachen Lösung sichern wir uns am Schluss des ersten Teils. 
+Im analytischen Teil formulieren wir das Problem zu einem Problem ohne Nebenbedingung um. Dieses lässt sich dann als partielle Differentialgleichung schreiben. Die Existenz und Eindeutigkeit der schwachen Lösung sichern wir uns am Schluss des ersten Teils. 
 
 Für die numerische Betrachtung schreiben wir das Problem nochmal um und wenden dann Finite Elemente und den Galerkin Ansatz an. Das Resultat ist ein Gleichungssytem, das sich einfach lösen lässt. 
 
@@ -50,7 +50,7 @@ Erinnern wir uns an das Optimierungsproblem, das die Verschiebung des Körpers be
 	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2
 \end{align*}
 
-Es ist leichter ein Problem ohne Nebenbedingung zu betrachten, also nehmen wir die Nebenbedingung mit in dem Raum auf, über dem wir optimieren. Also suchen wir statt $u \in \h^2$ 
+Es ist leichter ein Problem ohne Nebenbedingung zu betrachten, also nehmen wir die Nebenbedingung mit in dem Raum auf, über den wir optimieren. Also suchen wir statt $u \in \h^2$ 
 \begin{align*}
 	u \in u_0 + \ho^2:=u_0+\{u \in\h^2| u=0 \text{ auf } \Gamma_1 \cup \Gamma_2\} 
 \end{align*}
@@ -58,6 +58,7 @@ Das Problem hat dann folgende Form
 \begin{align}
 	\label{eq:optimierung_u_ohne_nb2}
 	& \min\limits_{u \in u_0 +\ho^2} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \nu \left( \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \right) \diff x 
+
 \end{align}
 
 Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren. Es tauchen keine Mischung aus den Termen $u_1$ und $u_2$ auf, das heißt, dass wir die Optimierungen trennen können. Beide sind identisch, es müssen später nur unterschiedliche Werte eingesetzt werden. Betrachten wir oBdA die Optimierung nach $u_1$. 
@@ -147,7 +148,7 @@ Sei $\xi \in \R^n$. Dann gilt:
 	& \ge \epsilon_1 |\xi|^2
 \end{align*}
 Damit ist Annahme 1 erfüllt mit $\lambda = \epsilon_1$. 
-Zu Annahme 2:
+Für Annahme 2 gilt
 \begin{align*}
 	|\xi^T A(x) \zeta| =  (v^2 + \epsilon_1) \xi \cdot \zeta   \le (v_0^2 + \epsilon_2) \xi \cdot \zeta 
      \le (\sup (v_0)^2 + \epsilon_2)  |\xi| |\zeta| 
@@ -173,7 +174,7 @@ Finde $\utild \in \ho$, sodass  $\forall  \psi \in \ho$
 	- \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \nabla \uotild \nabla  \psi \diff x  = \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right)  \nabla \utild \nabla  \psi \diff x 
 \end{align*}
 
-Zur numerischen Betrachtung bieten sich Finite Elemente, insbesondere die dreieckig-linearen Lagrange Elemente an. Dafür triangulieren wir das Gebiet, wie in \ref{sec:finite_elemente} dargestellt. Nun nutzen wir den Galerkin Ansatz. Dafür gilt ab jetzt $k:=(m+1)(n+1)$
+Zur numerischen Betrachtung bieten sich Finite Elemente, insbesondere die dreieckig linearen Lagrange Elemente an. Dafür triangulieren wir das Gebiet, wie in \ref{sec:finite_elemente} dargestellt. Nun nutzen wir den Galerkin Ansatz. Dafür gilt ab jetzt $k:=(m+1)(n+1)$
 \begin{align*}
 	\utild(x,y):= \sum\limits_{i=1}^{k} u^h_i T_i(x,y) 
 \end{align*}
@@ -205,7 +206,7 @@ Wir kennen $\nabla T_i \nabla T_j$ auf jedem Dreieck. Also muss nur noch $\int_E
 \begin{align*}
 	\int\limits_E v^2 + \epsilon_1 \diff x &  = \int\limits_E v^2  \diff x + \frac{1}{2}\epsilon_1  \\
 \end{align*}
-Da $v$ bereits numerisch berechnet wurde, haben wir nur Funktionsauswertungen von $v$ an den Ecken des Dreieckes gegeben und wir wissen, dass $v \in \mathcal{P}_1$. Also ist v eindeutig bestimmt und kann berechnet werden. Die Berechnung ist in \eqref{eq:gerades_dreieck_lineare_fkt} und \eqref{eq:ungerades_dreieck_lineare_fkt} zu finden. 
+Da $v$ bereits numerisch berechnet wurde, haben wir nur Funktionsauswertungen von $v$ an den Ecken des Dreieckes gegeben und wir wissen, dass $v \in \mathcal{P}_1$. Also ist v eindeutig bestimmt und kann berechnet werden. Die Darstellung von $v$ ist in \eqref{eq:gerades_dreieck_lineare_fkt} und \eqref{eq:ungerades_dreieck_lineare_fkt} zu finden. 
 
 Die Berechnung von $\int_E v^2 \diff x$ sieht wie folgt aus
 \begin{align*}
@@ -240,7 +241,7 @@ Jetzt können wir $L_{ij}$ für festes $i,j$ berechnen. Falls $i$ und $j$ nicht ad
 	\item $j$ liegt direkt unter $i$, $j=i+n+1$ 
 	\item  $j$ liegt schräg unter $i$, also $j=i+n+2$
 \end{itemize}
-Betrachten wir für die einzelnen Berechnungen \ref{fig:triang_inner}. $T_i$ ist immer der Mittelpunkt dieser Zeichnung, $T_j$ ist entsprechend des jeweiligen $j$ positioniert. In den Berechnungen stimmen die Nummerierungen der Dreiecke mit den Nummerierungen in der Abbildung \ref{fig:triang_inner} überein und $\varphi_k, k \in \{0,1,2\}$ entspricht den $\varphi_k$ in \eqref{eq:varphi}. 
+Betrachten wir für die einzelnen Berechnungen \ref{fig:triang_inner}. $T_i$ ist immer der Mittelpunkt dieser Zeichnung, $T_j$ ist entsprechend des jeweiligen $j$ positioniert. In den Berechnungen stimmen die Nummerierungen der Dreiecke mit den Nummerierungen in der Abbildung \ref{fig:triang_inner} überein und $\varphi_k$, $k \in \{1,2,3\}$ entspricht den $\varphi_k$ in \eqref{eq:varphi}. 
 
 Betrachten wir nun die vier Fälle. 
 
@@ -285,11 +286,11 @@ Mit diesen Werten können wir nun die Matrix $ \left( \int_{\Omega} (v^2+ \epsilo
 	\caption{Darstellung der Matrix $ \left( \int_{\Omega} (v^2+ \epsilon) \nabla T_i \nabla T_j \right)_{ij}$ }
 	\label{fig:int_u}
 \end{figure}
-Dabei sind auf der Diagonalen die Einträge $L_{i,i}$, auf der Nebendiagonalen die Einträge $BL_{i,i+1}$ und auf der anderen Diagonale die Einträge $BL_{i,i+n+1}$. Wir haben bis jetzt immer nur über das Referenzdreieck integriert. Da wir aber eigentlich über die transformierten Dreiecke integrieren, müssen wir zu der Matrix $1/(h_1 h_2)$ multiplizieren. 
+Dabei sind auf der Diagonalen die Einträge $L_{i,i}$, auf der Nebendiagonalen die Einträge $L_{i,i+1}$ und auf der anderen Diagonale die Einträge $L_{i,i+n+1}$. Wir haben bis jetzt immer nur über das Referenzdreieck integriert. Da wir aber eigentlich über die transformierten Dreiecke integrieren, müssen wir zu der Matrix $1/(h_1 h_2)$ multiplizieren. 
 
 \subsection{Aggregation}
 
-Nun haben wir die Matrix $L$ und den Vektor $u_0^h$ gegeben, um das Gleichungssystem $L u^h = L u_0^h$ zu berechnen. Allerdings haben wir noch nicht eingebracht, dass auf $\Gamma_1 \cup \Gamma_2$ $u=0$ gilt. Eigentlich würden wir das im Vektor $u$ mit aufnehmen, also die Zeilen 0 setzten, die den Rand repräsentieren und dann das Gleichungssystem lösen. Dies geht numerisch jedoch nicht so einfach. Die Information muss in $L$ und in $L u_0^h$ codiert sein. Dazu setzt man die Zeilen in $L$ 0, die zum Rand gehören. Die zugehörigen Diagonaleinträge werden 1 gesetzt. Diese Matrix nennen wir $\tilde{L}$. Die zugehörige Zeile in $L u_0^h$ setzt man 0. Den neuen Vektor nennen wir $\tilde{L u_0^h}$ Dadurch erhält man, dass $u^h$ an dieser Stelle 0 wird. 
+Nun haben wir die Matrix $L$ und den Vektor $u_0^h$ gegeben, um das Gleichungssystem $L u^h = L u_0^h$ zu berechnen. Allerdings haben wir noch nicht eingebracht, dass auf $\Gamma_1 \cup \Gamma_2$ $u=0$ gilt. Eigentlich würden wir das im Vektor $u$ mit aufnehmen, also die Zeilen 0 setzten, die den Rand repräsentieren und dann das Gleichungssystem lösen. Dies geht numerisch jedoch nicht so einfach. Die Information muss in $L$ und in $L u_0^h$ codiert sein. Dazu setzt man die Zeilen in $L$ 0, die zum Rand gehören. Die zugehörigen Diagonaleinträge werden 1 gesetzt. Diese Matrix nennen wir $\tilde{L}$. Die zugehörige Einträge in $L u_0^h$, also die Einträge, die in der selben Zeile sind, setzt man 0. Den neuen Vektor nennen wir $\tilde{L u_0^h}$ Dadurch erhält man, dass $u^h$ an dieser Stelle 0 wird. 
 
 
 Damit haben wir beide Seiten diskretisiert und können das Gleichungssystem implementieren.  
@@ -913,6 +914,9 @@ Ganz am Anfang ist zu sagen, dass wir nur Risse betrachten, die mindestens zwei 
 %todo warum genau?
 
 \subsection{Justieren der festen Parameter}
+Zunächst ist es wichtig, dass $u_0$ an beiden Rändern unterschiedlich ist. Wenn $u_0$ an beiden Rändern gleich ist, ist die Verschiebung des Materials überall gleich, d.h. das Material verschiebt sich überall gleich, also das nur eine Translation stattgefunden hat. Selbst wenn wir einen Riss einfügen, werden wir diesen nicht sehen. 
+%todo translation nachschlagen
+
 Als erstes treffen wir eine Wahl für $\epsilon_1$ und $\epsilon_2$. Für $\epsilon_1$ muss gelten: $\epsilon_1<\frac{1}{k}$, wobei $k$ die Anzahl der Gitterpunkte ist. 
 %todo warum?  
 Für $\epsilon_2$ muss gelten: $\epsilon_2>\frac{1}{k}$, 
@@ -938,57 +942,75 @@ Kommen wir zur Wahl von $v_0$ es sollte Sinn ergeben $v_0$ konstant 1 zu wählen,
 
 
 \subsection{Beispiele}
-Zunächst ist es wichtig, dass $u_0$ an beiden Rändern unterschiedlich ist. Wenn $u_0$ an beiden Rändern gleich ist, ist die Verschiebung des Materials überall gleich, d.h. das Material   
+Mit dem implementierten Algorithmus können wir nun einige Beispiele betrachten. Dazu betrachten wir zwei unterschiedliche Grafiken. In einer Grafik ist die Verschiebung des Gebietes dargestellt, in der anderen, ob und wie dolle ein Riss vorhanden ist. Bei beiden Grafiken ist jeweils das gesamte Gebiet, hier ein rechteckiges Gebiet in 2D auf der x und y Koordinate dargestellt. Die z Koordinate gibt bei der Verschiebung an, wie stark das Gebiet am Punkt $(x,y)$ Verschoben ist und bei dem Riss, wie stark des jeweilige Gitterpunkt eingerissen ist. Ein Wert in der Nähe von 1 bedeutet, dass das Gebiet nicht gerissen ist und 0, dass es vollständig gerissen ist. 
 
-\paragraph{$u_0$ ist konstant und der Riss ist durchgängig}
+Für beide Grafiken betrachte ich je 8 Bilder. Diese geben an, wie viele Iterationsschritte der Newton Algorithmus durchgelaufen ist. Das erste Bild (also links oben) gibt das Ergebnis nach der ersten Iteration an. Das zweite Bild, rechts neben dem ersten Bild, gibt das Ergebnis nach 2 Schritten aus. Dann folgen 5, 10, 20, 50, 100 und zum Schluss, rechts unten 200 Iterationsschritte. 
 
-\paragraph{$u_0$ ist konstant und der Riss ist nur an einem Rand}
+\subsubsection{$u_0$ ist konstant und der Riss ist durchgängig}
 
-\paragraph{$u_0$ ist konstant und der Riss ist in der Mitte}
+\begin{figure}[t]
+	\centering 
+	\includegraphics[scale=0.5]{images/optimazation/01rissGanz_Gitter_100_u0Konstant.png}
+	\caption{Darstellung der Verschiebung des Gebietes bei konstantem $u_0$, einem Riss in der Mitte und $100x100$ Gitterpunkten}
+	\label{fig:riss_ganz_mitte.gebiet}
+\end{figure}
 
-\paragraph{$u_0$ ist konstant und der Riss ist an beiden Rändern}
+\begin{figure}[t]
+	\centering	\includegraphics[scale=0.5]{images/optimazation/02rissGanz_Gitter_100_u0Konstant.png}
+	\caption{Darstellung des Risses  bei konstantem $u_0$, einem Riss in der Mitte und $100x100$ Gitterpunkten}
+	\label{fig:riss_ganz_mitte.riss}
+\end{figure}
 
-\paragraph{$u_0$ ist linear und der Riss ist durchgängig}
+Beim ersten Beispiel ist das Gebiet an der rechten und linken Seite konstant eingespannt. Hier ist also $u$ am linken Rand immer 1 und am rechten Rand immer 2. Am Anfang wurde ein Riss durch das gesamte Gebiet eingefügt, der parallel zum eingespannten Rand verläuft. Dieser befindet sich genau in der Mitte des Gebietes. Also bei einem 100x100 Gitter ist der Riss zwei Gitterpunkte Breit, also auf $\{(50,i*h) \times (51,i*h)| i \in \{0, \cdots 100\}\} \times $ mit $h=1/100$. Dieses sieht man auch in dem ersten Bild von \ref{fig:riss_ganz_mitte.riss}. Betrachtet man den Riss im Verlauf der Iterationen, sieht man, dass der Riss an der gleichen Stelle bleibt und geglättet wird. Manchmal schwankt das Gebiet, das nicht gerissen ist, zwischen $.9$ und $1.1$.  
+Die Verschiebung des Gebietes  \ref{fig:riss_ganz_mitte.gebiet}  sieht ähnlich aus. An der Stelle, wo der Riss ist, ist eine Unstetigkeitsstelle zu finden. Diese zieht sich durch alle Bilder durch. Die Veränderung im verlauf der Iterationen ist zum einen, dass die Unstetigkeit geglättet wird. Zum anderen ist die Verschiebung, die nicht beim Riss ist linear. Am Ende hingegen wird sie fast konstant.  
+Die Glättung des Risses und damit auch die Glättung der Unstetigkeitsstelle bei der Verschiebung im Gebiet entsteht durch den $|\nabla v|^2$ Term im Optimierungsproblem, wie am Anfang erläutert. Dass die Verschiebung zunächst linear und dann konstant ist, hat die gleiche Begründung. 
+Der Riss breitet sich nicht weiter aus, da das Gebiet nicht weiter verschoben wird. Also ergibt dieses Beispiel genau das, was wir erwarten. 
 
-\paragraph{$u_0$ ist linear und der Riss ist nur an einem Rand}
+Betrachten wir das gleiche Szenario bei einem $10x10$ Gitter wie in \ref{fig:riss_ganz_mitte_10_gitter.riss} und \ref{fig:riss_ganz_mitte_10_gitter.gebiet}. Hier gibt es andere Ergebnisse. Der Riss verschiebt sich zum Rand.  
+%todo warum? 
+ 
+\begin{figure}[ht]
+	\centering 
+	\includegraphics[scale=0.9]{images/optimazation/01rissGanz_Gitter10_u0Konstant.png}
+	\caption{Darstellung der Verschiebung des Gebietes  bei konstantem $u_0$, einem Riss in der Mitte und $10x10$ Gitterpunkten}
+	\label{fig:riss_ganz_mitte_10_gitter.gebiet}
+\end{figure}
 
-\paragraph{$u_0$ ist linear und der Riss ist an beiden Rändern}
+\begin{figure}[ht]
+	\centering	\includegraphics[scale=0.9]{images/optimazation/02rissGanz_Gitter10_u0Konstant.png}
+	\caption{Darstellung des Risses  bei konstantem $u_0$, einem Riss in der Mitte und $10x10$ Gitterpunkten}
+	\label{fig:riss_ganz_mitte_10_gitter.riss}
+\end{figure}
 
-\paragraph{$u_0$ ist linear und der Riss ist in der Mitte}
-
-\paragraph{$u_0$ ist entgegengesetzt linear und der Riss ist durchgängig}
-
-\paragraph{$u_0$ ist entgegengesetzt linear und der Riss ist nur an einem Rand}
-
-\paragraph{$u_0$ ist entgegengesetzt linear und der Riss ist in der Mitte}
-
-\paragraph{$u_0$ ist entgegengesetzt linear und der Riss ist an beiden Rändern}
-
-\paragraph{$u_0$ ist eine parabel an beiden Seiten und der Riss ist durchgängig}
-
-\paragraph{$u_0$ ist eine seite linear und andere konstant}
-
-
-\begin{itemize}
-	\item stärkere Einsicht in die vorher beschriebenen Numerischen Methoden
-	\begin{itemize}
-		\item noch keine ahnung
-	\end{itemize}
-	\item Verifizierung Theoretischer Aussagen
-	\begin{itemize}
-		\item Konvergiert die Newtonmethode? deformation wird ziemlich ähnlich, obwohl riss einmal am anfang als loch und ein anderes mal als kompletter Riss gegeben; Riss sieht auch ähnlich aus, nur dass beim mittleren Riss der Riss wirklich in der Mitte geblieben ist und beim Loch an eine Seite gewandert ist. 
-		\item vll auch, dass einige vorraussetzungen nicht gebraucht werden? eher unwichtig!
-	\end{itemize}
-\end{itemize}
+Bei sehr kleinen Gitter (10x10) eher etwas komisch: Der Riss setzt sich zum Rand fort, wo $u_0=1$ gilt. 
+%todo erklärung
 
 
-Falls u an beiden Seiten auf unterschiedlicher aber jeweils konstanter Höhe eingespannt ist und ein Riss in der Mitte des Materials entsteht, sehen wir die Unstetigkeitsstelle genau an dem Riss. 
-Unterschiedliche Gitterweiten?
+\paragraph{$u_0$ ist konstant und das Material ist am Rand angerissen}
 
-Falls wir $u$ nicht konstant einspannen, also an beiden Seiten schräg, aber gleiche Höhe
-Unterschiedliche Gitterweiten?
+\begin{figure}[ht]
+	\centering	\includegraphics[scale=0.9]{images/optimazation/01riss1Rand_Gitter_100_u0Konstant.png}
+	\caption{Darstellung des Risses  bei konstantem $u_0$, einem kleinen Riss am Rand und $100x100$ Gitterpunkten}
+	\label{fig:riss_klein_100_gitter.gebiet}
+\end{figure}
 
-schräg aber unterschiedliche Höhe
-unterschiedliche Gitterweiten
+\begin{figure}[ht]
+	\centering	\includegraphics[scale=0.5]{images/optimazation/02riss1Rand_Gitter_100_u0Konstant.png}
+	\caption{Darstellung des Risses  bei konstantem $u_0$, einem kleinen Riss am Rand und $100x100$ Gitterpunkten}
+	\label{fig:riss_klein_100_gitter.riss}
+\end{figure}
 
-entgegengesetzt schräg
+Beim nächsten Experiment betrachten wir wieder das gleiche $u$ wir vorhin, nur reißen wir das Papier nur an einer Seite an. Dieser Riss ist 10 Gitterpunkte lang und wir betrachten wieder ein 100x100 Gitter. 
+Betrachten wir zunächst die Verschiebung des Gebietes. Hier sieht man nur dort eine Unstetigkeitsstelle, wo am Anfang der Riss ist. Diese Unstetigkeitsstelle wird länger und breitet sich parallel zur Befestigung aus. Am Ende, bei 200 Iterationen, ist im gesamten Papier eine Unstetigkeit. Die Unstetigkeitsstelle wird wieder glatter, je mehr Iterationen das Programm durchgeführt hat.     
+
+Der Riss verhält sich fast identisch. Bei den ersten 20 Iterationen stellt man fast keine Ausbreitung des Risses fest. Bei 50 Iterationen ist der Wert von $v$ dort, wo die Funktion nicht das Extremum annimmt, bei ca $0.7$. Bei späteren Iterationen tritt das Phänomen nicht auf und der Riss ist durch das ganze Material zu sehen.  
+%todo 0.7 oder 0,7
+
+Das grobe Verhalten ist genau das erwartete Verhalten. Der Riss sollte sich parallel zur Befestigung fortsetzten und das tut er auch. Die Annormalität bei der 50. Iteration lässt sich darauf zurückführen, dass $v$ nicht gerissen ist, heißt, dass $v$ ungefähr 1 ist. Damit ist $0.7$ noch im Rahmen. 
+
+
+Programm konvergiert
+Insgesamt lässt sich feststellen, dass das Programm bei vielen Gitterpunkten funktioniert. Mit einer kleineren Gitterweite treten Abweichungen auf. 
+
+%todo alles in fazit
+%todo Grafiken andere Stellen

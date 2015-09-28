@@ -21,6 +21,13 @@ todo
 korrektur lesen							8 
 								37.5 +2
 
+laufen lassen: 
+- entgegengesetztes u0 mit riss mitte
+- querer riss
+- riss schräg ansetzten
+- u0 quadratisch einspannen
+- alles mit kleineren Gittern
+
 Fr: 6
 Sa: 8
 So: 8

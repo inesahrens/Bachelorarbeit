@@ -6,7 +6,7 @@
 \BOOKMARK [1][-]{section.2.2}{Partielle Differentialgleichungen}{chapter.2}% 6
 \BOOKMARK [1][-]{section.2.3}{Finite Elemente}{chapter.2}% 7
 \BOOKMARK [1][-]{section.2.4}{Semidifferenzierbare Newton Methode}{chapter.2}% 8
-\BOOKMARK [2][-]{subsection.2.4.1}{Newton Methoden ohne Nebenbedingungen}{section.2.4}% 9
+\BOOKMARK [2][-]{subsection.2.4.1}{Newton Methode ohne Nebenbedingung}{section.2.4}% 9
 \BOOKMARK [2][-]{subsection.2.4.2}{Konvergenz der generalisierten Newton Methode}{section.2.4}% 10
 \BOOKMARK [2][-]{subsection.2.4.3}{Semidifferential}{section.2.4}% 11
 \BOOKMARK [2][-]{subsection.2.4.4}{Semidifferenzierbare Newton Methode}{section.2.4}% 12
@@ -30,4 +30,4 @@
 \BOOKMARK [2][-]{subsection.A.1.1}{Numerische Darstellung von G1}{section.A.1}% 30
 \BOOKMARK [2][-]{subsection.A.1.2}{Berechnung von G2v}{section.A.1}% 31
 \BOOKMARK [1][-]{section.A.2}{Code}{appendix.A}% 32
-\BOOKMARK [0][-]{appendix*.38}{Literaturverzeichnis}{}% 33
+\BOOKMARK [0][-]{appendix*.32}{Literaturverzeichnis}{}% 33

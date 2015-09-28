@@ -5,109 +5,58 @@
 \chapter{Einleitung}
 \label{chap:einleitung}
 
-Konvergenz S 38 in Script 
+%todo Konvergenz S 38 in Script 
+%englischer Titel: solution of a phase field model for crack formation using semismooth newton methods
 
-\begin{itemize}
-	\item Was beschreibt mein Problem? Warum minimiere ich da?
-	\item Was besagen die einzelnen Terme?
-	\item Was mache ich in meiner Bachelorarbeit damit/ wie mache ich es
-\end{itemize}
+%todo anderer Anfangssatz
+Wir wollen herausfinden, wie Risse entstehen, bzw wie sie sich fortsetzen,
 
-Betrachten wir zunächst ein Beispiel. Ein Material z.B. ein Blatt Papier, bezeichnen wir die Punkte auf diesem Material mit $\Omega \subset \R^3$, ist an zwei gegenüberliegenden Seiten eingespannt und an diesen Seiten wird Kraft ausgeübt. Was passiert? Zunächst wird sich das Blatt Papier ein wenig dehnen, also Deformieren. Dieses beschreibt $x \mapsto \varphi(x)$. Die Verschiebung eines Punkts x auf dem Blatt Papier wird also angegeben durch 
+%\begin{itemize}
+%	\item Was beschreibt mein Problem? Warum minimiere ich da?
+%	\item Was besagen die einzelnen Terme? fertig
+%	\item Was mache ich in meiner Bachelorarbeit damit/ wie mache ich es
+%\end{itemize}
+%todo was ist ein phasenfeld?
+%todo referenzen einfügen!
+Betrachten wir zunächst ein Beispiel. Ein Blatt Papier befindet sich in Ruheposition auf dem Gebiet $\Omega \subset \R^3 $.Nun wird es an zwei gegenüberliegenden Seiten eingespannt und an diesen Seiten wird Kraft ausgeübt. Was passiert? Zunächst wird sich das Blatt Papier ein wenig dehnen, also deformieren. Die neue Position des Papiers beschreibt $\varphi(x)$. Also gilt $\varphi=u+id$ wobei $u$ die Verschiebung des Körpers ist. 
+
+Das Ziel ist es, obwohl Kraft auf dem Körper ausgeübt wird, dass die Verzerrung des Papiers minimal ist. Dazu betrachten wir den Abstand zwischen $x \in \Omega$ und $ x+h \in \Omega$ im aktuellen Zustand
 \begin{align*}
-	u: \R^3 \rightarrow \R^3 \\x \mapsto \varphi(x) -x
-\end{align*}   
-Solange das Papier nicht reißt, ist die Verschiebung stetig. $u$ erfüllt die Elastizitätsgleichung. 
+	\|\varphi(x+h)- \varphi(x)\|^2 = \|\nabla \varphi \|^2 + o(\|h\|^2) = h^T \nabla \varphi^T \nabla \varphi h + o(\|h\|^2)
+\end{align*} 
+Damit haben wir die Matrix $C:=\nabla \varphi^T \nabla \varphi $ erhalten, die die lokale Änderung der Längen angibt. Diese nennt sich Cauchy-Grennscher Verzerrungstensor. 
+Die Verzerrung $E$ ist $ \frac{1}{2} (C-I)$. Da $u=\phi - \text{id}$ gilt, können wir die Ableitung von u einsetzen und erhalten
 \begin{align*}
-	\min_{u} \int_{\Omega \backslash \text{ Riss}} v^2 \frac{\nabla u + \nabla u^T}{2}^2 + \frac{\lambda}{2} \div(v)^2 \diff x
+	E_{ij}=\frac{1}{2} \left( \frac{\partial  u_i}{\partial x_j} +\frac{\partial  u_j}{\partial x_i}  \right) + \frac{1}{2} \sum\limits_{k} \frac{\partial  u_i}{\partial x_k} \frac{\partial  u_j}{\partial x_k} 
 \end{align*}
-Dabei beschreibt 
+Da im linearen die quadratischen Terme vernachlässigt werden können, erhalten wir $ \frac{1}{2} \left( \frac{\partial  u_i}{\partial x_j} +\frac{\partial  u_j}{\partial x_i} \right) = \frac{\nabla u^T + \nabla u}{2} $.
+
+Wenn kräftiger am Papier gezogen wird, reißt es. Dann ist die Formel für die Verzerrung nicht mehr gültig. Also brauchen wir einen Term, der angibt, wo und wie stark der Körper gerissen ist.  $v: \Omega \rightarrow \R$ ist 0, falls der Körper vollständig gerissen ist und 1, wenn kein Riss vorhanden ist.  Multiplizieren wir also $ \frac{1}{2} (\nabla u^T + \nabla u)$ mit  $v^2 + \epsilon_1$. Es ergibt sich 
 \begin{align*}
-V: \Omega \rightarrow [0,1]
+	& \min\limits_u \int\limits_{\Omega} |\nabla u|^2 (v^2 + \epsilon_1) \\
+	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2  
 \end{align*}
-wo und wie stark ein Riss vorhanden ist. 0 bedeutet, dass das Material vollständig gerissen ist und 1, das kein Riss vorhanden ist.
-Der erste Term wird groß, sobald die Verschiebung des Gebietes stark wird, also wenn das Material kurz davor ist zu reißen.  
+Da wir $u$ nur im zweidimensionalen betrachten, können wir  $\frac{\nabla u + \nabla u^T}{2}^2$ vereinfachen zu $|\nabla u|^2$. Der Körper ist an $\Gamma_1$ und $\Gamma_2$ befestigt, was die Randbedingung $u_0$ angibt.  
 
- Sobald es reißt, wird das Papier zu beiden Seiten weggezogen und die Verschiebung wird unstetig. An den stellen, an denen das Papier nicht durchreißt, erfüllt es die Elasitzitätsgleichung:
-	\begin{align*}
-	\min_{u} \int_{\Omega \backslash \text{ Riss}}  \frac{\nabla u + \nabla u^T}{2}^2 \diff x
-	\end{align*}
-
-
-englischer Titel: solution of a phase field model for crack formation using semismooth newton methods
-
-%todo einleitung besser schreiben.
-% dazu gehört:
-% - Anwendung/ Erklärungen
-%   - Entstehung von Rissen und ihre Fortsetzung in einem Phasenfeld
-%   - einzelne Terme erklären
-%   -  
-% - Organisation der Arbeit am ende der Einleitung
-
-Erklärung des Problems
-Wir betrachten die Darstellung von Rissen. 
-\begin{itemize}
-	\item genaues Problem aufschreiben
-	\item $u: \R^3 \rightarrow \R^3$ ist die Verschiebung des Materials
-	\item $x \mapsto \varphi(x)$ ist die Deformation des Materials bei einem Riss
-	\item damit gilt $u(x) = \varphi(x)-x$ 
-	\item u ist stetig, wenn es nicht reißt. Gleichung der Elastizität ist erfüllt. 
-	\item Betrachte 
-	\begin{align*}
-		\min_{u} \int_{\Omega \backslash \text{ Riss}} v^2 \frac{\nabla u + \nabla u^T}{2}^2 + \frac{\lambda}{2} \div(v)^2 \diff x
- 	\end{align*}
- 	gilt nur für einen festen Riss
- 	\item $\frac{\nabla u + \nabla u^T}{2}^2 =|\nabla u|^2$ ungefähr, mit $u: \R^2 \rightarrow \R$
- 	\item die Elastische Energiedichte ist $\mu \frac{\nabla u + \nabla u^T}{2}^2 + \frac{\lambda}{2} \div(v)^2  $  und nur von $\nabla u$ abhängig. 
- 	\item $v: \Omega \rightarrow [0,1]$ mit $v=0$ falls Riss, $v=1$ ungefähr! sonst
- 	\item Oberflächenenergie ist proportional zur Oberfläche.
- 	\item $\min_{u,v} \int_{\Omega} v^2 |\nabla u|^2 + v*\text{ Riss oberfläche} dx$
- 	\item oberfläche von v, wo v=0 ist muss berechnet werden (oder ungleich 0?) das ist der Term 
- 	\begin{align*}
- 		\int_{\Omega} |\nabla v|^2 + \frac{1}{\epsilon} (1-v)^2 \diff x
- 	\end{align*}  
- 	und davon das Minimum. Nennt sich auch Ambrsio Tortorelli Phasenfeld. Suchen in Braides. 
- 	\item für $\epsilon \rightarrow 0$ gilt $v=1$
-\end{itemize}
-
-Anwendung des Problem: 
-\begin{itemize}
-	\item Material wird eingespannt an zwei Seiten und dann wird gezogen
-\end{itemize}
-
-Ich befasse mich mit Rissen und der Darstellung des Problems als Newtonmethode. Dabei sind meine Aufgaben:
-
-\begin{enumerate}
-	\item Optimalitätsbedingungen aufstellen (KKT)
-	\item Das Problem auf Semidifferenzierbarkeit untersuchen 
-	\item Newtonmethode für das Problem aufstellen
-	\item Problem implementieren mithilfe von Finite Elemente
-	\item Konvergenz des Problems anhand der Implementation untersuchen: Hängt die Konvergenz vom Gitter ab?
-\end{enumerate} 
-
-Das Problem lautet:
+In der Modellierung wäre es nun ideal, falls der Körper nie reißt. Dies ist jedoch nicht möglich. Betrachten wir deswegen den Riss genauer. Einerseits wollen wir, dass der Riss möglichst klein ist, also die Oberfläche, auf der der Riss auftritt möglichst minimal ist. Anderersetits stellen wir fest, dass, wenn ein Riss vorhanden ist, immer ein Übergang zwischen dem Riss und dort wo es nicht gerissen ist, ist. 
+Betrachten wir zunächst die Minimierung der Oberfläche. Wir wollen also, dass $\int\limits_{\Omega} (1-v)^2$ minimal ist. Aber in der Realität stellt man fes, dass es Zwischenstück zwischen Riss un nicht Riss gibt. Damit dieses genügend glatt ist, addieren wir die Ableitung zum Quadrat mit $\epsilon_2^2$ multipliziert hinzu. Daraus ergibt sich eine Darstellung vom Riss
+\begin{align*}
+	\epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} (1-v)^2
+\end{align*}
+Zusammengefasst ist das gesamte Problem gegeben durch
 \begin{align*}
 	& \min\limits_{u \in  \h^2 , v \in \h } \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \nu \left(\epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \right) dx \\
 	& \text{s.d.} \hspace{1ex} 0 \le v \le v_0 \\\
 	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2  
 \end{align*}
-dabei ist $\nu$ eine Konstante. 
-\begin{nota}
- $| \nabla u|^2:=\frac{\partial u_1}{\partial x_1 }^2 
- 				+ \frac{\partial u_1}{\partial x_2 }^2 
- 				+ \frac{\partial u_2}{\partial x_1 }^2 
- 				+ \frac{\partial u_2}{\partial x_2 }^2  
- 				= u_{1 x_1}^2+ u_{1 x_2}^2 + u_{2 x_1}^2 + u_{2 x_2}^2  $ 
-\end{nota} 
-
-dabei ist $\epsilon_i>0 \hspace{1ex}\forall i \in \{1,2,3\}$ ein kleiner Parameter und $\Gamma_1, \Gamma_2 \subset \Omega$  der rechte bzw. linke Rand eines rechteckigen Gebietes $\Omega \subset \R^2$, d.h., $\Omega=[0,a] \times [0,b] \hspace{1ex} \Gamma_1=\{0\} \times [0,b] \hspace{1ex} \Gamma_2=\{a\} \times [0,b] $
-
-$u:\Omega \rightarrow \R^2 $ beschreibt die Verschiebung eines Körpers auf dem Gebiet $\Omega$, wenn ein Riss entsteht. Der Körper ist an $\Gamma_1$ und $\Gamma_2$ befestigt, was die Randbedingung $u_0$ angibt.  
- $v: \Omega \rightarrow \R$ gibt an, wo und wie stark der Körper gerissen ist. 0 bedeutet, dass der Körper vollständig gerissen ist und 1, das kein Riss vorhanden ist.  
+dabei ist $\nu$ eine Konstante, $\epsilon_i>0 \hspace{1ex}\forall i \in \{1,2\}$ ein kleiner Parameter und $\Gamma_1, \Gamma_2 \subset \Omega$  der rechte bzw. linke Rand eines rechteckigen Gebietes $\Omega \subset \R^2$, d.h., $\Omega=[0,a] \times [0,b] \hspace{1ex} \Gamma_1=\{0\} \times [0,b] \hspace{1ex} \Gamma_2=\{a\} \times [0,b] $
  
- Analytische und numerische Grundlagen werden gebraucht, um die Verschiebung des Gebietes und die Entstehung des Risses zu finden. Für die analytische Betrachtung nutze ich partielle Differentialgleichungen und Optimierung. Da die Lösung des Problems analytisch nicht zu finden ist, diskretisiere ich das Problem mit dreieckig lineare Lagrange Elemente und implementiere es mittels semiglatter Newton Methoden. Die Grundlagen dazu sind im zweiten Kapitel zu finden. Alle Themen sind sehr umfangreich und ich werde nur die wichtigsten Begriffe einführen können. 
+$u:\Omega \rightarrow \R^2 $ beschreibt die Verschiebung eines Körpers auf dem Gebiet $\Omega$. Der Körper ist an $\Gamma_1$ und $\Gamma_2$ befestigt, was die Randbedingung $u_0$ angibt.  
+$v: \Omega \rightarrow \R$ gibt an, wo und wie stark der Körper gerissen ist. 0 bedeutet, dass der Körper vollständig gerissen ist und 1, das kein Riss vorhanden ist.    
+
+Zur Lösung des Problems, werden analytische und numerische Grundlagen gebraucht. Für die analytische Betrachtung nutze ich partielle Differentialgleichungen und Optimierung. Da die Lösung des Problems analytisch nicht zu finden ist, diskretisiere ich das Problem mit dreieckig lineare Lagrange Elemente und implementiere es mittels semiglatter Newton Methoden. Die Grundlagen dazu sind im zweiten Kapitel zu finden. Alle Themen sind sehr umfangreich und ich werde nur die wichtigsten Begriffe einführen können. 
  
- Die Untersuchung des Problems folgt in Kapitel drei. Beim ersten Betrachten fällt auf, dass die Optimierung nach $u$ und $v$ getrennt werden kann. Dieses wird im ersten Teil des dritten Kapitels erläutert. Im zweiten Teil wird die Optimierung nach $u$ betrachtet. Zuerst wird die Existenz und Eindeutigkeit gesichert, um dann numerisch die Lösung mit dreieckig linearen Lagrange Elementen zu suchen. Die Optimierung nach $v$ im dritten Teil hat den selben Aufbau. Nur ist hier das Problem komplizierter und die numerische Lösung erfolgt mit der semiglatten Newton Methode. 
- Im letzten Kapitel werte ich die numerischen Resultate aus und ziehe Rückschlüsse für die Konvergenz der Methode aufgrund der Gitterweite.  
-%todo später überprüfen, ob ich das wirklich tue, wenns geschribene ist
+Die Untersuchung des Problems folgt in Kapitel drei. Beim ersten Betrachten fällt auf, dass die Optimierung nach $u$ und $v$ getrennt werden kann. Dieses wird im ersten Teil des dritten Kapitels erläutert. Im zweiten Teil wird die Optimierung nach $u$ betrachtet. Zuerst wird die Existenz und Eindeutigkeit gesichert, um dann numerisch die Lösung mit dreieckig linearen Lagrange Elementen zu suchen. Die Optimierung nach $v$ im dritten Teil hat den selben Aufbau. Nur ist hier das Problem komplizierter und die numerische Lösung erfolgt mit der semiglatten Newton Methode. 
+Im letzten Kapitel werte ich die numerischen Resultate aus und ziehe Rückschlüsse für die Konvergenz der Methode aufgrund der Gitterweite.  
+%todo später überprüfen, ob ich das wirklich tue, wenns geschrieben ist
 
