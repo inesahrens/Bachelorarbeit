@@ -1,5 +1,15 @@
 \begin{thebibliography}{1}
 
+\bibitem{braess}
+Dietrich Braess.
+\newblock {\em Finite Elemente}.
+\newblock Springer-Verlag, 1992.
+
+\bibitem{braides}
+Andrea Braides.
+\newblock {\em $\Gamma$-convergence for Beginners}.
+\newblock Oxford University Press, 2005.
+
 \bibitem{hinze:op_pde_constraints}
 M.~Hinze, R.~Pinnau, M.~Ulbrich, and S.~Ulbrich.
 \newblock {\em Optimazation with PDE Constraints}.

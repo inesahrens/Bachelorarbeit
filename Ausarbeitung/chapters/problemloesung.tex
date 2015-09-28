@@ -58,7 +58,6 @@ Das Problem hat dann folgende Form
 \begin{align}
 	\label{eq:optimierung_u_ohne_nb2}
 	& \min\limits_{u \in u_0 +\ho^2} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \nu \left( \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \right) \diff x 
-
 \end{align}
 
 Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren. Es tauchen keine Mischung aus den Termen $u_1$ und $u_2$ auf, das heißt, dass wir die Optimierungen trennen können. Beide sind identisch, es müssen später nur unterschiedliche Werte eingesetzt werden. Betrachten wir oBdA die Optimierung nach $u_1$. 
@@ -85,24 +84,19 @@ Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren
 			\Big( & J(u_1+t  \psi,u_2)-J(u_1,u_2) \Big) \\
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
-			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla (u_1+t  \psi )|^2 + |\nabla u_2|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \diff x \\ 
-			& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla u_1|^2 \hspace{6ex} + |\nabla u_2|^2  + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \diff x \Big) \\
-			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-			\Big(	& 
-			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \left( | \nabla (u_1+t  \psi )|^2 - | \nabla u_1|^2 \right) \diff x  
-			\Big) \\	
-			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-			\Big(	& 
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla (u_1+t  \psi )|^2 + |\nabla u_2|^2 + \epsilon_2 |\nabla v|^2  \\ 
+			& & &\hspace{-2ex} + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \diff x \\
+			& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla u_1|^2 \hspace{7ex} + |\nabla u_2|^2  + \epsilon_2 |\nabla v|^2  \\
+			& & &\hspace{-2ex} + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \diff x \Big) \\
+			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 	& 
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) \left( | \nabla (u_1+t  \psi )|^2 - | \nabla u_1|^2 \right) \diff x  \\	
+			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 	& 
 			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( | \nabla u_1+t \nabla  \psi |^2 - | \nabla u_1|^2 ) \diff x  
-			\Big) \\	
-			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-			\Big(	& 
-			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( | \nabla u_1|^2 + 2 t  \nabla u_1 \nabla  \psi  + t^2 |\nabla  \psi |^2 - | \nabla u_1|^2 ) \diff x  
-			\Big) \\					
-			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
-			\Big(	& 
-			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( 2 t  \nabla u_1 \nabla  \psi  + t^2 |\nabla  \psi |^2 ) \diff x  
-			\Big) \\	
+			 \\	
+			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 	& 
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( | \nabla u_1|^2 + 2 t  \nabla u_1 \nabla  \psi  + t^2 |\nabla  \psi |^2 - | \nabla u_1|^2 ) \diff x   \\					
+			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 	& 
+			\int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) ( 2 t  \nabla u_1 \nabla  \psi  + t^2 |\nabla  \psi |^2 ) \diff x   \\	
 			& = & &\int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right) \nabla u_1 \nabla  \psi \diff x  
 		\end{array}	
 	\end{align*}
@@ -278,7 +272,7 @@ Betrachten wir nun die vier Fälle.
 \end{align*}
 
 \paragraph*{Zusammenfassung}
-Mit diesen Werten können wir nun die Matrix $ \left( \int_{\Omega} (v^2+ \epsilon) \nabla T_i \nabla T_j \right)_{ij}$ aufstellen:
+Mit diesen Werten können wir die Matrix $ \left( \int_{\Omega} (v^2+ \epsilon) \nabla T_i \nabla T_j \right)_{ij}$ aufstellen:
 
 \begin{figure}[ht]
 	\centering
@@ -326,7 +320,6 @@ Das lässt sich allgemein als Optimierungsproblem mit Ungleichungsnebenbedingunge
  \min\limits_{w \in W} J(w) \quad \text{s.d.} \quad w \in C 
 \end{align*}
 wobei W ein Banachraum, $J: W \rightarrow \R $ G-diffbar und $C \subset W$. 
-
 In diesem Fall bedeutet das also, dass 
 \begin{align*}
 	\begin{array}{lrcl}
@@ -335,16 +328,14 @@ In diesem Fall bedeutet das also, dass
 		\multicolumn{4}{l}{ C:= \left\{ v \in H^1(\Omega) | 0 \le v \le v_0 \right\} }	
 	\end{array}
 \end{align*}
-
 Zunächst wollen wir die Existenz und Eindeutigkeit der Lösung zeigen. Dafür brauchen wir, dass $J$ Gâteaux differenzierbar ist. 
-
 \begin{lem}
 	\label{lem:J_g_diffbar}
-	$J$ ist Gâteaux-Differenzierbar mit 
+	$J$ ist Gâteaux differenzierbar mit 
 	\begin{align*}
 		\begin{array}{lrcl}
 			J'(v): 	& \overline{H^1}(\Omega) 	& \rightarrow 	& \R \\
-			&\psi_1							& \mapsto		&  \left( 2  v | \nabla (u)|^2  - \nu \left(  \epsilon_2 2 \Delta v - \frac{2}{\epsilon_2} (1-v),\psi_1 \right) \right)_{L^2(\Omega)} + \left( 2 \epsilon_2 \nu \nabla v \nu ,\psi_1 \right)_{L^2(\partial \Omega)}  \\
+			&\psi_1							& \mapsto		&  \int\limits_{\Omega} 2\psi_1 v | \nabla u|^2 + \nu \left( \epsilon_2 2 \nabla v \nabla \psi_1 - \frac{2}{\epsilon_2} (1-v)\psi_1 \right) \diff x\\
 		\end{array}	
 	\end{align*}
 \end{lem}
@@ -356,8 +347,10 @@ Zunächst wollen wir die Existenz und Eindeutigkeit der Lösung zeigen. Dafür brau
 			\Big( & J(v+t\psi_1)-J(v) \Big) \\
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
-			\int\limits_{\Omega}  \left( (v+t\psi_1)^2 + \epsilon_1 \right) | \nabla (u)|^2 + \nu \left( \epsilon_2 |\nabla (v+t\psi_1)|^2 + \frac{1}{\epsilon_2} \left( 1- (v+t\psi_1) \right)^2 \right)\\ 
-			& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla u|^2 \hspace{8ex} + \nu \left( \epsilon_2 |\nabla v|^2 \hspace{6.5ex}+ \frac{1}{\epsilon_2} \left( 1- v \right)^2 \right) \Big)  \\
+			\int\limits_{\Omega}  \left( (v+t\psi_1)^2 + \epsilon_1 \right) | \nabla (u)|^2 \\ 
+			& & &\hspace{-2ex} + \nu \left( \epsilon_2 |\nabla (v+t\psi_1)|^2 + \frac{1}{\epsilon_2} \left( 1- (v+t\psi_1) \right)^2 \right) \\
+			& & &\hspace{-2ex} - \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) | \nabla u|^2 \hspace{8ex} \\
+			& & &\hspace{-2ex} + \nu \left( \epsilon_2 |\nabla v|^2 \hspace{8ex}+ \frac{1}{\epsilon_2} \left( 1- v \right)^2 \right) \Big)  \\
 			& = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
 			\Big(	& 
 			\int\limits_{\Omega} \left( \left( (v+t\psi_1)^2 + \epsilon_1 \right) - \left( v^2 + \epsilon_1 \right) \right) | \nabla (u)|^2 \\
@@ -377,7 +370,8 @@ Zunächst wollen wir die Existenz und Eindeutigkeit der Lösung zeigen. Dafür brau
 			& = &\hspace{6.5ex} & 
 			\int\limits_{\Omega} 2\psi_1 v | \nabla u|^2 + \nu \left( \epsilon_2 2 \nabla v \nabla \psi_1 - \frac{2}{\epsilon_2} (1-v)\psi_1 \right) \diff x\\	
 			& = &\hspace{6.5ex} & 
-			\int\limits_{\Omega} 2  v | \nabla u|^2 \psi_1 - \nu \left( \epsilon_2 2 \Delta v  \psi_1 - \frac{2}{\epsilon_2} (1-v)\psi_1 \right) \diff x + \int\limits_{\partial \Omega} 2 \nu  \epsilon_2 \nabla v \nu \psi_1 \diff x  							 
+			\int\limits_{\Omega} 2  v | \nabla u|^2 \psi_1 - \nu \left( \epsilon_2 2 \Delta v  \psi_1 - \frac{2}{\epsilon_2} (1-v)\psi_1 \right) \diff x 	\\
+			& & &\hspace{-2ex} + \int\limits_{\partial \Omega} 2 \nu  \epsilon_2 \nabla v \nu \psi_1 \diff x  						 
 		\end{array}
 	\end{align*}
 	Damit es auch eine G\^ateaux Ableitung ist, muss sie beschränkt und linear sein. Dies ist einfach zu sehen. 
@@ -403,7 +397,8 @@ Um Konvexität von C zu zeigen, sei $0<\lambda<1 $ und $v, w \in C$. Dann gilt $0
 	\begin{array}{ll}
 		J(v) 	& = \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \nu \left( \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \right) \diff x \\
 		& = \int_{\Omega} v^2  | \nabla u|^2 + \epsilon_1  | \nabla u|^2  + \nu \left( \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} \left( 1- 2v + v^2 \right) \right) \diff x \\
-		& = \int_{\Omega} v^2  | \nabla u|^2 - \nu \left( \frac{2}{\epsilon_2} v + \frac{1}{\epsilon_2}v^2 \right)  \diff x + \int_{\Omega} \epsilon_1  | \nabla u|^2  + \nu \frac{1}{\epsilon_2}\diff x  +  \int_{\Omega} \nu \epsilon_2 |\nabla v|^2 \diff x \\
+		& = \int_{\Omega} v^2  | \nabla u|^2 - \nu \left( \frac{2}{\epsilon_2} v + \frac{1}{\epsilon_2}v^2 \right)  \diff x + \int_{\Omega} \epsilon_1  | \nabla u|^2  + \nu \frac{1}{\epsilon_2}\diff x  \\
+		& \hspace{2ex}+  \int_{\Omega} \nu \epsilon_2 |\nabla v|^2 \diff x \\
 		& \le \int_{\Omega} v^2  \left(| \nabla u|^2 + \nu \frac{1}{\epsilon_2} \right)   \diff x + c  +  \epsilon_2 \| \nabla v\|_{L^2(\Omega)}^2 \\
 		& \le c' \|v\|_{L^2(\Omega)}^2 + c + \epsilon_2 \| \nabla v\|_{L^2(\Omega)}^2 \\
 		& \le c'' \left( \|v\|_{L^2(\Omega)}^2 + \| \nabla v\|_{L^2(\Omega)}^2 \right) + c \\
@@ -411,7 +406,6 @@ Um Konvexität von C zu zeigen, sei $0<\lambda<1 $ und $v, w \in C$. Dann gilt $0
 		& \rightarrow \infty
 	\end{array}
 \end{align*}
-
 mit $c,c',c''>0$ passende Konstanten. 
 \end{enumerate}
 Alle Voraussetzungen aus \ref{thm:existenz_eindeutigkeit_loesung} sind erfüllt, also existiert genau eine Lösung des Optimierungsproblems. 
@@ -431,8 +425,12 @@ Nachdem wir nun wissen, dass die Lösung existiert und eindeutig ist, wollen wir 
 	\end{align*}
 \end{thm}
 \begin{proof}
-	Die Bedingungen aus \ref{thm:kkt_system} müssen gelten 
-	Sei $P:=\{(v,w) \in H^1(\Omega) \times H^1(\Omega) | v\ge 0 \text{ und } w \ge 0\} \subset H^1(\Omega) \times H^1(\Omega)$. $\mathring{P} \neq \emptyset$, da $H^1(\Omega)$ nur stetige Funktionen enthält. Also ist $P$ ein positiver Kegel. 
+	Die Bedingungen aus \ref{thm:kkt_system} müssen gelten.
+	Sei 
+	\begin{align*}
+			P:=\{(v,w) \in H^1(\Omega) \times H^1(\Omega) | v\ge 0 \text{ und } w \ge 0\} \subset H^1(\Omega) \times H^1(\Omega)
+	\end{align*}
+	$\mathring{P} \neq \emptyset$, da $H^1(\Omega)$ nur stetige Funktionen enthält. Also ist $P$ ein positiver Kegel. 
 	
 	$J:H^1(\Omega) \rightarrow \R $ sei wie oben definiert. 
 	$H$ ist linear, also konvex. 
@@ -479,23 +477,23 @@ Daraus ergibt sich eine starke und schwache Formulierung. Die Starke lautet
 \end{align*}
 Die schwache Formulierung ist dann
 \begin{align*}
- 	& \int\limits_{\Omega} 2 \psi_1  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \psi_1  - \frac{2}{\epsilon_2} (1-v)\psi_1 + \eta \psi_1 \diff x = 0 & \forall \psi_1 \in \h \\
-	& \int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(\overline{v}-v_0)\}- \min\{0, \eta + c\overline{v}\} \right) \psi_1 \diff x = 0 & \forall c>0, \forall  \psi_1 \in \h 
+ 	& \int\limits_{\Omega} 2 \psi_1  v | \nabla u|^2 + \epsilon_2 2 \nabla v \nabla \psi_1  - \frac{2}{\epsilon_2} (1-v)\psi_1 + \eta \psi_1 \diff x = 0  \\
+	& \int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(\overline{v}-v_0)\}- \min\{0, \eta + c\overline{v}\} \right) \psi_1 \diff x = 0 
 \end{align*}
-mit $\eta = \mu - \lambda$
+$ \forall c>0, \forall  \psi_1 \in \h $ mit $\eta = \mu - \lambda$
 
 \subsection{Anwendung auf semidifferenzierbare Newton Methode}
 
 Unser Ziel ist es, eine Methode zu finden, wie wir das KKT System lösen können. Betrachten wir also 
 \begin{align*}
-	\begin{array}{rcl}
-		G: H^1(\Omega) \times H^1(\Omega)	& \rightarrow 	& H^{-1}(\Omega)^2 \\
-		(v, \eta)								& \mapsto  	& 
+	%\begin{array}{rcl}
+		& G: H^1(\Omega) \times H^1(\Omega) \rightarrow  H^{-1}(\Omega)^2 \\
+		& (v, \eta)								\mapsto   
 		\begin{pmatrix}
 			\int\limits_{\Omega} 2 \psi_1  v | \nabla u|^2 + \nu \left( \epsilon_2 2 \nabla v \nabla \psi_1  - \frac{2}{\epsilon_2} (1-v)\psi_1 + \eta \psi_1 \right) \diff x  \\
 			\int\limits_{\Omega} \left( \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\} \right) \psi_2 \diff x
 		\end{pmatrix}
-	\end{array}
+	%\end{array}
 \end{align*}
 Wir wollen $(v, \eta)$ finden, sodass $G=0$. Direkt kann diese Formel nicht gelöst werden, da wir um $G_2$ zu berechnen $(v,\eta)$ benötigen. Dies ist nicht gegeben. Also lösen wir das Problem mit einer Newton Methode. Für jeden Iterationsschritt ist $(v,\eta)$ durch den vorherigen gegeben. Dafür brauchen wir aber die Ableitung von G.  Da $G_2$ offensichtlich keine G\^ateaux-Ableitung hat, brauchen wir das Semidifferenzial. Also wird die semidifferenzierbare Newton Methode gebraucht. 
 
@@ -511,7 +509,7 @@ Sehen wir uns zunächst die $\partial G_1(v,\eta)(h)$ an. Es gilt:
 	falls $u$ fest gewählt ist, oder $u \in L^{\infty}$ 
 \end{thm}
 \begin{proof}
-	Nach \ref{lem:semidiffbar_f_diffbar} ist $G_1$ $\partial G_1$ semidifferenzierbar, falls $G_1$ stetig Fréchet differenzierbar ist. Bestimmen wir zunächst die Richtungsableitung in Richtung $\phi_1$ bzw $\phi_2$. Diese ist gegeben durch 
+	Nach \ref{lem:semidifferenzierbar_f_differenzierbar} ist $G_1$ $\partial G_1$ semidifferenzierbar, falls $G_1$ stetig Fréchet differenzierbar ist. Bestimmen wir zunächst die Richtungsableitung in Richtung $\phi_1$ bzw $\phi_2$. Diese ist gegeben durch 
 	\begin{align*}
 		& \partial G_{1 v} (v, \eta)(\psi_1,\phi_1) = \int\limits_{\Omega} 2 \psi_1  \phi_1 | \nabla u|^2 + \nu \left( \epsilon_2 2 \nabla \phi_1 \nabla \psi_1  + \frac{2}{\epsilon_2} \phi_1 \psi_1 \right) \diff x \\
 		& G_{1 \eta} (v, \eta) (\phi_2) = \int\limits_{\Omega}  \nu \phi_2 \psi_1  \diff x
@@ -529,9 +527,10 @@ Sehen wir uns zunächst die $\partial G_1(v,\eta)(h)$ an. Es gilt:
 	\begin{align*}
 		& \|G_1(v + h,\eta) - G_1(v,\eta) - \partial G_{1v}(v,\eta)(h)\| \\
 		& =  \| 	\int\limits_{\Omega} 2 \psi_1  (v+h)  | \nabla u|^2 + \nu \left( \epsilon_2 2 \nabla (v+h) \nabla \psi_1  - \frac{2}{\epsilon_2} (1-(v+h))\psi_1 + \eta \psi_1  \right)\diff x \\
-		& \hspace{5ex} - 	\int\limits_{\Omega} 2 \psi_1  v | \nabla u|^2 + \nu \left( \epsilon_2 2 \nabla v \nabla \psi_1  - \frac{2}{\epsilon_2} (1-v)\psi_1 + \eta \psi_1  \right) \diff x \\
-		&  \hspace{5ex} - \int\limits_{\Omega} 2 \psi_1  h | \nabla u|^2 + \nu \left( \epsilon_2 2 \nabla h \nabla \psi_1  + \frac{2}{\epsilon_2} h \psi_1  \right) \diff x \| \\
-		& = \| \int\limits_{\Omega} 2 \psi_1  h | \nabla u|^2 + \nu \left( \epsilon_2 2 \nabla h \nabla \psi_1  + \frac{2}{\epsilon_2} h \psi_1 \right) \diff x -\int\limits_{\Omega} 2 \psi_1  h | \nabla u|^2 + \nu \left( \epsilon_2 2 \nabla h \nabla \psi_1  + \frac{2}{\epsilon_2} h \psi_1 \right) \diff x \| \\
+		& \hspace{3ex} - 	\int\limits_{\Omega} 2 \psi_1  v | \nabla u|^2 + \nu \left( \epsilon_2 2 \nabla v \nabla \psi_1  - \frac{2}{\epsilon_2} (1-v)\psi_1 + \eta \psi_1  \right) \diff x \\
+		&  \hspace{3ex} - \int\limits_{\Omega} 2 \psi_1  h | \nabla u|^2 + \nu \left( \epsilon_2 2 \nabla h \nabla \psi_1  + \frac{2}{\epsilon_2} h \psi_1  \right) \diff x \| \\
+		& = \| \int\limits_{\Omega} 2 \psi_1  h | \nabla u|^2 + \nu \left( \epsilon_2 2 \nabla h \nabla \psi_1  + \frac{2}{\epsilon_2} h \psi_1 \right) \diff x -\int\limits_{\Omega} 2 \psi_1  h | \nabla u|^2 \\
+		& \hspace{3ex}+ \nu \left( \epsilon_2 2 \nabla h \nabla \psi_1  + \frac{2}{\epsilon_2} h \psi_1 \right) \diff x \| \\
 		& = 0
 	\end{align*} 
 	Da $G_{1v}$ beschränkt und linear ist, ist $G_{1v}$ auch stetig. 
@@ -595,9 +594,9 @@ Für das Semidifferenzial von $G_2$  beweisen wir zunächst ein Lemma
 	Sei nun $d<0$. Da $d$ nahe an 0 ist, gilt $d>-cv_0$ mit $v_0>0$. Es ist $\partial G_2^{\eta}(\eta+d) = \{1\}$ und damit 
 	\begin{align*}
 		& \sup\limits_{M \in \partial f(\eta+d,v) } \| f(\eta+d,v)-f(\eta,v)-M d\|_{H^{-1}(\Omega)} \\
-		& \hspace{3ex} = \| -c(v-v_0) +d +c(v-v_0) -d \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right)  \text{ für } \| d \|_{\h} \rightarrow 0
+		& \hspace{3ex} = \| -c(v-v_0) +d +c(v-v_0) -d \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right) 
 	\end{align*}	
-	
+	für $\| d \|_{\h} \rightarrow 0$
 	Fehlt nur noch $\eta = -cv$. Sei zunächst $d>0$. Da $d$ nahe an 0 ist, gilt auch $d<cv_0$. Es gilt $\partial f(\eta+d,v) = \{1\}$ und damit 	
 	\begin{align*}
 		& \sup\limits_{M \in \partial G_2^{\eta}(\eta+d) } \| f(\eta+d,v)-f(\eta)-M d\|_{H^{-1}(\Omega)} \\
@@ -606,9 +605,9 @@ Für das Semidifferenzial von $G_2$  beweisen wir zunächst ein Lemma
 	Sei nun $d<0$. Es gilt: Es gilt $\partial G_2^{\eta}(\eta+d) = \{0\}$ und damit 	
 	\begin{align*}
 		& \sup\limits_{M \in \partial f(\eta+d,v) } \| f(\eta+d,v)-f(\eta,v)-M d\|_{H^{-1}(\Omega)} \\
-		& \hspace{3ex}= \| -cv+cv \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right)  \text{ für } \| d \|_{\h} \rightarrow 0
+		& \hspace{3ex}= \| -cv+cv \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right) 
 	\end{align*}
-	Damit ist $f$ semidifferenzierbar nach $\eta$. Für die Semidifferenzierbarkeit nach $v$ gilt die Gleiche Rechnung.  
+	 für $ \| d \|_{\h} \rightarrow 0$. Damit ist $f$ semidifferenzierbar nach $\eta$. Für die Semidifferenzierbarkeit nach $v$ gilt die Gleiche Rechnung.  
 \end{proof}
 
 Das eigentliche Ziel war es, das Semidifferenzial von $G_2$ zu finden. Dieses können wir nun tun
@@ -705,26 +704,26 @@ Stellen wir dazu die Newton Methode auf
 	}
 \end{algorithm}
 
-Nun wollen wir noch herausfinden, ob die Newton Methode konvergiert.
-
-\begin{thm}[Konvergenz der Newton Methode]
-	Der Algorithmus \ref{algo:semidiffbare_nm_anw} konvergiert.	
-\end{thm}
-\begin{proof}
-	Wir wollen Theorem \ref{thm:konvergenz_des_semidiffbaren_newton_verfahrens} anwenden. Dazu muss $G$ stetig sein und $\partial G$ semidifferenzierbar und die Regularitätsannahme muss erfüllt sein. 
-	Die Semidifferenzierbarkeit wurde in \ref{thm:G1_semidiffbar} schon gezeigt. Fehlt noch die Reguaritätsannahme.  
-	Dazu muss gezeigt werden, dass 
-	\begin{align*}
-		\exists C>0, \quad \exists \delta >0 : \|M^{-1}\|_{X \rightarrow Y} \le C \quad \forall M \in \partial G(x) \quad \forall x \in X, \quad \|x-\overline{x}\|_X<\delta
-	\end{align*}
-	mit 
-	\begin{align*}
-	M:= \begin{pmatrix}
-		\partial G_{1 v} & \partial G_{1 \eta} \\
-		\partial G_{2 v} & \partial G_{2 \eta} 
-	\end{pmatrix}
-	\end{align*} 
-\end{proof}
+%Nun wollen wir noch herausfinden, ob die Newton Methode konvergiert.
+%
+%\begin{thm}[Konvergenz der Newton Methode]
+%	Der Algorithmus \ref{algo:semidiffbare_nm_anw} konvergiert.	
+%\end{thm}
+%\begin{proof}
+%	Wir wollen Theorem \ref{thm:konvergenz_des_semidiffbaren_newton_verfahrens} anwenden. Dazu muss $G$ stetig sein und $\partial G$ semidifferenzierbar und die Regularitätsannahme muss erfüllt sein. 
+%	Die Semidifferenzierbarkeit wurde in \ref{thm:G1_semidiffbar} schon gezeigt. Fehlt noch die Reguaritätsannahme.  
+%	Dazu muss gezeigt werden, dass 
+%	\begin{align*}
+%		\exists C>0, \quad \exists \delta >0 : \|M^{-1}\|_{X \rightarrow Y} \le C \quad \forall M \in \partial G(x) \quad \forall x \in X, \quad \|x-\overline{x}\|_X<\delta
+%	\end{align*}
+%	mit 
+%	\begin{align*}
+%	M:= \begin{pmatrix}
+%		\partial G_{1 v} & \partial G_{1 \eta} \\
+%		\partial G_{2 v} & \partial G_{2 \eta} 
+%	\end{pmatrix}
+%	\end{align*} 
+%\end{proof}
 
 \subsection{Numerische Betrachtung}
 
@@ -748,7 +747,8 @@ G_1(v,\eta) =  \int\limits_{\Omega} 2 \psi_1 v | \nabla u|^2 + \nu \left(  \epsi
 wird nun diskretisiert:
 \begin{align*}
 	& \hspace{2ex} \int\limits_{\Omega} 2\psi_1 v | \nabla u|^2 + \nu \left( 2 \epsilon_2  \nabla v \nabla \psi_1 - \frac{2}{\epsilon_2} (1-v)\psi_1  \right) +  \eta \psi_1  \diff x \\
-	& = \int\limits_{\Omega} 2 T_j  \sum\limits_{i=1}^{k} v_i^h T_i u^{dis} + \nu \left( \epsilon_2 2 \sum\limits_{i=1}^{k} v_i^h \nabla T_i \nabla  T_j - \frac{2}{\epsilon_2} (1-\sum\limits_{i=1}^{k} v_i^h T_i) T_j \right) + \sum\limits_{i=1}^{k} \eta_i^h T_i T_j  \diff x \\
+	& = \int\limits_{\Omega} 2 T_j  \sum\limits_{i=1}^{k} v_i^h T_i u^{dis} + \nu \left( \epsilon_2 2 \sum\limits_{i=1}^{k} v_i^h \nabla T_i \nabla  T_j - \frac{2}{\epsilon_2} (1-\sum\limits_{i=1}^{k} v_i^h T_i) T_j \right)\\
+	&  \hspace{3ex} + \sum\limits_{i=1}^{k} \eta_i^h T_i T_j  \diff x \\
 	& =  \sum\limits_{i=1}^{k} v_i^h \left(  2 \int\limits_{\Omega} u^{dis} T_i T_j \diff x + 2 \epsilon_2 \nu \int\limits_{\Omega} \nabla T_i \nabla T_j \diff x +  \nu \frac{2}{\epsilon_2}  \int\limits_{\Omega} T_i T_j \diff x  \right) \\
 	& - \nu \frac{2}{\epsilon_2} \sum\limits_{i=1}^{k} \int\limits_{\Omega} T_j \diff x 
 	+  \sum\limits_{i=1}^{k} \eta_i^h \int\limits_{\Omega} T_i T_j \diff x \\
@@ -769,7 +769,7 @@ Die Berechnung der Matrizen $A,B,D$ und des Vektors $c$ erfolgt im Anhang \ref{s
 \end{figure}
 %todo BildÄndern
 
-wobei bei $A$ auf der Hauptdiagonalen $\frac{1}{12} \left( \sum\limits_{i=1}^6 u^{dis}_{E_i} \right)$, auf der Nebendiagonalen $\frac{1}{24} \left( u^{dis}_{E_3} + u^{dis}_{E_6} \right) $ , auf der zweiten Nebendiagonalen $ \frac{1}{24} \left( u^{dis}_{E_4} + u^{dis}_{E_5} \right) $  und auf der dritten Nebendiagonalen $ \frac{1}{24} \left( u^{dis}_{E_5} +u^{dis}_{E_6} \right)$ steht. 
+wobei bei $A$ auf der Hauptdiagonalen $\frac{1}{12} ( \sum\limits_{i=1}^6 u^{dis}_{E_i} )$ steht, auf der Nebendiagonalen steht $\frac{1}{24} ( u^{dis}_{E_3} + u^{dis}_{E_6} ) $ , auf der zweiten Nebendiagonalen $ \frac{1}{24} ( u^{dis}_{E_4} + u^{dis}_{E_5} ) $  und auf der dritten Nebendiagonalen $ \frac{1}{24} ( u^{dis}_{E_5} +u^{dis}_{E_6} )$. 
 
 Bei $B$ steht  auf der Hauptdiagonalen $4 $, auf der Nebendiagonalen und der zweiten Nebendiagonalen  $-1 $. 
 

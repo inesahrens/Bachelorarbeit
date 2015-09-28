@@ -1,13 +1,14 @@
-function result = calculate_u(edges, allSurroundingTriangles, u0, epsilon, v, m, n)
+function result = calculate_u(edges, allSurroundingTriangles, u0, ...
+    epsilon, v, m, n)
 % CALCULATE_U berechnet u
 %   Ziel ist es  
 %   - \int_Omega (v^2 + eps) \nabla u0 \nabla T_j 
-%   = \sum_i^{(n+1)(m+1)}  \int_Omega (v^2+eps) \nabla u \nabla T_i \nabla T_j
+%   = \int_Omega (v^2+eps) \nabla u \nabla T_i \nabla T_j
 %   für alle j =1,... (m+1)(n+1) zu berechnen
 %   Dafür muss die linke und rechte Seite numerisch berechnet werden. 
 
-    % Da für die Berechnung des Integrals für alle Dreiecke das Integral von
-    % v^2+eps gebraucht wird, berechnen wir es hier. 
+    % Da für die Berechnung des Integrals für alle Dreiecke das Integral 
+    % von v^2+eps gebraucht wird, berechnen wir es hier. 
     integral_v = integral_of_v_total(v, edges, epsilon,n,m); 
 
 %   rechte Seite
@@ -24,10 +25,12 @@ function result = calculate_u(edges, allSurroundingTriangles, u0, epsilon, v, m,
             rechts(i*(n+1)+1+n,i*(n+1)+1+n ) = 1;
          end
          
-%   linke Seite: - \int_Omega (v^2 + eps) \nabla u0 \nabla T_j = - \int_Omega (v^2 + eps) \nabla T_i \nabla T_j * u_0 
+%   linke Seite: - \int_Omega (v^2 + eps) \nabla u0 \nabla T_j 
+%   = - \int_Omega (v^2 + eps) \nabla T_i \nabla T_j * u_0 
 
     links = - rechts * u0; 
-    % links muss an den Rändern 0 gesetzt werden. Dadurch werden die 0 Randwerte eingebracht.  
+    % links muss an den Rändern 0 gesetzt werden. Dadurch werden die 
+    % 0 Randwerte eingebracht.  
     for i=0:m
        links(i*(n+1)+1) = 0;
        links(i*(n+1)+1+n) = 0;

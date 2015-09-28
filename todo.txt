@@ -2,16 +2,14 @@ todo
 - konvergenz der NM 
   - komisches zeugs; probieren zu verstehen			1 
   - obsacle Problem suchen und lösung davon suchen		8	
-- fazit schreiben 						4	5
-- semidiffbar teil überarbeiten nachdem ich konvergenz weiß     2
-
 								___
 								15 +2
 korrektur lesen							8 
 								23 +2
 
 laufen lassen: 
-- riss schräg ansetzten
+- epsilon wählen, falls zeit
+
 
 Mo: 8
 Di: 10
@@ -19,12 +17,12 @@ Di: 10
     18
 
 
-Fazit:
+viel zeit .calculate G2div
+fn0
+integrate_u_ti_tj
+integrate_ti_tj
+integrate_gti_gtj
 
-- ana
-	- andere vorr an u0.v0, u ? muss das? was wäre gut -> kann weitergearbeitet werden
-	- konvergenz der methode
-- Implementation:
-	- parameter wählen
- 	- beispiele
-	- andere implementation nach u auch newton, alles einzelner newtonstep -> was soll das bringen?
+einleitung:
+Bsp: Matieral wird an zwei Seiten eingespannt und reißt: ich betrachte das zugehörige optimierungsproblem analytisch und numerisch, wie sich der riss sich fortsetzt und wie sich das gebiet verschiebt.
+Funktioniert durch erst existenz und eindeutigkeit der lösung zeigen, dann numerisch mit FE implementieren. 

@@ -23,23 +23,25 @@
 \contentsline {subsection}{\numberline {3.3.2}Anwendung auf semidifferenzierbare Newton Methode}{32}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}Numerische Betrachtung}{38}{subsection.3.3.3}
 \contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{1}$}{38}{section*.13}
-\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2}$}{39}{section*.15}
+\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2}$}{40}{section*.15}
 \contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{1 v}$}{41}{section*.16}
 \contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{1 \eta }$}{41}{section*.17}
 \contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2 v}$}{42}{section*.18}
-\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2 \eta }$}{42}{section*.20}
+\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2 \eta }$}{43}{section*.20}
 \contentsline {subsection}{\numberline {3.3.4}Agregation}{43}{subsection.3.3.4}
 \contentsline {chapter}{\numberline {4}Fazit und Ausblick}{44}{chapter.4}
-\contentsline {subsection}{\numberline {4.0.5}Justieren der festen Parameter im Code}{44}{subsection.4.0.5}
-\contentsline {subsection}{\numberline {4.0.6}Beispiele}{45}{subsection.4.0.6}
-\contentsline {subsubsection}{\nonumberline $u_0$ ist konstant und der Riss ist durchg\"angig}{46}{section*.21}
-\contentsline {paragraph}{\nonumberline $u_0$ ist konstant und das Material ist am Rand angerissen}{47}{figure.caption.28}
-\contentsline {chapter}{\numberline {A}Allgemeine Informationen}{51}{appendix.A}
-\contentsline {section}{\numberline {A.1}Rechnungen}{51}{section.A.1}
-\contentsline {subsection}{\numberline {A.1.1}Numerische Darstellung von $G_1$}{51}{subsection.A.1.1}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix A}{52}{section*.29}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix B}{53}{section*.30}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix D}{54}{section*.31}
-\contentsline {subsection}{\numberline {A.1.2}Berechnung von $G_{2v}$}{54}{subsection.A.1.2}
-\contentsline {section}{\numberline {A.2}Code}{56}{section.A.2}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{58}{appendix*.32}
+\contentsline {section}{\numberline {4.1}Justieren der festen Parameter im Code}{44}{section.4.1}
+\contentsline {section}{\numberline {4.2}Beispiele}{45}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Der Riss im Material ist durchg\"angig}{46}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Das Material ist am Rand angerissen}{49}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Das Material ist an beiden Seiten eingerissen}{51}{subsection.4.2.3}
+\contentsline {section}{\numberline {4.3}Ausblick}{52}{section.4.3}
+\contentsline {chapter}{\numberline {A}Allgemeine Informationen}{53}{appendix.A}
+\contentsline {section}{\numberline {A.1}Rechnungen}{53}{section.A.1}
+\contentsline {subsection}{\numberline {A.1.1}Numerische Darstellung von $G_1$}{53}{subsection.A.1.1}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix A}{54}{section*.29}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix B}{55}{section*.30}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix D}{56}{section*.31}
+\contentsline {subsection}{\numberline {A.1.2}Berechnung von $G_{2v}$}{56}{subsection.A.1.2}
+\contentsline {section}{\numberline {A.2}Code}{58}{section.A.2}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{77}{appendix*.32}

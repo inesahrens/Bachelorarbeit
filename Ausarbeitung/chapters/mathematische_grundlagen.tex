@@ -372,7 +372,7 @@ Wir erhalten
 Oft teilt man diese Kleinheitsannahmen in zwei Teile auf: 
 
 \begin{defi}[Regularitätsannahme]
-	Sei $M_k \in L(X,Y)$, wobei X,Y Banachräume sind. Dann ist die Regularitätsannahme gegeben durch:
+	Sei $M_k \in L(X,Y)$, wobei X und Y Banachräume sind. Dann ist die Regularitätsannahme gegeben durch:
 	\begin{align*}
 		\|M_k^{-1}\|_{Y \rightarrow X} \le C \quad \forall k \ge 0
 	\end{align*}
@@ -433,7 +433,7 @@ Dieses nennt sich semidifferenzierbar.
 
 \begin{lem}
 	\label{lem:semidifferenzierbar_f_differenzierbar}
-	Sei $G: X \rightarrow Y$ ein Operator zwischen Banachräumen und stetig Fréchet-differenzierbar in einer Umgebung von x. Dann ist G $\{ G' \}$-semidifferenzierbar in x. Falls $G'$ $\alpha$-Hölderstetig in einer Umgebung von x ist, dann ist G $\{ G' \} $-semidifferenzierbar in x von der Ordnung $\alpha$. 
+	Sei $G: X \rightarrow Y$ ein Operator zwischen Banachräumen und stetig Fréchet differenzierbar in einer Umgebung von x. Dann ist G $\{ G' \}$-semidifferenzierbar in x. Falls $G'$ $\alpha$-Hölderstetig in einer Umgebung von x ist, dann ist G $\{ G' \} $ semidifferenzierbar in x von der Ordnung $\alpha$. 
 	
 	$\{G'\}$ beschreibt den Operator $\{G'\}: X \rightrightarrows L(X,Y)$ mit $\{G'\}(x)=\{G'(x)\}$ 
 \end{lem}
@@ -476,7 +476,7 @@ Mit dem Semidifferential können wir nun die semidifferenzierbare Newton Methode 
 		$x^{k+1}=x^k+s^k $\;
 	}
 \end{algorithm}
-Damit diese konvergiert, muss die Approximationsannahme und die Regularitätsannahme erfüllt sein. 
+Damit diese konvergiert, muss die Approximations- und Regularitätsannahme erfüllt sein. 
 Die Approximationsannahme ist durch die Semidifferenzierbarkeit gegeben. Fehlt noch die Regularitätsannahme. 
 
 \begin{defi}[Regularitätsannahme für das semidifferenzierbare Newton Verfahren]
