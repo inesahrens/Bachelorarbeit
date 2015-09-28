@@ -29,12 +29,11 @@
 \contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2 v}$}{42}{section*.18}
 \contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2 \eta }$}{42}{section*.20}
 \contentsline {subsection}{\numberline {3.3.4}Agregation}{43}{subsection.3.3.4}
-\contentsline {section}{\numberline {3.4}Numerische Resultate}{43}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Justieren der festen Parameter}{44}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}Beispiele}{45}{subsection.3.4.2}
-\contentsline {subsubsection}{\nonumberline $u_0$ ist konstant und der Riss ist durchg\"angig}{45}{section*.21}
+\contentsline {chapter}{\numberline {4}Fazit und Ausblick}{44}{chapter.4}
+\contentsline {subsection}{\numberline {4.0.5}Justieren der festen Parameter im Code}{44}{subsection.4.0.5}
+\contentsline {subsection}{\numberline {4.0.6}Beispiele}{45}{subsection.4.0.6}
+\contentsline {subsubsection}{\nonumberline $u_0$ ist konstant und der Riss ist durchg\"angig}{46}{section*.21}
 \contentsline {paragraph}{\nonumberline $u_0$ ist konstant und das Material ist am Rand angerissen}{47}{figure.caption.28}
-\contentsline {chapter}{\numberline {4}Fazit und Ausblick}{50}{chapter.4}
 \contentsline {chapter}{\numberline {A}Allgemeine Informationen}{51}{appendix.A}
 \contentsline {section}{\numberline {A.1}Rechnungen}{51}{section.A.1}
 \contentsline {subsection}{\numberline {A.1.1}Numerische Darstellung von $G_1$}{51}{subsection.A.1.1}

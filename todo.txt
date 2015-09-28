@@ -2,37 +2,29 @@ todo
 - konvergenz der NM 
   - komisches zeugs; probieren zu verstehen			1 
   - obsacle Problem suchen und lösung davon suchen		8	
-- einleitung schreiben
-  - in Braess Finite Elemente nachschlagen, elastische Energie	1	3
-  - in Braides Delta sowieso oder Phasenkonvergenz nachlesen 	1	4	
-    nach Ambrosio Tornelli Phasenfeld 
-  - Material wird eingespannt und auf Ränder kraft ausgeübt	.5	
-  - einleitung schreiben					4 
-
-- kapitel numerische Resultate, testbeispiele			
-  - alle festen Parameter testen + erklärung			2	1
-  - testbeispiele + bilder					6	2 (ohne Bilder)	
-  - fazit schreiben 						4	5
+- fazit schreiben 						4	5
 - semidiffbar teil überarbeiten nachdem ich konvergenz weiß     2
-- m+1 -> n+1 überall						~1
-- einheitliches i,j bei T_i					~1	
+
 								___
-								29.5 +2
+								15 +2
 korrektur lesen							8 
-								37.5 +2
+								23 +2
 
 laufen lassen: 
-- entgegengesetztes u0 mit riss mitte
-- querer riss
 - riss schräg ansetzten
-- u0 quadratisch einspannen
-- alles mit kleineren Gittern
 
-Fr: 6
-Sa: 8
-So: 8
 Mo: 8
 Di: 10
    ___
-    40 
+    18
 
+
+Fazit:
+
+- ana
+	- andere vorr an u0.v0, u ? muss das? was wäre gut -> kann weitergearbeitet werden
+	- konvergenz der methode
+- Implementation:
+	- parameter wählen
+ 	- beispiele
+	- andere implementation nach u auch newton, alles einzelner newtonstep -> was soll das bringen?
