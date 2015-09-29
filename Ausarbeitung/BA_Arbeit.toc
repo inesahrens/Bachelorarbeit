@@ -1,47 +1,48 @@
 \select@language {ngerman}
-\contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}
-\contentsline {chapter}{\numberline {2}Mathematische Grundlagen}{4}{chapter.2}
-\contentsline {section}{\numberline {2.1}Optimierung}{4}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Optimierungsproblem ohne Nebenbedingung}{4}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Optimierungsproblem mit Ungleichungsnebenbedingung}{5}{subsection.2.1.2}
-\contentsline {section}{\numberline {2.2}Partielle Differentialgleichungen}{8}{section.2.2}
-\contentsline {section}{\numberline {2.3}Finite Elemente}{9}{section.2.3}
-\contentsline {section}{\numberline {2.4}Semidifferenzierbare Newton Methode}{11}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Newton Methode ohne Nebenbedingung}{12}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Konvergenz der generalisierten Newton Methode}{12}{subsection.2.4.2}
-\contentsline {subsection}{\numberline {2.4.3}Semidifferential}{15}{subsection.2.4.3}
-\contentsline {subsection}{\numberline {2.4.4}Semidifferenzierbare Newton Methode}{16}{subsection.2.4.4}
-\contentsline {chapter}{\numberline {3}Anwendung auf das Phasenfeldmodell f\"ur Rissentstehung}{18}{chapter.3}
-\contentsline {section}{\numberline {3.1}Erste Betrachtung des Modells}{18}{section.3.1}
-\contentsline {section}{\numberline {3.2}Optimierung nach u}{19}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Analytische Betrachtung}{20}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Numerische Betrachtung}{22}{subsection.3.2.2}
-\contentsline {subsubsection}{\nonumberline Berechnung des $u$ Integrals}{23}{section*.5}
-\contentsline {subsection}{\numberline {3.2.3}Aggregation}{26}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Optimierung nach v}{27}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Analytische Betrachtung}{27}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Anwendung auf semidifferenzierbare Newton Methode}{32}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Numerische Betrachtung}{38}{subsection.3.3.3}
-\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{1}$}{38}{section*.13}
-\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2}$}{40}{section*.15}
-\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{1 v}$}{41}{section*.16}
-\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{1 \eta }$}{41}{section*.17}
-\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2 v}$}{42}{section*.18}
-\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2 \eta }$}{43}{section*.20}
-\contentsline {subsection}{\numberline {3.3.4}Agregation}{43}{subsection.3.3.4}
-\contentsline {chapter}{\numberline {4}Fazit und Ausblick}{44}{chapter.4}
-\contentsline {section}{\numberline {4.1}Justieren der festen Parameter im Code}{44}{section.4.1}
-\contentsline {section}{\numberline {4.2}Beispiele}{45}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Der Riss im Material ist durchg\"angig}{46}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Das Material ist am Rand angerissen}{49}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Das Material ist an beiden Seiten eingerissen}{51}{subsection.4.2.3}
-\contentsline {section}{\numberline {4.3}Ausblick}{52}{section.4.3}
-\contentsline {chapter}{\numberline {A}Allgemeine Informationen}{53}{appendix.A}
-\contentsline {section}{\numberline {A.1}Rechnungen}{53}{section.A.1}
-\contentsline {subsection}{\numberline {A.1.1}Numerische Darstellung von $G_1$}{53}{subsection.A.1.1}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix A}{54}{section*.29}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix B}{55}{section*.30}
-\contentsline {paragraph}{\nonumberline Berechnung der Matrix D}{56}{section*.31}
-\contentsline {subsection}{\numberline {A.1.2}Berechnung von $G_{2v}$}{56}{subsection.A.1.2}
-\contentsline {section}{\numberline {A.2}Code}{58}{section.A.2}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{77}{appendix*.32}
+\contentsline {chapter}{\numberline {1}Einleitung}{2}{chapter.1}
+\contentsline {chapter}{\numberline {2}Modellierung}{4}{chapter.2}
+\contentsline {chapter}{\numberline {3}Mathematische Grundlagen}{6}{chapter.3}
+\contentsline {section}{\numberline {3.1}Optimierung}{6}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Optimierungsproblem ohne Nebenbedingung}{6}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Optimierungsproblem mit Ungleichungsnebenbedingung}{8}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.2}Partielle Differentialgleichungen}{10}{section.3.2}
+\contentsline {section}{\numberline {3.3}Finite Elemente}{11}{section.3.3}
+\contentsline {section}{\numberline {3.4}Semidifferenzierbare Newton Methode}{13}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Newton Methode ohne Nebenbedingung}{14}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Konvergenz der generalisierten Newton Methode}{14}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Semidifferential}{16}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.4.4}Semidifferenzierbare Newton Methode}{18}{subsection.3.4.4}
+\contentsline {chapter}{\numberline {4}Anwendung auf das Phasenfeldmodell f\"ur Rissentstehung}{20}{chapter.4}
+\contentsline {section}{\numberline {4.1}Erste Betrachtung des Modells}{20}{section.4.1}
+\contentsline {section}{\numberline {4.2}Optimierung nach u}{21}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Analytische Betrachtung}{22}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Numerische Betrachtung}{24}{subsection.4.2.2}
+\contentsline {subsubsection}{\nonumberline Berechnung des $u$ Integrals}{25}{section*.6}
+\contentsline {subsection}{\numberline {4.2.3}Aggregation}{28}{subsection.4.2.3}
+\contentsline {section}{\numberline {4.3}Optimierung nach v}{29}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Analytische Betrachtung}{29}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Anwendung auf semidifferenzierbare Newton Methode}{34}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Numerische Betrachtung}{40}{subsection.4.3.3}
+\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{1}$}{40}{section*.14}
+\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2}$}{42}{section*.16}
+\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{1 v}$}{43}{section*.17}
+\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{1 \eta }$}{43}{section*.18}
+\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2 v}$}{44}{section*.19}
+\contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2 \eta }$}{45}{section*.21}
+\contentsline {subsection}{\numberline {4.3.4}Agregation}{45}{subsection.4.3.4}
+\contentsline {chapter}{\numberline {5}Numerische Resultate}{47}{chapter.5}
+\contentsline {section}{\numberline {5.1}Justieren der Parameter im Code}{47}{section.5.1}
+\contentsline {section}{\numberline {5.2}Beispiele}{48}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Der Riss im Material ist durchg\"angig}{49}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Das Material ist am Rand angerissen}{52}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Das Material ist an beiden Seiten eingerissen}{54}{subsection.5.2.3}
+\contentsline {chapter}{\numberline {6}Fazit und Ausblick}{55}{chapter.6}
+\contentsline {chapter}{\numberline {A}Allgemeine Informationen}{57}{appendix.A}
+\contentsline {section}{\numberline {A.1}Rechnungen}{57}{section.A.1}
+\contentsline {subsection}{\numberline {A.1.1}Numerische Darstellung von $G_1$}{57}{subsection.A.1.1}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix A}{58}{section*.32}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix B}{59}{section*.33}
+\contentsline {paragraph}{\nonumberline Berechnung der Matrix D}{60}{section*.34}
+\contentsline {subsection}{\numberline {A.1.2}Berechnung von $G_{2v}$}{60}{subsection.A.1.2}
+\contentsline {section}{\numberline {A.2}Code}{63}{section.A.2}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{82}{appendix*.35}

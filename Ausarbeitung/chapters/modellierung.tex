@@ -1,0 +1,41 @@
+\chapter{Modellierung}
+\label{chap:modellierung}
+
+
+Erinnern wir uns an das Beispiel am Anfang: Ein Blatt Papier befindet sich in Ruheposition auf dem Gebiet $\Omega \subset \R^3 $. Nun wird es an zwei gegenüberliegenden Seiten eingespannt und an diesen Seiten wird gezogen. Zunächst deformiert sich das Papier. Die Funktion $\varphi: \Omega \rightarrow \R^3$ beschreibt die neue Position des Papiers. Also gilt $\varphi=u+id$, wobei $u: \Omega \rightarrow \R^3$ die Verschiebung des Körpers ist. 
+
+Das Ziel ist es, ein $\varphi$ zu finden, bei dem die Verzerrung des Papiers minimal ist. Dazu betrachten wir den Abstand zwischen $x \in \Omega$ und $ x+h \in \Omega$ im aktuellen Zustand. Durch taylorn erhalten wir
+\begin{align*}
+	\|\varphi(x+h)- \varphi(x)\|^2 = \|\nabla \varphi \|^2 + o(\|h\|^2) = h^T \nabla \varphi^T \nabla \varphi h + o(\|h\|^2).
+\end{align*} 
+Damit haben wir die Matrix $C:=\nabla \varphi^T \nabla \varphi $ erhalten, die die lokale Änderung der Längen angibt und Cauchy-Grennscher Verzerrungstensor genannt wird. 
+Die Verzerrung $E$ lässt sich über $ \frac{1}{2} (C-I)$ berechnen. Da $u=\varphi - \text{id}$ gilt, können wir die Ableitung von u einsetzen und erhalten
+\begin{align*}
+	E_{ij}=\frac{1}{2} \left( \frac{\partial  u_i}{\partial x_j} +\frac{\partial  u_j}{\partial x_i}  \right) + \frac{1}{2} \sum\limits_{k} \frac{\partial  u_i}{\partial x_k} \frac{\partial  u_j}{\partial x_k} .
+\end{align*}
+Da im Linearen die quadratischen Terme vernachlässigt werden können, erhalten wir 
+\begin{align*}
+	\frac{1}{2} \left( \frac{\partial  u_i}{\partial x_j} +\frac{\partial  u_j}{\partial x_i} \right) = \frac{\nabla u^T + \nabla u}{2}
+\end{align*}
+
+Irgendwann hält das Papier den auf es wirkenden Kräften nicht mehr stand und reißt. Sobald dies geschieht, gilt die Formel für die Verzerrung nicht mehr. Also brauchen wir einen Term, der angibt, wo und wie stark der Körper gerissen ist. Dazu definieren wir $v: \Omega \rightarrow \R$. $v$ ist 0, falls der Körper vollständig gerissen ist und 1, wenn kein Riss vorhanden ist.  Multiplizieren wir also $ \frac{1}{2} (\nabla u^T + \nabla u)$ mit  $v^2 + \epsilon_1$. Es ergibt sich 
+\begin{align*}
+	& \min\limits_u \int\limits_{\Omega} |\nabla u|^2 (v^2 + \epsilon_1) \\
+	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2  
+\end{align*}
+Da wir $u$ nur im zweidimensionalen betrachten, können wir  $\frac{\nabla u + \nabla u^T}{2}^2$  zu $|\nabla u|^2$ vereinfachen. Am rechten bzw. linken Rand $\Gamma_1, \Gamma_2 \subset \Omega$ ist das Material befestigt, was $u=u_0$ aussagt.  
+
+Ideal wäre es, wenn der Körper niemals reißen würde. Da dies aber in der Anwendung nicht der Fall sein kann, möchten wir einen möglichst kleinen Riss erhalten. Die Oberfläche, auf die der Riss auftritt sollte also minimal sein. Wir wollen also, dass $\int\limits_{\Omega} (1-v)^2$ minimal ist. Aber in der Realität stellt man fest, dass der Riss glatt ist. Um dies zu modellieren, addieren wir die Ableitung zum Quadrat mit $\epsilon_2^2$ multipliziert hinzu. Daraus ergibt sich eine Darstellung vom Riss
+\begin{align*}
+	\epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} (1-v)^2
+\end{align*}
+Zusammengefasst ist das gesamte Problem gegeben durch
+\begin{align*}
+	& \min\limits_{u \in  \h^2 , v \in \h } \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \nu \left(\epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \right) dx \\
+	& \text{s.d.} \hspace{1ex} 0 \le v \le v_0 \\
+	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2 , 
+\end{align*}
+dabei ist $\nu$ eine Konstante, $\epsilon_i>0$ für alle $i \in \{1,2\}$ ein kleiner Parameter und $\Gamma_1, \Gamma_2 \subset \Omega$  der rechte bzw. linke Rand eines rechteckigen Gebietes $\Omega \subset \R^2$, d.h., 
+\begin{align*}
+	\Omega=[0,a] \times [0,b] \hspace{1ex} \Gamma_1=\{0\} \times [0,b] \hspace{1ex} \Gamma_2=\{a\} \times [0,b] .
+\end{align*}

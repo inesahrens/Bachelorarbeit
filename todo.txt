@@ -1,28 +1,22 @@
 todo 	
-- konvergenz der NM 
-  - komisches zeugs; probieren zu verstehen			1 
-  - obsacle Problem suchen und lösung davon suchen		8	
+- Literaturverzeichnis:
+  - groß klein quellen						.5
+  + bei 4. verlag angeben 
+  + wübbeling richtig schreiben
+- auf zeitfehler korrektur lesen
+- alle ichs wirs raus
+- code neue seite anfangen
+- S19,28,33,36,37 abstände
+
 								___
 								15 +2
 korrektur lesen							8 
 								23 +2
 
-laufen lassen: 
-- epsilon wählen, falls zeit
 
+tocholskistraße ecke ziegelstraße copy shop
 
 Mo: 8
 Di: 10
    ___
     18
-
-
-viel zeit .calculate G2div
-fn0
-integrate_u_ti_tj
-integrate_ti_tj
-integrate_gti_gtj
-
-einleitung:
-Bsp: Matieral wird an zwei Seiten eingespannt und reißt: ich betrachte das zugehörige optimierungsproblem analytisch und numerisch, wie sich der riss sich fortsetzt und wie sich das gebiet verschiebt.
-Funktioniert durch erst existenz und eindeutigkeit der lösung zeigen, dann numerisch mit FE implementieren. 

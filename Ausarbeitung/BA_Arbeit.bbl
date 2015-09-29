@@ -17,13 +17,10 @@ M.~Hinze, R.~Pinnau, M.~Ulbrich, and S.~Ulbrich.
 
 \bibitem{kunisch}
 Karl Kunisch.
-\newblock {\em Semi-smooth Newton Methods for Non-differentiable Optimazation
-  Problems}.
-\newblock 2008.
-
-\bibitem{npdgl}
-Dr.~Frank Wübbeling.
-\newblock Vorlesung numerik partieller differentialgleichungen.
+\newblock Semi-smooth newton methods for non-differentiable optimazation
+  problems.
+\newblock In {\em Lipschitz Lectures}, Universit{\"a}t Graz, 2008.
+\newblock http://math.uni-graz.at/kunisch/papers/lipschitzlectureskunisch.pdf.
 
 \bibitem{op}
 Prof.~Benedikt Wirth.
@@ -32,5 +29,9 @@ Prof.~Benedikt Wirth.
 \bibitem{pdgl}
 Prof.~Benedikt Wirth.
 \newblock Vorlesung partielle differentialgleichungen.
+
+\bibitem{npdgl}
+Dr.~Frank W{\"u}bbeling.
+\newblock Vorlesung numerik partieller differentialgleichungen.
 
 \end{thebibliography}

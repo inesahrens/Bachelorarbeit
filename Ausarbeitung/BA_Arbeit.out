@@ -1,36 +1,37 @@
 \BOOKMARK [0][-]{chapter.1}{Einleitung}{}% 1
-\BOOKMARK [0][-]{chapter.2}{Mathematische Grundlagen}{}% 2
-\BOOKMARK [1][-]{section.2.1}{Optimierung}{chapter.2}% 3
-\BOOKMARK [2][-]{subsection.2.1.1}{Optimierungsproblem ohne Nebenbedingung}{section.2.1}% 4
-\BOOKMARK [2][-]{subsection.2.1.2}{Optimierungsproblem mit Ungleichungsnebenbedingung}{section.2.1}% 5
-\BOOKMARK [1][-]{section.2.2}{Partielle Differentialgleichungen}{chapter.2}% 6
-\BOOKMARK [1][-]{section.2.3}{Finite Elemente}{chapter.2}% 7
-\BOOKMARK [1][-]{section.2.4}{Semidifferenzierbare Newton Methode}{chapter.2}% 8
-\BOOKMARK [2][-]{subsection.2.4.1}{Newton Methode ohne Nebenbedingung}{section.2.4}% 9
-\BOOKMARK [2][-]{subsection.2.4.2}{Konvergenz der generalisierten Newton Methode}{section.2.4}% 10
-\BOOKMARK [2][-]{subsection.2.4.3}{Semidifferential}{section.2.4}% 11
-\BOOKMARK [2][-]{subsection.2.4.4}{Semidifferenzierbare Newton Methode}{section.2.4}% 12
-\BOOKMARK [0][-]{chapter.3}{Anwendung auf das Phasenfeldmodell f\374r Rissentstehung}{}% 13
-\BOOKMARK [1][-]{section.3.1}{Erste Betrachtung des Modells}{chapter.3}% 14
-\BOOKMARK [1][-]{section.3.2}{Optimierung nach u}{chapter.3}% 15
-\BOOKMARK [2][-]{subsection.3.2.1}{Analytische Betrachtung}{section.3.2}% 16
-\BOOKMARK [2][-]{subsection.3.2.2}{Numerische Betrachtung}{section.3.2}% 17
-\BOOKMARK [2][-]{subsection.3.2.3}{Aggregation}{section.3.2}% 18
-\BOOKMARK [1][-]{section.3.3}{Optimierung nach v}{chapter.3}% 19
-\BOOKMARK [2][-]{subsection.3.3.1}{Analytische Betrachtung}{section.3.3}% 20
-\BOOKMARK [2][-]{subsection.3.3.2}{Anwendung auf semidifferenzierbare Newton Methode}{section.3.3}% 21
-\BOOKMARK [2][-]{subsection.3.3.3}{Numerische Betrachtung}{section.3.3}% 22
-\BOOKMARK [2][-]{subsection.3.3.4}{Agregation}{section.3.3}% 23
-\BOOKMARK [0][-]{chapter.4}{Fazit und Ausblick}{}% 24
-\BOOKMARK [1][-]{section.4.1}{Justieren der festen Parameter im Code}{chapter.4}% 25
-\BOOKMARK [1][-]{section.4.2}{Beispiele}{chapter.4}% 26
-\BOOKMARK [2][-]{subsection.4.2.1}{Der Riss im Material ist durchg\344ngig}{section.4.2}% 27
-\BOOKMARK [2][-]{subsection.4.2.2}{Das Material ist am Rand angerissen}{section.4.2}% 28
-\BOOKMARK [2][-]{subsection.4.2.3}{Das Material ist an beiden Seiten eingerissen}{section.4.2}% 29
-\BOOKMARK [1][-]{section.4.3}{Ausblick}{chapter.4}% 30
-\BOOKMARK [0][-]{appendix.A}{Allgemeine Informationen}{}% 31
-\BOOKMARK [1][-]{section.A.1}{Rechnungen}{appendix.A}% 32
-\BOOKMARK [2][-]{subsection.A.1.1}{Numerische Darstellung von G1}{section.A.1}% 33
-\BOOKMARK [2][-]{subsection.A.1.2}{Berechnung von G2v}{section.A.1}% 34
-\BOOKMARK [1][-]{section.A.2}{Code}{appendix.A}% 35
-\BOOKMARK [0][-]{appendix*.32}{Literaturverzeichnis}{}% 36
+\BOOKMARK [0][-]{chapter.2}{Modellierung}{}% 2
+\BOOKMARK [0][-]{chapter.3}{Mathematische Grundlagen}{}% 3
+\BOOKMARK [1][-]{section.3.1}{Optimierung}{chapter.3}% 4
+\BOOKMARK [2][-]{subsection.3.1.1}{Optimierungsproblem ohne Nebenbedingung}{section.3.1}% 5
+\BOOKMARK [2][-]{subsection.3.1.2}{Optimierungsproblem mit Ungleichungsnebenbedingung}{section.3.1}% 6
+\BOOKMARK [1][-]{section.3.2}{Partielle Differentialgleichungen}{chapter.3}% 7
+\BOOKMARK [1][-]{section.3.3}{Finite Elemente}{chapter.3}% 8
+\BOOKMARK [1][-]{section.3.4}{Semidifferenzierbare Newton Methode}{chapter.3}% 9
+\BOOKMARK [2][-]{subsection.3.4.1}{Newton Methode ohne Nebenbedingung}{section.3.4}% 10
+\BOOKMARK [2][-]{subsection.3.4.2}{Konvergenz der generalisierten Newton Methode}{section.3.4}% 11
+\BOOKMARK [2][-]{subsection.3.4.3}{Semidifferential}{section.3.4}% 12
+\BOOKMARK [2][-]{subsection.3.4.4}{Semidifferenzierbare Newton Methode}{section.3.4}% 13
+\BOOKMARK [0][-]{chapter.4}{Anwendung auf das Phasenfeldmodell f\374r Rissentstehung}{}% 14
+\BOOKMARK [1][-]{section.4.1}{Erste Betrachtung des Modells}{chapter.4}% 15
+\BOOKMARK [1][-]{section.4.2}{Optimierung nach u}{chapter.4}% 16
+\BOOKMARK [2][-]{subsection.4.2.1}{Analytische Betrachtung}{section.4.2}% 17
+\BOOKMARK [2][-]{subsection.4.2.2}{Numerische Betrachtung}{section.4.2}% 18
+\BOOKMARK [2][-]{subsection.4.2.3}{Aggregation}{section.4.2}% 19
+\BOOKMARK [1][-]{section.4.3}{Optimierung nach v}{chapter.4}% 20
+\BOOKMARK [2][-]{subsection.4.3.1}{Analytische Betrachtung}{section.4.3}% 21
+\BOOKMARK [2][-]{subsection.4.3.2}{Anwendung auf semidifferenzierbare Newton Methode}{section.4.3}% 22
+\BOOKMARK [2][-]{subsection.4.3.3}{Numerische Betrachtung}{section.4.3}% 23
+\BOOKMARK [2][-]{subsection.4.3.4}{Agregation}{section.4.3}% 24
+\BOOKMARK [0][-]{chapter.5}{Numerische Resultate}{}% 25
+\BOOKMARK [1][-]{section.5.1}{Justieren der Parameter im Code}{chapter.5}% 26
+\BOOKMARK [1][-]{section.5.2}{Beispiele}{chapter.5}% 27
+\BOOKMARK [2][-]{subsection.5.2.1}{Der Riss im Material ist durchg\344ngig}{section.5.2}% 28
+\BOOKMARK [2][-]{subsection.5.2.2}{Das Material ist am Rand angerissen}{section.5.2}% 29
+\BOOKMARK [2][-]{subsection.5.2.3}{Das Material ist an beiden Seiten eingerissen}{section.5.2}% 30
+\BOOKMARK [0][-]{chapter.6}{Fazit und Ausblick}{}% 31
+\BOOKMARK [0][-]{appendix.A}{Allgemeine Informationen}{}% 32
+\BOOKMARK [1][-]{section.A.1}{Rechnungen}{appendix.A}% 33
+\BOOKMARK [2][-]{subsection.A.1.1}{Numerische Darstellung von G1}{section.A.1}% 34
+\BOOKMARK [2][-]{subsection.A.1.2}{Berechnung von G2v}{section.A.1}% 35
+\BOOKMARK [1][-]{section.A.2}{Code}{appendix.A}% 36
+\BOOKMARK [0][-]{appendix*.35}{Literaturverzeichnis}{}% 37

@@ -4,19 +4,17 @@
 
 \chapter{Anwendung auf das Phasenfeldmodell für Rissentstehung }
 
-Nachdem wir die mathematischen Grundlagen für die Betrachtung eines Optimierungsproblems kennengelernt haben, wollen wir diese anwenden. 
-Zunächst teilen wir das Minimierungsproblem in zwei voneinander unabhängige Optimierungen auf: Die Optimierung nach $u$ und die Optimierung nach $v$. Im Anschluss betrachten wir beide Optimierungen genauer, indem wir sie umschreiben und numerische Verfahren zur Lösung entwickeln. Zum Schluss fusionieren wir beide Verfahren.
+Nachdem wir die mathematischen Grundlagen für die Betrachtung eines Optimierungsproblems kennengelernt haben, wollen wir diese anwenden. Das Problem war gegeben durch 
+\begin{align*}
+	& \min\limits_{u \in  \h^2 , v \in \h } \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \nu \left(\epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \right) dx \\
+	& \text{s.d.} \hspace{1ex} 0 \le v \le v_0 \\
+	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2  
+\end{align*}
+Zunächst teilen das Optimierungsproblem in zwei voneinander unabhängige Optimierungen auf: Die Optimierung nach $u$ und die Optimierung nach $v$. Im Anschluss betrachten wir beide Optimierungen genauer, indem wir sie umschreiben und numerische Verfahren zur Lösung entwickeln. Zum Schluss fusionieren wir beide Verfahren.
 
 
 \section{Erste Betrachtung des Modells}
-\label{sec:allgemeines_kkt}
 
-Erinnern wir uns an die vorangegangene Problemstellung 
-\begin{align*}
-	& \min\limits_{u \in  \h^2 , v \in \h } \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \nu \left( \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \right) \diff x \\
-	& \text{s.d.} \hspace{1ex} 0 \le v \le v_0 \\\
-	& u=u_0 \text{ auf } \Gamma_1 \cup \Gamma_2  
-\end{align*}
 
 Beim genaueren Betrachten bemerkt man, dass die Ungleichungsnebenbedingung nur von $v$ und die Randbedingung nur von $u$ abhängt. Dies bietet die Möglichkeit das Optimierungsproblem in zwei Teilprobleme aufzuteilen.
 \begin{align*}
@@ -28,7 +26,7 @@ Beim genaueren Betrachten bemerkt man, dass die Ungleichungsnebenbedingung nur v
 	& \text{s.d.} \hspace{1ex} 0 \le v \le v_0 
 \end{align*}
 
-Wenn man beide Probleme implementiert, löst man zunächst die Optimierung nach $u$ und setzt die Lösung dann in die Optimierung nach $v$ ein. Danach setzt man die Lösung von $v$ in die Optimierung nach $u$ ein. Dieses Vorgehen wird mit der semidifferenzierbaren Newtonmethode wiederholt. Betrachten wir zuerst die Optimierung nach u. 
+Wenn man beide Probleme implementiert, löst man zunächst die Optimierung nach $u$ und setzt die Lösung dann in die Optimierung nach $v$ ein. Danach setzt man die Lösung von $v$ in die Optimierung nach $u$ ein. Dieses Vorgehen wird mit der semidifferenzierbaren Newton Methode wiederholt. Betrachten wir zuerst die Optimierung nach u. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -38,9 +36,9 @@ Wenn man beide Probleme implementiert, löst man zunächst die Optimierung nach $u
 
 Das Kapitel ist in zwei Unterkapitel aufgeteilt: Die analytische und numerische Betrachtung. 
 
-Im analytischen Teil formulieren wir das Problem zu einem Problem ohne Nebenbedingung um. Dieses lässt sich dann als partielle Differentialgleichung schreiben. Die Existenz und Eindeutigkeit der schwachen Lösung sichern wir uns am Schluss des ersten Teils. 
+Im analytischen Teil formulieren wir das Minimierungsproblem zu einem Problem ohne Nebenbedingung um. Dieses lässt sich dann als partielle Differentialgleichung schreiben. Die Existenz und Eindeutigkeit der schwachen Lösung wird am Schluss des ersten Teils bewiesen. 
 
-Für die numerische Betrachtung schreiben wir das Problem nochmal um und wenden dann Finite Elemente und den Galerkin Ansatz an. Das Resultat ist ein Gleichungssytem, das sich einfach lösen lässt. 
+Für die numerische Betrachtung schreiben wir das Problem nochmal um und wenden dann Finite Elemente und den Galerkin Ansatz an. Das Resultat ist ein Gleichungssystem, das sich einfach lösen lässt. 
 
 \subsection{Analytische Betrachtung}
 
@@ -60,13 +58,13 @@ Das Problem hat dann folgende Form
 	& \min\limits_{u \in u_0 +\ho^2} \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \nu \left( \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \right) \diff x 
 \end{align}
 
-Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren. Es tauchen keine Mischung aus den Termen $u_1$ und $u_2$ auf, das heißt, dass wir die Optimierungen trennen können. Beide sind identisch, es müssen später nur unterschiedliche Werte eingesetzt werden. Betrachten wir oBdA die Optimierung nach $u_1$. 
+Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren. Es tauchen keine Mischungen aus den Termen $u_1$ und $u_2$ auf, das heißt, dass wir die Optimierungen trennen können. Beide sind identisch, es müssen später nur unterschiedliche Werte eingesetzt werden. Betrachten wir o.B.d.A. die Optimierung nach $u_1$. 
 
 \begin{thm}[Bedingung für ein Minimum]
 	Sei das Minimierungsproblem \eqref{eq:optimierung_u_ohne_nb2} gegeben und $\tilde{u_1}$  nimmt das Minimum an. Dann gilt 
 	\begin{align}
 		\label{eq:u_gleich_null}
-		\int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla \tilde{u_1} \nabla  \psi \diff x = 0 \forall  \psi \in u_0 + \ho 
+		\int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla \tilde{u_1} \nabla  \psi \diff x = 0 \hspace{2ex}\forall  \psi \in u_0 + \ho 
 	\end{align}
 \end{thm}
 \begin{proof}
@@ -77,7 +75,7 @@ Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren
 			& u 											& \mapsto		& \int_{\Omega} \left( v^2 + \epsilon_1 \right) | \nabla u|^2 + \epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} \left( 1- v \right)^2 \diff x 
 		\end{array}
 	\end{align*}
-	\eqref{eq:u_gleich_null} ist. Leiten wir $J$ ab: 
+	von der Form \eqref{eq:u_gleich_null} ist. Leiten wir $J$ ab: 
 	\begin{align*}
 		\begin{array}{lcrl}
 			\partial J(u)( \psi ) & = &\lim\limits_{t \rightarrow 0} \frac{1}{t} 
@@ -103,8 +101,8 @@ Da $u: \Omega \rightarrow \R^2$, müssen wir nach $u_1$ und nach $u_2$ minimieren
 	Damit dies eine G\^ateaux Ableitung ist, muss die Abbildung $J'(u_1):  \psi  \mapsto \partial J(u_1, \psi ) \in \R $ linear und beschränkt sein. Linearität ist einfach nachzurechnen. Beschränktheit lässt sich durch Cauchy-Schwarz zeigen.   
 \end{proof}
 
-Also lautet unser analytisches Problem:
-Finde $u_1 \in u_0+\ho$, sodass  $\forall  \psi  \in u_0 +\ho$ gilt 
+Somit lautet unser analytisches Problem:
+Finde $u_1 \in u_0+\ho$, sodass für alle $ \psi  \in u_0 +\ho$ gilt 
 \begin{align}
 \label{eq:problem_u}
 	0 = \int\limits_{\Omega} 2 \left( v^2 + \epsilon_1 \right)  \nabla u_1 \nabla  \psi   \diff x 
@@ -115,7 +113,7 @@ Nun ist noch interessant, ob eine Lösung existiert und ob sie eindeutig ist. Die
 	Sei $u_0 \in \h^2, ,v_0 \in \h$. Die schwache Lösung $u \in u_0+\ho$ von \eqref{eq:problem_u} existiert und ist eindeutig. 
 \end{thm}
 \begin{proof}
-Wir wenden \ref{thm:existenz_schwache_loesung} an. Dazu müssen wir die Bilinearform aufstellen und dann \ref{ann:ex_und_eind} zeigen. 
+Wir wenden \ref{thm:existenz_schwache_loesung} an. Dazu müssen wir die Bilinearform aufstellen und alle  Annahmen aus \ref{ann:ex_und_eind} zeigen. 
 Die Bilinearform lautet 
 \begin{align*}
 	\begin{array}{rrcl}
@@ -123,7 +121,7 @@ Die Bilinearform lautet
 		& (u_1, \psi )											& \mapsto		& \int\limits_{\Omega}  \left( v^2 + \epsilon_1 \right) 2  \nabla u_1 \nabla  \psi   \diff x 
 	\end{array}
 \end{align*}
-Mit den Bezeichnungen aus \ref{sec:grundlagen_pdgl} ist $g = u_0$, $f,b,c=0$ und  
+Mit den Bezeichnungen aus Kapitel \ref{sec:grundlagen_pdgl} ist $g = u_0$, $f,b,c=0$ und  
 \begin{align*}
 	A(x):= \begin{pmatrix}
 	v^2(x) + \epsilon_1 & 0 \\
@@ -137,7 +135,7 @@ Sei $\xi \in \R^n$. Dann gilt:
 	\xi^T A(x) \xi  & = \xi^T  \begin{pmatrix}
 	v^2(x) + \epsilon_1 & 0 \\
 	0 & v^2(x) + \epsilon_1 
-	\end{pmatrix}		 \\
+	\end{pmatrix} \xi		 \\
 	& = (v^2+ \epsilon_1) \xi \cdot \xi \\
 	& \ge \epsilon_1 |\xi|^2
 \end{align*}
@@ -152,7 +150,7 @@ mit $\Lambda = \sup (v_0)^2 + \epsilon   $
 
 \subsection{Numerische Betrachtung}
 
-Wir haben grade bewiesen, dass wir folgendes Problem lösen müssen:
+Das vorherige Kapitel hat das Minimierungsproblem zu folgender Nullstellensuchen vereinfacht: 
 
 Finde $u_1 \in u_0+ H_0^1(\Omega)$, sodass
 \begin{align*}
@@ -160,7 +158,7 @@ Finde $u_1 \in u_0+ H_0^1(\Omega)$, sodass
 \end{align*}
 
 Da die Nullstelle im Raum $H_0^1(\Omega)$ einfacher zu finden ist, als im Raum $u_0 + H_0^1(\Omega)$, stellen wir das Problem um. 
-Dazu definieren wir $\uotild \in u_0 + \ho$, sodass $\uotild$ $u_{0_1}$ auf dem Rand $\Gamma_1 \cup \Gamma_2$ entspricht und sonst $0$ ist. Definiere zusätzlich $\utild \in \ho$, sodass $u_1=\utild + \uotild$. 
+Dazu definieren wir $\uotild \in u_0 + \ho$, sodass $\uotild$ auf dem Rand $\Gamma_1 \cup \Gamma_2$  $u_{0_1}$ entspricht und sonst $0$ ist. Definiere zusätzlich $\utild \in \ho$, sodass $u_1=\utild + \uotild$. 
 Damit lässt sich das Problem umschreiben zu 
 
 Finde $\utild \in \ho$, sodass  $\forall  \psi \in \ho$  
@@ -219,7 +217,7 @@ Berechnen wir nun
 L_{i,j} = \sum\limits_{\tilde{E} \in E_k} \nabla T_i \nabla T_j \int\limits_{\tilde{E}}  \left( v^2 + \epsilon \right)   \diff x 
 \end{align*}
 
-$T_i$ ist nur auf dem Gitterpunkt $i$ $1$ und sonst $0$. Das heißt genauer, dass $T_i$ nur auf sechs Dreiecken ungleich 0 ist. Um das Integral zu bestimmen braucht man also maximal sechs Dreiecke. Falls der Gitterpunkt am Rand liegen sollte, betrachtet man nur drei Dreiecke, an den Ecken entweder ein oder zwei Dreiecke. 
+$T_i$ ist nur auf dem Gitterpunkt $i$ $1$ und sonst $0$. Das heißt genauer, dass $T_i$ nur auf sechs Dreiecken ungleich 0 ist. Um das Integral zu bestimmen, braucht man also maximal sechs Dreiecke. Falls der Gitterpunkt am Rand liegen sollte, betrachtet man nur drei Dreiecke, an den Ecken entweder ein oder zwei Dreiecke. 
 
 \begin{figure}[ht]
 	\centering
@@ -249,7 +247,7 @@ Betrachten wir nun die vier Fälle.
 		& +  \nabla \varphi_2  \nabla \varphi_2  \int\limits_{E_5}  \left( v^2 + \epsilon \right) \diff x	
 		+ \nabla \varphi_1 \nabla \varphi_1 \int\limits_{E_6} \left( v^2 + \epsilon \right) \diff x 
 \end{align*}
-%todo falls zeit reihenfolge anders
+
 \paragraph*{$j$ liegt rechts neben $i$}
 \begin{align*}
 	L_{i,i+1}	& = \sum\limits_{E \in E_k}  \nabla T_i \nabla T_{i+1}  \int\limits_{E}  \left( v^2 + \epsilon \right)   \diff x \\
@@ -280,7 +278,7 @@ Mit diesen Werten können wir die Matrix $ \left( \int_{\Omega} (v^2+ \epsilon) \
 	\caption{Darstellung der Matrix $ \left( \int_{\Omega} (v^2+ \epsilon) \nabla T_i \nabla T_j \right)_{ij}$ }
 	\label{fig:int_u}
 \end{figure}
-Dabei sind auf der Diagonalen die Einträge $L_{i,i}$, auf der Nebendiagonalen die Einträge $L_{i,i+1}$ und auf der anderen Diagonale die Einträge $L_{i,i+n+1}$. Wir haben bis jetzt immer nur über das Referenzdreieck integriert. Da wir aber eigentlich über die transformierten Dreiecke integrieren, müssen wir zu der Matrix $1/(h_1 h_2)$ multiplizieren. 
+Dabei sind auf der Diagonalen die Einträge $L_{i,i}$, auf der Nebendiagonalen die Einträge $L_{i,i+1}$ und auf der anderen Diagonale die Einträge $L_{i,i+n+1}$. Wir haben bis jetzt immer nur über das Referenzdreieck integriert. Da wir aber eigentlich über die transformierten Dreiecke integrieren, müssen wir zur Matrix $1/(h_1 h_2)$ multiplizieren. 
 
 \subsection{Aggregation}
 
@@ -304,7 +302,7 @@ Da sowohl $\tilde{L}$ als auch $\tilde{L u_0^h}$ aus fast nur Nullen besteht, ve
 
 \section{Optimierung nach v}
 
-Bei der Optimierung nach $v$ geht es um die Fortsetzung des Risses. Für dieses Optimierungsproblem mit Ungleichungsnebenbedingung sicheren wir zunächst die Existenz und Eindeutigkeit der Lösung. Danach stellen wir die Optimalitätsbedingungen auf. Das resultiert in ein Karush Kuhn Tucker System. Dieses wollen wir mittels semidifferenzierbarer Newton Methode lösen. Dazu müssen zunächst alle Funktionen der KKT Systems differenziert und danach diskretisiert werden. Dies geschieht wieder mit Finiten Elementen. Am Schluss führe beide Optimierungsprobleme zu einem Verfahren zusammen.    
+Bei der Optimierung nach $v$ geht es um die Fortsetzung des Risses. Für dieses Optimierungsproblem mit Ungleichungsnebenbedingung sicheren wir zunächst die Existenz und Eindeutigkeit der Lösung. Danach stellen wir die Optimalitätsbedingungen auf. Das resultiert in ein Karush Kuhn Tucker System. Dieses wollen wir mittels semidifferenzierbarer Newton Methode lösen. Dazu müssen zunächst alle Funktionen der KKT Systems differenziert und danach diskretisiert werden. Dies geschieht wieder mit Finiten Elementen. Am Schluss führen wir beide Optimierungsprobleme zu einem Verfahren zusammen.    
 
 
 \subsection{Analytische Betrachtung}
@@ -390,7 +388,7 @@ $C$ ist nichtleer, da $0 \in C$.
 Sei $v_n$ eine konvergente Folge in C. Dann gilt $0 \le v_n \le v_0 \hspace{1ex} \forall n \in \N$. Es gilt auch $0 \le \lim_{n \rightarrow \infty} u_n \le v_0$. Also ist $C$ abgeschlossen. 
 
 Um Konvexität von C zu zeigen, sei $0<\lambda<1 $ und $v, w \in C$. Dann gilt $0 \le \lambda v + (1- \lambda) w$, da $\lambda>0$. Außerdem gilt $\lambda v + (1- \lambda) w \le \lambda v_0 + (1- \lambda) v_0 = v_0$. Also ist jede Konvexkombination in $C$ enthalten, $C$ ist konvex. 
-	\item $J$ ist strikt konvex. Der Beweis dazu kann durch einfaches nachrechnen geführt werden. Für Stetigkeit gilt dasselbe. 
+	\item $J$ ist strikt konvex. Der Beweis dazu kann durch einfaches Nachrechnen geführt werden. Für Stetigkeit gilt dasselbe. 
 	\item $J$ ist Gâteaux differenzierbar nach \eqref{lem:J_g_diffbar}
 	\item Sei $w \in C$ mit $\|v\|_{H^1(\Omega)} \rightarrow \infty$. Dann gilt
 \begin{align*}
@@ -466,7 +464,7 @@ Die Projektion für die Nebenbedingung lautet nach \eqref{eq:min_max_theorie}:
 \mu - \lambda = \max\{0, \mu- \lambda + c(\overline{v}-v_0)\}+ \min\{0, \mu- \lambda + c\overline{v}\} \vspace{2ex} \forall c>0
 \end{align*}
 
-Daraus ergibt sich eine starke und schwache Formulierung. Die Starke lautet 
+Daraus ergibt sich eine starke und schwache Formulierung. Die Starke lautet:  
  Suche $v \in H^1$, sodass 
 \begin{align*}
 	\begin{array}{lll}
@@ -495,7 +493,7 @@ Unser Ziel ist es, eine Methode zu finden, wie wir das KKT System lösen können. 
 		\end{pmatrix}
 	%\end{array}
 \end{align*}
-Wir wollen $(v, \eta)$ finden, sodass $G=0$. Direkt kann diese Formel nicht gelöst werden, da wir um $G_2$ zu berechnen $(v,\eta)$ benötigen. Dies ist nicht gegeben. Also lösen wir das Problem mit einer Newton Methode. Für jeden Iterationsschritt ist $(v,\eta)$ durch den vorherigen gegeben. Dafür brauchen wir aber die Ableitung von G.  Da $G_2$ offensichtlich keine G\^ateaux-Ableitung hat, brauchen wir das Semidifferenzial. Also wird die semidifferenzierbare Newton Methode gebraucht. 
+Wir wollen $(v, \eta)$ finden, sodass $G=0$ ist. Direkt kann diese Formel nicht gelöst werden, da wir um $G_2$ zu berechnen $(v,\eta)$ benötigen. Dies ist nicht gegeben. Also lösen wir das Problem mit einer Newton Methode. Für jeden Iterationsschritt ist $(v,\eta)$ durch den vorherigen gegeben. Dafür brauchen wir aber die Ableitung von G.  Da $G_2$ offensichtlich keine G\^ateaux-Ableitung hat, brauchen wir das Semidifferenzial. Also wird die semidifferenzierbare Newton Methode gebraucht. 
 
 Sehen wir uns zunächst die $\partial G_1(v,\eta)(h)$ an. Es gilt:
 
@@ -579,14 +577,14 @@ Für das Semidifferenzial von $G_2$  beweisen wir zunächst ein Lemma
 		\end{array}
 		\right .
 	\end{align*}
-	Die Äquivalenz von diese Form von $f$ und \eqref{eq:H}, kann einfach nachgerechnet werden. 
+	Die Äquivalenz dieser Form von $f$ und \eqref{eq:H}, kann einfach nachgerechnet werden. 
 	Betrachten wir zunächst die Ableitung nach $\eta$. Es reicht, die Semidifferenzierbarkeit der einzelnen Abschnitte zu betrachten. Falls jeder Abschnitt semidifferenzierbar ist und die Übergänge auch, so ist $f$ semidifferenzierbar. 
 	
-	Sei dazu $-c(v-v_0) < \eta$ oder $ \eta < -c v $. Mit \ref{lem:semidiffbar_f_diffbar} gilt, dass, falls $f$ stetig Fréchet differenzierbar ist, $f$ $\partial f$ semidifferenzierbar. Um Fréchet Differenzierbarkeit zu zeigen, bestimmen wir zunächst die Richtungsableitung. Diese ist offensichtlich $0$. Dadurch folgt sofort die Fréchet differenzierbarkeit. 
+	Sei dazu $-c(v-v_0) < \eta$ oder $ \eta < -c v $. Mit \ref{lem:semidifferenzierbar_f_differenzierbar} gilt, dass, falls $f$ stetig Fréchet Differenzierbar ist, $f$ $\partial f$ semidifferenzierbar. Um Fréchet Differenzierbarkeit zu zeigen, bestimmen wir zunächst die Richtungsableitung. Diese ist offensichtlich $0$. Dadurch folgt sofort die Fréchet Differenzierbarkeit. 
 	
-	Sei nun $-cv < \eta < -c(v-v_0) $. Durch \ref{lem:semidiffbar_f_diffbar} müssen wir wieder die Fréchet Differenzierbarkeit überprüfen. Offensichtlich ist die Identität Fréchet differenzierbar. Das Differenzial ist hier 1. 
+	Sei nun $-cv < \eta < -c(v-v_0) $. Durch \ref{lem:semidifferenzierbar_f_differenzierbar} müssen wir wieder die Fréchet Differenzierbarkeit überprüfen. Offensichtlich ist die Identität Fréchet differenzierbar. Das Differenzial ist hier 1. 
 	
-	Sei $\eta =-c(v-v_0)$. Sei zunächst $d>0$. Die Abschätzung \eqref{eq:semidiffbar_abschaetzung} muss gelten. Hier ist $\partial f(\eta+d, v) = \{0\}$ und damit 
+	Sei $\eta =-c(v-v_0)$. Sei zunächst $d>0$. Die Abschätzung \eqref{eq:semidifferenzierbar_abschaetzung} muss gelten. Hier ist $\partial f(\eta+d, v) = \{0\}$ und damit 
 	\begin{align*}
 		& \sup\limits_{M \in \partial f(\eta+d,v) } \| f(\eta+d,v)-f(\eta)-M d\|_{H^{-1}(\Omega)} \\
 		& \hspace{3ex}= \| -c(v-v_0) +c(v-v_0) \|_{H^{-1}(\Omega)} = 0 = o\left( \| d\|_{\h} \right)  \text{ für } \| d \|_{\h} \rightarrow 0
@@ -632,11 +630,11 @@ ist semidifferenzierbar mit
 		 & = \int\limits_{\Omega} \eta \psi_2 \diff x - \int\limits_{\Omega} \max\{0, \eta + c(v-v_0)\} \psi_2 \diff x - \int\limits_{\Omega} \min\{0, \eta + c v\} \psi_2 \diff x \\
 		 & = F_1(v,\eta)(\psi_2) - F_2(v,\eta)(\psi_2) - F_3(v,\eta)(\psi_2)  
 	\end{align*}
-	Wir können nach \ref{thm:rechenregeln_semidiffbare_fkt} $F_1$, $F_2$, $F_3$ getrennt ableiten. Betrachten wir die Ableitung nach $\eta$. Die Ableitung von $F_1$ ist einfach
+	Wir können nach \ref{thm:rechenregeln_semidifferenzierbare_fkt} $F_1$, $F_2$, $F_3$ getrennt ableiten. Betrachten wir die Ableitung nach $\eta$. Die Ableitung von $F_1$ ist einfach
 	\begin{align*}
 		\partial F_{1 \eta}(\psi_2, \phi_2) = \int_{\Omega} \psi_2 \phi_2 \diff x 
 	\end{align*}
-	$F_2$ und $F_3$ lassen sich mithilfe der Kettenregel aus \ref{thm:rechenregeln_semidiffbare_fkt} ableiten
+	$F_2$ und $F_3$ lassen sich mithilfe der Kettenregel aus \ref{thm:rechenregeln_semidifferenzierbare_fkt} ableiten
 	\begin{align*}
 		\partial F_{2 \eta}(\psi_2, \phi_2) & = \int\limits_{\Omega} \frac{\partial}{\partial \eta + c(v-v_0)} \max\{0, \eta + c(v-v_0)\} \frac{\partial \eta}{\partial \eta} \psi_2 \diff x \\
 		& =  \int\limits_{\Omega} \frac{\partial f_2}{\partial \eta} \psi_2 \phi_2 \diff x \\
@@ -704,32 +702,11 @@ Stellen wir dazu die Newton Methode auf
 	}
 \end{algorithm}
 
-%Nun wollen wir noch herausfinden, ob die Newton Methode konvergiert.
-%
-%\begin{thm}[Konvergenz der Newton Methode]
-%	Der Algorithmus \ref{algo:semidiffbare_nm_anw} konvergiert.	
-%\end{thm}
-%\begin{proof}
-%	Wir wollen Theorem \ref{thm:konvergenz_des_semidiffbaren_newton_verfahrens} anwenden. Dazu muss $G$ stetig sein und $\partial G$ semidifferenzierbar und die Regularitätsannahme muss erfüllt sein. 
-%	Die Semidifferenzierbarkeit wurde in \ref{thm:G1_semidiffbar} schon gezeigt. Fehlt noch die Reguaritätsannahme.  
-%	Dazu muss gezeigt werden, dass 
-%	\begin{align*}
-%		\exists C>0, \quad \exists \delta >0 : \|M^{-1}\|_{X \rightarrow Y} \le C \quad \forall M \in \partial G(x) \quad \forall x \in X, \quad \|x-\overline{x}\|_X<\delta
-%	\end{align*}
-%	mit 
-%	\begin{align*}
-%	M:= \begin{pmatrix}
-%		\partial G_{1 v} & \partial G_{1 \eta} \\
-%		\partial G_{2 v} & \partial G_{2 \eta} 
-%	\end{pmatrix}
-%	\end{align*} 
-%\end{proof}
-
 \subsection{Numerische Betrachtung}
 
 Alle Funktionen aus dem Newtonsystem müssen numerisch dargestellt werden. 
 
-Für die Diskretisierung wird dasselbe Gitter und die Selben Elemente genommen wie bei der Optimierung nach u. Auch hier werden wir wieder mit dem Galerkin Ansatz arbeiten d.h. 
+Für die Diskretisierung wird das selbe Gitter und die selben Elemente genommen wie bei der Optimierung nach u. Auch hier werden wir wieder mit dem Galerkin Ansatz arbeiten d.h. 
 \begin{align*}
 	v=\sum\limits_{i=1}^{k} v_i^h T_i \hspace{9ex} \eta = \sum\limits_{i=1}^{k} \eta_i^h T_i \hspace{9ex} v_0=\sum\limits_{i=1}^{k} {v_0}_i^h T_i
 \end{align*}
@@ -757,7 +734,7 @@ wird nun diskretisiert:
 
 mit $e:=(1,\cdots,1)^T v^h:=(v_1^h, \cdots v_k^h)^T$, $\eta^h:=(\eta_1^h, \cdots \eta_k^h)^T$, $A_{ij}=  \int_{\Omega} u^{dis} T_i T_j \diff x $, $B_{ij}:= \int_{\Omega} \nabla T_i \nabla T_j \diff x$, $c_j:= \int_{\Omega} T_j \diff x$ und $D_{ij}:= \int_{\Omega} T_i T_j \diff x $.
 
-Die Berechnung der Matrizen $A,B,D$ und des Vektors $c$ erfolgt im Anhang \ref{sec:rechnungen}. Es ergibt sich 
+Die Berechnung der Matrizen $A,B,D$ erfolgt im Anhang \ref{sec:rechnungen}. Es ergibt sich 
 \begin{equation*}
 	(2 A + 2 \nu \epsilon_2 B + \frac{2 \nu }{\epsilon_2} D) v^h  - \frac{2 \nu }{\epsilon_2} De + D \eta^h =  
 \end{equation*}
@@ -858,7 +835,8 @@ numerisch dargestellt werden. Statt $\frac{\partial f}{\partial v}$ implementier
 Nun wird $\partial G_{2 v}(\eta, v) (\psi_2, \phi_1)$ diskretisiert. Hier wird wie immer $\psi_2, \phi_1$ durch die globalen Formfunktionen $T_i$ ersetzt und $\Omega $ durch die Vereinigung aller Dreiecke. Nun kann für jedes Dreieck  $\int\limits_E  \frac{\partial f}{\partial v} T_i T_j \diff x $ berechnet werden. Dies erfolgt im Anhang \ref{sec:rechnungen}. 
  
 Wir erhalten wieder eine Matrix folgender Form:
-\begin{figure}[ht]
+
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[scale=0.25]{images/matrix2.png}
 	\caption{Darstellung der Matrix $ \left( \int_{\Omega} (v^2+ \epsilon) \nabla T_i \nabla T_j \right)_{ij}$ }

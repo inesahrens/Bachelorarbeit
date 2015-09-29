@@ -1,14 +1,147 @@
-% ===========================
-% Zusammenfassung / Abstract
-% ===========================
 
-% --- Erzeugt eine formatierte unnummerierte Ueberschrift 'Zusammenfassung' ohne Eintraege in die .toc-Datei oder fuer die Kolumnenbeschriftung
-\chapter*{Zusammenfassung}
+\chapter{Numerische Resultate}
 
-Wie der Name schon sagt, soll der Abstract den Inhalt der Arbeit zusammenfassen. Es sollte ausreichend viele Details enthalten, sodass der Leser die Möglichkeit hat zu entscheiden, ob er die vollständige Arbeit lesen soll. In der Regel gilt: Je kürzer, desto besser, unter der Bedingung, dass es ausreichend viele Informationen enthält. Im Allgemeinen ist es empfehlenswert den Abstract zum Schluss der Arbeit zu verfassen, insbesondere nachdem der Hauptteil der Arbeit aufgeschrieben ist. Und noch einige besondere Hinweise für die Erstellung eines Abstracts.
+Zuerst betrachten wir die die Implementation der Optimierung. Wir werden darauf eingehen, wie man die Parameter im Code \ref{sec:code} wählen muss. Danach werde ich einige Beispiele für unterschiedliche Gitterweiten, verschiedene Risse und Möglichkeiten des Einspannens des Materials betrachten.   
 
-\begin{itemize}
-	\item Idealerweise sollte der Leser keine Informationen in der Arbeit nachschlagen, um den Abstract zu verstehen.
-	\item Vermeiden Sie wenn möglich mathematische Gleichungen im Abstract.
-	\item Versuchen Sie den Abstract leicht verständlich zu gestalten.
-\end{itemize}
+\section{Justieren der Parameter im Code}
+
+Am Anfang ist zu sagen, dass wir nur Risse betrachten, die mindestens zwei Gitterpunkte breit sind. Wenn ein Riss nur einen Gitterpunkt breit ist, wird $v$ nicht konstant $0$, was dazu führt, dass in der Implementation nie ein vollständiger Riss vorhanden ist.   
+
+Außerdem muss $u_0$ an beiden Rändern unterschiedlich sein. Wenn $u_0$ an beiden Rändern gleich ist, ist die Verschiebung des Materials überall gleich, d.h. das nur eine Translation stattgefunden hat. Selbst wenn wir einen Riss einfügen, werden wir diesen nicht sehen. 
+
+%Als erstes treffen wir eine Wahl für $\epsilon_1$ und $\epsilon_2$. Für $\epsilon_1$ muss gelten: $\epsilon_1<\frac{1}{k}$, wobei $k$ die Anzahl der Gitterpunkte ist. 
+%%todo warum?  
+%Für $\epsilon_2$ muss gelten: $\epsilon_2>\frac{1}{k}$, 
+%%todo warum? da epsilon die breite des Risses darstellt??? ca 
+
+Zur Wahl von $c$: Wählt man $c$ zu groß und betrachtet
+\begin{align*}
+	f(v,\eta)=  \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\}				
+\end{align*}
+werden das Maximum und das Minimum 0, da $v-v_0$ negativ ist und $v$ positiv ist. Es gilt $f(v,\eta)= \eta$. Nach dem Newtonverfahren ist $-G_2 = \partial G_{2v} s_1^k + \partial G_{2 \eta} s_2^k$ mit 
+\begin{align*}
+	G_2 = (\int\limits_{\Omega} T_i T_j \diff_x)_{ij}  \eta^h \hspace{9ex}
+	\partial G_{2v}  = 0 \hspace{9ex}
+	\partial G_{2 \eta}  = (\int\limits_{\Omega} T_i T_j \diff x)_{ij} 
+\end{align*} 
+Daraus folgt $\eta^h = - s^k$. Außerdem gilt $\eta^{k+1}= \eta^k + s^k= 0$. Dadurch fallen nach dem ersten Iterationsschritt alle Terme mit $\eta$ weg. Also berücksichtigen wir die vorgegebene Bedingung von $0<v<v_0$ nicht mehr. Diese soll aber explizit berücksichtigt werden. Also sollte man $c$ nicht zu groß wählen. Auch wenn $c$ zu klein gewählt wird, beachten wir die Schranke nicht d.h. sinnvollerweise sollte man ungefähr $c=1$ wählen. 
+
+Die richtige Wahl von $\eta$ am Anfang zu finden, ist gar nicht so einfach. $\eta$ kann positiv und negativ sein, da $\eta=\lambda - \mu$ wobei $\lambda>0, \mu>0$ Lagrangemultiplikatoren sind. Experimentell findet man heraus, dass $\eta=1$ kein Ergebnis liefert, bei $\eta \ge 2$ fast kein Übergang zwischen Riss und nicht Riss ist, bei $0,4<\eta<1$ ist das Papier nicht richtig gerissen, also $v$ wird nie ganz 0 und/oder das Papier ist nie ganz heile d.h. 1 wird nie angenommen. Bei $\eta=,34$ ist es für manche Probleme sehr gut, für andere nicht. Erst im negativen Bereich, erhalten wir für alle Probleme gute Werte. Hier muss aber  $\eta >-1 $ gelten. 
+%todo für wahl eta grafiken einfügen?
+
+Kommen wir zur Wahl von $v_0$. Es sollte Sinn ergeben, $v_0$ konstant um die 1 zu wählen, da $v=1$ schon bedeutet, dass kein Riss vorhanden ist. Kleiner sollte es nicht gewählt werden, da sonst nicht zugelassen ist, dass das Gebiet nicht gerissen ist. Dies ist leider in der Implementation nicht zu sehen. Bei $v_0>.7$ erhalten wir Ergebnisse, die mit den erwarteten Ergebnissen übereinstimmen. Damit ist auch  $v>v_0$, was im Widerspruch zu der Nebenbedingung $0<v<v_0$ steht.  Außerdem verändern auch große Werte von $v_0$ nichts am Ergebnis. Dieses Verhalten lässt überlegen, ob es überhaupt sinnvoll ist, diese Bedingung mit in das Problem zu nehmen. Als weiteren ansatz könnte die Rissentstehung auch ohne Ungleichungsnebenbedingungen getestet werden. 
+
+\section{Beispiele}
+Mit dem implementierten Algorithmus können wir nun einige Beispiele betrachten. Dazu betrachten wir zwei unterschiedliche Grafiken, z.B. \ref{fig:riss_ganz_mitte.riss} und \ref{fig:riss_ganz_mitte.gebiet} . In einer Grafik ist die Verschiebung des Gebietes dargestellt, in der anderen, ob und wie stark ein Riss vorhanden ist. Bei beiden Grafiken ist jeweils das gesamte Gebiet, hier ein rechteckiges Gebiet in 2D auf der x und y Koordinate dargestellt. Die z Koordinate gibt bei der Verschiebung an, wie stark das Gebiet verschoben ist und bei dem Riss, wie stark der jeweilige Gitterpunkt eingerissen ist. Ein Wert in der Nähe von 1 bedeutet, dass das Gebiet nicht gerissen ist und 0, dass es vollständig gerissen ist. 
+
+Bei beiden Grafiken sind je 8 Bilder zu sehen. Diese geben an, wie viele Iterationsschritte der Newton Algorithmus durchgelaufen ist. Das erste Bild (also links oben) gibt das Ergebnis nach der ersten Iteration an. Das zweite Bild, rechts neben dem ersten Bild, gibt das Ergebnis nach 2 Schritten aus. Dann folgen 5, 10, 20, 50, 100 und zum Schluss, rechts unten, 200 Iterationsschritte. 
+
+\subsection{Der Riss im Material ist durchgängig}
+
+Beim ersten Beispiel ist das Gebiet an der rechten und linken Seite konstant eingespannt. Hier ist $u$ am linken Rand immer 1 und am rechten Rand immer 2. Am Anfang wurde ein Riss durch das gesamte Gebiet eingefügt, der parallel zum eingespannten Rand verläuft. Dieser befindet sich genau in der Mitte des Gebietes. Dieses sieht man auch in dem ersten Bild von \ref{fig:riss_ganz_mitte.riss}.
+
+Betrachtet man den Riss im Verlauf der Iterationen, sieht man, dass der Riss an der gleichen Stelle bleibt und geglättet wird. Manchmal schwankt das Gebiet, das nicht gerissen ist, zwischen $.9$ und $1.1$.  
+Die Verschiebung des Gebietes  \ref{fig:riss_ganz_mitte.gebiet}  sieht ähnlich aus. An der Stelle des Risses, ist eine Unstetigkeitsstelle zu finden. Diese zieht sich durch alle Bilder. Die Veränderung im Verlauf der Iterationen ist zum einen, dass die Unstetigkeit geglättet wird. Zum anderen ist die Verschiebung, die nicht beim Riss ist, linear und mit steigender Iterationszahl fast konstant.  
+
+Die Glättung des Risses und damit auch die Glättung der Unstetigkeitsstelle bei der Verschiebung im Gebiet entsteht durch den $|\nabla v|^2$ Term im Optimierungsproblem, wie am Anfang erläutert. Ebenfalls ist die zunächst lineare und dann annähernd konstante Verschiebung hierauf zurückzuführen.
+Der Riss breitet sich nicht weiter aus, da das Gebiet nicht weiter verschoben wird. Dieses Szenario liefert realitätsnahe Ergebnisse. 
+
+Betrachten wir das gleiche Szenario bei einem $10x10$ Gitter wie in \ref{fig:riss_ganz_mitte_10_gitter.gebiet} und \ref{fig:riss_ganz_mitte_10_gitter.riss}. Hier gibt es andere Ergebnisse. Der Riss verschiebt sich zum Rand, an dem $v=1$ gilt. Vermutlich liegt die Verschiebung des Risses daran, dass der Riss sehr groß im Vergleich zu dem Gitter ist. Dadurch wird das gesamte Papier gerissen, was niedriger eingespannt ist. 
+
+\newpage 
+\begin{figure}[!htb]
+	\centering 
+	\includegraphics[scale=0.429]{images/optimazation/01rissGanz_Gitter_100_u0Konstant.png}
+	\caption{Darstellung der Verschiebung des Gebietes bei konstantem $u_0$, einem Riss in der Mitte und $100x100$ Gitterpunkten}
+	\label{fig:riss_ganz_mitte.gebiet}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering	\includegraphics[scale=0.429]{images/optimazation/02rissGanz_Gitter_100_u0Konstant.png}
+	\caption{Darstellung des Risses  bei konstantem $u_0$, einem Riss in der Mitte und $100x100$ Gitterpunkten}
+	\label{fig:riss_ganz_mitte.riss}
+\end{figure}
+
+\newpage
+
+\begin{figure}[!htb]
+	\centering 
+	\includegraphics[scale=0.8]{images/optimazation/01rissGanz_Gitter10_u0Konstant.png}
+	\caption{Darstellung der Verschiebung des Gebietes  bei konstantem $u_0$, einem Riss in der Mitte und $10x10$ Gitterpunkten}
+	\label{fig:riss_ganz_mitte_10_gitter.gebiet}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering	\includegraphics[scale=0.8]{images/optimazation/02rissGanz_Gitter10_u0Konstant.png}
+	\caption{Darstellung des Risses  bei konstantem $u_0$, einem Riss in der Mitte und $10x10$ Gitterpunkten}
+	\label{fig:riss_ganz_mitte_10_gitter.riss}
+\end{figure}
+
+\newpage
+
+
+
+\subsection{Das Material ist am Rand angerissen}
+
+Beim nächsten Experiment betrachten wir das gleiche $u$ wie vorhin, aber wir reißen das Papier nur an einer Seite ein wenig an. Dieser Riss ist 10 Gitterpunkte lang auf einem 100x100 Gitter. Abbildung \ref{fig:riss_klein_100_gitter.gebiet} und \ref{fig:riss_klein_100_gitter.riss} zeigen dieses Szenario. 
+
+Betrachten wir zunächst die Verschiebung des Gebietes. Hier sieht man nur dort eine Unstetigkeitsstelle, wo am Anfang der Riss ist. Diese Unstetigkeitsstelle wird länger und breitet sich parallel zur Befestigung aus. Am Ende, bei 200 Iterationen, ist im gesamten Papier der Riss zu sehen. Die Unstetigkeitsstelle wird wieder glatter, je mehr Iterationen das Programm durchgeführt hat.     
+
+Der Riss verhält sich fast identisch. Bei den ersten 20 Iterationen stellt man fast keine Ausbreitung des Risses fest. Bei 50 Iterationen ist der Wert von $v$ dort, wo die Funktion nicht das Extremum annimmt, bei ca $0.7$. Bei späteren Iterationen tritt das Phänomen nicht auf und der Riss ist durch das ganze Material zu sehen.  
+
+Das grobe Verhalten ist genau das erwartete Verhalten. Der Riss sollte sich parallel zur Befestigung fortsetzten und das tut er auch. Die Annormalität bei der 50. Iteration lässt sich darauf zurückführen, dass $v$ nicht gerissen ist, heißt, dass $v$ ungefähr 1 ist. Damit ist $0,7$ grade noch akzeptabel. 
+
+\newpage 
+
+\begin{figure}[!htb]
+	\centering	\includegraphics[scale=0.91]{images/optimazation/01riss1Rand_Gitter_100_u0Konstant.png}
+	\caption{Verschiebung des Gebietes bei konstantem $u_0$, einem kleinen Riss am Rand und $100x100$ Gitterpunkten}
+	\label{fig:riss_klein_100_gitter.gebiet}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering	\includegraphics[scale=0.42]{images/optimazation/02riss1Rand_Gitter_100_u0Konstant.png}
+	\caption{Darstellung des Risses  bei konstantem $u_0$, einem kleinen Riss am Rand und $100x100$ Gitterpunkten}
+	\label{fig:riss_klein_100_gitter.riss}
+\end{figure}
+
+\newpage 
+
+\subsection{Das Material ist an beiden Seiten eingerissen}
+
+
+Befestigen wir das Material wieder wie vorhin und reißen das Material an beiden Seiten an, sodass die Risse aufeinander zulaufen. Dies stellen Abbildung \ref{fig:riss_aufeinanderzulaufend_100_gitter.gebiet} und \ref{fig:riss_aufeinanderzulaufend_100_gitter.riss} dar. 
+
+Zunächst wird der Riss bei beiden Bildern nur geglättet. Später setzt er sich fort, sodass beide Risse zu einem Riss werden. Dadurch erhält man einen Riss, der quer durch das gesamte Material verläuft. 
+
+Dieses ist auch das erwartete Verhalten des Risses. 
+
+\begin{figure}[!htb]
+	\centering	\includegraphics[scale=0.24]{images/optimazation/01Riss2gegeneinanderausgerichtet_Gitter_100_u0_konstant.png}
+	\caption{Verschiebung des Gebietes bei konstantem $u_0$, einem kleinen Riss an beiden Rändern und $100x100$ Gitterpunkten}
+	\label{fig:riss_aufeinanderzulaufend_100_gitter.gebiet}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering	\includegraphics[scale=0.35]{images/optimazation/02Riss2gegeneinanderausgerichtet_Gitter_100_u0_konstant.png}
+	\caption{Darstellung des Risses  bei konstantem $u_0$, einem kleinen Riss an beiden Rändern und $100x100$ Gitterpunkten}
+	\label{fig:riss_aufeinanderzulaufend_100_gitter.riss}
+\end{figure}
+
+%Kommen wir zu einem Beispiel, wo das Programm nicht das erwartete tut.
+
+%\subsection{Das Material ist an einer Seite an zwei Stellen eingerissen}
+%
+%\begin{figure}[ht]
+%	\centering	\includegraphics[scale=0.3]{images/optimazation/01_2_rissAnEinerSeite_100Gitter_u0Konstant.png}
+%	\caption{Darstellung des Risses bei konstantem $u_0$, einem kleinen Riss an beiden Rändern und $100x100$ Gitterpunkten}
+%	\label{fig:2riss_eineSeite_100_gitter.gebiet}
+%\end{figure}
+%
+%\begin{figure}[ht]
+%	\centering	\includegraphics[scale=0.42]{images/optimazation/02_2_rissAnEinerSeite_100Gitter_u0Konstant.png}
+%	\caption{Darstellung des Risses  bei konstantem $u_0$, einem kleinen Riss an beiden Rändern und $100x100$ Gitterpunkten}
+%	\label{fig:2riss_eineSeite_100_gitter.riss}
+%\end{figure}
+%
+%Die Befestigung des Materials ist wieder dieselbe wie vorhin. Nun reißen wir das Papier an einer Seite so ein, dass sich die Risse 
