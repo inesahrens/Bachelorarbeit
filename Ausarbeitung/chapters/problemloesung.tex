@@ -849,7 +849,7 @@ Jeder Eintrag, der nicht 0 ist, besteht aus der Summe von unterschiedlichen Ausw
 Die numerische Darstellung ist genau die gleiche, wie bei $G_{2 v}$, nur dass die Funktionsauswertungen von $f$ andere sind. 
 
 \subsection{Agregation}
-Nun sind alle Funktionen diskretisiert und das Problem kann implementiert werden. Stellen wir die genaue Newton Methode auf 
+Nun sind alle Funktionen diskretisiert und das Problem kann implementiert werden. Stellen wir die genaue Newton Methode auf. 
 
 \begin{algorithm}[H]
 	\caption{semidifferenzierbare Newton Methode}
@@ -883,4 +883,3 @@ mit
 		f					& = &  \eta - \max\{0, \eta + c(v-v_0)\}- \min\{0, \eta + c v\}				
 	\end{array}
 \end{align*}
-$1/h_1 h_2$ kommt nicht in der Newton Methode vor, da es vorher gekürzt wurde. 

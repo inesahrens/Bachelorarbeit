@@ -4,7 +4,7 @@
 
 \chapter{Fazit und Ausblick}
 
-Insgesamt lässt sich feststellen, dass die Implementation für viele Gitterpunkte bei allen vorgestellten Beispielen realitätsnahe Ergebnisse liefert. Bei einer kleineren Gitterweite erhalte ich nicht das Ergebnis, was ich erwarte, wie z.B. bei \ref{fig:riss_ganz_mitte_10_gitter.riss} und \ref{fig:riss_ganz_mitte_10_gitter.gebiet}. Hier reißt das Material am Rand und nicht in der Mitte. Das selbe Problem lässt sich auch bei anderen Beispielen finden, die ich hier aufgrund des Umfangs nicht präsentieren kann. Eine mögliche Erklärung ist, dass der Riss sehr groß im Vergleich zu dem Material ist und jegliche Fortsetzung des Risses schon dazu führt, dass das Material auch am Rand gerissen wird. 
+Insgesamt lässt sich feststellen, dass die Implementation bei einer größeren Anzahl an Gitterpunkten bei allen vorgestellten Beispielen realitätsnahe Ergebnisse liefert. Bei weniger Gitterpunkten erhalte ich nicht das erwartete Ergebnis, wie z.B. bei Abbildung \ref{fig:riss_ganz_mitte_10_gitter.gebiet} und \ref{fig:riss_ganz_mitte_10_gitter.riss}. Hier reißt das Material am Rand und nicht in der Mitte. Eine mögliche Erklärung ist, dass der Riss sehr groß im Vergleich zu dem Material ist und jegliche Fortsetzung des Risses schon dazu führt, dass das Material auch am Rand gerissen wird. 
 
 \begin{figure}[!bth]
 	\centering	\includegraphics[scale=0.40]{images/optimazation/02_2_rissAnEinerSeite_100Gitter_u0Konstant.png}
@@ -12,9 +12,9 @@ Insgesamt lässt sich feststellen, dass die Implementation für viele Gitterpunkte
 	\label{fig:2riss_eineSeite_100_gitter.riss}
 \end{figure}
 
-Ein anderes, nicht funktionierendes Beispiel zeigt die Modellierung von zwei Rissen, die in einem Material auf der gleichen Seite sind und aufeinander zu laufen. Ein Riss verschwindet komplett bei vielen Iterationen, wie in Abbildung \ref{fig:2riss_eineSeite_100_gitter.riss} dargestellt. Dies dürfte nicht sein, da, wenn das Material einmal gerissen ist, der Riss immer dort bleiben sollte. Weiterführend könnte betrachtet werden, warum dieser Riss verschwindet. Vielleicht ist dies ein Problem der Modellierung.
+Ein anderes, nicht funktionierendes Beispiel, zeigt die Modellierung von zwei Rissen, die in einem Material auf der gleichen Seite sind und aufeinander zu laufen. Ein Riss verschwindet komplett bei vielen Iterationen, wie in Abbildung \ref{fig:2riss_eineSeite_100_gitter.riss} dargestellt. Dies dürfte nicht sein. Wenn das Material einmal gerissen ist, sollte der Riss immer dort bleiben. Weiterführend könnte betrachtet werden, warum dieser Riss verschwindet. Vielleicht ist dies ein Problem in der Modellierung, da in dieser Modellierung die Oberfläche des Risses klein gehalten wird, wenn die Verschiebung des Gebietes nicht zu groß wird. Die Verschiebung des Materials wird klein, wenn schon ein anderer Riss vorhanden ist. Dadurch könnte der Riss verschwinden. 
 
-Betrachten wir die Laufzeit der Implementation. Diese liegt bei $O(n^2)$, wobei $n$ die Breite bzw. Höhe des Gitters ist. Dieses ist in \ref{fig:laufzeit} zu sehen. Eigentlich sollte es in $O(n)$ möglich sein, das Problem zu implementieren, da nur Matrizen aufgestellt werden und mehrere Matrixmultiplikationen mit Sparse-Matrizen stattfinden, die sehr effizient sind. Beim genaueren Betrachten des Codes fällt auf, dass meine Implementation sehr viel Zeit bei dem erstellen der Matrizen braucht. Dieses könnte vermutlich sehr viel schneller gehen. 
+Betrachten wir die Laufzeit der Implementation. Diese liegt bei $O(n^2)$, wobei $n$ die Breite bzw. Höhe des Gitters ist. Dieses ist in \ref{fig:laufzeit} zu sehen. Eigentlich sollte es in $O(n)$ möglich sein, das Problem zu implementieren, da nur Matrizen aufgestellt werden und mehrere Matrixmultiplikationen mit Sparse-Matrizen stattfinden, die sehr effizient sind. Beim genaueren Betrachten des Codes fällt auf, dass meine Implementation sehr viel Zeit bei dem erstellen der Matrizen braucht. Dieses könnte vermutlich sehr viel effizienter berechnet werden. 
 
  \begin{figure}[!htb]
  	\centering	\includegraphics[scale=0.42]{images/laufzeit.png}

@@ -29,7 +29,7 @@
 % ---										 Definition eigener Befehle
 % ---                    Ausfuehrung global wirkender Befehle (z.B. globale Layout Einstellungen etc.)
 \usepackage{styles/abschlussarbeit}
-
+\raggedbottom
 
 % =============================
 %	Hauptdokument mit Textinhalt
@@ -47,9 +47,13 @@
 % --- Titelblatt
 \include{chapters/titelseite}
 
+
 % kleine roemische Seitenzahlen im Vorspann der Arbeit, Seitenzaehler wird automatisch auf 1 gesetzt
 \pagenumbering{roman}
-
+\newpage 
+\thispagestyle{empty}
+\quad \addtocounter{page}{-1}
+\newpage
 % --- Zusammenfassung (Abstract)
 %\include{chapters/zusammenfassung}
 
@@ -57,12 +61,17 @@
 \tableofcontents
 
 % technische Gruende, damit Inhaltsverzeichnis roemische Seitenzahl erhaelt
-\newpage
-% arabische Seitenzahlen im Rest der Arbeit, Seitenzaehler wird automatisch auf 1 gesetzt
-\pagenumbering{arabic}
-
 \include{chapters/eidesstattliche_erklaerung}
 
+% arabische Seitenzahlen im Rest der Arbeit, Seitenzaehler wird automatisch auf 1 gesetzt
+
+
+\pagenumbering{roman}
+\newpage 
+\thispagestyle{empty}
+\quad \addtocounter{page}{-1}
+\newpage
+\pagenumbering{arabic}
 %----- Problemstellung (Problemstellung)
 \include{chapters/einleitung}
 
