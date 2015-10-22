@@ -1,4 +1,5 @@
-function [A, B, D] =  Matrixes_for_G(u, edges, allSurroundingTriangles, m, n )
+function [A, B, D] =  Matrixes_for_G(u, edges, allSurroundingTriangles,...
+    m, n )
 %Berechnet alle Matrizen und Vektoren, die für die Berechnung von G
 %gebraucht werden, außer e. 
 

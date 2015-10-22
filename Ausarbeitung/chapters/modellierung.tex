@@ -2,7 +2,7 @@
 \label{chap:modellierung}
 
 
-Erinnern wir uns an das Beispiel am Anfang: Ein Blatt Papier befindet sich in Ruheposition auf dem Gebiet $\Omega \subset \R^3 $. Nun wird es an zwei gegenüberliegenden Seiten eingespannt und an diesen Seiten wird gezogen. Zunächst deformiert sich das Papier. Die Funktion $\varphi: \Omega \rightarrow \R^3$ beschreibt die neue Position des Papiers. Also gilt $\varphi=u+id$, wobei $u: \Omega \rightarrow \R^3$ die Verschiebung des Körpers ist. 
+Erinnern wir uns an das Beispiel am Anfang: Ein Blatt Papier befindet sich in Ruheposition auf dem Gebiet $\Omega \subset \R^3 $. Nun wird es an zwei gegenüberliegenden Seiten eingespannt und an diesen Seiten wird gezogen. Zunächst deformiert sich das Papier. Folgende Modellierung stammt aus \cite{braess}. Die Funktion $\varphi: \Omega \rightarrow \R^3$ beschreibt die neue Position des Papiers. Also gilt $\varphi=u+id$, wobei $u: \Omega \rightarrow \R^3$ die Verschiebung des Körpers ist. 
 
 Das Ziel ist es, ein $\varphi$ zu finden, bei dem die Verzerrung des Papiers minimal ist. Dazu betrachten wir den Abstand zwischen $x \in \Omega$ und $ x+h \in \Omega$ im aktuellen Zustand. Durch taylorn erhalten wir
 \begin{align*}
@@ -25,7 +25,7 @@ Irgendwann hält das Papier den auf es wirkenden Kräften nicht mehr stand und rei
 \end{align*}
 Da wir $u$ nur im zweidimensionalen betrachten, können wir  $\frac{\nabla u + \nabla u^T}{2}^2$  zu $|\nabla u|^2$ vereinfachen. Am rechten bzw. linken Rand $\Gamma_1, \Gamma_2 \subset \Omega$ ist das Material befestigt, was $u=u_0$ aussagt.  
 
-Ideal wäre es, wenn der Körper niemals reißen würde. Da dies aber in der Anwendung nicht der Fall sein kann, möchten wir einen möglichst kleinen Riss erhalten. Die Oberfläche, auf die der Riss auftritt sollte also minimal sein. Wir wollen also, dass $\int\limits_{\Omega} (1-v)^2$ minimal ist. Aber in der Realität stellt man fest, dass der Riss glatt ist. Um dies zu modellieren, addieren wir die Ableitung zum Quadrat mit $\epsilon_2^2$ multipliziert hinzu. Daraus ergibt sich eine Darstellung vom Riss
+Ideal wäre es, wenn der Körper niemals reißen würde. Da dies aber in der Anwendung nicht der Fall sein kann, möchten wir einen möglichst kleinen Riss erhalten. Die Oberfläche, auf die der Riss auftritt sollte also minimal sein. Wir wollen also, dass $\int\limits_{\Omega} (1-v)^2$ minimal ist. Aber in der Realität stellt man fest, dass der Riss glatt ist. Um dies zu modellieren, addieren wir die Ableitung zum Quadrat mit $\epsilon_2^2$ multipliziert hinzu. Daraus ergibt sich eine Darstellung vom Riss nach \cite{braides}
 \begin{align*}
 	\epsilon_2 |\nabla v|^2 + \frac{1}{\epsilon_2} (1-v)^2
 \end{align*}

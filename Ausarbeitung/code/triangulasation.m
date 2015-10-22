@@ -2,7 +2,8 @@ function [edges, E] = triangulasation(m,n)
 % TRIANGULASATION gibt die Triangulierung von dem Gebiet Omega an. 
 %   edges ist eine n*m*2 x 3 Matrix und berechnet alle Ecken der Dreiecke
 %   allSurroundingTriangles ist eine (m+1)*(n+1) x 6 Matrix und beinhaltet 
-%   in der i ten Zeile alle indizes der Dreiecke, die um den Punkt i liegen. 
+%   in der i ten Zeile alle indizes der Dreiecke, die um den Punkt i 
+%   liegen. 
     
     edges = edges_of_triangles(m,n); 
     E = surrounding_triangles(m,n); 

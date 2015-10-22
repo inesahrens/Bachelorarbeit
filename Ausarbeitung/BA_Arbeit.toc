@@ -20,7 +20,7 @@
 \contentsline {subsubsection}{\nonumberline Berechnung des $u$ Integrals}{24}{section*.6}
 \contentsline {subsection}{\numberline {4.2.3}Aggregation}{27}{subsection.4.2.3}
 \contentsline {section}{\numberline {4.3}Optimierung nach v}{28}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Analytische Betrachtung}{28}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.1}Analytische Betrachtung}{29}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}Anwendung auf semidifferenzierbare Newton Methode}{33}{subsection.4.3.2}
 \contentsline {subsection}{\numberline {4.3.3}Numerische Betrachtung}{39}{subsection.4.3.3}
 \contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{1}$}{39}{section*.14}
@@ -29,7 +29,7 @@
 \contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{1 \eta }$}{42}{section*.18}
 \contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2 v}$}{43}{section*.19}
 \contentsline {subsubsection}{\nonumberline Numerische Darstellung von $G_{2 \eta }$}{44}{section*.21}
-\contentsline {subsection}{\numberline {4.3.4}Agregation}{44}{subsection.4.3.4}
+\contentsline {subsection}{\numberline {4.3.4}Aggregation}{44}{subsection.4.3.4}
 \contentsline {chapter}{\numberline {5}Numerische Resultate}{45}{chapter.5}
 \contentsline {section}{\numberline {5.1}Justieren der Parameter im Code}{45}{section.5.1}
 \contentsline {section}{\numberline {5.2}Beispiele}{46}{section.5.2}

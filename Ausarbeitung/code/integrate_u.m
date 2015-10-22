@@ -46,8 +46,9 @@ function result = diagonal_u(allSurroundingTriangles, integral_v, n, m)
 end
 
 
-function result = second_diagonal_u(allSurroundingTriangles,integral_v, n, m)
-%SECOND_DIAGONAL_U berechnet \int_Omega (v^2+eps) \nabla T_i \nabla T_i+1 dx 
+function result = second_diagonal_u(allSurroundingTriangles,integral_v,...
+    n, m)
+%SECOND_DIAGONAL_U berechnet\int_Omega (v^2+eps) \nabla T_i \nabla T_i+1 dx 
 
     result = zeros((n+1)*(m+1),1); 
     

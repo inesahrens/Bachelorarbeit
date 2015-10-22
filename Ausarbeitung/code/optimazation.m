@@ -84,7 +84,8 @@ end
 for i=1:k
 
     % u1 wird berechnet. 
-    u1 = calculate_u(edges, allSurroundingTriangles, u0, epsilon(1), v, m, n);  
+    u1 = calculate_u(edges, allSurroundingTriangles, u0, epsilon(1), v,...
+        m, n);  
     u = [u1,u1] ; 
 
     % als nächstes soll das Gleichungssystem gelöst werden, Dazu muss G
@@ -108,7 +109,8 @@ for i=1:k
     G1eta = D; 
     
     % Berechnung von G2 und den Ableitungen
-    [G2, G2v, G2eta] = G2_and_deratives(v, eta, const, v0, D, edges, allSurroundingTriangles, m, n); 
+    [G2, G2v, G2eta] = G2_and_deratives(v, eta, const, v0, D, edges,...
+        allSurroundingTriangles, m, n); 
     
     % Die Ableitungen müssen noch zu einer großen Matrix, wie oben
     % beschrieben zusammengefügt werden. Hier bieten sich sparse Matrizen
